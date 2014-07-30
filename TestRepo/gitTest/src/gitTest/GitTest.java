@@ -8,5 +8,7 @@ public class GitTest {
 		
 		System.out.println("It's kIm!!!!!!!");
 		System.out.println("I'm Da Eun Park.");
+		
+		System.out.println("test");
 	}
 }
