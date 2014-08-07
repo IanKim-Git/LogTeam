@@ -8,7 +8,5 @@ public class UserBean {
 	String uphone;
 	int uprocnt;
 	public UserBean() {
-		super();
-	}
-	
+	}	
 }
