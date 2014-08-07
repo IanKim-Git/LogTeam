@@ -20,6 +20,9 @@
 	<bean class="model.dao.StudentDaoImpl" id="stDao" /> -->
 	<bean id="puDao" class="model.dao.ProgUserDAO"/>
 	<bean id="puService" class="model.service.ProgUserService"/>
+	
+	<bean id="projectDao" class="model.dao.ProjectDAO"/>
+	<bean id="projectService" class="model.service.ProjectService"/>
 
 	<!-- Json 응답을 위한 설정 -->
 	<!-- <bean id="jsonView" class="net.sf.json.spring.web.servlet.view.JsonView" >

@@ -20,10 +20,8 @@ public class ProgUserController {
 	public String idPwCheck(@RequestParam("email") String uemail, @RequestParam("pw") String upw, Model model){
 		model.addAttribute("email", uemail);
 		model.addAttribute("pw", upw);	
-		System.out.println(uemail);
-		System.out.println(upw);
+
 		ProgUserBean pu = puService.userCheck(uemail, upw);
-		System.out.println(pu);
 		if(pu != null){
 			model.addAttribute("name", pu.getUname());
 			model.addAttribute("phone", pu.getUphone());

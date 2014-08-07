@@ -13,4 +13,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select uemail, uname, upw, uphone, uprocnt from proguser
 	</select>
 
+	<insert id="newProject" parameterType="projectBean">
+		insert into Project values(seq_p.nextval, #{pname}, #{ppw}, #{pmento}, #{pstart}, #{pend}, #{pleader}, 0)
+	</insert>
+	
 </mapper>
+
+<!-- 
+<mapper namespace="Project">
+
+	
+</mapper>
+ -->
