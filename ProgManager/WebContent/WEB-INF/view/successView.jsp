@@ -12,6 +12,6 @@
 	이름 - ${requestScope.name}<br>
 	전화번호 - ${requestScope.phone}<br>
 	
-	
+	<a href="updateInfo.html">개인정보 변경 화면</a>
 </body>
 </html>

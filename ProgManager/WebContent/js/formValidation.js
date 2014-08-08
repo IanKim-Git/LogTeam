@@ -15,12 +15,3 @@ function isPasswordValid(pw){
 	}
 	return true;
 }
-
-//전화번호 형식 검증 함수
-function isPhoneValid(phone){
-	var phoneFormat = /^([0-9]{2,4})-([0-9]{3,4})-([0-9]{3,4})$/;
-	if(phone.search(phoneFormat) == -1){
-		return false;
-	}
-	return true;
-}

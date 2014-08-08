@@ -24,8 +24,8 @@ public class ProgUserService {
 		return puDao.userIdCheck(uemail);
 	}
 	
-	/*public static void main(String[] args) {
-		ProgUserService p = new ProgUserService();
-		System.out.println(p.userCheck("pst5400@naver.com", "1234"));
-	}*/
+	//개인 정보 변경
+	public int userUpdateInfo(ProgUserBean pu){
+		return puDao.userUpdate(pu);
+	}
 }

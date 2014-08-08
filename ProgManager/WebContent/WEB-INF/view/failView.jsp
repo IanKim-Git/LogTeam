@@ -10,5 +10,7 @@
 	<b>존재하지 않는 사용자입니다.</b><br>
 	이메일 - ${requestScope.email}<br>
 	비밀번호 - ${requestScope.pw}<br>
+	
+	<a href="index.html">로그인 화면으로 돌아가기</a>
 </body>
 </html>

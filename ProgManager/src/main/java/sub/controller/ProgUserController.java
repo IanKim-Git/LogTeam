@@ -40,7 +40,7 @@ public class ProgUserController {
 	//이메일 중복 체크
 	@RequestMapping("idCheck.do")
 	@ResponseBody
-	public ResponseEntity<String> studentNoCheck(String email){
+	public ResponseEntity<String> userEmailCheck(String email){
 		String checkMsg = "<font color='blue'>사용 가능한 ID 입니다.</font>";		
 //		String pu = ;//DB 확인 로직
 		if(puService.userEmailCheck(email) != null){//이미 해당 id가 존재하는 조건식
@@ -64,9 +64,8 @@ public class ProgUserController {
 	@RequestMapping(value="insert.do", method=RequestMethod.POST)
 //	@RequestMapping("insert.do")
 //	@ResponseBody
-	public String insert(@RequestParam("email") String uemail, @RequestParam("name") String uname, 
+	public String insertUser(@RequestParam("email") String uemail, @RequestParam("name") String uname, 
 						 @RequestParam("pw") String upw, @RequestParam("phone") String uphone, Model model) {
-//		System.out.println("Eee");
 		String resultMsg = "signInFail";//저장 실패시 응답되는 데이터
 		System.out.println(uname);
 		
@@ -76,7 +75,7 @@ public class ProgUserController {
 			model.addAttribute("name", uname);
 			resultMsg = "signInSucc";//정상 저장시 응답되는 데이터
 		}
-		return resultMsg;  
+		return resultMsg;
 	}
 
 }

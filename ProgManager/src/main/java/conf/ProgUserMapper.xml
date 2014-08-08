@@ -22,13 +22,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<!-- 회원가입 : 전화번호가 없는 경우 -->
-	<insert id="signInNoUphone" parameterType="puBean">
+	<!-- <insert id="signInNoUphone" parameterType="puBean">
 		insert into proguser(uemail, uname, upw) values(#{uemail} , #{uname} , #{upw})
-	</insert>
+	</insert> -->
 	
 	<!-- 이메일 중복 체크 -->
+	
 	<select id="IdCheck" parameterType="java.lang.String" resultType="String" >
 		select uemail from proguser where uemail=#{uemail}
+	</select>
+	
+	<!-- 회원 정보 변경 -->
+	<update id="update" parameterType="puBean">
+		update proguser set upw=#{upw}, uname=#{uname}, uphone=#{uphone} where uemail=#{uemail}		
+	</update>
+	
+	<!-- 회원 정보 확인 -->
+	<select id="userInfo" parameterType="java.lang.String" resultMap="rmPuBean">
+		select uemail, uname, upw, uphone, uprocnt from proguser where uemail=#{uemail}
 	</select>
 	
 	<!-- 모든 회원 정보 확인 -->

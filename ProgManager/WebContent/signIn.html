@@ -89,8 +89,9 @@
 			}
 		});//end of name validation
 				
-		$("#resetSpan").click(function(){
+		$("#reset").click(function(){
 			$("span").html("");
+			$("input[type=text]").val("");
 			eflag = false;
 			pflag = false;
 			pflag2 = false;
@@ -109,21 +110,20 @@
 	});//end of ready
 </script>
 <body>
-	
+	<h4>회원가입 화면</h4>
 	<form action="insert.do" method="post" id="signInForm">
 		* ID(e-mail) 
 		<input type="text" name="email" id="email" class="progUser"><span id="idValidation"></span><br> 
 		* Password 
 		<input type="password" name="pw" id="pw" class="progUser"><span id="pwValidation"></span><br>
 		* Reenter Password 
-		<input type="password" id="pwAgain" ><span id="pw2Validation"></span><br> 
+		<input type="password" id="pwAgain" class="progUser"><span id="pw2Validation"></span><br> 
 		* Name 
 		<input type="text" name="name" id="name" class="progUser" ><span id="nameValidation"></span><br>
 		Phone Number(ex.000-0000-0000) 
 		<input type="text" name="phone" id="phone" class="progUser"><br>
 		<input type="submit" value="회원가입" id="submitted">
-		<input type="reset" value="취소" id="resetSpan"><br>
-		flag : <p></p>	
+		<input type="button" value="취소" id="reset" Onclick="location.href='index.html'"><br>
 	</form>
 
 </body>
