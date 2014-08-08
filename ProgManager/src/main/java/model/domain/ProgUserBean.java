@@ -14,15 +14,14 @@ public class ProgUserBean {
 		this.upw = upw;
 	}
 	//uemail, uname, upw, uphone, uprocnt
-	public ProgUserBean(String uemail, String uname, String upw, String uprocnt) {
+	public ProgUserBean(String uemail, String uname, String upw, String uphone) {
 		this(uemail, upw);
 		this.uname = uname;
-		this.uprocnt = uprocnt;
-		this.uphone = null;
+		this.uphone = uphone;
 	}
 	public ProgUserBean(String uemail, String uname, String upw, String uphone, String uprocnt) {
-		this(uemail, uname, upw, uprocnt);
-		this.uphone = uphone;
+		this(uemail, uname, upw, uphone);
+		this.uprocnt = uprocnt;
 	}
 	
 	public String getUemail() {

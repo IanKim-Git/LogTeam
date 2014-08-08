@@ -13,7 +13,7 @@ public class ProgUserDAO {
 		ProgUserBean pu = null;
 		try{
 			session = DBUtil.getSqlSession();
-			pu = session.selectOne("progUser.IdPwCheck", new ProgUserBean(uemail, upw));
+			pu = session.selectOne("prog.IdPwCheck", new ProgUserBean(uemail, upw));
 		}finally{
 			DBUtil.closeSqlSession(session);
 		}
