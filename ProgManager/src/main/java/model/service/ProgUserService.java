@@ -15,12 +15,12 @@ public class ProgUserService {
 	}
 	
 	//회원가입 후 결과 반환
-	public int userSignIn(String uemail, String uname, String upw, String uphone){
-		return puDao.userSignIn(uemail, uname, upw, uphone);
+	public int userSignIn(ProgUserBean pu){
+		return puDao.userSignIn(pu);
 	}
 	
 	//이메일 중복 체크 결과 반환
-	public ProgUserBean userEmailCheck(String uemail){
+	public String userEmailCheck(String uemail){
 		return puDao.userIdCheck(uemail);
 	}
 	

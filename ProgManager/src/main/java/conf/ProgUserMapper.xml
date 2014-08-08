@@ -27,8 +27,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<!-- 이메일 중복 체크 -->
-	<select id="IdCheck" parameterType="java.lang.String" resultMap="rmPuBean">
-		select uemail, uname, upw, uphone, uprocnt from proguser where uemail=#{uemail}
+	<select id="IdCheck" parameterType="java.lang.String" resultType="String" >
+		select uemail from proguser where uemail=#{uemail}
 	</select>
 	
 	<!-- 모든 회원 정보 확인 -->

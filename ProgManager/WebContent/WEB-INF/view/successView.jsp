@@ -11,5 +11,7 @@
 	비밀번호 - ${requestScope.pw}<br>
 	이름 - ${requestScope.name}<br>
 	전화번호 - ${requestScope.phone}<br>
+	
+	
 </body>
 </html>

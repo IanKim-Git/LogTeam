@@ -1,98 +1,129 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>SignIn Test</title>
 </head>
 <script src="js/jquery-1.10.2.js"></script>
 <script src="js/formValidation.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
+		var eflag = false;
+		var pflag = false;
+		var pflag2 = false;
+		var nflag = false;
 		//이메일 검사
 		/*
-		1. 반드시 입력
-		2. 이메일 형식 검증
-		3. 중복 검사
+		1. 반드시 입력*
+		2. 이메일 형식 검증*
+		3. 중복 검사*
 		*/
-		$("#email").blur(function(){
+		 $("#email").keyup(function(){
+			$("p").html($('#email').val()); 
 			var isValid = isEmailValid($('#email').val());
 			if(!isValid){
 				$("#idValidation").html("<font color='red'>적합하지 않은 e-mail 형식입니다. 다시 입력하세요</font>");
+				eflag = false;
 			}else{
-				$("#idValidation").html("<font color='blue'>사용 가능한 ID 입니다.</font>");
-			} 
-		});//end of email validation
+				 $.ajax({
+					url : "idCheck.do", 					//서버에 요청할 정보
+					type : "post",							//method방식
+					dataType : "text", 					//응답되는 데이터 타입
+					data : "email=" + $("#email").val(),	//서버에 전송할 데이터 no=입력된 데이터
+					
+					success : function(data) {		//응답 성공시 자동 실행되는 사용자 정의 함수
+						$("#idValidation").html(data);
+					},
+					
+					error : function(err) { //응답 실패했을때 자동 실행되는 사용자 정의 함수(서버 자체의 검증 로직 자체가 부득이하게 안 된 경우에 실행)
+						alert(err + " : 회원가입 실패! 다시 시도해보세요..");
+					}				
+				});//end of ajax	 		
+				eflag = true;			
+			}
+			
+		});//end of email validation 
 		
 		//비밀번호 확인
 		/*
-		1. 반드시 입력
+		1. 반드시 입력*
 		*/
-		$("#pw").blur(function(){
+		$("#pw").keyup(function(){
 			var isValid = isPasswordValid($("#pw").val());
 			if(!isValid){
 				$("#pwValidation").html("<font color='red'>비밀번호는 반드시 4-20자의 숫자, 영대소문자, 특수문자여야 합니다. </font>");
+				pflag = false;
 			}else{
 				$("#pwValidation").html("<font color='blue'>사용 가능한 비밀번호입니다.</font>");
+				pflag = true;
 			}
 			
 		});//end of password validaion
 		
 		//비밀번호 재확인
 		/*
-		1. 반드시 입력
-		2. 비밀번호 일치하는지 검사
+		1. 반드시 입력*
+		2. 비밀번호 일치하는지 검사*
 		*/
-		$("#pwAgain").blur(function(){
-//			$("#pw2Validation").html("<font color='red'>비밀번호가 일치하지 않습니다. 다시 입력하세요.</font>");
-
-			if(!isPasswordValid($("#pw").val()) && $("#pw").val() != $("#pwAgain").val()){
+		$("#pwAgain").keyup(function(){
+			if(!isPasswordValid($("#pw").val()) || $("#pw").val() != $("#pwAgain").val()){
 				$("#pw2Validation").html("<font color='red'>비밀번호가 일치하지 않습니다. 다시 입력하세요.</font>");
+				pflag2 = false;
 			}else{
 				$("#pw2Validation").html("<font color='blue'>사용 가능한 비밀번호 입니다.</font>");
+				pflag2 = true;
 			} 
 		});//end of reentered password validaion
 		
 		//이름 확인
 		/*
-		1. 반드시 입력
+		1. 반드시 입력*
 		*/
-		$("#name").blur(function(){
-//			alert($("#name").val());
-		});//end of name validation
-		
-		//전화번호 확인
-		/*
-		1. 전화번호 형식 확인
-		*/
-		$("#phone").blur(function(){
-			var isValid = isPhoneValid($("#phone").val());
-			if(!isValid){
-				$("#phoneValidation").html("<font color='red'>예시에 나온 형식대로 입력하시길 바랍니다.</font>");
+		$("#name").keyup(function(){
+			if($("#name").val() == ""){
+				$("#nameValidation").html("<font color='red'>이름은 반드시 입력하셔야 합니다.</font>");
+				nflag = false;
 			}else{
-				$("#phoneValidation").html("<font color='blue'>사용 가능한 전화번호입니다.</font>");
+				$("#nameValidation").html("<font color='blue'>이름 입력 완료</font>");
+				nflag = true;
 			}
-		});//end of phone validation
-		
+		});//end of name validation
+				
 		$("#resetSpan").click(function(){
-			$("#idValidation").html("");
-			$("#pwValidation").html("");
-			$("#pw2Validation").html("");
-			$("#nameValidation").html("");
-			$("#phoneValidation").html("");
-		});//end of reset button			
+			$("span").html("");
+			eflag = false;
+			pflag = false;
+			pflag2 = false;
+			nflag = false;
+		});//end of reset button
+		 
+		$("#submitted").click(function(){
+			if(!eflag ||!pflag || !pflag2 || !nflag){
+				alert("회원가입 정보를 다시 입력하십시오");
+				return false;
+			}else{
+				alert("회원가입 성공!");
+			}
+		});//end of signIn button
 	
 	});//end of ready
 </script>
 <body>
 	
-	<form action="">
-		ID(e-mail) <input type="text" name="email" id="email"><span id="idValidation"></span><br> 
-		Password <input type="password" name="pw" id="pw"><span id="pwValidation"></span><br>
-		Reenter Password <input type="password" name="pwAgain" id="pwAgain"><span id="pw2Validation"></span><br> 
-		Name <input type="text" name="name" id="name"><span id="nameValidation"></span><br>
-		Phone Number(ex.000-0000-0000) <input type="text" name="phone" id="phone"><span id="phoneValidation"></span><br>
-		<input type="submit" value="회원가입">
-		<input type="reset" value="취소" id="resetSpan">		
+	<form action="insert.do" method="post" id="signInForm">
+		* ID(e-mail) 
+		<input type="text" name="email" id="email" class="progUser"><span id="idValidation"></span><br> 
+		* Password 
+		<input type="password" name="pw" id="pw" class="progUser"><span id="pwValidation"></span><br>
+		* Reenter Password 
+		<input type="password" id="pwAgain" ><span id="pw2Validation"></span><br> 
+		* Name 
+		<input type="text" name="name" id="name" class="progUser" ><span id="nameValidation"></span><br>
+		Phone Number(ex.000-0000-0000) 
+		<input type="text" name="phone" id="phone" class="progUser"><br>
+		<input type="submit" value="회원가입" id="submitted">
+		<input type="reset" value="취소" id="resetSpan"><br>
+		flag : <p></p>	
 	</form>
 
 </body>
