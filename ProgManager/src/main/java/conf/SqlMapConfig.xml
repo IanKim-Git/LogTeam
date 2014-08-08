@@ -13,6 +13,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
    <typeAliases>
      <typeAlias type="model.domain.ProgUserBean" alias="puBean"/>
      <typeAlias type="model.domain.ProjectBean" alias="projectBean"/>
+     <typeAlias type="model.domain.UserProjectBean" alias="UPBean"/>
    </typeAliases>
    
 	<environments default="development">
