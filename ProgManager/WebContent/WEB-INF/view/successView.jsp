@@ -101,5 +101,7 @@
 			</tr>
 		</table>
 	
+	<a href="updateInfo.html">개인정보 변경 화면</a>
+
 </body>
 </html>

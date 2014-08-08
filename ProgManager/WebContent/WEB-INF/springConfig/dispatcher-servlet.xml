@@ -26,7 +26,8 @@
 
 	<!-- Json 응답을 위한 설정 -->
 	<!--<bean id="jsonView" class="net.sf.json.spring.web.servlet.view.JsonView" >
-		<property name="contentType" value="text/html;charset=UTF-8" />
+	<bean id="jsonView" class="net.sf.json.spring.web.servlet.view.JsonView" >
+		<property name="contentType" value="text/html;charset=UTF-8" /> 
 	</bean> -->
 	<bean id="projectJsonView" class="net.sf.json.spring.web.servlet.view.JsonView" >
 		<property name="contentType" value="text/html;charset=UTF-8" />
