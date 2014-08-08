@@ -29,7 +29,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	</environments>
 	
 	<mappers>
-		<mapper resource="conf/ProgUserMapper.xml"/>
+		<mapper resource="conf/ProgSQLMapper.xml"/>
 	</mappers>
 </configuration>
 
