@@ -20,7 +20,7 @@
 					data : $("#newproform").serialize(),
 					success : function(data) {
 						if (data == "ok") {
-							alert("가입 성공");
+							alert("프로젝트 생성 완료");
 							$("input[type=text]").val("");	//text박스 모두 지우기
 							$("#pleader").val(pleader);
 							getData();							//모든레코드 검색하는 함수 호출
