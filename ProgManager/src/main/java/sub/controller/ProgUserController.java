@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class ProgUserController {
@@ -30,6 +31,7 @@ public class ProgUserController {
 		if(pu != null){
 			model.addAttribute("name", pu.getUname());
 			model.addAttribute("phone", pu.getUphone());
+			model.addAttribute("title", "메인 화면");
 			return "successView";
 		}
 		return "failView";
@@ -60,12 +62,10 @@ public class ProgUserController {
 	
 	//회원가입
 	@RequestMapping(value="insert.do", method=RequestMethod.POST)
-//	@RequestMapping("insert.do")
-//	@ResponseBody
 	public String insertUser(@RequestParam("email") String uemail, @RequestParam("name") String uname, 
 						 @RequestParam("pw") String upw, @RequestParam("phone") String uphone, Model model) {
 		String resultMsg = "signInFail";//저장 실패시 응답되는 데이터
-		System.out.println(uname);
+//		System.out.println(uname);
 		
 		int result = puService.userSignIn(new ProgUserBean(uemail, uname, upw, uphone));
 		if(result > 0 )  {
@@ -75,5 +75,50 @@ public class ProgUserController {
 		}
 		return resultMsg;
 	}
+	
+	//개인 정보 변경 페이지로 사용자 정보 넘기기
+	@RequestMapping(value="sendEmail.do", method=RequestMethod.POST)
+	public String sendUserEmail(@RequestParam("email") String uemail, Model model){
+//		System.out.println("사용자 이메일 : " + uemail);
+		ProgUserBean pu = puService.userInfo(uemail);
+//		System.out.println("사용자 정보 : " + pu);
+		model.addAttribute("user", pu);
+		return "updateInfo";
+	}
+	
+	//개인정보 변경
+	@RequestMapping(value="update.do", method=RequestMethod.POST)
+	public String updateUser(@RequestParam("email") String uemail, @RequestParam("name") String uname, 
+						 @RequestParam("pw") String upw, @RequestParam("phone") String uphone, Model model) {
+		String resultMsg = "signInFail";//저장 실패시 응답되는 데이터
+//		System.out.println("사용자 이메일"+uemail);
+//		System.out.println(uname);
+//		System.out.println(upw);
+//		System.out.println(uphone);
+		int result = puService.userUpdateInfo(new ProgUserBean(uemail, uname, upw, uphone));
+		if(result > 0 )  {
+			model.addAttribute("email", uemail);
+			model.addAttribute("name", uname);
+			model.addAttribute("pw", upw);
+			model.addAttribute("phone", uphone);
+			model.addAttribute("title", "메인 화면");
+			resultMsg = "successView";//정상 저장시 응답되는 데이터
+		}
+		return resultMsg;  
+	}
+	
+	//개인정보 변경 취소
+	@RequestMapping(value="cancel.do", method=RequestMethod.POST)
+	public String cancelUpdate(@RequestParam("oldemail") String uemail, Model model){
+		System.out.println("수정하기 취소");
+		ProgUserBean pu = puService.userInfo(uemail);
+		model.addAttribute("email", uemail);
+		model.addAttribute("name", pu.getUname());
+		model.addAttribute("pw", pu.getUpw());
+		model.addAttribute("phone", pu.getUphone());
+		model.addAttribute("title", "메인 화면");
+		return "successView";
+	}
+	
 
 }
