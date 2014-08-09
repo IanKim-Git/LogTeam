@@ -9,7 +9,8 @@
 <script src="js/jquery-1.10.2.js"></script>
 <script src="js/formValidation.js"></script>
 <script type="text/javascript">
-	$(document).ready(function(){		
+	$(document).ready(function(){	
+		nflag = true;
 		//비밀번호 확인
 		/*
 		1. 반드시 입력*
