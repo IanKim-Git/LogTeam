@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-/conf/
 /model/
-=======
-/model/
-/conf/
->>>>>>> refs/heads/branch_kyd_project
-=======
-/conf/
-/model/
->>>>>>> refs/remotes/origin/branch_pde_signIn
 /sub/
+/util/
