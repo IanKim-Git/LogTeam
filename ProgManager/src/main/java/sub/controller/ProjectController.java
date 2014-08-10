@@ -40,6 +40,18 @@ public class ProjectController {
 		else
 			return "no";
 	}
+	
+	@RequestMapping(value="enterProjectMain.do", method=RequestMethod.POST)
+	public String newProject(@RequestParam("pnum") String pnum, @RequestParam("uemail") String uemail, Model model ){
+
+		System.out.println("///////////////////////sdfsdfsdf/////////////////////");
+		System.out.println("////////////////////////////////////////////"+pnum);
+		System.out.println("////////////////////////////////////////////"+uemail);
+		
+		//model.addAttribute("pname", pname);
+
+		return "projectMain";
+	}
 
 	/* 스프링 웹 설정 파일 참조 : springAjaxMyBatis-servlet.xml  
 	<bean id="jsonView" class="net.sf.json.spring.web.servlet.view.JsonView" >
