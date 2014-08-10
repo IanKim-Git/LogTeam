@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>로그인 성공 화면</title>
+<title>${requestScope.title }</title>
 </head>
 
 <script src="js/jquery-1.10.2.js"></script>
@@ -22,6 +22,7 @@
 						if (data == "ok") {
 							alert("프로젝트 생성 완료");
 							$("input[type=text]").val("");	//text박스 모두 지우기
+							$("input[type=password]").val("");
 							$("#pleader").val(pleader);
 							getData();							//모든레코드 검색하는 함수 호출
 						} else {
@@ -101,7 +102,13 @@
 			</tr>
 		</table>
 	
-	<a href="updateInfo.html">개인정보 변경 화면</a>
-
+	<!-- <a href="WEB-INF/view/updateInfo.jsp">개인정보 변경 화면</a> -->
+	<!-- <input type="button" value="수정하기"	Onclick="location.href='updateInfo.jsp'"> -->
+	<form action="sendEmail.do" id="userEmail" method="post">
+		<input type="submit" value="개인정보 변경하기"/>
+		<input type="hidden" name="email" id="email" value="${requestScope.email}"/>
+	</form>
+		
+	
 </body>
 </html>

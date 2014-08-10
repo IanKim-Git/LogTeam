@@ -29,11 +29,7 @@ public class ProgUserDAO {
 		int result = 0;
 		try {
 			session = DBUtil.getSqlSession();
-//			if(uphone == null || uphone.equals("")){
 				result = session.insert("prog.signIn", pu);				
-//			}else{
-//				result = session.insert("progUser.signIn", pu);
-//			}
 			flag = result > 0 ? true : false;
 		} finally {
 			DBUtil.closeSqlSession(flag, session);
@@ -71,17 +67,17 @@ public class ProgUserDAO {
 	}
 	
 	//회원 정보 출력
-		public ProgUserBean userInfo(String uemail) {
-			SqlSession session = null;
-			ProgUserBean pu = null;
-			try{
-				session = DBUtil.getSqlSession();
-				pu = session.selectOne("prog.userInfo", uemail);
-			}finally{
-				DBUtil.closeSqlSession(session);
-			}
-			return pu;
+	public ProgUserBean userInfo(String uemail) {
+		SqlSession session = null;
+		ProgUserBean pu = null;
+		try{
+			session = DBUtil.getSqlSession();
+			pu = session.selectOne("prog.userInfo", uemail);
+		}finally{
+			DBUtil.closeSqlSession(session);
 		}
+		return pu;
+	}
 	
 	//모든 회원 정보
 	public List<ProgUserBean> allUsers() {

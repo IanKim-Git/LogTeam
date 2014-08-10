@@ -1,45 +1,16 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>SignIn Test</title>
+<title>UpdateInfo Test(view/jsp)</title>
 </head>
 <script src="js/jquery-1.10.2.js"></script>
 <script src="js/formValidation.js"></script>
 <script type="text/javascript">
-	$(document).ready(function(){		
-		//이메일 검사
-		/*
-		1. 반드시 입력*
-		2. 이메일 형식 검증*
-		3. 중복 검사*
-		*/
-		 $("#email").keyup(function(){
-			$("p").html($('#email').val()); 
-			var isValid = isEmailValid($('#email').val());
-			if(!isValid){
-				$("#idValidation").html("<font color='red'>적합하지 않은 e-mail 형식입니다. 다시 입력하세요</font>");
-				eflag = false;
-			}else{
-				 $.ajax({
-					url : "idCheck.do", 					//서버에 요청할 정보
-					type : "post",							//method방식
-					dataType : "text", 					//응답되는 데이터 타입
-					data : "email=" + $("#email").val(),	//서버에 전송할 데이터 no=입력된 데이터
-					
-					success : function(data) {		//응답 성공시 자동 실행되는 사용자 정의 함수
-						$("#idValidation").html(data);
-					},
-					
-					error : function(err) { //응답 실패했을때 자동 실행되는 사용자 정의 함수(서버 자체의 검증 로직 자체가 부득이하게 안 된 경우에 실행)
-						alert(err + " : 회원가입 실패! 다시 시도해보세요..");
-					}				
-				});//end of ajax	 		
-				eflag = true;			
-			}
-			
-		});//end of email validation 
-		
+	$(document).ready(function(){	
+		nflag = true;
 		//비밀번호 확인
 		/*
 		1. 반드시 입력*
@@ -87,41 +58,48 @@
 				
 		$("#reset").click(function(){
 			$("span").html("");
-			$("input[type=text]").val("");
+//			$("input[type=text]").val("");
+			$("#name").val("");
+			$("#phone").val("");
 			$("input[type=password]").val("");
-			eflag = false;
+//			eflag = false;
 			pflag = false;
 			pflag2 = false;
 			nflag = false;
 		});//end of reset button
 		 
 		$("#submitted").click(function(){
-			if(!eflag ||!pflag || !pflag2 || !nflag){
-				alert("회원가입 정보를 다시 입력하십시오");
+			if(!pflag || !pflag2 || !nflag){
+				alert("회원 정보를 다시 입력하십시오");
 				return false;
 			}else{
-				alert("회원가입 성공!");
+				alert("개인 정보 변경 성공!");
 			}
 		});//end of signIn button
 	
 	});//end of ready
+
 </script>
 <body>
-	<h4>회원가입 화면</h4>
-	<form action="insert.do" method="post" id="signInForm">
+	<h4>개인 정보 변경 화면</h4>
+	<form action="update.do" method="post" id="updateForm">
 		* ID(e-mail) 
-		<input type="text" name="email" id="email"><span id="idValidation"></span><br> 
+		<input type="text" value="${requestScope.user.uemail}" disabled="disabled"><br>
+		<input type="hidden" name="email" id="email" value="${requestScope.user.uemail}"/>
 		* Password 
 		<input type="password" name="pw" id="pw"><span id="pwValidation"></span><br>
 		* Reenter Password 
-		<input type="password" id="pwAgain"><span id="pw2Validation"></span><br> 
+		<input type="password" id="pwAgain" ><span id="pw2Validation"></span><br> 
 		* Name 
-		<input type="text" name="name" id="name"><span id="nameValidation"></span><br>
+		<input type="text" name="name" id="name" value="${requestScope.user.uname}"><span id="nameValidation"></span><br>
 		Phone Number(ex.000-0000-0000) 
-		<input type="text" name="phone" id="phone"><br>
-		<input type="submit" value="회원가입" id="submitted">
-		<input type="button" value="취소" id="reset" Onclick="location.href='index.html'"><br>
+		<input type="text" name="phone" id="phone" value="${requestScope.user.uphone}"><br>
+		<input type="submit" value="확인" id="submitted">
+		
 	</form>
-
+	<form action="cancel.do" method="post" id="cancelBtn">
+		<input type="hidden" name="oldemail" id="oldemail" value="${requestScope.user.uemail}"/>
+		<input type="submit" value="취소" id="reset"><br>
+	</form>
 </body>
 </html>

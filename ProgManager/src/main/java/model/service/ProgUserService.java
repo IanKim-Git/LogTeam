@@ -28,4 +28,9 @@ public class ProgUserService {
 	public int userUpdateInfo(ProgUserBean pu){
 		return puDao.userUpdate(pu);
 	}
+	
+	//개인 정보 반환
+	public ProgUserBean userInfo(String uemail){
+		return puDao.userInfo(uemail);
+	}
 }
