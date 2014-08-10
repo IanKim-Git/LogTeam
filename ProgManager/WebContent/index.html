@@ -103,14 +103,47 @@
 			nflag = false;
 			
 		});//end of reset button
+		
+		function deleteJoinForm() {
+			$("#idValidation").html("");
+			$("#pwValidation").html("");
+			$("#pw2Validation").html("");
+			$("#nameValidation").html("");
+			$("#email2").val("");
+			$("#pw2").val("");
+			$("#pwAgain").val("");
+			$("#name").val("");
+			$("#phone").val("");
+			eflag = false;
+			pflag = false;
+			pflag2 = false;
+			nflag = false;
+			$('#JoinButton').removeClass('active');
+			$('#JoinBox').hide();
+		}
 		 
 		$("#Join").click(function(){
 			if(!eflag ||!pflag || !pflag2 || !nflag){
 				alert("회원가입 정보를 다시 입력하십시오");
 				return false;
-			}else{
-				alert("회원가입 성공!");
 			}
+			$.ajax({
+				url : "insert.do",
+				type : "post",
+				dataType : "text", 
+				data : $("#JoinForm").serialize(),
+				success : function(data) {
+					if (data == "ok") {
+						alert("회원가입 성공!");
+					} else {
+						alert("가입 실패");
+					}
+					deleteJoinForm();
+				},
+				error : function(data) {
+					alert(data + ' : 가입로직 실행시 에러 발생');
+				}
+			}); //end of ajax
 		});//end of signIn button
 	
 	});//end of ready
@@ -170,7 +203,7 @@
                                 <label for="phone">Phone Number(ex.000-0000-0000)</label>
                                 <input type="text" name="phone" id="phone">
                             </fieldset>
-                            <input type="submit" id="Join" value="가입" />
+                            <input type="button" id="Join" value="가입" />
                             <input type="reset" id="resetSpan" value="취소" />
                         </fieldset>
                     </form>
