@@ -61,20 +61,21 @@ public class ProgUserController {
 	}
 	
 	//회원가입
-	@RequestMapping(value="insert.do", method=RequestMethod.POST)
-	public String insertUser(@RequestParam("email") String uemail, @RequestParam("name") String uname, 
-						 @RequestParam("pw") String upw, @RequestParam("phone") String uphone, Model model) {
-		String resultMsg = "signInFail";//저장 실패시 응답되는 데이터
-//		System.out.println(uname);
-		
-		int result = puService.userSignIn(new ProgUserBean(uemail, uname, upw, uphone));
-		if(result > 0 )  {
-			model.addAttribute("email", uemail);
-			model.addAttribute("name", uname);
-			resultMsg = "signInSucc";//정상 저장시 응답되는 데이터
-		}
-		return resultMsg;
-	}
+			@RequestMapping(value="insert.do", method=RequestMethod.POST)
+			public String insert(@RequestParam("email2") String uemail, @RequestParam("name") String uname, 
+								 @RequestParam("pw2") String upw, @RequestParam("phone") String uphone, Model model) {
+//				System.out.println("Eee");
+				String resultMsg = "signInFail";//저장 실패시 응답되는 데이터
+				System.out.println(uname);
+				
+				int result = puService.userSignIn(new ProgUserBean(uemail, uname, upw, uphone));
+				if(result > 0 )  {
+					model.addAttribute("email2", uemail);
+					model.addAttribute("name", uname);
+					resultMsg = "signInSucc";//정상 저장시 응답되는 데이터
+				}
+				return resultMsg;  
+			}
 	
 	//개인 정보 변경 페이지로 사용자 정보 넘기기
 	@RequestMapping(value="sendEmail.do", method=RequestMethod.POST)

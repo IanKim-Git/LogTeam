@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+/conf/
+/model/
+/sub/
+=======
 /model/
 /sub/
 <<<<<<< HEAD
@@ -5,3 +10,4 @@
 /conf/
 =======
 >>>>>>> refs/remotes/origin/branch_pde_udate
+>>>>>>> refs/heads/branch_wsn_loginUI
