@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-     <meta http-equiv="Content-Type" content="text/html" charset="EUC-KR">
+     <meta http-equiv="X-UA-Compatible" content="text/html" charset="EUC-KR">
 	 <title>${requestScope.title }</title>
      <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
      <link href='stylesheets/jquery.gridly.css' rel='stylesheet' type='text/css'>
@@ -15,17 +15,18 @@
      <script src='javascripts/rainbow.js' type='text/javascript'></script>
      <script src="js/login.js"></script>
      <script src="javascripts/createProjectBtn.js"></script>
-      
-	<script src="js/jquery-1.10.2.js"></script>
+<!-- 	 <script src="js/jquery-1.10.2.js"></script> -->
 </head>
 
 <script type="text/javascript">
 	$(document).ready(	function() {
-			
 		var pleader = $("#pleader").val();
-			
+
 		// 프로젝트 생성하기 버튼을 클릭했을때 project table에 저장되는 로직
 		$("#btn").click(function() {
+    	 	var brick;
+   			var pname = $("#pname").val();
+   		 	alert(pname);
 			$.ajax({
 				url : "newProject.do",
 				type : "post",
@@ -34,10 +35,14 @@
 				success : function(data) {
 					if (data == "ok") {
 						alert("프로젝트 생성 완료");
-						$("input[type=text]").val("");	//text박스 모두 지우기
-						$("input[type=password]").val("");
-						$("#pleader").val(pleader);
-						getData();							//모든레코드 검색하는 함수 호출
+						getData();							//모든레코드 검색하는 함수 호출				
+				    	document.getElementById("createProjectPop").style.display="none";
+				    	brick = "<div class='brick small'><br><br><font color='black'>"+pname+
+				    		+"</font><br><br></div>";
+				        event.preventDefault();
+				        event.stopPropagation();
+				        $('.gridly').append(brick);
+				        $('.gridly').gridly();
 					} else {
 						alert("가입 실패");
 					}
@@ -45,6 +50,7 @@
 				error : function(data) {
 					alert(data + ' : 가입로직 실행시 에러 발생');
 				}
+				
 			}); //end of ajax
 		});//end of 가입로직
 
@@ -56,18 +62,17 @@
 				type : "post",
 				dataType : "json", 					//결과데이터타입
 				success : function(data) {
-					var table = "";
+					document.getElementById("gridly").innerHTML="<div class='brick large' ><br><br><font color='black'>ProgManager<br><b>관리자 페이지</b></font></div>";
+					
 					//기존에 있는 테이블 첫행만 빼고 지우기
 					//http://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_sel_gt
-					$("#projectlistTable tr:gt(0)").remove();
+					//$("#projectlistTable tr:gt(0)").remove();
 					
 					$(data.list).each(function(index, project) {
-						table += "<tr><td>" + project.pnum + "</td><td>" + project.pname + "</td><td>" +  project.pmento + "</td>";
-						table += "<td>" + project.pstart + "</td><td>" + project.pend + "</td><td>" + project.pleader + "</td><td>";
-						table += "<input type='button' value='입장하기' id='enterProject' name='"+project.no+"'></td></tr>"
+						document.getElementById("gridly").innerHTML+="<div class='brick small' id="+$('#pnum')+"><br><br><font color='black' >"+"<div id='contents'>"+project.pname+"</div><br></font></div>";
+						$('.gridly').gridly();
 					});
 					//테이블에 추가
-					$("#projectlistTable tr:eq(0)").after(table);
 				},
 				error : function(err) {//실패했을때
 					alert(err + " : 모든 프로젝트 정보 불러오기 실패");
@@ -86,13 +91,13 @@
 						alert("삭제 성공");
 						getData();
 					} else {
-						alert("삭제 실패")
+						alert("삭제 실패");
 					}
 				},
 				error : function(err) {//실패했을때
-					alert(err + " : 학생정보 삭제 실패")
+					alert(err + " : 학생정보 삭제 실패");
 				}
-			})
+			});
 		});
 
 		//레코드 가져오기는 함수 호출
@@ -172,30 +177,16 @@
       <br>
       <hr>
       <h3> <font color="orange">◆  자신 프로젝트 목록 ◆</font></h3>
-      <section class='example'>
-        <div class='gridly'>
-
-          <div class='brick small' >
-          <br><br><font color='black' >ProgManager
-          <br>
-          	프로젝트 로그 관리 프로젝트
-          	<br>
-          	팀원<br>
-          	박상태, 김용두, 황수남, 박다은
-          	<br>
-          	프로젝트 시작일 : 0000-00-00<br>
-          	프로젝트 종료일 : 0000-00-00<br>
-          	</font>
-          
-            <a class='delete' href='#'>&times;</a>          </div>
-          <div class='brick small'>
-            <a class='delete' href='#'>&times;</a>          </div>
-
-        </div>
+      <div id="projectList">
+	      <section class='example'>
+	        <div class='gridly' id='gridly'>
+	        </div>
+          </section>
+  		</div>
         <p class='actions'>
           <a class='button' href="javascript:ViewLayer();">프로젝트 생성하기</a>
         </p>
-      </section>
+ 
     </div>
    	<div ><a id='nextLink' href='mainProject.html'>넘어가기</a></div>
     	
@@ -204,29 +195,22 @@
 	   	<font color="black" size="40" style="4">프로젝트 생성하기</font>
 	   	<br>
 	   	<br>
-	   	<font color=white>프로젝트 이름 : </font><input type=text /><br>
-	   	<font color=white>프로젝트 비밀번호 : </font><input type=text /><br>
-	   	<font color=white>담당자 id : </font><input type=text /><br>
-	   	<font color=white>프로젝트 시작 : </font><input type=text /><br>
-	   	<font color=white>PM id : </font><input type=text /><br>
-	   	
+
 	   	<form name="newProject.do" id="newproform" method="post">
-		Project Name <input type="text"  name="pname" /><br>
-		Project PassWord <input type="password" name="ppw" /><br>
-		Project Mendo ID <input type="text" name="pmento" /><br>
-		Project Start Date <input type="text" name="pstart" /><br>
-		Project End Date <input type="text" name="pend" /><br>
-		Project Leader <input type="text" name="pleader" id="pleader" value="${requestScope.email}"/><br>
-		<input type="button" value="생성하기" id="btn">
+			Project Name <input type="text"  name="pname" id="pname" /><br>
+			Project PassWord <input type="password" name="ppw" /><br>
+			Project Mendo ID <input type="text" name="pmento" /><br>
+			Project Start Date <input type="text" name="pstart" /><br>
+			Project End Date <input type="text" name="pend" /><br>
+			Project Leader <input type="text" name="pleader" id="pleader" value="${requestScope.email}"/><br>
+		<br>
+		<br>
+		<input class='basicBtn' type="button" value="생성하기" id="btn">
+		<input class='cancel basicBtn' type="button" value="취소" id="btn2">
 		</form>
 	   	<br>
-	   	<div align="center">
-	   	<a class='add basicBtn' href='#'>만들기</a>
-	   	<a class='cancel basicBtn' href="#">취소</a>
-	   	</div>
+
 	   	<br>
-	   	<button id="ok"  onclick="registerProject()">확인</button>
-	   	<button id="cancel" >취소</button>
    	</div>
     <script> 
       function ViewLayer(){

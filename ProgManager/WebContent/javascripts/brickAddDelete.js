@@ -2,9 +2,10 @@
 (function() {
   $(function() {
     var brick;
-    brick = "<div class='brick small'><div class='delete'>&times;</div></div>";
+    brick = "<div class='brick small'></div>";
     $(document).on("click", ".gridly .brick", function(event) {
       var $this, size;
+      var sizeflag;
       event.preventDefault();
       event.stopPropagation();
       $this = $(this);
@@ -12,12 +13,24 @@
       $this.toggleClass('large');
       if ($this.hasClass('small')) {
         size = 140;
+        sizeflag=true;
       }
       if ($this.hasClass('large')) {
         size = 300;
+        sizeflag=false;
       }
       $this.data('width', size);
       $this.data('height', size);
+      if($this.hasClass('large')){
+    	  alert(document.getElementById(this.getAttribute('id')).getAttribute('id'));
+    	  document.getElementById("contents").innerHTML="getBIG";
+    	 // $this.data('contents','옹?');
+      }
+      if($this.hasClass('small')){
+    	  document.getElementById("contents").innerHTML="getSMALL";
+
+    	 // $this.data('contents','응?');
+      }
       return $('.gridly').gridly('layout');
     });
     $(document).on("click", ".gridly .delete", function(event) {
