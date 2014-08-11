@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-This is project Main
+This is project Main<br>
+
+프 번호 - ${requestScope.pnum}<br>
+유 이메일 - ${requestScope.uemail}<br>
 </body>
 </html>
