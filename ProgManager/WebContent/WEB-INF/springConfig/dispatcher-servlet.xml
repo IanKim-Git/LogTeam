@@ -11,20 +11,28 @@
 	<!-- viewReslover 등록 -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/view/" /> <!-- 폴더경로 -->
-		<property name="suffix" value=".jsp" /><!-- 확장자 -->
-		<property name="order" value="1" />
+		
+		 <property name="prefix" value="/WEB-INF/view/" /> <!-- 폴더경로 -->
+		 <property name="suffix" value=".jsp" /><!-- 확장자 -->
+		 <property name="order" value="1" />
+	
 	</bean>
 
 	<!-- <bean id="stService" class="model.service.StudentServiceImpl"  />
 	<bean class="model.dao.StudentDaoImpl" id="stDao" /> -->
-	<bean id="puDao" class="model.dao.ProgUserDAO"/>
-	<bean id="puService" class="model.service.ProgUserService"/>
+	<bean id="puDao" class="model.dao.ProgUserDAO" />
+	<bean id="puService" class="model.service.ProgUserService" />
+	
+	<bean id="projectDao" class="model.dao.ProjectDAO" />
+	<bean id="projectService" class="model.service.ProjectService" />
 
 	<!-- Json 응답을 위한 설정 -->
-	<!-- <bean id="jsonView" class="net.sf.json.spring.web.servlet.view.JsonView" >
-		<property name="contentType" value="text/html;charset=UTF-8" />
+	<!--<bean id="jsonView" class="net.sf.json.spring.web.servlet.view.JsonView" >
+		<property name="contentType" value="text/html;charset=UTF-8" /> 
 	</bean> -->
+	<bean id="projectJsonView" class="net.sf.json.spring.web.servlet.view.JsonView" >
+		<property name="contentType" value="text/html;charset=UTF-8" />
+	</bean>
 
 	<!-- ViewResolver를 찾을때 bean의 id로 제일먼저 찾을수 있도록 우선순위를 0으로 줌
 			생략시 spring controller에서 jsonView에 매핑된 view 실행 불가 -->

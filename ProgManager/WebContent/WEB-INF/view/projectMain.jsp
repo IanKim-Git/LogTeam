@@ -4,13 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>로그인 실패 화면</title>
+<title>Insert title here</title>
 </head>
 <body>
-	<b>존재하지 않는 사용자입니다.</b><br>
-	이메일 - ${requestScope.email}<br>
-	비밀번호 - ${requestScope.pw}<br>
-	
-	<a href="index.html">로그인 화면으로 돌아가기</a>
+This is project Main
 </body>
 </html>
