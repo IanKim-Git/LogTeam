@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import model.domain.ProjectBean;
+import model.service.ProgUserService;
 import model.service.ProjectService;
 
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,9 @@ import org.springframework.web.servlet.ModelAndView;
 public class ProjectController {
 	@Resource(name="projectService")
 	private ProjectService projectService;
+	
+	@Resource(name="puService")
+	private ProgUserService puService;
 
 	@RequestMapping(value="newProject.do", method=RequestMethod.POST)
 	@ResponseBody
@@ -69,6 +73,15 @@ public class ProjectController {
 		mv.addObject("list", list);			
 		mv.setViewName("projectJsonView");	//id=jsonView 객체를 찾아서 JsonView실행
 		return mv;
+	}
+	
+	@RequestMapping(value="projectInfo.do", method=RequestMethod.POST)
+	public String projectInfo(@RequestParam("pnum") int pnum, Model model){
+		System.out.println("///////////////pnum : " + pnum);
+		model.addAttribute("pinfo", projectService.getProjectInfo(pnum));
+		model.addAttribute("puser", puService.projectUserList(pnum));
+		model.addAttribute("pnum", pnum);
+		return "projectInfo";
 	}
 
 }

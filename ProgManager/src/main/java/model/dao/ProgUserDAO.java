@@ -92,6 +92,20 @@ public class ProgUserDAO {
 		return list;
 	}
 	
+	//프로젝트 번호로 해당 유저 리스트 출력
+	public List<ProgUserBean> allProjectUsers(int pnum) {
+		SqlSession session = null;
+		List<ProgUserBean> list = null;
+		try {
+			session = DBUtil.getSqlSession();
+			list = session.selectList("prog.getProjectUserList", pnum);
+		} finally {
+			DBUtil.closeSqlSession(session);
+		}
+		return list;
+	}
+	
+	
 	//###단위 테스트###
 /*	public static void main(String[] args) {
 		ProgUserDAO p = new ProgUserDAO();

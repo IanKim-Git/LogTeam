@@ -28,7 +28,12 @@
 	<!--<bean id="jsonView" class="net.sf.json.spring.web.servlet.view.JsonView" >
 		<property name="contentType" value="text/html;charset=UTF-8" /> 
 	</bean> -->
+	<!-- 유저가 속한 프로젝트 리스트 불러오는  -->
 	<bean id="projectJsonView" class="net.sf.json.spring.web.servlet.view.JsonView" >
+		<property name="contentType" value="text/html;charset=UTF-8" />
+	</bean>
+	<!-- 유저가 클릭한 프로젝트, 1개의 정보를 받아오는 -->
+	<bean id="projectinfoJsonView" class="net.sf.json.spring.web.servlet.view.JsonView" >
 		<property name="contentType" value="text/html;charset=UTF-8" />
 	</bean>
 

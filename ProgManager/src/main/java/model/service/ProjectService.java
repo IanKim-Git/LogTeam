@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import model.dao.ProjectDAO;
+import model.domain.ProjectBean;
 
 public class ProjectService {
 	
@@ -23,13 +24,20 @@ public class ProjectService {
 		return pnum;
 	}
 	
+	//프로젝트 참여하기
 	public int newParticipation(String email, int pnum){
 		return projectDao.newParticipation(email, pnum);
 	}
 	
+	//유저 emial을 통하여 참여한 프로젝트 리스트 불러오기
 	public List getProjectList(String uemail) {
 		System.out.println("////////////////////////////////getproject list service//////////////////////////////");
 		return projectDao.getProjectList(uemail);
+	}
+	
+	public ProjectBean getProjectInfo(int pnum){
+		System.out.println("////////////////////////////////getproject info service//////////////////////////////");
+		return projectDao.getProject(pnum);
 	}
 
 }

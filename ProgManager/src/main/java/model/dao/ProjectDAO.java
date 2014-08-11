@@ -63,9 +63,15 @@ public class ProjectDAO {
 	}
 	
 	//해당 프로젝트 불러오기
-	public static ProjectBean getProject(){
+	public static ProjectBean getProject(int pnum){
+		SqlSession session = null;
 		ProjectBean projectbean = null;
-		
+		try{
+			session = DBUtil.getSqlSession();
+			projectbean = session.selectOne("prog.getProjectInfo", pnum);
+		}finally{
+			DBUtil.closeSqlSession(session);
+		}
 		return projectbean;
 	}
 	

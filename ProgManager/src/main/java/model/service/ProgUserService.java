@@ -1,8 +1,11 @@
 package model.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import model.dao.ProgUserDAO;
+import model.dao.ProjectDAO;
 import model.domain.ProgUserBean;
 
 public class ProgUserService {
@@ -32,5 +35,10 @@ public class ProgUserService {
 	//개인 정보 반환
 	public ProgUserBean userInfo(String uemail){
 		return puDao.userInfo(uemail);
+	}
+	
+	//해당 프로젝트에 속한 회원 리스트 반환
+	public List projectUserList(int pnum){
+		return puDao.allProjectUsers(pnum);
 	}
 }

@@ -11,5 +11,13 @@ This is project Main<br>
 
 프 번호 - ${requestScope.pnum}<br>
 유 이메일 - ${requestScope.uemail}<br>
+
+
+
+<form action="projectInfo.do" method="post">
+   <input type="submit" value="프로젝트 정보">
+   <input type="hidden" name="pnum" value="${requestScope.pnum}">
+</form>
+
 </body>
 </html>
