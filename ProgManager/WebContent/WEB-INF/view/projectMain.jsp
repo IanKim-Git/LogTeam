@@ -7,6 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-This is project Main
+This is project Main<br>
+
+프 번호 - ${requestScope.pnum}<br>
+유 이메일 - ${sessionScope.userData.uemail}<br>
+<form action="logList.do" id="logList" method="post">
+	<input type="submit" value="로그게시판">
+	<input type="hidden" name="enterLogPnum" value="${requestScope.pnum}">
+</form>
 </body>
 </html>

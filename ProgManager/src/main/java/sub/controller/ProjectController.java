@@ -49,6 +49,8 @@ public class ProjectController {
 		System.out.println("////////////////////////////////////////////"+uemail);
 		
 		//model.addAttribute("pname", pname);
+		model.addAttribute("pnum", pnum);
+		model.addAttribute("uemail", uemail);
 
 		return "projectMain";
 	}
@@ -68,6 +70,13 @@ public class ProjectController {
 		mv.addObject("list", list);			
 		mv.setViewName("projectJsonView");	//id=jsonView 객체를 찾아서 JsonView실행
 		return mv;
+	}
+	
+	//로그게시판으로 이동
+	@RequestMapping("logList.do")
+	public String enterLogList(@RequestParam("enterLogPnum") String pnum, Model model){
+		model.addAttribute("pnum", pnum);
+		return "logList";
 	}
 
 }

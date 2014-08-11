@@ -1,3 +1,4 @@
+<%@page import="java.util.HashMap"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -6,7 +7,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>${requestScope.title }</title>
 </head>
+<%
+	String email = (String)request.getAttribute("email");
+	String pw = (String)request.getAttribute("pw");
+	String name = (String)request.getAttribute("name");
+	String phone = (String)request.getAttribute("phone");
+	
+	HashMap userData = new HashMap();
+	userData.put("uemail", email);
+	userData.put("upw", pw);
+	userData.put("uname", name);
+	userData.put("uphone", phone);
+	session.setAttribute("userData", userData);
 
+%>
 <script src="js/jquery-1.10.2.js"></script>
 <script type="text/javascript">
 	$(document).ready(	function() {
@@ -55,7 +69,7 @@
 						table += "<td>" + project.pstart + "</td><td>" + project.pend + "</td><td>" + project.pleader + "</td><td>";
 						table += "<form action='enterProjectMain.do' id='enterProject' method='post'><input type='submit' value='입장하기'/>";
 						table += "<input type='hidden' id='pnum' name='pnum' value='"+project.pnum+"'/>";
-						table += "<input type='hidden' id='uemail' name='uemail' value='"+project.pleader+"'/></form>";
+						table += "<input type='hidden' id='uemail' name='uemail' value='"+$("#curUser").val()+"'/></form>";
 						
 					});
 					//테이블에 추가
@@ -83,6 +97,7 @@
 	<br><hr><br>
 	
 	<h2>New Project</h2>
+	<input type="hidden" id="curUser" name="curUser" value="${requestScope.email}">
 	<form name="newProject.do" id="newproform" method="post">
 		Project Name <input type="text"  name="pname" /><br>
 		Project PassWord <input type="password" name="ppw" /><br>
@@ -114,7 +129,6 @@
 	<!-- <input type="button" value="수정하기"	Onclick="location.href='updateInfo.jsp'"> -->
 	<form action="sendEmail.do" id="userEmail" method="post">
 		<input type="submit" value="개인정보 변경하기"/>
-		<input type="hidden" name="email" id="email" value="${requestScope.email}"/>
 	</form>
 		
 	

@@ -84,21 +84,21 @@
 	<h4>개인 정보 변경 화면</h4>
 	<form action="update.do" method="post" id="updateForm">
 		* ID(e-mail) 
-		<input type="text" value="${requestScope.user.uemail}" disabled="disabled"><br>
-		<input type="hidden" name="email" id="email" value="${requestScope.user.uemail}"/>
+		<input type="text" value="${sessionScope.userData.uemail}" disabled="disabled"><br>
+		<input type="hidden" name="email" id="email" value="${sessionScope.userData.uemail}"/>
 		* Password 
 		<input type="password" name="pw" id="pw"><span id="pwValidation"></span><br>
 		* Reenter Password 
 		<input type="password" id="pwAgain" ><span id="pw2Validation"></span><br> 
 		* Name 
-		<input type="text" name="name" id="name" value="${requestScope.user.uname}"><span id="nameValidation"></span><br>
+		<input type="text" name="name" id="name" value="${sessionScope.userData.uname}"><span id="nameValidation"></span><br>
 		Phone Number(ex.000-0000-0000) 
-		<input type="text" name="phone" id="phone" value="${requestScope.user.uphone}"><br>
+		<input type="text" name="phone" id="phone" value="${sessionScope.userData.uphone}"><br>
 		<input type="submit" value="확인" id="submitted">
 		
 	</form>
 	<form action="cancel.do" method="post" id="cancelBtn">
-		<input type="hidden" name="oldemail" id="oldemail" value="${requestScope.user.uemail}"/>
+		<input type="hidden" name="oldemail" id="oldemail" value="${sessionScope.userData.uemail}"/>
 		<input type="submit" value="취소" id="reset"><br>
 	</form>
 </body>
