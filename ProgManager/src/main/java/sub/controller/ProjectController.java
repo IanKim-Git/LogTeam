@@ -48,7 +48,8 @@ public class ProjectController {
 		System.out.println("////////////////////////////////////////////"+pnum);
 		System.out.println("////////////////////////////////////////////"+uemail);
 		
-		//model.addAttribute("pname", pname);
+		model.addAttribute("pnum", pnum);
+		model.addAttribute("uemail", uemail);
 
 		return "projectMain";
 	}
