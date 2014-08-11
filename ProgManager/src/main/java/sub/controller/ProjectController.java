@@ -42,7 +42,7 @@ public class ProjectController {
 	}
 	
 	@RequestMapping(value="enterProjectMain.do", method=RequestMethod.POST)
-	public String newProject(@RequestParam("pnum") String pnum, @RequestParam("uemail") String uemail, Model model ){
+	public String newProject(@RequestParam("pnum") String pnum, @RequestParam("uemail") String uemail, Model model){
 
 		System.out.println("///////////////////////sdfsdfsdf/////////////////////");
 		System.out.println("////////////////////////////////////////////"+pnum);

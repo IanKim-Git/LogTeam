@@ -53,7 +53,10 @@
 					$(data.list).each(function(index, project) {
 						table += "<tr><td>" + project.pnum + "</td><td>" + project.pname + "</td><td>" +  project.pmento + "</td>";
 						table += "<td>" + project.pstart + "</td><td>" + project.pend + "</td><td>" + project.pleader + "</td><td>";
-						table += "<input type='button' value='입장하기' id='enterProject' name='"+project.no+"'></td></tr>"
+						table += "<form action='enterProjectMain.do' id='enterProject' method='post'><input type='submit' value='입장하기'/>";
+						table += "<input type='hidden' id='pnum' name='pnum' value='"+project.pnum+"'/>";
+						table += "<input type='hidden' id='uemail' name='uemail' value='"+project.pleader+"'/></form>";
+						
 					});
 					//테이블에 추가
 					$("#projectlistTable tr:eq(0)").after(table);
@@ -63,26 +66,7 @@
 				}
 			}); //end of ajax
 		}//end of getData()
-			
-		$(document).on("click", "#enterProject", function() {
-			$.ajax({
-				url : "enterProjectMain.do", 
-				type : "post",
-				dataType : "text", 
-				data : "pnum=" + $(this).attr("pnum") + "&uemail=" + $("#pleader").val(),	//서버에 전송할 데이터
-				success : function(data) {
-					if (data == "ok") {
-						alert("삭제 성공");
-						getData();
-					} else {
-						alert("삭제 실패")
-					}
-				},
-				error : function(err) {//실패했을때
-					alert(err + " : 학생정보 삭제 실패")
-				}
-			})
-		});
+		
 
 		//레코드 가져오기는 함수 호출
 		getData();
