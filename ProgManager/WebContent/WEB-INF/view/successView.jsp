@@ -172,17 +172,14 @@
 		                	  "<div class='brick small' id="+project.pnum+"><br><br><font color='black' >"+
 		                	  		"<div id='content_s"+project.pnum+"' style='display:table-cell; vertical-align:middle; font-size: 1.3em;'>"+project.pname+"</div><br>"+
 		                	  		"<div id='content_l"+project.pnum+"' style='display:none; font-size: 1.2em;'>"+
-		                	  			"프로젝트 번호 : "+project.pnum+"<br>"+
-		                	  			"프로젝트 이름 : "+project.pname+"<br>"+
-		                	  			"멘토 : "+project.pmento+"<br>"+
-		                	  			"기간 : <br>"+project.pstart+"~"+project.pend+"<br>"+
-		                	  			"팀장 : "+project.pleader+"<br>"+
-		                	  			"</div><br></font>"+
-		                	  			
-		                	  			"<div id='enterBtn'><form action='enterProjectMain.do' id='enterProject' method='post'><input type='submit' value='입장하기'/>"+
+		                	  			"프로젝트 번호 : "+project.pnum+"<br>"+	"프로젝트 이름 : "+project.pname+"<br>"+
+		                	  			"멘토 : "+project.pmento+"<br>"+  		"기간 : <br>"+project.pstart+"~"+project.pend+"<br>"+
+		                	  			"팀장 : "+project.pleader+"<br>"+  		"</div><br></font>"+
+		                	  		"<a class='enter' href='#' id="+project.num+">입장하기</a>"+
+		                	  			"<form action='enterProjectMain.do' id='enterProject' method='post'>"+
 	                	  				"<input type='hidden' id='pnum' name='pnum' value='"+project.pnum+"'/>"+
-	                	  				"<input type='hidden' id='pname' name='pname' value='"+project.pname+"'/></div>"+
-	                	  				"</div>";
+	                	  				"<input type='hidden' id='pname' name='pname' value='"+project.pname+"'/>"+
+	                	  		"</div>";
 	           
 		                  
 		                $('.gridly').gridly();

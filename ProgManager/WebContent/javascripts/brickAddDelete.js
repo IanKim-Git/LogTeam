@@ -34,14 +34,23 @@
       return $('.gridly').gridly('layout');
     });
     
-    $(document).on("click", ".gridly .delete", function(event) {
+    /*$(document).on("click", ".gridly .delete", function(event) {
       var $this;
       event.preventDefault();
       event.stopPropagation();
       $this = $(this);
       $this.closest('.brick').remove();
       return $('.gridly').gridly('layout');
-    });
+    });*/
+    $(document).on("click", ".gridly .enter", function(event) {
+        var $this;
+        event.preventDefault();
+        event.stopPropagation();
+        $this = $(this);
+        //$this.closest('.brick').remove();
+        $(enterProject).submit();
+        return $('.gridly').gridly('layout');
+      });
     
     $(document).on("click", ".cancel", function(event){
     	event.preventDefault();
