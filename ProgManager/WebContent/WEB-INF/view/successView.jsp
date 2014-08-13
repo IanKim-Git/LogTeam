@@ -183,6 +183,7 @@
 		                	  			"<div id='enterBtn'><form action='enterProjectMain.do' id='enterProject' method='post'><input type='submit' value='입장하기'/>"+
 	                	  				"<input type='hidden' id='pnum' name='pnum' value='"+project.pnum+"'/>"+
 	                	  				"<input type='hidden' id='pname' name='pname' value='"+project.pname+"'/></div>";
+	           
 		                  
 		                $('.gridly').gridly();
 		               });
