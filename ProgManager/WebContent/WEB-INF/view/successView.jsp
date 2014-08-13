@@ -167,6 +167,7 @@
 						simpleProjectInfo = project.pnum + project.pname;
 						//alert(simpleProjectInfo);
 						
+						
 		                document.getElementById("gridly").innerHTML+=
 		                	  "<div class='brick small' id="+project.pnum+"><br><br><font color='black' >"+
 		                	  "<div id='content_s"+project.pnum+"' style='display:table-cell; vertical-align:middle; font-size: 1.3em;'>"+project.pname+"</div><br>"+
