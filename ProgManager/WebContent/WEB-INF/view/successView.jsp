@@ -135,12 +135,13 @@
 						alert("프로젝트 생성 완료");
 						getData();							//모든레코드 검색하는 함수 호출				
 				    	document.getElementById("createProjectPop").style.display="none";
-				    	brick = "<div class='brick small'><br><br><font color='black'>"+pname+
-				    		+"</font><br><br></div>";
-				        event.preventDefault();
-				        event.stopPropagation();
-				        $('.gridly').append(brick);
-				        $('.gridly').gridly();
+				    	//brick = "<div class='brick small'><br><br><font color='black'>"+pname+
+				    	//	+"</font><br><br></div>";
+				        //event.preventDefault();
+				        //event.stopPropagation();
+				        //$('.gridly').append(brick);
+				        //$('.gridly').gridly();
+				        
 					} else {
 						alert("가입 실패");
 					}
@@ -347,21 +348,22 @@
         </div>
     </div>
     
-    <div class='content' align="center">
-    	<h1><b> <font color="blue" style="font-style: oblique;">ProgManager!</font></b></h1>
+    <div class='content' align="center" style="margin-top: 35px">
+    	<h1><b> <font color="4682B4" style="font-style: oblique;">ProgManager!</font></b></h1>
     	<br>
     	<hr>
-    	<h3> <font color="orange"> 진행중인 프로젝트 </font></h3>
     	<div id="projectList">
     		<section class='example'>
 	    		<div class='gridly' id='gridly'></div>
 	    		</section>
   	  	</div>
+  	  	<br>
+    	<hr>
         <p class='actions' style="float: left;">
-          <a class='button' href="javascript:ViewCreateLayer();">프로젝트 생성하기</a>
+          <a class='button' href="javascript:ViewCreateLayer();" >프로젝트 생성</a>
         </p>
         <p class='actions' style="float: right;">
-          <a class='button' href="javascript:ViewJoinLayer();">프로젝트 참여하기</a>
+          <a class='button' href="javascript:ViewJoinLayer();">프로젝트 참여</a>
         </p>
     </div>
         	
@@ -369,12 +371,12 @@
 	   	<br><font color="black" size="30" style="4">프로젝트 생성하기</font><br><br>
 
 	   	<form name="newProject.do" id="newproform" method="post">
-			Project Name :     <input type="text"  name="pname" id="pname" /><br>
-			Project PassWord : <input type="password" name="ppw" /><br>
-			Project Mento ID : <input type="text" name="pmento" /><br>
-			Start Date : 	   <input type="text" name="pstart" /><br>
-			End Date : 		   <input type="text" name="pend" /><br>
-			Leader : 		   <input type="text" name="pleader" id="pleader" value="${requestScope.email}"/><br>
+			Name :<input type="text"  name="pname" id="pname" /><br>
+			PassWord :<input type="password" name="ppw" /><br>
+			Mento ID :<input type="text" name="pmento" /><br>
+			Start Date :<input type="text" name="pstart" /><br>
+			End Date :<input type="text" name="pend" /><br>
+			Leader :<input type="text" name="pleader" id="pleader" value="${requestScope.email}"/><br>
 		<br>
 		<br>
 		<input class='basicBtn' type="button" value="생성하기" id="btn">

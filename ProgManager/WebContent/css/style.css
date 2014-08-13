@@ -1,8 +1,13 @@
+/*Fontawesome Iconfont*/
+@import url(http://thecodeplayer.com/uploads/fonts/font-awesome-4.0.1/css/font-awesome.min.css);
+/*Montserrat, Open Sans*/
+@import url(http://fonts.googleapis.com/css?family=Montserrat|Open+Sans:400,300);
+
 html,body{width:100%;height:100%;padding:0;background:#fff;margin:0;font-family:arial}
 a { text-decoration:none }
 .container { width:262px; margin:0 auto; padding-top:200px; }
 
-#bar { width:100%; height:90px; padding:0px ; background:url(../images/bar.png) repeat-x; }
+#bar { width:100%; height:70px; padding:0px ; background:url(../images/bar.png) repeat-x; }
 #container { width:1270px; margin:0 auto; }
 
 /*-------LOGIN STARTS HERE -------*/
@@ -14,7 +19,7 @@ a { text-decoration:none }
     font-size:11px;
     width: 1143px;
     height: 56px;
-    padding-top: 15px;
+    padding-top: 11px;
 }
 
 /* Join Container (default to float:right) */
@@ -24,7 +29,7 @@ a { text-decoration:none }
     font-size:11px;
     width: 102px;
     height: 56px;
-    padding-top: 15px;
+    padding-top: 11px;
 }
 
 /* Login Button */
@@ -33,13 +38,13 @@ a { text-decoration:none }
     float:right;
     background:#d2e0ea url(../images/buttonbg.png) repeat-x; 
     border:2px solid #899caa;
-    border-radius:30px;
+    border-radius:14px;
     -moz-border-radius:3px;
     position:relative;
     z-index:30;
     cursor:pointer;    
     width: 108px;
-    height: 47px;
+    height: 40px;
     box-sizing: content-box;
 }
 
@@ -49,23 +54,23 @@ a { text-decoration:none }
     float:right;
     background:#d2e0ea url(../images/buttonbg.png) repeat-x; 
      border:2px solid #899caa;
-    border-radius:30px;
+    border-radius:14px;
     -moz-border-radius:3px;
     position:relative;
     z-index:30;
     cursor:pointer;    
-    width: 115px;
-    height: 47px;
+    width: 108px;
+    height: 40px;
     box-sizing: content-box;    
 }
 
 /* Login Button Text */
 #loginButton span {
     color:#445058; 
-    font-size:21px; 
+    font-size:19px; 
     font-weight:bold; 
     text-shadow:1px 1px #fff;
-    padding:11px 27px 9px 8px;
+    padding:10px 27px 9px 8px;
     background:url(../images/loginArrow.png) no-repeat 80px 17px;
     display:block
     
@@ -74,7 +79,7 @@ a { text-decoration:none }
 /* Join Button Text */
 #JoinButton span {
     color:#445058; 
-    font-size:21px; 
+    font-size:19px; 
     font-weight:bold; 
     text-shadow:1px 1px #fff; 
     padding:10px 29px 9px 10px;
@@ -392,16 +397,16 @@ fieldset#body {
 }
 
 #createProjectPop{
-   position:fixed; 
-   left:300px; 
-   top:100px; 
-   width:700px; 
+   position:absolute; 
+   left:30%; 
+   top:30%; 
+   width:550px; 
    height:400px; 
    background: rgb(193,233,242);
    z-index:20; 
    display:none; 
    border:medium; 
-   border-radius:30px;
+   border-radius:90px;
 }
 
 /* 프로젝트 조인 버튼*/
@@ -439,14 +444,14 @@ fieldset#body {
 }
 
 #joinProjectPop{
-   position:fixed; 
-   left:300px; 
-   top:100px; 
-   width:700px; 
+   position:absolute; 
+   top: 30%; 
+   left: 30%; 
+   width:550px; 
    height:400px; 
    background: rgb(193,233,242);
    z-index:20; 
    display:none; 
    border:medium; 
-   border-radius:30px;
+   border-radius:90px;
 }
