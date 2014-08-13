@@ -56,15 +56,15 @@ public class LogDAO {
 	 
 	
 	//단위 테스트
-/*	public static void main(String[] args){
+	/*public static void main(String[] args){
 		LogDAO ld = new LogDAO();
 //		ld.logDelete(25);
 		
-		 insert into log(lnum, l_pnum, l_uemail, ldata, ltext, lpublic, ladmission)
-		values(seq_l.nextval , #{l_pnum}, #{l_uemail}, sysdate, #{ltext}, 0, 0)
+//		 insert into log(lnum, l_pnum, l_uemail, ldata, ltext, lpublic, ladmission)
+//		values(seq_l.nextval , #{l_pnum}, #{l_uemail}, sysdate, #{ltext}, #{lpublic}, 0)
 		 
-		ld.logWrite(new LogBean(21, "t@t.t", "test contents"));
-		List<LogBean> lb = ld.allLogs(21);
+		ld.logWrite(new LogBean(2, "t@t.t", "test contents lpublic", 1));
+		List<LogBean> lb = ld.allLogs(2);
 		for(LogBean l : lb){
 			System.out.println(l);
 		}

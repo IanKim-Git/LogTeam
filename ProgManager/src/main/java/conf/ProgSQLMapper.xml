@@ -107,12 +107,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 -->
 	<insert id="logWrite" parameterType="logBean">
 		insert into log(lnum, l_pnum, l_uemail, ldata, ltext, lpublic, ladmission)
-		values(seq_l.nextval , #{l_pnum}, #{l_uemail}, sysdate, #{ltext}, 0, 0)
+		values(seq_l.nextval , #{l_pnum}, #{l_uemail}, sysdate, #{ltext}, #{lpublic}, 0)
 	</insert>
 	
 	<insert id="logWriteChoice" parameterType="logBean">
 		insert into log(lnum, l_pnum, l_uemail, ldata, ltext, lpublic, ladmission)
-		values(seq_l.nextval , #{l_pnum}, #{l_uemail}, sysdate, #{ltext}, #{lpublic}, #{ladmission})
+		values(seq_l.nextval , #{l_pnum}, #{l_uemail}, sysdate, #{ltext}, 0, 0)
 	</insert>
 
 	<!-- ### 공지사항용 SQL문 ### -->

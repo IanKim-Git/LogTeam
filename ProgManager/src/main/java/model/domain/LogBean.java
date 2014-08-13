@@ -35,6 +35,12 @@ public class LogBean {
 		this.l_uemail = l_uemail;
 		this.ltext = ltext;
 	}
+	public LogBean(int l_pnum, String l_uemail, String ltext, int lpublic) {
+		this.l_pnum = l_pnum;
+		this.l_uemail = l_uemail;
+		this.ltext = ltext;
+		this.lpublic = lpublic;
+	}
 	public int getLnum() {
 		return lnum;
 	}

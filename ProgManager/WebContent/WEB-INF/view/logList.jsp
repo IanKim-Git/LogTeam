@@ -24,8 +24,12 @@
 					//data.list로 온 데이터 : [{no:값, name:값,...}, {no:값, name:값,...}, {no:값, name:값,...}, ...]
 					$(data.list).each(function(index, item) {//{no:값, name:값,...}
 						table += "<tr><td>" + (count--) + "</td><td>" + item.l_uemail + "</td><td>" +  item.ldata + "</td><td>" +  item.ltext + "</td>";
-						table += "<td>" + item.lpublic + "</td><td>" + item.ladmission + "</td><td>";
-						table += "<input type='button' value='삭제' id='del' name='"+item.lnum+"'></td></tr>";
+						if(item.lpublic == 0){
+							table += "<td>비공개</td>";
+						}else if(item.lpublic == 1){
+							table += "<td>공개</td>";
+						}						
+						table += "<td>" + item.ladmission + "</td><td><input type='button' value='삭제' id='del' name='"+item.lnum+"'></td></tr>";
 					});
 					//테이블에 추가
 					$("#listTable tr:eq(0)").after(table);
@@ -69,6 +73,8 @@
 						alert("로그 작성 성공");
 						$("textarea").val("");	
 						getLogs();							
+					} else if(data == "again") {
+						alert("로그 공개여부를 선택하세요.");
 					} else {
 						alert("로그 작성 실패");
 					}
@@ -90,6 +96,11 @@
 	유저 이메일 : ${sessionScope.userData.uemail}<br>
 	
 	<form action="write.do" id="writeForm" method="post">
+		<select id="lpublic" name="lpublic">
+			<option value="-1">선택</option>
+			<option value="0">비공개</option>
+			<option value="1">공개</option>
+		</select><br>
 		<input type="hidden" id="l_pnum" name="l_pnum" value="${requestScope.pnum}">
 		<input type="hidden" id="l_uemail" name="l_uemail" value="${sessionScope.userData.uemail}">
 		<textarea id="ltext" name="ltext" rows="5" cols="60" ></textarea>

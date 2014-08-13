@@ -142,11 +142,11 @@
 				        $('.gridly').append(brick);
 				        $('.gridly').gridly();
 					} else {
-						alert("가입 실패");
+						alert("프로젝트 생성 실패");
 					}
 				},
 				error : function(data) {
-					alert(data + ' : 가입로직 실행시 에러 발생');
+					alert(data + ' : 프로젝트 생성 로직 실행시 에러 발생');
 				}
 			}); //end of ajax
 		});//end of 가입로직
