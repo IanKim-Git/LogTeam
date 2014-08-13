@@ -175,14 +175,14 @@
 		                	  			"프로젝트 번호 : "+project.pnum+"<br>"+
 		                	  			"프로젝트 이름 : "+project.pname+"<br>"+
 		                	  			"멘토 : "+project.pmento+"<br>"+
-		                	  			"기간 : <br>"+project.pstart+
-		                	  			"~"+project.pend+"<br>"+
+		                	  			"기간 : <br>"+project.pstart+"~"+project.pend+"<br>"+
 		                	  			"팀장 : "+project.pleader+"<br>"+
 		                	  			"</div><br></font>"+
-		                	  			"</div>"+
+		                	  			
 		                	  			"<div id='enterBtn'><form action='enterProjectMain.do' id='enterProject' method='post'><input type='submit' value='입장하기'/>"+
 	                	  				"<input type='hidden' id='pnum' name='pnum' value='"+project.pnum+"'/>"+
-	                	  				"<input type='hidden' id='pname' name='pname' value='"+project.pname+"'/></div>";
+	                	  				"<input type='hidden' id='pname' name='pname' value='"+project.pname+"'/></div>"+
+	                	  				"</div>";
 	           
 		                  
 		                $('.gridly').gridly();
