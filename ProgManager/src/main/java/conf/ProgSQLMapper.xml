@@ -83,7 +83,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!--  ### 로그용 SQL문 ###  -->
 	<!-- 해당 프로젝트의 모든 로그 출력 -->
 	<select id="allLogs" parameterType="int" resultType="logBean" >
-		select lnum, l_pnum, l_uemail, ldata, ltext, lpublic, ladmission from log where l_pnum=#{l_pnum}
+		select lnum, l_pnum, l_uemail, ldata, ltext, lpublic, ladmission from log where l_pnum=#{l_pnum} order by ldata desc
 	</select>
 	
 	<!-- 해당 로그 삭제 -->

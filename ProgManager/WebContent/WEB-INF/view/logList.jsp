@@ -20,10 +20,10 @@
 					var table = "";
 					$("#listTable tr:gt(0)").remove();
 //					<th>로그번호</th><th>작성자</th><th>작성일</th><th>내용</th><th>공개여부</th><th>승인여부</th><th>삭제</th>
-					
+					var count = data.list.length;
 					//data.list로 온 데이터 : [{no:값, name:값,...}, {no:값, name:값,...}, {no:값, name:값,...}, ...]
 					$(data.list).each(function(index, item) {//{no:값, name:값,...}
-						table += "<tr><td>" + (index+1) + "</td><td>" + item.l_uemail + "</td><td>" +  item.ldata + "</td><td>" +  item.ltext + "</td>";
+						table += "<tr><td>" + (count--) + "</td><td>" + item.l_uemail + "</td><td>" +  item.ldata + "</td><td>" +  item.ltext + "</td>";
 						table += "<td>" + item.lpublic + "</td><td>" + item.ladmission + "</td><td>";
 						table += "<input type='button' value='삭제' id='del' name='"+item.lnum+"'></td></tr>";
 					});
