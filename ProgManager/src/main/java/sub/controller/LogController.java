@@ -33,7 +33,7 @@ public class LogController {
 	}
 	
 	//로그 삭제
-	@RequestMapping("/delete.do")
+	@RequestMapping("/deleteLog.do")
 	@ResponseBody
 	public String delete(String lnum) {
 		String result = "no";

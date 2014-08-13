@@ -39,7 +39,7 @@
 		//삭제 버튼을 눌렀을 때 로그 삭제
 		$(document).on("click", "#del", function() {
 			$.ajax({
-				url : "delete.do", 
+				url : "deleteLog.do", 
 				type : "post",
 				dataType : "text", 
 				data : "lnum=" + $(this).attr("name"),	//서버에 전송할 데이터 : <input type='button' value='삭제' id='del' name='"+item.no+"'>

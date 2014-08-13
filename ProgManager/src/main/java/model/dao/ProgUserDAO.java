@@ -9,19 +9,20 @@ import org.apache.ibatis.session.SqlSession;
 import util.DBUtil;
 
 public class ProgUserDAO {
-	//로그인 할 때 아이디와 비밀번호가 테이블에 존재하는지 체크
+	// 로그인 할 때 아이디와 비밀번호가 테이블에 존재하는지 체크
 	public ProgUserBean userIdPwCheck(String uemail, String upw) {
 		SqlSession session = null;
 		ProgUserBean pu = null;
-		try{
+		try {
 			session = DBUtil.getSqlSession();
-			pu = session.selectOne("prog.IdPwCheck", new ProgUserBean(uemail, upw));
-		}finally{
+			pu = session.selectOne("prog.IdPwCheck", new ProgUserBean(uemail,
+					upw));
+		} finally {
 			DBUtil.closeSqlSession(session);
 		}
 		return pu;
 	}
-	
+
 	// 회원 가입
 	public int userSignIn(ProgUserBean pu) {
 		SqlSession session = null;
@@ -29,28 +30,28 @@ public class ProgUserDAO {
 		int result = 0;
 		try {
 			session = DBUtil.getSqlSession();
-				result = session.insert("prog.signIn", pu);				
+			result = session.insert("prog.signIn", pu);
 			flag = result > 0 ? true : false;
 		} finally {
 			DBUtil.closeSqlSession(flag, session);
 		}
 		return result;
 	}
-	
+
 	// 회원 가입 시 이메일 중복 체크
 	public String userIdCheck(String uemail) {
 		SqlSession session = null;
 		String id = null;
-		try{
+		try {
 			session = DBUtil.getSqlSession();
 			id = session.selectOne("prog.IdCheck", uemail);
-		}finally{
+		} finally {
 			DBUtil.closeSqlSession(session);
 		}
 		return id;
 	}
-	
-	//회원 정보 변경
+
+	// 회원 정보 변경
 	public int userUpdate(ProgUserBean pu) {
 		SqlSession session = null;
 		boolean flag = false;
@@ -65,21 +66,38 @@ public class ProgUserDAO {
 		}
 		return result;
 	}
-	
-	//회원 정보 출력
+
+	// 회원 탈퇴
+	public int userDelete(ProgUserBean pu) {
+		SqlSession session = null;
+		boolean flag = false;
+		int result = 0;
+		try {
+			session = DBUtil.getSqlSession();
+			System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			result = session.delete("prog.delete", pu);
+			flag = result > 0 ? true : false;
+
+		} finally {
+			DBUtil.closeSqlSession(flag, session);
+		}
+		return result;
+	}
+
+	// 회원 정보 출력
 	public ProgUserBean userInfo(String uemail) {
 		SqlSession session = null;
 		ProgUserBean pu = null;
-		try{
+		try {
 			session = DBUtil.getSqlSession();
 			pu = session.selectOne("prog.userInfo", uemail);
-		}finally{
+		} finally {
 			DBUtil.closeSqlSession(session);
 		}
 		return pu;
 	}
-	
-	//모든 회원 정보
+
+	// 모든 회원 정보
 	public List<ProgUserBean> allUsers() {
 		SqlSession session = null;
 		List<ProgUserBean> list = null;
