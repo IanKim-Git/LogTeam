@@ -49,6 +49,11 @@ public class LogController {
 	public String insert(LogBean lb) {
 //		System.out.println("###################받아온 데이터"+lb);
 		String resultMsg = "no";//저장 실패시 응답되는 데이터
+		
+		 if(lb.getLpublic() == -1){
+	 		return "again";
+	 	}
+		 
 		int result = logService.logWrite(lb);
 		if(result > 0 )  {
 			resultMsg = "ok";//정상 저장시 응답되는 데이터

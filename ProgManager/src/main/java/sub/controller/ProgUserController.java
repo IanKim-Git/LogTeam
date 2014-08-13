@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class ProgUserController {
@@ -23,8 +22,7 @@ public class ProgUserController {
 
 	// 로그인 할 때 아이디(이메일)와 비밀번호 확인
 	@RequestMapping(value = "idPwCheck.do", method = RequestMethod.POST)
-	public String idPwCheck(@RequestParam("email") String uemail,
-			@RequestParam("pw") String upw, Model model) {
+	public String idPwCheck(@RequestParam("email") String uemail, @RequestParam("pw") String upw, Model model) {
 		model.addAttribute("email", uemail);
 		model.addAttribute("pw", upw);
 
@@ -37,6 +35,7 @@ public class ProgUserController {
 		}
 		return "failView";
 	}
+	
 
 	// 이메일 중복 체크
 	@RequestMapping("idCheck.do")

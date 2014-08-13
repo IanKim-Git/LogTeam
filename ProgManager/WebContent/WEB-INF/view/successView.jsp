@@ -143,7 +143,7 @@
 				        //$('.gridly').gridly();
 				        
 					} else {
-						alert("가입 실패");
+						alert("프로젝트 생성 실패");
 					}
 				},
 				error : function(data) {
