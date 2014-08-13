@@ -1,4 +1,4 @@
-//main.html¿¡¼­ ¹öÆ° ¸®½º³Ê µî·Ï ½ºÅ©¸³Æ®
+//main.htmlï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½Æ®
 $(function() {
     var button = $('#createProject');
     var box = $('#createProjectBox');
@@ -10,6 +10,24 @@ $(function() {
     });
     $(this).mouseup(function(login) {
         if(!($(login.target).parent('#createProject').length > 0)) {
+            button.removeClass('active');
+            box.hide();
+        }
+    });
+});
+
+//main.htmlï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½Æ®
+$(function() {
+    var button = $('#joinProject');
+    var box = $('#joinProjectBox');
+ //   var form = $('#loginForm');
+    button.removeAttr('href');
+    button.mouseup(function(login) {
+        box.toggle();
+        button.toggleClass('active');
+    });
+    $(this).mouseup(function(login) {
+        if(!($(login.target).parent('#joinProject').length > 0)) {
             button.removeClass('active');
             box.hide();
         }

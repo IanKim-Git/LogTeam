@@ -150,6 +150,36 @@
 				}
 			}); //end of ajax
 		});//end of 가입로직
+		
+		//프로젝트 참여하기 버튼 로직
+		$("#Joinbtn").click(function() {
+    	 	var brick;
+   			var pname = $("#pname").val();
+   		 	alert(pname);
+			$.ajax({
+				url : "newParticipation.do",
+				type : "post",
+				dataType : "text",
+				data : $("#joinproform").serialize(),
+				success : function(data) {
+					if (data == "ok") {
+						alert("프로젝트 참여 성공");
+						getData();							//모든레코드 검색하는 함수 호출				
+				    	document.getElementById("joinProjectPop").style.display="none";
+				    	//brick = "<div class='brick small'><br><br><font color='black'>"+pname+"</font><br><br></div>";
+				        //event.preventDefault();
+				        //event.stopPropagation();
+				        //$('.gridly').append(brick);
+				        //$('.gridly').gridly();
+					} else {
+						alert("프로젝트 참여 실패");
+					}
+				},
+				error : function(data) {
+					alert(data + ' : 프로젝트 참여 로직 실행 에러');
+				}
+			}); //end of ajax
+		});//end of 가입로직
 
 		// 해당 유저의 email로 등록된 모든 프로젝트 검색 후 출력
 		function getData() {
@@ -327,16 +357,16 @@
 	    		<div class='gridly' id='gridly'></div>
 	    		</section>
   	  	</div>
-        <p class='actions'>
-          <a class='button' href="javascript:ViewLayer();">프로젝트 생성하기</a>
+        <p class='actions' style="float: left;">
+          <a class='button' href="javascript:ViewCreateLayer();">프로젝트 생성하기</a>
+        </p>
+        <p class='actions' style="float: right;">
+          <a class='button' href="javascript:ViewJoinLayer();">프로젝트 참여하기</a>
         </p>
     </div>
         	
    	<div id="createProjectPop" align="center">
-	   	<br>
-	   	<font color="black" size="30" style="4">프로젝트 생성하기</font>
-	   	<br>
-	   	<br>
+	   	<br><font color="black" size="30" style="4">프로젝트 생성하기</font><br><br>
 
 	   	<form name="newProject.do" id="newproform" method="post">
 			Project Name :     <input type="text"  name="pname" id="pname" /><br>
@@ -350,17 +380,35 @@
 		<input class='basicBtn' type="button" value="생성하기" id="btn">
 		<input class='cancel basicBtn' type="button" value="취소" id="btn2">
 		</form>
-	   	<br>
-
-	   	<br>
+	   	<br><br>
    	</div>
+   	
+   	<div id="joinProjectPop" align="center">
+	   	<br><font color="black" size="30" style="4">프로젝트 참여하기</font>
+	   	<br><br>
+
+	   	<form name="joinProject.do" id="joinproform" method="post">
+			Project Number :     <input type="text"  name="pnum" id="pnum" /><br>
+			Project PassWord : <input type="password" name="ppw" /><br>
+			<input type="hidden" name="uemail" value="${requestScope.email}">
+		<br>
+		<br>
+		<input class='basicJoinBtn' type="button" value="참여하기" id="Joinbtn">
+		<input class='cancel basicJoinBtn' type="button" value="취소" id="Joinbtn2">
+		</form>
+	   	<br><br>
+   	</div>
+   	
     <script> 
-      function ViewLayer(){
+      function ViewCreateLayer(){
         document.getElementById("createProjectPop").style.display='inline'
      }
       function registerProject(){
     	  document.getElementById("createProjectPop").style.display='none'
       }
+      function ViewJoinLayer(){
+          document.getElementById("joinProjectPop").style.display='inline'
+       }
 	</script> 	
 	<br>
 	

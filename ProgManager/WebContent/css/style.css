@@ -353,6 +353,7 @@ fieldset#body {
 
 
 
+
 /* 프로젝트 생성 버튼 및 box 설정  */
 
 #createProject { 
@@ -391,6 +392,53 @@ fieldset#body {
 }
 
 #createProjectPop{
+   position:fixed; 
+   left:300px; 
+   top:100px; 
+   width:700px; 
+   height:400px; 
+   background: rgb(193,233,242);
+   z-index:20; 
+   display:none; 
+   border:medium; 
+   border-radius:30px;
+}
+
+/* 프로젝트 조인 버튼*/
+#joinProject { 
+    display:inline-block;
+    border:2px solid #899caa; 
+    border-radius:30px;
+    -moz-border-radius:3px;
+    position:relative;
+    z-index:30;
+    cursor:pointer;    
+    width: 108px;
+    height: 52px;
+    
+}
+#joinProject span {
+    color:#445058; 
+    font-size:10px; 
+    font-weight:bold; 
+    text-shadow:1px 1px #fff; 
+    padding:7px 29px 9px 10px;
+    display:block
+}
+
+#joinProject:hover {
+    background:black;
+}
+
+#joinProjectBox {
+    position:relative;
+    width:100px;
+    height:100px;
+    display:none;
+    z-index:29;
+}
+
+#joinProjectPop{
    position:fixed; 
    left:300px; 
    top:100px; 

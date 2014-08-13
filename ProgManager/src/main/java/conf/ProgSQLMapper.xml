@@ -48,7 +48,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       select uemail, uname, upw, uphone, uprocnt from proguser
    </select>
 
+
 	<!-- ### 프로젝트용 쿼리문 ### -->
+	<!-- 새로운 프로젝트 추가 쿼리문  -->
 	<insert id="newProject" parameterType="projectBean">
 		insert into Project values(seq_p.nextval, #{pname}, #{ppw}, #{pmento}, #{pstart}, #{pend}, #{pleader}, 0)
 	</insert>
@@ -76,6 +78,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 프로젝트에 속한 유저 정보 가저오기 -->
 	 <select id="getProjectUserList" parameterType="int" resultType="puBean">
 	 	select uname, uphone, uemail from proguser, userproject where up_pnum=#{pnum} and up_uemail=uemail;
+	 </select>
+	 
+	 <!-- 프로젝트 pnum과 ppw를 통해 해당 프로젝트가 있는 프로젝트인지 확인 -->
+	 <select id="checkProValid" parameterType="projectBean" resultType="projectBean">
+	 	select pnum, pname, ppw, pmento, pstart, pend, pleader, pterminate from project where pnum=#{pnum} and ppw=#{ppw}
 	 </select>
 
 	

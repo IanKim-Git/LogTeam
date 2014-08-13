@@ -24,6 +24,17 @@ public class ProjectService {
 		return pnum;
 	}
 	
+	public boolean joinProject(int pnum, String ppw, String uemail){
+		if(projectDao.checkProNumAndPass(pnum,ppw)){
+			if(newParticipation(uemail, pnum)>0)
+				return true;
+			else
+				return false;
+		}else{
+			return false;
+		}
+	}
+	
 	//프로젝트 참여하기
 	public int newParticipation(String email, int pnum){
 		return projectDao.newParticipation(email, pnum);

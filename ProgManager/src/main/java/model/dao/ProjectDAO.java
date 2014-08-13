@@ -75,6 +75,24 @@ public class ProjectDAO {
 		return projectbean;
 	}
 	
+	//pnum과 ppw받아서 있는 프로젝트인지 확인하기
+	public static boolean checkProNumAndPass(int pnum, String ppw){
+		SqlSession session = null;
+		ProjectBean projectbean = null;
+		try{
+			session = DBUtil.getSqlSession();
+			projectbean = session.selectOne("prog.checkProValid", new ProjectBean(pnum,ppw));
+		}finally{
+			DBUtil.closeSqlSession(session);
+		}
+		if(projectbean!=null){
+			projectbean = null;
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
 	//프로젝트 삭제하기
 	public static boolean deleteProject(){
 		
@@ -86,20 +104,6 @@ public class ProjectDAO {
 		
 		return true;
 	}
-	
-	
-	/*//로그인 할 때 아이디와 비밀번호 체크
-	public static ProgUserBean userIdPwCheck(String uemail, String upw) {
-		SqlSession session = null;
-		ProgUserBean pu = null;
-		try{
-			session = DBUtil.getSqlSession();
-			pu = session.selectOne("progUser.IdPwCheck", new ProgUserBean(uemail, upw));
-		}finally{
-			DBUtil.closeSqlSession(session);
-		}
-		return pu;
-	}*/
 	
 	
 //	public static void main(String[] args) {

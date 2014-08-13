@@ -13,6 +13,13 @@ public class ProjectBean {
 	public ProjectBean() {
 		super();
 	}
+	
+	public ProjectBean(int pnum, String ppw) {
+		super();
+		this.pnum = pnum;
+		this.ppw = ppw;
+	}
+
 	public ProjectBean(int pnum, String pname, String ppw, String pstart,
 			String pleader, int pterminate) {
 		super();

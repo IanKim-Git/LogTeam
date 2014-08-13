@@ -56,6 +56,7 @@
     	event.preventDefault();
     	event.stopPropagation();
     	document.getElementById("createProjectPop").style.display="none";
+    	document.getElementById("joinProjectPop").style.display="none";
     })
     
     $(document).on("click", ".add", function(event) {

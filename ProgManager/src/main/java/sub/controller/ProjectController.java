@@ -45,6 +45,19 @@ public class ProjectController {
 			return "no";
 	}
 	
+	@RequestMapping(value="newParticipation.do", method=RequestMethod.POST)
+	@ResponseBody
+	public String joinProject(@RequestParam("pnum") int pnum, @RequestParam("ppw") String ppw, @RequestParam("uemail") String uemail, Model model ){
+		System.out.println("/////////new participation.///////////////////////////////////////////////////");
+		model.addAttribute("pnum", pnum);
+		model.addAttribute("ppw", ppw);
+		
+		if(projectService.joinProject(pnum, ppw, uemail) == true)
+			return "ok";
+		else
+			return "no";
+	}
+	
 	@RequestMapping(value="enterProjectMain.do", method=RequestMethod.POST)
 	public String newProject(@RequestParam("pnum") String pnum, @RequestParam("pname") String pname, Model model){
 
@@ -53,6 +66,7 @@ public class ProjectController {
 		
 		model.addAttribute("pnum", pnum);
 		model.addAttribute("pname", pname);
+		
 		return "projectMain";
 	}
 
