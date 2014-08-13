@@ -72,11 +72,46 @@ public class ProjectController {
 		return mv;
 	}
 	
+	//프로젝트 정보로 이동
+	@RequestMapping("projectInfo.do")
+	public String enterProjectInfo(@RequestParam("enterProInfoPnum") String pnum, Model model){
+		model.addAttribute("pnum", pnum);
+		return "projectInfo";
+	}
+	
+	//공지사항으로 이동
+	@RequestMapping("announcement.do")
+	public String enterAnnouncement(@RequestParam("enterAnnPnum") String pnum, Model model){
+		model.addAttribute("pnum", pnum);
+		return "announcement";
+	}
+	
+	//캘린더로 이동
+	@RequestMapping("calender.do")
+	public String enterCalender(@RequestParam("enterCalPnum") String pnum, Model model){
+		model.addAttribute("pnum", pnum);
+		return "calender";
+	}
+	
 	//로그게시판으로 이동
 	@RequestMapping("logList.do")
 	public String enterLogList(@RequestParam("enterLogPnum") String pnum, Model model){
 		model.addAttribute("pnum", pnum);
 		return "logList";
+	}
+	
+	//팀원성과도로 이동
+	@RequestMapping("outcome.do")
+	public String enterOutcome(@RequestParam("enterOutPnum") String pnum, Model model){
+		model.addAttribute("pnum", pnum);
+		return "outcome";
+	}
+	
+	//회계관리로 이동
+	@RequestMapping("account.do")
+	public String enterAccount(@RequestParam("enterAccPnum") String pnum, Model model){
+		model.addAttribute("pnum", pnum);
+		return "account";
 	}
 
 }

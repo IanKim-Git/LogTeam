@@ -85,6 +85,7 @@
 	});//end of ready
 </script>
 <body>
+	<h6>로그게시판</h6>
 	프로젝트 번호 : ${requestScope.pnum}
 	유저 이메일 : ${sessionScope.userData.uemail}<br>
 	

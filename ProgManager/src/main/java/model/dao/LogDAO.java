@@ -16,6 +16,7 @@ public class LogDAO {
 		try {
 			session = DBUtil.getSqlSession();
 			list = session.selectList("prog.allLogs", l_pnum);
+			
 		} finally {
 			DBUtil.closeSqlSession(session);
 		}
