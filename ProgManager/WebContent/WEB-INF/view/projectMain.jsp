@@ -10,6 +10,7 @@
 	This is project Main<br>
 
 	프 번호 - ${requestScope.pnum}<br>
+	프 이름 - ${requestScope.pname}<br>
 	유 이메일 - ${sessionScope.userData.uemail}<br>
 	<!-- 프로젝트 정보 -->
 	<form action="projectInfo.do" id="projectInfo" method="post">

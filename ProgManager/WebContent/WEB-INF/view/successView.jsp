@@ -170,15 +170,19 @@
 						
 		                document.getElementById("gridly").innerHTML+=
 		                	  "<div class='brick small' id="+project.pnum+"><br><br><font color='black' >"+
-		                	  "<div id='content_s"+project.pnum+"' style='display:table-cell; vertical-align:middle; font-size: 1.3em;'>"+project.pname+"</div><br>"+
-		                	  "<div id='content_l"+project.pnum+"' style='display:none; font-size: 1.2em;'>"+
-		                	  		"프로젝트 번호 : "+project.pnum+"<br>"+
-		                	  		"프로젝트 이름 : "+project.pname+"<br>"+
-		                	  		"멘토 : "+project.pmento+"<br>"+
-		                	  		"기간 : <br>"+project.pstart+
-		                	  		"~"+project.pend+"<br>"+
-		                	  		"팀장 : "+project.pleader+"<br>"+
-		                	  		"</div><br></font></div>";
+		                	  		"<div id='content_s"+project.pnum+"' style='display:table-cell; vertical-align:middle; font-size: 1.3em;'>"+project.pname+"</div><br>"+
+		                	  		"<div id='content_l"+project.pnum+"' style='display:none; font-size: 1.2em;'>"+
+		                	  			"프로젝트 번호 : "+project.pnum+"<br>"+
+		                	  			"프로젝트 이름 : "+project.pname+"<br>"+
+		                	  			"멘토 : "+project.pmento+"<br>"+
+		                	  			"기간 : <br>"+project.pstart+
+		                	  			"~"+project.pend+"<br>"+
+		                	  			"팀장 : "+project.pleader+"<br>"+
+		                	  			"</div><br></font>"+
+		                	  			"</div>"+
+		                	  			"<div id='enterBtn'><form action='enterProjectMain.do' id='enterProject' method='post'><input type='submit' value='입장하기'/>"+
+	                	  				"<input type='hidden' id='pnum' name='pnum' value='"+project.pnum+"'/>"+
+	                	  				"<input type='hidden' id='pname' name='pname' value='"+project.pname+"'/></div>";
 		                  
 		                $('.gridly').gridly();
 		               });
@@ -191,25 +195,7 @@
 			}); //end of ajax
 		}//end of getData()
 
-		$(document).on("click", "#enterProject", function() {
-			$.ajax({
-				url : "enterProjectMain.do", 
-				type : "post",
-				dataType : "text", 
-				data : "pnum=" + $(this).attr("pnum") + "&uemail=" + $("#pleader").val(),	//서버에 전송할 데이터
-				success : function(data) {
-					if (data == "ok") {
-						alert("삭제 성공");
-						getData();
-					} else {
-						alert("삭제 실패");
-					}
-				},
-				error : function(err) {//실패했을때
-					alert(err + " : 학생정보 삭제 실패");
-				}
-			});
-		});
+		
 		
 		$("#Join").click(function(){
 			nflag=true;
