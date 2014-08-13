@@ -1,19 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="euc-kr"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
 
-	<!-- ì»¨íŠ¸ë¡¤ëŸ¬ ìƒì„±í•˜ì§€ ì•Šì•„ë„ ìžë™ìŠ¤ìº”(ìƒì„±)ë˜ë„ë¡ ì„¤ì • -->
+	<!-- ÄÁÆ®·Ñ·¯ »ý¼ºÇÏÁö ¾Ê¾Æµµ ÀÚµ¿½ºÄµ(»ý¼º)µÇµµ·Ï ¼³Á¤ -->
 	<context:component-scan base-package="sub.controller" />
 	
-	<!-- viewReslover ë“±ë¡ -->
+	<!-- viewReslover µî·Ï -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		
-		 <property name="prefix" value="/WEB-INF/view/" /> <!-- í´ë”ê²½ë¡œ -->
-		 <property name="suffix" value=".jsp" /><!-- í™•ìž¥ìž -->
+		 <property name="prefix" value="/WEB-INF/view/" /> <!-- Æú´õ°æ·Î -->
+		 <property name="suffix" value=".jsp" /><!-- È®ÀåÀÚ -->
 		 <property name="order" value="1" />
 	
 	</bean>
@@ -26,7 +26,7 @@
 	<bean id="projectDao" class="model.dao.ProjectDAO" />
 	<bean id="projectService" class="model.service.ProjectService" />
 
-	<!-- Json ì‘ë‹µì„ ìœ„í•œ ì„¤ì • -->
+	<!-- Json ÀÀ´äÀ» À§ÇÑ ¼³Á¤ -->
 	<!--<bean id="jsonView" class="net.sf.json.spring.web.servlet.view.JsonView" >
 		<property name="contentType" value="text/html;charset=UTF-8" /> 
 	</bean> -->
@@ -34,8 +34,8 @@
 		<property name="contentType" value="text/html;charset=UTF-8" />
 	</bean>
 
-	<!-- ViewResolverë¥¼ ì°¾ì„ë•Œ beanì˜ idë¡œ ì œì¼ë¨¼ì € ì°¾ì„ìˆ˜ ìžˆë„ë¡ ìš°ì„ ìˆœìœ„ë¥¼ 0ìœ¼ë¡œ ì¤Œ
-			ìƒëžµì‹œ spring controllerì—ì„œ jsonViewì— ë§¤í•‘ëœ view ì‹¤í–‰ ë¶ˆê°€ -->
+	<!-- ViewResolver¸¦ Ã£À»¶§ beanÀÇ id·Î Á¦ÀÏ¸ÕÀú Ã£À»¼ö ÀÖµµ·Ï ¿ì¼±¼øÀ§¸¦ 0À¸·Î ÁÜ
+			»ý·«½Ã spring controller¿¡¼­ jsonView¿¡ ¸ÅÇÎµÈ view ½ÇÇà ºÒ°¡ -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
 		<property name="order" value="0" />
 	</bean>

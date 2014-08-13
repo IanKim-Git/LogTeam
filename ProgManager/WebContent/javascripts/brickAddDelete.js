@@ -13,24 +13,30 @@
       $this.toggleClass('large');
       if ($this.hasClass('small')) {
         size = 140;
-        sizeflag=true;
       }
       if ($this.hasClass('large')) {
         size = 300;
-        sizeflag=false;
       }
       $this.data('width', size);
       $this.data('height', size);
+      var jsonProject = eval("("+this.getAttribute('value')+")");
+//      var jsonProject = JSON.parse(this.getAttribute('value'));
+//      alert(this.getAttribute('value'));
+      alert(jsonProject);
+      var clickid = this.getAttribute('id');
       if($this.hasClass('large')){
-    	  alert(document.getElementById(this.getAttribute('id')).getAttribute('id'));
-    	  document.getElementById("contents").innerHTML="getBIG";
-    	 // $this.data('contents','옹?');
+         /*document.getElementById("contents"+clickid).innerHTML="프로젝트 제목 : "+this.getAttribute('value'). + "<br>"
+         														+"담당자 Id : "+this.getAttribute('value').pmento+"<br>"
+         														+"프로젝트 시작일 : "+this.getAttribute('value').pstart+"<br>";*/
+    	  
+    	  document.getElementById("contents"+clickid).innerHTML = "프로젝트 제목 : "+jsonProject.pname+"프로젝트 제목 : ";
       }
       if($this.hasClass('small')){
-    	  document.getElementById("contents").innerHTML="getSMALL";
-
-    	 // $this.data('contents','응?');
+     /*    document.getElementById("contents"+clickid).innerHTML=this.getAttribute('value').pname;*/
       }
+      
+      var value = this.getElementById
+      
       return $('.gridly').gridly('layout');
     });
     $(document).on("click", ".gridly .delete", function(event) {

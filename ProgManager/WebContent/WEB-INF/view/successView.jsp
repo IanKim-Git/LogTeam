@@ -62,16 +62,20 @@
 				type : "post",
 				dataType : "json", 					//결과데이터타입
 				success : function(data) {
-					document.getElementById("gridly").innerHTML="<div class='brick large' ><br><br><font color='black'>ProgManager<br><b>관리자 페이지</b></font></div>";
+					document.getElementById("gridly").innerHTML="<div class='brick small' ><br><br><font color='black'>ProgManager<br><b>관리자 페이지</b></font></div>";
 					
 					//기존에 있는 테이블 첫행만 빼고 지우기
 					//http://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_sel_gt
 					//$("#projectlistTable tr:gt(0)").remove();
 					
+
 					$(data.list).each(function(index, project) {
-						document.getElementById("gridly").innerHTML+="<div class='brick small' id="+$('#pnum')+"><br><br><font color='black' >"+"<div id='contents'>"+project.pname+"</div><br></font></div>";
-						$('.gridly').gridly();
-					});
+						alert(JSON.stringify(project));
+						
+		                  document.getElementById("gridly").innerHTML+="<div class='brick small' id="+project.pnum+" value="+JSON.stringify(project)+"><br><br><font color='black' >"+"<div id='contents"+project.pnum+"'>"+project.pname+"</div><br></font></div>";
+		                  $('.gridly').gridly();
+		               });
+					
 					//테이블에 추가
 				},
 				error : function(err) {//실패했을때
