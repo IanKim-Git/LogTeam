@@ -5,15 +5,15 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
 
-	<!-- ÄÁÆ®·Ñ·¯ »ý¼ºÇÏÁö ¾Ê¾Æµµ ÀÚµ¿½ºÄµ(»ý¼º)µÇµµ·Ï ¼³Á¤ -->
+	<!-- ì»¨íŠ¸ë¡¤ëŸ¬ ìƒì„±í•˜ì§€ ì•Šì•„ë„ ìžë™ìŠ¤ìº”(ìƒì„±)ë˜ë„ë¡ ì„¤ì • -->
 	<context:component-scan base-package="sub.controller" />
 	
-	<!-- viewReslover µî·Ï -->
+	<!-- viewReslover ë“±ë¡ -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		
-		 <property name="prefix" value="/WEB-INF/view/" /> <!-- Æú´õ°æ·Î -->
-		 <property name="suffix" value=".jsp" /><!-- È®ÀåÀÚ -->
+		 <property name="prefix" value="/WEB-INF/view/" /> <!-- í´ë”ê²½ë¡œ -->
+		 <property name="suffix" value=".jsp" /><!-- í™•ìž¥ìž -->
 		 <property name="order" value="1" />
 	
 	</bean>
@@ -28,22 +28,20 @@
 	
 	<bean id="logDao" class="model.dao.LogDAO" />
 	<bean id="logService" class="model.service.LogService" />
+	
+	<bean id="anDao" class="model.dao.AnnouncementDAO"/>
 
-	<!-- Json ÀÀ´äÀ» À§ÇÑ ¼³Á¤ -->
+	<!-- Json ì‘ë‹µì„ ìœ„í•œ ì„¤ì • -->
 	<!--<bean id="jsonView" class="net.sf.json.spring.web.servlet.view.JsonView" >
 		<property name="contentType" value="text/html;charset=UTF-8" /> 
 	</bean> -->
-	<!-- ìœ ì €ê°€ ì†í•œ í”„ë¡œì íŠ¸ ë¦¬ìŠ¤íŠ¸ ë¶ˆëŸ¬ì˜¤ëŠ”  -->
+	<!-- ï¿½ï¿½ï¿½åª›ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ç”±ÑŠï¿½ï¿½ï¿½éºï¿½ï¿½ï¿½ã…»ï¿½  -->
 	<bean id="projectJsonView" class="net.sf.json.spring.web.servlet.view.JsonView" >
 		<property name="contentType" value="text/html;charset=UTF-8" />
 	</bean>
-	<!-- ìœ ì €ê°€ í´ë¦­í•œ í”„ë¡œì íŠ¸, 1ê°œì˜ ì •ë³´ë¥¼ ë°›ì•„ì˜¤ëŠ” -->
-	<bean id="projectinfoJsonView" class="net.sf.json.spring.web.servlet.view.JsonView" >
-		<property name="contentType" value="text/html;charset=UTF-8" />
-	</bean>
 
-	<!-- ViewResolver¸¦ Ã£À»¶§ beanÀÇ id·Î Á¦ÀÏ¸ÕÀú Ã£À»¼ö ÀÖµµ·Ï ¿ì¼±¼øÀ§¸¦ 0À¸·Î ÁÜ
-			»ý·«½Ã spring controller¿¡¼­ jsonView¿¡ ¸ÅÇÎµÈ view ½ÇÇà ºÒ°¡ -->
+	<!-- ViewResolverë¥¼ ì°¾ì„ë•Œ beanì˜ idë¡œ ì œì¼ë¨¼ì € ì°¾ì„ìˆ˜ ìžˆë„ë¡ ìš°ì„ ìˆœìœ„ë¥¼ 0ìœ¼ë¡œ ì¤Œ
+			ìƒëžµì‹œ spring controllerì—ì„œ jsonViewì— ë§¤í•‘ëœ view ì‹¤í–‰ ë¶ˆê°€ -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
 		<property name="order" value="0" />
 	</bean>

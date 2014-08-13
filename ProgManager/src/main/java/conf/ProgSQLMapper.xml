@@ -90,7 +90,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!--  ### 로그용 SQL문 ###  -->
 	<!-- 해당 프로젝트의 모든 로그 출력 -->
 	<select id="allLogs" parameterType="int" resultType="logBean" >
-		select lnum, l_pnum, l_uemail, ldata, ltext, lpublic, ladmission from log where l_pnum=#{l_pnum}
+		select lnum, l_pnum, l_uemail, ldata, ltext, lpublic, ladmission from log where l_pnum=#{l_pnum} order by ldata desc
 	</select>
 	
 	<!-- 해당 로그 삭제 -->
@@ -116,7 +116,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into log(lnum, l_pnum, l_uemail, ldata, ltext, lpublic, ladmission)
 		values(seq_l.nextval , #{l_pnum}, #{l_uemail}, sysdate, #{ltext}, 0, 0)
 	</insert>
+	
+	<insert id="logWriteChoice" parameterType="logBean">
+		insert into log(lnum, l_pnum, l_uemail, ldata, ltext, lpublic, ladmission)
+		values(seq_l.nextval , #{l_pnum}, #{l_uemail}, sysdate, #{ltext}, #{lpublic}, #{ladmission})
+	</insert>
 
+	<!-- ### 공지사항용 SQL문 ### -->
+	<!-- 공지사항 불러오기 -->
+	<select id="allAns" parameterType="int" resultType="anBean" >
+		select * from announcement where an_pnum=#{an_pnum} order by andate desc
+	</select>
+	
+	<!-- 공지사항 작성하기 -->
+	<!-- insert into announcement values(seq_an.nextval,seq_p.currval,sysdate,'a@a.a','bbb',1); -->
+	<!-- 
+	private int annum;
+	private int an_pnum;
+	private String andate;
+	private String an_uemail;
+	private String ancontent;
+	private int animportance;
+	 -->
+	<insert id="anWrite" parameterType="anBean">
+		insert into announcement(annum, an_pnum, andate, an_uemail, ancontent, animportance)
+		values(seq_an.nextval , #{an_pnum}, sysdate, #{an_uemail}, #{ancontent}, #{animportance})
+	</insert>
+	
+	<!-- 공지사항 삭제 -->
+	<delete id="anDelete" parameterType="int">
+		delete announcement where annum = #{annum}
+	</delete>
 </mapper>
 
 
