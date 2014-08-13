@@ -21,6 +21,9 @@
 <script type="text/javascript">
 	$(document).ready(	function() {
 		var pleader = $("#pleader").val();
+		
+		var fullProjectInfo;
+		var simpleProjectInfo;
 
 		// 프로젝트 생성하기 버튼을 클릭했을때 project table에 저장되는 로직
 		$("#btn").click(function() {
@@ -62,18 +65,27 @@
 				type : "post",
 				dataType : "json", 					//결과데이터타입
 				success : function(data) {
-					document.getElementById("gridly").innerHTML="<div class='brick small' ><br><br><font color='black'>ProgManager<br><b>관리자 페이지</b></font></div>";
-					
-					//기존에 있는 테이블 첫행만 빼고 지우기
-					//http://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_sel_gt
-					//$("#projectlistTable tr:gt(0)").remove();
-					
+					document.getElementById("gridly").innerHTML="<div class='brick small' ><br><br><font color='black'><b>I'm Mento.</b></font></div>";					
 
 					$(data.list).each(function(index, project) {
-						alert(JSON.stringify(project));
+						//alert(JSON.stringify(project));
+						fullProjectInfo = JSON.stringify(project);//value="+JSON.stringify(project)+"
+						simpleProjectInfo = project.pnum + project.pname;
+						//alert(simpleProjectInfo);
 						
-		                  document.getElementById("gridly").innerHTML+="<div class='brick small' id="+project.pnum+" value="+JSON.stringify(project)+"><br><br><font color='black' >"+"<div id='contents"+project.pnum+"'>"+project.pname+"</div><br></font></div>";
-		                  $('.gridly').gridly();
+		                document.getElementById("gridly").innerHTML+=
+		                	  "<div class='brick small' id="+project.pnum+"><br><br><font color='black' >"+
+		                	  "<div id='content_s"+project.pnum+"' style='display:table-cell; vertical-align:middle; font-size: 1.3em;'>"+project.pname+"</div><br>"+
+		                	  "<div id='content_l"+project.pnum+"' style='display:none; font-size: 1.2em;'>"+
+		                	  		"프로젝트 번호 : "+project.pnum+"<br>"+
+		                	  		"프로젝트 이름 : "+project.pname+"<br>"+
+		                	  		"멘토 : "+project.pmento+"<br>"+
+		                	  		"기간 : <br>"+project.pstart+
+		                	  		"~"+project.pend+"<br>"+
+		                	  		"팀장 : "+project.pleader+"<br>"+
+		                	  		"</div><br></font></div>";
+		                  
+		                $('.gridly').gridly();
 		               });
 					
 					//테이블에 추가
@@ -106,6 +118,7 @@
 
 		//레코드 가져오기는 함수 호출
 		getData();
+		
 
 	});//end of ready()
 </script>
@@ -173,40 +186,35 @@
             <!-- Join Ends Here -->
         </div>
     </div>
-    <div class='content' align="center">
     
-     <h1><b> <font color="blue">ProgManager에 오신걸 환영합니다</font></b></h1>
-      <br>
-      <p>자신의 프로젝트를 내맘대로 정렬하세요^^</p>
-      <br>
-      <hr>
-      <h3> <font color="orange">◆  자신 프로젝트 목록 ◆</font></h3>
-      <div id="projectList">
-	      <section class='example'>
-	        <div class='gridly' id='gridly'>
-	        </div>
-          </section>
-  		</div>
+    <div class='content' align="center">
+    	<h1><b> <font color="blue" style="font-style: oblique;">ProgManager!</font></b></h1>
+    	<br>
+    	<hr>
+    	<h3> <font color="orange"> 진행중인 프로젝트 </font></h3>
+    	<div id="projectList">
+    		<section class='example'>
+	    		<div class='gridly' id='gridly'></div>
+	    		</section>
+  	  	</div>
         <p class='actions'>
           <a class='button' href="javascript:ViewLayer();">프로젝트 생성하기</a>
         </p>
- 
     </div>
-   	<div ><a id='nextLink' href='mainProject.html'>넘어가기</a></div>
-    	
+        	
    	<div id="createProjectPop" align="center">
 	   	<br>
-	   	<font color="black" size="40" style="4">프로젝트 생성하기</font>
+	   	<font color="black" size="30" style="4">프로젝트 생성하기</font>
 	   	<br>
 	   	<br>
 
 	   	<form name="newProject.do" id="newproform" method="post">
-			Project Name <input type="text"  name="pname" id="pname" /><br>
-			Project PassWord <input type="password" name="ppw" /><br>
-			Project Mendo ID <input type="text" name="pmento" /><br>
-			Project Start Date <input type="text" name="pstart" /><br>
-			Project End Date <input type="text" name="pend" /><br>
-			Project Leader <input type="text" name="pleader" id="pleader" value="${requestScope.email}"/><br>
+			Project Name :     <input type="text"  name="pname" id="pname" /><br>
+			Project PassWord : <input type="password" name="ppw" /><br>
+			Project Mento ID : <input type="text" name="pmento" /><br>
+			Start Date : 	   <input type="text" name="pstart" /><br>
+			End Date : 		   <input type="text" name="pend" /><br>
+			Leader : 		   <input type="text" name="pleader" id="pleader" value="${requestScope.email}"/><br>
 		<br>
 		<br>
 		<input class='basicBtn' type="button" value="생성하기" id="btn">
@@ -223,34 +231,9 @@
       function registerProject(){
     	  document.getElementById("createProjectPop").style.display='none'
       }
-      
    </script> 
 	
 	<br>
-	<hr>
-	<br>
-	<h2>모든 프로젝트 정보 보기</h2>
-		<table cellspacing="0">
-			<tr>
-				<td style="text-align: right">
-					<input type="button" value="모든 학생 정보 보기">
-				</td>
-			</tr>
-		</table>
-		<table id="projectlistTable" cellspacing="0">
-			<tr bgcolor="#FOFOF7">
-				<th>프로젝트 번호</th><th>이름</th><th>담당자</th><th>시작일</th><th>종료일</th><th>팀장</th><th>입장</th>
-			</tr>
-			
-		</table>
-	
-	<!-- <a href="WEB-INF/view/updateInfo.jsp">개인정보 변경 화면</a> -->
-	<!-- <input type="button" value="수정하기"	Onclick="location.href='updateInfo.jsp'"> -->
-	<form action="sendEmail.do" id="userEmail" method="post">
-		<input type="submit" value="개인정보 변경하기"/>
-		<input type="hidden" name="email" id="email" value="${requestScope.email}"/>
-	</form>
-		
 	
 </body>
 </html>

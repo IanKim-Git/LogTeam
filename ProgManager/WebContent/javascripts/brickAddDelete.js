@@ -19,26 +19,21 @@
       }
       $this.data('width', size);
       $this.data('height', size);
-      var jsonProject = eval("("+this.getAttribute('value')+")");
-//      var jsonProject = JSON.parse(this.getAttribute('value'));
-//      alert(this.getAttribute('value'));
-      alert(jsonProject);
+      
       var clickid = this.getAttribute('id');
+      
       if($this.hasClass('large')){
-         /*document.getElementById("contents"+clickid).innerHTML="프로젝트 제목 : "+this.getAttribute('value'). + "<br>"
-         														+"담당자 Id : "+this.getAttribute('value').pmento+"<br>"
-         														+"프로젝트 시작일 : "+this.getAttribute('value').pstart+"<br>";*/
-    	  
-    	  document.getElementById("contents"+clickid).innerHTML = "프로젝트 제목 : "+jsonProject.pname+"프로젝트 제목 : ";
+    	  document.getElementById("content_s"+clickid).style.display='none';
+    	  document.getElementById("content_l"+clickid).style.display='table-cell'; 
       }
       if($this.hasClass('small')){
-     /*    document.getElementById("contents"+clickid).innerHTML=this.getAttribute('value').pname;*/
+    	  document.getElementById("content_l"+clickid).style.display='none';
+    	  document.getElementById("content_s"+clickid).style.display='table-cell';
       }
-      
-      var value = this.getElementById
       
       return $('.gridly').gridly('layout');
     });
+    
     $(document).on("click", ".gridly .delete", function(event) {
       var $this;
       event.preventDefault();
@@ -47,11 +42,13 @@
       $this.closest('.brick').remove();
       return $('.gridly').gridly('layout');
     });
+    
     $(document).on("click", ".cancel", function(event){
     	event.preventDefault();
     	event.stopPropagation();
     	document.getElementById("createProjectPop").style.display="none";
     })
+    
     $(document).on("click", ".add", function(event) {
       event.preventDefault();
       event.stopPropagation();
@@ -59,6 +56,7 @@
 	  document.getElementById("createProjectPop").style.display="none";
       return $('.gridly').gridly();
     });
+    
     return $('.gridly').gridly();
   });
 
