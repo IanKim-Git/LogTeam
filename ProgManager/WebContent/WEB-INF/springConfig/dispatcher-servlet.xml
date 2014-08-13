@@ -23,6 +23,9 @@
 	
 	<bean id="projectDao" class="model.dao.ProjectDAO" />
 	<bean id="projectService" class="model.service.ProjectService" />
+	
+	<bean id="logDao" class="model.dao.LogDAO" />
+	<bean id="logService" class="model.service.LogService" />
 
 	<!-- Json 응답을 위한 설정 -->
 	<!--<bean id="jsonView" class="net.sf.json.spring.web.servlet.view.JsonView" >

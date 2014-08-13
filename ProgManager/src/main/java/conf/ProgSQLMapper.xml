@@ -4,6 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="prog">
+	<!-- ### 유저용 SQL문 ### -->
 	<resultMap type="puBean" id="rmPuBean">
 		<result column="UEMAIL" property="uemail" />
 		<result column="UNAME" property="uname" />
@@ -43,8 +44,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	
-	<!--*** 프로젝트용 쿼리 ***-->
-	<!-- 새로운 프로젝트 생성 -->
+
+	<!-- ### 프로젝트용 쿼리문 ### -->
 	<insert id="newProject" parameterType="projectBean">
 		insert into Project values(seq_p.nextval, #{pname}, #{ppw}, #{pmento}, #{pstart}, #{pend}, #{pleader}, 0)
 	</insert>
@@ -73,7 +74,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 <select id="getProjectUserList" parameterType="int" resultType="puBean">
 	 	select uname, uphone, uemail from proguser, userproject where up_pnum=#{pnum} and up_uemail=uemail;
 	 </select>
+
 	
+	
+	<!--  ### 로그용 SQL문 ###  -->
+	<!-- 해당 프로젝트의 모든 로그 출력 -->
+	<select id="allLogs" parameterType="int" resultType="logBean" >
+		select lnum, l_pnum, l_uemail, ldata, ltext, lpublic, ladmission from log where l_pnum=#{l_pnum}
+	</select>
+	
+	<!-- 해당 로그 삭제 -->
+	<delete id="logDelete" parameterType="int">
+		delete log where lnum = #{lnum}
+	</delete>
+	
+	<!-- 로그 작성 : only text -->
+	<!-- insert into log values(seq_l.nextval,21,'t@t.t',sysdate,'test text',null,null,0,0); -->
+	<!-- select lnum, l_pnum, l_uemail, ldata, ltext, lpublic, ladmission from log; -->
+	<!-- 
+	"LNUM" NUMBER(4,0) NOT NULL ENABLE, 
+	"L_PNUM" NUMBER(4,0) NOT NULL ENABLE, 
+	"L_UEMAIL" VARCHAR2(30) NOT NULL ENABLE, 
+	"LDATA" DATE NOT NULL ENABLE, 
+	"LTEXT" VARCHAR2(1000), 
+	"LPHOTO" BLOB, 
+	"LFILE" BLOB, 
+	"LPUBLIC" NUMBER(1,0) NOT NULL ENABLE, 
+	"LADMISSION" NUMBER(1,0) NOT NULL ENABLE, 
+	 -->
+	<insert id="logWrite" parameterType="logBean">
+		insert into log(lnum, l_pnum, l_uemail, ldata, ltext, lpublic, ladmission)
+		values(seq_l.nextval , #{l_pnum}, #{l_uemail}, sysdate, #{ltext}, 0, 0)
+	</insert>
 </mapper>
 
 
