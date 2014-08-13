@@ -2,7 +2,7 @@ html,body{width:100%;height:100%;padding:0;background:#fff;margin:0;font-family:
 a { text-decoration:none }
 .container { width:262px; margin:0 auto; padding-top:200px; }
 
-#bar { width:100%; height:60px; padding:15px 0; background:url(../images/bar.png) repeat-x; }
+#bar { width:100%; height:90px; padding:0px ; background:url(../images/bar.png) repeat-x; }
 #container { width:1270px; margin:0 auto; }
 
 /*-------LOGIN STARTS HERE -------*/
@@ -14,6 +14,7 @@ a { text-decoration:none }
     font-size:11px;
     width: 1143px;
     height: 56px;
+    padding-top: 15px;
 }
 
 /* Join Container (default to float:right) */
@@ -23,6 +24,7 @@ a { text-decoration:none }
     font-size:11px;
     width: 102px;
     height: 56px;
+    padding-top: 15px;
 }
 
 /* Login Button */
@@ -30,7 +32,7 @@ a { text-decoration:none }
     display:inline-block;
     float:right;
     background:#d2e0ea url(../images/buttonbg.png) repeat-x; 
-    border:2px solid #899caa; 
+    border:2px solid #899caa;
     border-radius:30px;
     -moz-border-radius:3px;
     position:relative;
@@ -38,7 +40,7 @@ a { text-decoration:none }
     cursor:pointer;    
     width: 108px;
     height: 47px;
-    
+    box-sizing: content-box;
 }
 
 /* Join Button */
@@ -46,7 +48,7 @@ a { text-decoration:none }
     display:inline-block;
     float:right;
     background:#d2e0ea url(../images/buttonbg.png) repeat-x; 
-    border:2px solid #899caa; 
+     border:2px solid #899caa;
     border-radius:30px;
     -moz-border-radius:3px;
     position:relative;
@@ -54,7 +56,7 @@ a { text-decoration:none }
     cursor:pointer;    
     width: 115px;
     height: 47px;
-    
+    box-sizing: content-box;    
 }
 
 /* Login Button Text */
@@ -62,10 +64,11 @@ a { text-decoration:none }
     color:#445058; 
     font-size:21px; 
     font-weight:bold; 
-    text-shadow:1px 1px #fff; 
-    padding:11px 27px 9px 18px;
+    text-shadow:1px 1px #fff;
+    padding:11px 27px 9px 8px;
     background:url(../images/loginArrow.png) no-repeat 80px 17px;
     display:block
+    
 }
 
 /* Join Button Text */
@@ -90,7 +93,7 @@ a { text-decoration:none }
 /* Login Box */
 #loginBox {
     position:absolute;
-    top:57px;
+    top:70px;
     right:0;
     display:none;
     z-index:29;
@@ -99,7 +102,7 @@ a { text-decoration:none }
 /* Join Box */
 #JoinBox {
     position:absolute;
-    top:57px;
+    top:70px;
     right:0;
     display:none;
     z-index:29;
@@ -316,6 +319,23 @@ fieldset#body {
 
 /* Sign In Button */
 #JoinForm #resetSpan{
+    width:auto;
+    float:left;
+    background:#339cdf url(../images/loginbuttonbg.png) repeat-x;
+    color:#fff;
+    padding:7px 10px 8px 10px;
+    text-shadow:0px -1px #278db8;
+    border:1px solid #339cdf;
+    box-shadow:none;
+    -moz-box-shadow:none;
+    -webkit-box-shadow:none;
+    margin:0 12px 0 0;
+    cursor:pointer;
+    *padding:7px 2px 8px 2px; /* IE7 Fix */
+}
+
+/* leave Button */
+#JoinForm #leave{
     width:auto;
     float:left;
     background:#339cdf url(../images/loginbuttonbg.png) repeat-x;
