@@ -5,11 +5,10 @@
 <head>
      <meta http-equiv="X-UA-Compatible" content="text/html" charset="EUC-KR">
 	 <title>${requestScope.title }</title>
-     <link rel="stylesheet" href="css/style.css" />
+     <link rel="stylesheet" href="css/topBar.css" />
      <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.js' type='text/javascript'></script>
      <script src="js/login.js"></script>
      <script src="js/formValidation.js"></script>
-     <script src="javascripts/createProjectBtn.js"></script>
 <!-- 	 <script src="js/jquery-1.10.2.js"></script> -->
 
 </head>
@@ -154,34 +153,26 @@
 
 
 <body>
-   <div id="bar">
-        <div id="container">
-            <!-- Login Starts Here -->
-            <div id="loginContainer">
-                <a href="#" id="loginButton"><span>Logout</span><em></em></a>
-                <div style="clear:both"></div>
-                <div id="loginBox">                
-                    <form action="idPwCheck.do" method="post" id="loginForm">
-                        <fieldset id="body">
-                            <fieldset>
-                                <label for="email">Email Address</label>
-                                <input type="text" name="email" id="email" />
-                            </fieldset>
-                            <fieldset>
-                                <label for="password">Password</label>
-                                <input type="password" name="pw" id="pw" />
-                            </fieldset>
-                            <input type="submit" id="login" value="로그인" />
-                        </fieldset>
-                    </form>
-                </div>
-            </div>
-            <!-- Login Ends Here -->
-        </div>
-         <div id="container">
-            <!-- Join Starts Here -->
-            <div id="JoinContainer">
-                <a href="#" id="JoinButton"><span>Infom</span><em></em></a>
+     <div id="bar">
+        <!-- Login Starts Here -->
+    	<div id="loginContainer">
+	        <a href="#" id="loginButton"><span>Logout</span><em></em></a>
+	        <div id="loginBox">                
+	            <form action="idPwCheck.do" method="post" id="loginForm">
+	                    <fieldset id="body">
+		                    <fieldset>
+		                        <label for="email">Email Address</label>
+		                        <input type="text" name="email" id="email" />
+		                    </fieldset>
+		                    <fieldset>
+		                         <label for="password">Password</label>
+		                         <input type="password" name="pw" id="pw" />
+		                    </fieldset>
+		                    <input type="submit" id="login" value="로그인" />
+	                    </fieldset>
+	             </form>
+	         </div>
+                <a href="#" id="JoinButton"><span>Inform</span><em></em></a>
                 <div style="clear:both"></div>
        			<div id="JoinBox">
        				<form action="insert.do" method="post" id="JoinForm">
@@ -213,9 +204,8 @@
                         </fieldset>
                     </form>
        			</div>
-            </div>
+      </div>
             <!-- Join Ends Here -->
-        </div>
     </div>
 </body>
 </html>

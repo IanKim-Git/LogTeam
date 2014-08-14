@@ -3,27 +3,32 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+	<jsp:include page="topBar.jsp" flush="false" />
+	<jsp:include page="leftMenu.jsp" flush="false" />
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Announcement</title>
-<jsp:include page="topBar.jsp" flush="false" />
-<jsp:include page="leftMenu.jsp" flush="false" />
+
 </head>
 <script src="js/jquery-1.10.2.js"></script>
+<script>var jb = jQuery.noConflict();</script>
+
 <script type="text/javascript">
-	$(document).ready(function(){
+	jb(document).ready(function(){
 		//모든 공지사항을 불러오는 함수
 		function getAns() {
-			$.ajax({
+			jb.ajax({
 				url : "allAns.do", 
 				type : "post",
 				dataType : "json", 					//결과데이터타입
-				data : "pnum="+$("#an_pnum").val(),
+				data : "pnum="+jb("#an_pnum").val(),
 				success : function(data) {
 					var table = "";
-					$("#listTable tr:gt(0)").remove();
+					jb("#listTable tr:gt(0)").remove();
 //					<th>번호</th><th>내용</th><th>날짜</th><th>등록자</th><th>중요도</th><th>삭제</th>
 					var count = data.list.length;
-					$(data.list).each(function(index, item) {
+
+					//data.list로 온 데이터 : [{no:값, name:값,...}, {no:값, name:값,...}, {no:값, name:값,...}, ...]
+					jb(data.list).each(function(index, item) {//{no:값, name:값,...}
 						table += "<tr><td>" + (count--) + "</td><td>" + item.ancontent + "</td><td>" +  item.andate + "</td><td>" +  item.an_uemail + "</td>";
 						if(item.animportance == 3){
 							table += "<td>상</td><td>";
@@ -37,7 +42,7 @@
 						}
 					});
 					//테이블에 추가
-					$("#listTable tr:eq(0)").after(table);
+					jb("#listTable tr:eq(0)").after(table);
 				},
 				error : function(err) {//실패했을때
 					alert(err + " : 해당 프로젝트에는 공지사항이 아직 작성되지 않았습니다");
@@ -46,12 +51,12 @@
 		} //end of getAns()
 		
 		//삭제 버튼을 눌렀을 때 공지사항 삭제
-		$(document).on("click", "#del", function() {
-			$.ajax({
+		jb(document).on("click", "#del", function() {
+			jb.ajax({
 				url : "deleteAn.do", 
 				type : "post",
 				dataType : "text", 
-				data : "annum=" + $(this).attr("name"),	//서버에 전송할 데이터 : <input type='button' value='삭제' id='del' name='"+item.no+"'>
+				data : "annum=" + jb(this).attr("name"),	//서버에 전송할 데이터 : <input type='button' value='삭제' id='del' name='"+item.no+"'>
 				success : function(data) {
 					if (data == "ok") {
 						alert("삭제 성공");
@@ -67,16 +72,16 @@
 		});//end of 공지사항 삭제 
 		
 		//공지사항 등록
-		$("#anWrite").click(function() {
-			$.ajax({
+		jb("#anWrite").click(function() {
+			jb.ajax({
 				url : "writeAn.do",
 				type : "post",
 				dataType : "text", 				
-				data : $("#anWriteForm").serialize(),
+				data : jb("#anWriteForm").serialize(),
 				success : function(data) {
 					if (data == "ok") {
 						alert("공지사항 작성 성공");
-						$("textarea").val("");	
+						jb("textarea").val("");	
 						getAns();							
 					} else if(data == "again") {
 						alert("공지사항 중요도를 선택하세요.");

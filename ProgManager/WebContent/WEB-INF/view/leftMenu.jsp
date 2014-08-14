@@ -5,15 +5,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Project Main</title>
-     <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.js' type='text/javascript'></script>
-     <script src="js/login.js"></script>
+	
+	<link rel="stylesheet" href="css/leftMenu.css" type="text/css" media="screen">
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	
+	<script src="js/cufon-yui.js" type="text/javascript"></script>
+	<script src="js/BabelSans_500.font.js" type="text/javascript"></script>
+	<script src="js/jquery.easing.1.3.js" type="text/javascript"></script> 
 
-	 <link rel="stylesheet" href="css/style2.css" type="text/css" media="screen">
-		
-	 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-	 <script src="js/cufon-yui.js" type="text/javascript"></script>
-	 <script src="js/BabelSans_500.font.js" type="text/javascript"></script>
-	 <script src="js/jquery.easing.1.3.js" type="text/javascript"></script> 
 	 <script type="text/javascript">
 			$(function() {
 				Cufon.replace('a, span').CSS.ready(function() {
@@ -77,6 +77,9 @@
 
 <script type="text/javascript">
    
+	function onidPwCheck(){
+		$("#idPwCheck").submit();
+	}
 	function onprojectInfo(){
 		$("#projectInfo").submit();
 	}
@@ -102,10 +105,17 @@
     
     <div id="menubar">
 		<ul id="slidingMenu" class="slidingMenu">
+			<!-- 프로젝트 선택 창으로 돌아가기 -->
+			<li><form action="idPwCheck.do" id="idPwCheck" onclick="onidPwCheck()" method="post">
+					<input type="hidden" name="email" value="${sessionScope.userData.uemail}">
+					<input type="hidden" name="pw" value="${sessionScope.userData.upw }">
+					<a href="#">List Page</a>
+			</form></li>
+			
 			<!-- 프로젝트 정보 -->
 			<li><form action="projectInfo.do" id="projectInfo" onclick="onprojectInfo()" method="post">
 					<input type="hidden" name="enterProInfoPnum" value="${requestScope.pnum}">
-					<a href="#">Info</a>
+					<a href="#">INFO</a>
 			</form></li>
 			
 			<!-- 공지사항 -->

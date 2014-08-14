@@ -3,27 +3,35 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+	<jsp:include page="topBar.jsp" flush="false" />
+	<jsp:include page="leftMenu.jsp" flush="false" />
+	
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Log List</title>
-<jsp:include page="topBar.jsp" flush="false" />
-<jsp:include page="leftMenu.jsp" flush="false" />
 </head>
+
 <script src="js/jquery-1.10.2.js"></script>
+<script>var jb = jQuery.noConflict();</script>
+
 <script type="text/javascript">
-	$(document).ready(function(){
+	jb(document).ready(function(){
 		//모든 로그를 불러오는 함수
 		function getLogs() {
-			$.ajax({
+			jb.ajax({
 				url : "allLogs.do", 
 				type : "post",
 				dataType : "json", 					//결과데이터타입
-				data : "pnum="+$("#l_pnum").val(),
+				data : "pnum="+jb("#l_pnum").val(),
 				success : function(data) {
 					var table = "";
-					$("#listTable tr:gt(0)").remove();
-//					<th>로그번호</th><th>작성자</th><th>작성일</th><th>내용</th><th>공개여부</th><th>승인여부</th>
+
+					jb("#listTable tr:gt(0)").remove();
+//					<th>로그번호</th><th>작성자</th><th>작성일</th><th>내용</th><th>공개여부</th><th>승인여부</th><th>삭제</th>
+
 					var count = data.list.length;
-					$(data.list).each(function(index, item) {
+
+					//data.list로 온 데이터 : [{no:값, name:값,...}, {no:값, name:값,...}, {no:값, name:값,...}, ...]
+					jb(data.list).each(function(index, item) {//{no:값, name:값,...}
 						table += "<tr><td>" + (count--) + "</td><td>" + item.l_uemail + "</td><td>" +  item.ldata + "</td><td>" +  item.ltext + "</td>";
 						if(item.lpublic == 0){
 							table += "<td>비공개</td>";
@@ -33,7 +41,7 @@
 						table += "<td>" + item.ladmission + "</td><tr>";
 					});
 					//테이블에 추가
-					$("#listTable tr:eq(0)").after(table);
+					jb("#listTable tr:eq(0)").after(table);
 				},
 				error : function(err) {//실패했을때
 					alert(err + " : 해당 프로젝트에는 로그가 아직 작성되지 않았습니다");
@@ -42,12 +50,12 @@
 		} //end of getLogs()
 		
 		//삭제 버튼을 눌렀을 때 로그 삭제
-		$(document).on("click", "#del", function() {
-			$.ajax({
+		jb(document).on("click", "#del", function() {
+			jb.ajax({
 				url : "deleteLog.do", 
 				type : "post",
 				dataType : "text", 
-				data : "lnum=" + $(this).attr("name"),	//서버에 전송할 데이터 : <input type='button' value='삭제' id='del' name='"+item.no+"'>
+				data : "lnum=" + jb(this).attr("name"),	//서버에 전송할 데이터 : <input type='button' value='삭제' id='del' name='"+item.no+"'>
 				success : function(data) {
 					if (data == "ok") {
 						alert("삭제 성공");
@@ -63,16 +71,16 @@
 		});//end of 로그 삭제
 		
 		//로그 등록
-		$("#write").click(function() {
-			$.ajax({
+		jb("#write").click(function() {
+			jb.ajax({
 				url : "write.do",
 				type : "post",
 				dataType : "text", 				
-				data : $("#writeForm").serialize(),
+				data : jb("#writeForm").serialize(),
 				success : function(data) {
 					if (data == "ok") {
 						alert("로그 작성 성공");
-						$("textarea").val("");	
+						jb("textarea").val("");	
 						getLogs();							
 					} else if(data == "again") {
 						alert("로그 공개여부를 선택하세요.");
