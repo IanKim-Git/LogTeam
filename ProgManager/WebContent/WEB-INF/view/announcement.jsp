@@ -5,6 +5,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Announcement</title>
+<jsp:include page="topBar.jsp" flush="false" />
+<jsp:include page="leftMenu.jsp" flush="false" />
 </head>
 <script src="js/jquery-1.10.2.js"></script>
 <script type="text/javascript">

@@ -1,52 +1,29 @@
-<!doctype html>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <meta charset="EUC-KR">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>PLog Manager, to build a better and fair world.</title>
-    <link rel="stylesheet" href="css/style.css" />
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js?ver=1.4.2"></script>
-    <script src="js/login.js"></script>
-    <script src="js/formValidation.js"></script>
-	<script type="text/javascript">
-	
-	$(document).ready(function(){
-		var eflag = false;
+     <meta http-equiv="X-UA-Compatible" content="text/html" charset="EUC-KR">
+	 <title>${requestScope.title }</title>
+     <link rel="stylesheet" href="css/style.css" />
+     <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.js' type='text/javascript'></script>
+     <script src="js/login.js"></script>
+     <script src="js/formValidation.js"></script>
+     <script src="javascripts/createProjectBtn.js"></script>
+<!-- 	 <script src="js/jquery-1.10.2.js"></script> -->
+
+</head>
+
+
+<script type="text/javascript">
+
+	$(document).ready(	function() {
+		var pleader = $("#pleader").val();
+		
 		var pflag = false;
 		var pflag2 = false;
 		var nflag = false;
 		
-		//이메일 검사
-		/*
-		1. 반드시 입력*
-		2. 이메일 형식 검증*
-		3. 중복 검사*
-		*/
-		 $("#email2").keyup(function(){
-			$("p").html($('#email2').val()); 
-			var isValid = isEmailValid($('#email2').val());
-			if(!isValid){
-				$("#idValidation").html("<font color='red'>적합하지 않은 e-mail 형식입니다. 다시 입력하세요</font>");
-				eflag = false;
-			}else{
-				 $.ajax({
-					url : "idCheck.do", 					//서버에 요청할 정보
-					type : "post",							//method방식
-					dataType : "text", 					//응답되는 데이터 타입
-					data : "email=" + $("#email2").val(),	//서버에 전송할 데이터 no=입력된 데이터
-					
-					success : function(data) {		//응답 성공시 자동 실행되는 사용자 정의 함수
-						$("#idValidation").html(data);
-					},
-					
-					error : function(err) { //응답 실패했을때 자동 실행되는 사용자 정의 함수(서버 자체의 검증 로직 자체가 부득이하게 안 된 경우에 실행)
-						alert(err + " : 회원가입 실패! 다시 시도해보세요..");
-					}				
-				});//end of ajax	 		
-				eflag = true;			
-			}
-			
-		});//end of email validation 
 		
 		//비밀번호 확인
 		/*
@@ -61,7 +38,6 @@
 				$("#pwValidation").html("<font color='blue'>사용 가능한 비밀번호입니다.</font>");
 				pflag = true;
 			}
-			
 		});//end of password validaion
 		
 		//비밀번호 재확인
@@ -122,41 +98,67 @@
 			$('#JoinButton').removeClass('active');
 			$('#JoinBox').hide();
 		}
-		 
+		
 		$("#Join").click(function(){
-			if(!eflag ||!pflag || !pflag2 || !nflag){
+			nflag=true;
+			if(!pflag || !pflag2 || !nflag){
 				alert("회원가입 정보를 다시 입력하십시오");
 				return false;
 			}
 			$.ajax({
-				url : "insert.do",
+				url : "update.do",
 				type : "post",
 				dataType : "text", 
 				data : $("#JoinForm").serialize(),
 				success : function(data) {
 					if (data == "ok") {
-						alert("회원가입 성공!");
+						alert("회원 정보 변경 성공!");
 					} else {
-						alert("가입 실패");
+						alert("회원 정보 변경 실패");
 					}
 					deleteJoinForm();
 				},
 				error : function(data) {
-					alert(data + ' : 가입로직 실행시 에러 발생');
+					alert(data + ' : 회원 정보 변경 로직 실행시 에러 발생');
 				}
 			}); //end of ajax
 		});//end of Join button
-	
-	});//end of ready
+		
+		
+		$("#leave").click(function(){
+			if(!pflag || !pflag2){
+				alert("비밀 번호를 다시 입력하십시오");
+				return false;
+			}
+			$.ajax({
+				url : "delete.do",
+				type : "post",
+				dataType : "text", 
+				data : $("#JoinForm").serialize(),
+				success : function(data) {
+					if (data == "ok") {
+						alert("회원 탈퇴 성공!");
+						history.go(-1);
+					} else {
+						alert("회원 탈퇴 실패");
+					}
+					deleteJoinForm();
+				},
+				error : function(data) {
+					alert(data + ' : 회원 탈퇴 로직 실행시 에러 발생');
+				}
+			}); //end of ajax
+		});//end of Join button
+   });//end of ready()
 </script>
-</head>
-<body>
 
-    <div id="bar">
+
+<body>
+   <div id="bar">
         <div id="container">
             <!-- Login Starts Here -->
             <div id="loginContainer">
-                <a href="#" id="loginButton"><span>Login</span><em></em></a>
+                <a href="#" id="loginButton"><span>Logout</span><em></em></a>
                 <div style="clear:both"></div>
                 <div id="loginBox">                
                     <form action="idPwCheck.do" method="post" id="loginForm">
@@ -179,33 +181,35 @@
          <div id="container">
             <!-- Join Starts Here -->
             <div id="JoinContainer">
-                <a href="#" id="JoinButton"><span>Sign in</span><em></em></a>
+                <a href="#" id="JoinButton"><span>Infom</span><em></em></a>
                 <div style="clear:both"></div>
        			<div id="JoinBox">
        				<form action="insert.do" method="post" id="JoinForm">
                         <fieldset id="body">
-                            <fieldset>
+                        	<fieldset>
                                 <label for="email2">ID(e-mail)</label>
-                                <input type="text" name="email2" id="email2"/><br><span id="idValidation"></span>
+                               <input type="text" value="${requestScope.email}" disabled="disabled"/>
+                               <input type="hidden" name="email2" id="email2" value="${requestScope.email}"/>
+                            </fieldset>
+                            <fieldset>
+                                <label for="name">name</label>
+                                <input type="text" name="name" id="name" value="${requestScope.name}"/><br><span id="nameValidation"></span>
                             </fieldset>
                             <fieldset>
                                 <label for="password2">Password</label>
-                                <input type="password" name="pw2" id="pw2"/><span id="pwValidation"></span>
+                                <input type="password" name="pw2" id="pw2"/><br><span id="pwValidation"></span>
                             </fieldset>
                             <fieldset>
                                 <label for="pwAgain">Reenter Password</label>
-                                <input type="password" name="pwAgain" id="pwAgain"/><span id="pw2Validation"></span>
-                            </fieldset>
-                            <fieldset>
-                                <label for="name">Name</label>
-                                <input type="text" name="name" id="name"/><span id="nameValidation"></span>
+                                <input type="password" name="pwAgain" id="pwAgain"/><br><span id="pw2Validation"></span>
                             </fieldset>
                             <fieldset>
                                 <label for="phone">Phone Number(ex.000-0000-0000)</label>
-                                <input type="text" name="phone" id="phone">
+                                <input type="text" name="phone" id="phone" value="${requestScope.phone}">
                             </fieldset>
-                            <input type="button" id="Join" value="가입" />
+                            <input type="button" id="Join" value="확인" />
                             <input type="reset" id="resetSpan" value="취소" />
+                            <input type="button" id="leave" value="탈퇴" />
                         </fieldset>
                     </form>
        			</div>
@@ -213,21 +217,5 @@
             <!-- Join Ends Here -->
         </div>
     </div>
-    
-    <br><br>
-    <div style="margin: 0 auto;">
-    	<div style="float: left;" >
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<iframe src="http://www.koalastothemax.com/?aHR0cDovL3d3dy5pbWFnZXNidWRkeS5jb20vaW1hZ2VzLzEwNC8yMDEzLzA4L3dlbGNvbWUtY29sb3JmdWwtdGV4dC1ncmFwaGljLmpwZw=="
-			 height="540" width="600" frameborder=0 scrolling=no >Iframe
-			</iframe>
-		</div>
-		<div style="position: relative; left: -280px; top: 65px; float: right; ">
-			<h2>PLog Maneger<br>메인 페이지 레이아웃 테스트<br>Main Page Layout Test<br>Test Page<br></h2>
-		</div>
-	</div>
-	
 </body>
 </html>
