@@ -26,6 +26,11 @@ public class AnnouncementBean {
 		this.animportance = animportance;
 	}
 
+	public AnnouncementBean(int annum, String an_uemail) {
+		this.annum = annum;
+		this.an_uemail = an_uemail;
+	}
+
 	public int getAnnum() {
 		return annum;
 	}

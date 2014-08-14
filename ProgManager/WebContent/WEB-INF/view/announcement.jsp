@@ -30,8 +30,14 @@
 							table += "<td>중</td><td>";
 						}else if(item.animportance == 1){
 							table += "<td>하</td><td>";
-						}						
-						table += "<input type='button' value='삭제' id='del' name='"+item.annum+"'></td></tr>";
+						}
+						if($("#an_uemail").val() == item.an_uemail){
+							table += "<input type='button' value='삭제' id='del' name='"+item.annum+"'></td></tr>";
+						}
+						
+						
+						/* table += "<td><form id='delAn'><input type='hidden' name='" + item.annum + "'><input type='hidden' name='" +  item.an_uemail + "'>";
+						table += "<input type='button' value='삭제' id='del'></form></td>";	 */					
 					});
 					//테이블에 추가
 					$("#listTable tr:eq(0)").after(table);
@@ -61,7 +67,27 @@
 					alert(err + " : 공지사항 정보 삭제 실패");
 				}
 			});
-		});//end of 공지사항 삭제
+		});//end of 공지사항 삭제 
+		
+		/* $(document).on("click", "#del", function() {
+			$.ajax({
+				url : "deleteAn.do", 
+				type : "post",
+				dataType : "text", 
+				data : $("#delAn").serialize(),	//서버에 전송할 데이터 : <input type='button' value='삭제' id='del' name='"+item.no+"'>
+				success : function(data) {
+					if (data == "ok") {
+						alert("삭제 성공");
+						getAns();
+					} else {
+						alert("삭제 실패");
+					}
+				},
+				error : function(err) {//실패했을때
+					alert(err + " : 공지사항 정보 삭제 실패");
+				}
+			});
+		}); */
 		
 		//공지사항 등록
 		$("#anWrite").click(function() {

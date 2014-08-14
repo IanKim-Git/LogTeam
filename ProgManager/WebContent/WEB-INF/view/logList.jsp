@@ -29,7 +29,7 @@
 						}else if(item.lpublic == 1){
 							table += "<td>공개</td>";
 						}						
-						table += "<td>" + item.ladmission + "</td><td><input type='button' value='삭제' id='del' name='"+item.lnum+"'></td></tr>";
+						table += "<td>" + item.ladmission + "</td><tr>";
 					});
 					//테이블에 추가
 					$("#listTable tr:eq(0)").after(table);
@@ -110,7 +110,7 @@
 	<form action="" id="logListForm">			
 		<table id="listTable" cellspacing="0">
 			<tr bgcolor="#FOFOF7">
-				<th>로그번호</th><th>작성자</th><th>작성일</th><th>내용</th><th>공개여부</th><th>승인여부</th><th>삭제</th>
+				<th>로그번호</th><th>작성자</th><th>작성일</th><th>내용</th><th>공개여부</th><th>승인여부</th>
 			</tr>
 		</table>
 	</form>

@@ -55,10 +55,10 @@ public class AnnouncementDAO {
 	}	 
 	
 	//단위테스트
-/*	public static void main(String[] args){
+	public static void main(String[] args){
 		
-		insert into announcement(annum, an_pnum, andate, an_uemail, ancontent, animportance)
-			values(seq_an.nextval , #{an_pnum}, sysdate, ,#{an_uemail}, #{ancontent}, #{animportance})
+//		insert into announcement(annum, an_pnum, andate, an_uemail, ancontent, animportance)
+//			values(seq_an.nextval , #{an_pnum}, sysdate, ,#{an_uemail}, #{ancontent}, #{animportance})
 		 
 		AnnouncementDAO ad = new AnnouncementDAO();
 //		ad.anWrite(new AnnouncementBean(2, "t@t.t", "notice1", 1));
@@ -75,5 +75,5 @@ public class AnnouncementDAO {
 		for(AnnouncementBean temp : ab){
 			System.out.println(temp);
 		}
-	}*/
+	}
 }
