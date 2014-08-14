@@ -1,18 +1,15 @@
-@import url(http://fonts.googleapis.com/css?family=Montserrat|Open+Sans:400,300);
-@import url(http://thecodeplayer.com/uploads/fonts/font-awesome-4.0.1/css/font-awesome.min.css);
+html,body{width:100%;height:100%;padding:0;background:#fff;margin:0;font-family:arial}
 
+#bar { position: relative; width:100%; height:70px; padding:0px ; background:rgb(33,113,187); }
 
-html,body{
-	width:100%;height:100%;padding:0;background:#fff;margin:0;font-family:arial
-	}
-#bar { width:100%; height:90px; padding:0px ; background:rgb(33, 113, 187); }
-
-/*-------LOGIN STARTS HERE -------*/
+#mainView{
+	position:relative;
+	width:40%;
+}
 
 /* Login Container (default to float:right) */
 #loginContainer {
     position:relative;
-    float:left;
     width: 100%;
     height: 56px;
     padding-top: 15px;
@@ -20,34 +17,33 @@ html,body{
 
 /* Login Button */
 #loginButton { 
-	display:inline-block;
+    display:inline-block;
     float:right;
-    background:#d2e0ea url(../images/buttonbg.png) repeat-x; 
+    background:#d2e0ea; 
     border:2px solid #899caa;
     border-radius:14px;
     -moz-border-radius:3px;
     position:relative;
     z-index:30;
-    cursor:pointer;    
+    cursor:pointer;
     right:250px;
     width: 108px;
     height: 40px;
     box-sizing: content-box;
-
 }
 
 /* Join Button */
 #JoinButton { 
-    display:inline;
+    display:inline-block;
     float:right;
     background:#d2e0ea; 
      border:2px solid #899caa;
-    border-radius:30px;
+    border-radius:14px;
     position:relative;
     z-index:30;
     cursor:pointer;    
-    width: 115px;
-    height: 47px;
+    width: 108px;
+    height: 40px;
     box-sizing: content-box;    
 }
 
@@ -60,28 +56,26 @@ html,body{
     padding:10px 27px 9px 8px;
     background:url(../images/loginArrow.png) no-repeat 80px 17px;
     display:block
+    
 }
-
 /* Join Button Text */
 #JoinButton span {
     color:#445058; 
-    font-size:21px; 
+    font-size:19px; 
     font-weight:bold; 
     text-shadow:1px 1px #fff; 
-    text-align:center;
-    padding:11px 27px 9px;
+    padding:10px 29px 9px 10px;
     background:url(../images/loginArrow.png) no-repeat 80px 17px;
-    display:block;
+    display:block
 }
 
 #loginButton:hover {
-    background:url(../images/buttonbgHover.png) repeat-x;
-
+    background:#ffffff;
 }
 
 #JoinButton:hover {
-    background:#d2e0ea;
-}
+    background:#ffffff;
+    }
 
 /* Login Box */
 #loginBox {
@@ -101,10 +95,9 @@ html,body{
     z-index:29;
 }
 
-
 /* If the Login Button has been clicked */    
 #loginButton.active {
-    border-radius:30px 30px 0 0;
+    border-radius:14px;
 }
 
 #loginButton.active span {
@@ -113,7 +106,7 @@ html,body{
 
 /* If the Join Button has been clicked */    
 #JoinButton.active {
-    border-radius:30px 30px 0 0;
+    border-radius:14px;
 }
 
 #JoinButton.active span {
@@ -217,6 +210,14 @@ fieldset#body {
     cursor:pointer;
     *padding:7px 2px 8px 2px; /* IE7 Fix */
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -339,6 +340,156 @@ fieldset#body {
 
 
 
+/* 프로젝트 생성 버튼 및 box 설정  */
+
+#createProject { 
+    display:inline-block;
+    border:2px solid #899caa; 
+    border-radius:30px;
+    -moz-border-radius:3px;
+    position:relative;
+    z-index:30;
+    cursor:pointer;    
+    width: 108px;
+    height: 52px;
+    
+}
+
+/* create Button Text */
+#createProject span {
+    color:#445058; 
+    font-size:10px; 
+    font-weight:bold; 
+    text-shadow:1px 1px #fff; 
+    padding:7px 29px 9px 10px;
+    display:block
+}
+
+#createProject:hover {
+    background:black;
+}
+
+#createProjectBox {
+    position:relative;
+    width:100px;
+    height:100px;
+    display:none;
+    z-index:29;
+}
+
+#createProjectPop{
+   position:absolute; 
+   left:30%; 
+   top:30%; 
+   width:550px; 
+   height:400px; 
+   background: rgb(193,233,242);
+   z-index:20; 
+   display:none; 
+   border:medium; 
+   border-radius:90px;
+}
+
+/* 프로젝트 조인 버튼*/
+#joinProject { 
+    display:inline-block;
+    border:2px solid #899caa; 
+    border-radius:30px;
+    -moz-border-radius:3px;
+    position:relative;
+    z-index:30;
+    cursor:pointer;    
+    width: 108px;
+    height: 52px;
+    
+}
+#joinProject span {
+    color:#445058; 
+    font-size:10px; 
+    font-weight:bold; 
+    text-shadow:1px 1px #fff; 
+    padding:7px 29px 9px 10px;
+    display:block
+}
+
+#joinProject:hover {
+    background:black;
+}
+
+#joinProjectBox {
+    position:relative;
+    width:100px;
+    height:100px;
+    display:none;
+    z-index:29;
+}
+
+#joinProjectPop{
+   position:absolute; 
+   top: 30%; 
+   left: 30%; 
+   width:550px; 
+   height:400px; 
+   background: rgb(193,233,242);
+   z-index:20; 
+   display:none; 
+   border:medium; 
+   border-radius:90px;
+}
+
+
+/* 프로젝트 생성 버튼 및 box 설정  */
+
+#createProject { 
+    display:inline-block;
+    border:2px solid #899caa; 
+    border-radius:30px;
+    -moz-border-radius:3px;
+    position:relative;
+    z-index:30;
+    cursor:pointer;    
+    width: 108px;
+    height: 52px;
+    
+}
+
+/* create Button Text */
+#createProject span {
+    color:#445058; 
+    font-size:10px; 
+    font-weight:bold; 
+    text-shadow:1px 1px #fff; 
+    padding:7px 29px 9px 10px;
+    display:block
+}
+
+#createProject:hover {
+    background:black;
+}
+
+#createProjectBox {
+    position:relative;
+    width:100px;
+    height:100px;
+    display:none;
+    z-index:29;
+}
+
+#createProjectPop{
+   position:absolute; 
+   left:30%; 
+   top:30%; 
+   width:550px; 
+   height:400px; 
+   background: rgb(193,233,242);
+   z-index:20; 
+   display:none; 
+   border:medium; 
+   border-radius:90px;
+}
+
+
+
 #menubar{
 	position:relative;
 	float:left;
@@ -414,7 +565,7 @@ fieldset#body {
 #contents{
 	position:relative;
 	float:right;
-	width:78%;
+	width:85%;
 	height:1000px;
 	
 	

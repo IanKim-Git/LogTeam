@@ -1,20 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Project Main</title>
-     <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.js' type='text/javascript'></script>
-     <script src="js/login.js"></script>
 
-	 <link rel="stylesheet" href="css/style2.css" type="text/css" media="screen">
-		
-	 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-	 <script src="js/cufon-yui.js" type="text/javascript"></script>
-	 <script src="js/BabelSans_500.font.js" type="text/javascript"></script>
-	 <script src="js/jquery.easing.1.3.js" type="text/javascript"></script> 
-	 <script type="text/javascript">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+	<title>Project Main</title>
+	
+    <link rel="stylesheet" href="css/style3.css" type="text/css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.js' type='text/javascript'></script>
+    <script src="js/login.js"></script>
+	<script src="js/formValidation.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>
+	<script src="js/cufon-yui.js" type="text/javascript"></script>
+	<script src="js/BabelSans_500.font.js" type="text/javascript"></script>
+	<script src="js/jquery.easing.1.3.js" type="text/javascript"></script> 
+	
+	<script type="text/javascript">
 			$(function() {
 				Cufon.replace('a, span').CSS.ready(function() {
 					var $menu 		= $("#slidingMenu");
@@ -99,7 +102,63 @@
 
 
 <body>
+
+   <div id="bar">
+        <!-- Login Starts Here -->
+    	<div id="loginContainer">
+	        <a href="#" id="loginButton"><span>Logout</span><em></em></a>
+	        <div id="loginBox">                
+	            <form action="idPwCheck.do" method="post" id="loginForm">
+	                    <fieldset id="body">
+		                    <fieldset>
+		                        <label for="email">Email Address</label>
+		                        <input type="text" name="email" id="email" />
+		                    </fieldset>
+		                    <fieldset>
+		                         <label for="password">Password</label>
+		                         <input type="password" name="pw" id="pw" />
+		                    </fieldset>
+		                    <input type="submit" id="login" value="로그인" />
+	                    </fieldset>
+	             </form>
+	         </div>
+                <a href="#" id="JoinButton"><span>Inform</span><em></em></a>
+                <div style="clear:both"></div>
+       			<div id="JoinBox">
+       				<form action="insert.do" method="post" id="JoinForm">
+                        <fieldset id="body">
+                        	<fieldset>
+                                <label for="email2">ID(e-mail)</label>
+                               <input type="text" value="${requestScope.email}" disabled="disabled"/>
+                               <input type="hidden" name="email2" id="email2" value="${requestScope.email}"/>
+                            </fieldset>
+                            <fieldset>
+                                <label for="name">name</label>
+                                <input type="text" name="name" id="name" value="${requestScope.name}"/><br><span id="nameValidation"></span>
+                            </fieldset>
+                            <fieldset>
+                                <label for="password2">Password</label>
+                                <input type="password" name="pw2" id="pw2"/><br><span id="pwValidation"></span>
+                            </fieldset>
+                            <fieldset>
+                                <label for="pwAgain">Reenter Password</label>
+                                <input type="password" name="pwAgain" id="pwAgain"/><br><span id="pw2Validation"></span>
+                            </fieldset>
+                            <fieldset>
+                                <label for="phone">Phone Number(ex.000-0000-0000)</label>
+                                <input type="text" name="phone" id="phone" value="${requestScope.phone}">
+                            </fieldset>
+                            <input type="button" id="Join" value="확인" />
+                            <input type="reset" id="resetSpan" value="취소" />
+                            <input type="button" id="leave" value="탈퇴" />
+                        </fieldset>
+                    </form>
+       			</div>
+      </div>
+            <!-- Join Ends Here -->
+    </div>
     
+ 
     <div id="menubar">
 		<ul id="slidingMenu" class="slidingMenu">
 			<!-- 프로젝트 정보 -->
