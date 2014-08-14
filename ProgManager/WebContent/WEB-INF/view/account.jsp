@@ -10,8 +10,8 @@
 </head>
 
 <script src="js/jquery-1.10.2.js"></script>
-<script src="js/formValidation.js"></script>
 <script>var jb = jQuery.noConflict();</script>
+
 <script type="text/javascript">
 	jb(document).ready(function(){
 		//모든 회계 목록을 불러오는 함수
@@ -24,7 +24,7 @@
 				success : function(data) {
 					var table = "";
 					jb("#listTable tr:gt(0)").remove();
-//	<th>번호</th><th>내역</th><th><font color="green"><b>+</b></font></th><th><font color="red"><b>-</b></font></th><th>삭제</th>
+					//	<th>번호</th><th>내역</th><th><font color="green"><b>+</b></font></th><th><font color="red"><b>-</b></font></th><th>삭제</th>
 					var sumPlus = 0;
 					var sumMinus = 0;
 					jb(data.list).each(function(index, item) {
