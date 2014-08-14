@@ -1,0 +1,572 @@
+html,body{width:100%;height:100%;padding:0;background:#fff;margin:0;font-family:arial}
+
+#bar { position: relative; width:100%; height:70px; padding:0px ; background:rgb(33,113,187); }
+
+#mainView{
+	position:relative;
+	width:40%;
+}
+
+/* Login Container (default to float:right) */
+#loginContainer {
+    position:relative;
+    width: 100%;
+    height: 56px;
+    padding-top: 15px;
+}
+
+/* Login Button */
+#loginButton { 
+    display:inline-block;
+    float:right;
+    background:#d2e0ea; 
+    border:2px solid #899caa;
+    border-radius:14px;
+    -moz-border-radius:3px;
+    position:relative;
+    z-index:30;
+    cursor:pointer;
+    right:250px;
+    width: 108px;
+    height: 40px;
+    box-sizing: content-box;
+}
+
+/* Join Button */
+#JoinButton { 
+    display:inline-block;
+    float:right;
+    background:#d2e0ea; 
+     border:2px solid #899caa;
+    border-radius:14px;
+    position:relative;
+    z-index:30;
+    cursor:pointer;    
+    width: 108px;
+    height: 40px;
+    box-sizing: content-box;    
+}
+
+/* Login Button Text */
+#loginButton span {
+    color:#445058; 
+    font-size:19px; 
+    font-weight:bold; 
+    text-shadow:1px 1px #fff;
+    padding:10px 27px 9px 8px;
+    background:url(../images/loginArrow.png) no-repeat 80px 17px;
+    display:block
+    
+}
+/* Join Button Text */
+#JoinButton span {
+    color:#445058; 
+    font-size:19px; 
+    font-weight:bold; 
+    text-shadow:1px 1px #fff; 
+    padding:10px 29px 9px 10px;
+    background:url(../images/loginArrow.png) no-repeat 80px 17px;
+    display:block
+}
+
+#loginButton:hover {
+    background:#ffffff;
+}
+
+#JoinButton:hover {
+    background:#ffffff;
+    }
+
+/* Login Box */
+#loginBox {
+    position:absolute;
+    top:70px;
+    right:0;
+    display:none;
+    z-index:29;
+}
+
+/* Join Box */
+#JoinBox {
+    position:absolute;
+    top:70px;
+    right:0;
+    display:none;
+    z-index:29;
+}
+
+/* If the Login Button has been clicked */    
+#loginButton.active {
+    border-radius:14px;
+}
+
+#loginButton.active span {
+    background-position:80px -66px;
+}
+
+/* If the Join Button has been clicked */    
+#JoinButton.active {
+    border-radius:14px;
+}
+
+#JoinButton.active span {
+    background-position:80px -66px;
+}
+
+/* A Line added to overlap the border */
+#loginButton.active em {
+    position:absolute;
+    width:100%;
+    height:1px;
+    background:#d2e0ea;
+    bottom:-1px;
+}
+
+/* A Line added to overlap the border */
+#JoinButton.active em {
+    position:absolute;
+    width:100%;
+    height:1px;
+    background:#d2e0ea;
+    bottom:-1px;
+}
+
+/* Login Form */
+#loginForm {
+    width:248px; 
+    border:1px solid #899caa;
+    border-radius:3px 0 3px 3px;
+    -moz-border-radius:3px 0 3px 3px;
+    margin-top:-1px;
+    background:#d2e0ea;
+    padding:6px;
+}
+
+#loginForm fieldset {
+    margin:0 0 12px 0;
+    display:block;
+    border:0;
+    padding:0;
+}
+
+fieldset#body {
+    background:#fff;
+    border-radius:3px;
+    -moz-border-radius:3px;
+    padding:10px 13px;
+    margin:0;
+}
+
+#loginForm #checkbox {
+    width:auto;
+    margin:1px 9px 0 0;
+    float:left;
+    padding:0;
+    border:0;
+    *margin:-3px 9px 0 0; /* IE7 Fix */
+}
+
+#body label {
+    color:#3a454d;
+    margin:9px 0 0 0;
+    display:block;
+    float:left;
+}
+
+#loginForm #body fieldset label {
+    display:block;
+    float:none;
+    margin:0 0 6px 0;
+}
+
+/* Default Input */
+#loginForm input {
+    width:92%;
+    border:1px solid #899caa;
+    border-radius:3px;
+    -moz-border-radius:3px;
+    color:#3a454d;
+    font-weight:bold;
+    padding:8px 8px;
+    box-shadow:inset 0px 1px 3px #bbb;
+    -webkit-box-shadow:inset 0px 1px 3px #bbb;
+    -moz-box-shadow:inset 0px 1px 3px #bbb;
+    font-size:12px;
+}
+
+/* Sign In Button */
+#loginForm #login{
+    width:auto;
+    float:left;
+    background:#339cdf url(../images/loginbuttonbg.png) repeat-x;
+    color:#fff;
+    padding:7px 10px 8px 10px;
+    text-shadow:0px -1px #278db8;
+    border:1px solid #339cdf;
+    box-shadow:none;
+    -moz-box-shadow:none;
+    -webkit-box-shadow:none;
+    margin:0 12px 0 0;
+    cursor:pointer;
+    *padding:7px 2px 8px 2px; /* IE7 Fix */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Join Form */
+#JoinForm {
+    width:248px; 
+    border:1px solid #899caa;
+    border-radius:3px 0 3px 3px;
+    -moz-border-radius:3px 0 3px 3px;
+    margin-top:-1px;
+    background:#d2e0ea;
+    padding:6px;
+}
+
+#JoinForm fieldset {
+    margin:0 0 12px 0;
+    display:block;
+    border:0;
+    padding:0;
+}
+
+fieldset#body {
+    background:#fff;
+    border-radius:3px;
+    -moz-border-radius:3px;
+    padding:10px 13px;
+    margin:0;
+}
+
+#JoinForm #checkbox {
+    width:auto;
+    margin:1px 9px 0 0;
+    float:left;
+    padding:0;
+    border:0;
+    *margin:-3px 9px 0 0; /* IE7 Fix */
+}
+
+#body label {
+    color:#3a454d;
+    margin:9px 0 0 0;
+    display:block;
+    float:left;
+}
+
+#JoinForm #body fieldset label {
+    display:block;
+    float:none;
+    margin:0 0 6px 0;
+}
+
+/* Default Input */
+#JoinForm input {
+    width:92%;
+    border:1px solid #899caa;
+    border-radius:3px;
+    -moz-border-radius:3px;
+    color:#3a454d;
+    font-weight:bold;
+    padding:8px 8px;
+    box-shadow:inset 0px 1px 3px #bbb;
+    -webkit-box-shadow:inset 0px 1px 3px #bbb;
+    -moz-box-shadow:inset 0px 1px 3px #bbb;
+    font-size:12px;
+}
+
+/* Sign In Button */
+#JoinForm #Join{
+    width:auto;
+    float:left;
+    background:#339cdf url(../images/loginbuttonbg.png) repeat-x;
+    color:#fff;
+    padding:7px 10px 8px 10px;
+    text-shadow:0px -1px #278db8;
+    border:1px solid #339cdf;
+    box-shadow:none;
+    -moz-box-shadow:none;
+    -webkit-box-shadow:none;
+    margin:0 12px 0 0;
+    cursor:pointer;
+    *padding:7px 2px 8px 2px; /* IE7 Fix */
+}
+
+/* Sign In Button */
+#JoinForm #resetSpan{
+    width:auto;
+    float:left;
+    background:#339cdf url(../images/loginbuttonbg.png) repeat-x;
+    color:#fff;
+    padding:7px 10px 8px 10px;
+    text-shadow:0px -1px #278db8;
+    border:1px solid #339cdf;
+    box-shadow:none;
+    -moz-box-shadow:none;
+    -webkit-box-shadow:none;
+    margin:0 12px 0 0;
+    cursor:pointer;
+    *padding:7px 2px 8px 2px; /* IE7 Fix */
+}
+
+/* leave Button */
+#JoinForm #leave{
+    width:auto;
+    float:left;
+    background:#339cdf url(../images/loginbuttonbg.png) repeat-x;
+    color:#fff;
+    padding:7px 10px 8px 10px;
+    text-shadow:0px -1px #278db8;
+    border:1px solid #339cdf;
+    box-shadow:none;
+    -moz-box-shadow:none;
+    -webkit-box-shadow:none;
+    margin:0 12px 0 0;
+    cursor:pointer;
+    *padding:7px 2px 8px 2px; /* IE7 Fix */
+}
+
+
+
+
+/* 프로젝트 생성 버튼 및 box 설정  */
+
+#createProject { 
+    display:inline-block;
+    border:2px solid #899caa; 
+    border-radius:30px;
+    -moz-border-radius:3px;
+    position:relative;
+    z-index:30;
+    cursor:pointer;    
+    width: 108px;
+    height: 52px;
+    
+}
+
+/* create Button Text */
+#createProject span {
+    color:#445058; 
+    font-size:10px; 
+    font-weight:bold; 
+    text-shadow:1px 1px #fff; 
+    padding:7px 29px 9px 10px;
+    display:block
+}
+
+#createProject:hover {
+    background:black;
+}
+
+#createProjectBox {
+    position:relative;
+    width:100px;
+    height:100px;
+    display:none;
+    z-index:29;
+}
+
+#createProjectPop{
+   position:absolute; 
+   left:30%; 
+   top:30%; 
+   width:550px; 
+   height:400px; 
+   background: rgb(193,233,242);
+   z-index:20; 
+   display:none; 
+   border:medium; 
+   border-radius:90px;
+}
+
+/* 프로젝트 조인 버튼*/
+#joinProject { 
+    display:inline-block;
+    border:2px solid #899caa; 
+    border-radius:30px;
+    -moz-border-radius:3px;
+    position:relative;
+    z-index:30;
+    cursor:pointer;    
+    width: 108px;
+    height: 52px;
+    
+}
+#joinProject span {
+    color:#445058; 
+    font-size:10px; 
+    font-weight:bold; 
+    text-shadow:1px 1px #fff; 
+    padding:7px 29px 9px 10px;
+    display:block
+}
+
+#joinProject:hover {
+    background:black;
+}
+
+#joinProjectBox {
+    position:relative;
+    width:100px;
+    height:100px;
+    display:none;
+    z-index:29;
+}
+
+#joinProjectPop{
+   position:absolute; 
+   top: 30%; 
+   left: 30%; 
+   width:550px; 
+   height:400px; 
+   background: rgb(193,233,242);
+   z-index:20; 
+   display:none; 
+   border:medium; 
+   border-radius:90px;
+}
+
+
+/* 프로젝트 생성 버튼 및 box 설정  */
+
+#createProject { 
+    display:inline-block;
+    border:2px solid #899caa; 
+    border-radius:30px;
+    -moz-border-radius:3px;
+    position:relative;
+    z-index:30;
+    cursor:pointer;    
+    width: 108px;
+    height: 52px;
+    
+}
+
+/* create Button Text */
+#createProject span {
+    color:#445058; 
+    font-size:10px; 
+    font-weight:bold; 
+    text-shadow:1px 1px #fff; 
+    padding:7px 29px 9px 10px;
+    display:block
+}
+
+#createProject:hover {
+    background:black;
+}
+
+#createProjectBox {
+    position:relative;
+    width:100px;
+    height:100px;
+    display:none;
+    z-index:29;
+}
+
+#createProjectPop{
+   position:absolute; 
+   left:30%; 
+   top:30%; 
+   width:550px; 
+   height:400px; 
+   background: rgb(193,233,242);
+   z-index:20; 
+   display:none; 
+   border:medium; 
+   border-radius:90px;
+}
+
+
+
+#menubar{
+	position:relative;
+	float:left;
+	width:15%;
+	
+}
+
+
+
+.slidingMenu {
+	position: relative;
+	top:10px;
+	overflow:visible;
+	right:7px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.slidingMenu li {
+	display:block;
+	float:right;
+	clear:both;
+	position:relative;
+	overflow:hidden;
+}
+.slidingMenu li.move {
+	width: 9px;
+	height: 68px;
+	right:0px;
+	padding-right:10px;
+	margin-top:2px;
+	z-index: 8;
+	position: absolute;    
+	background: #2183c4;     
+	background: 
+		-webkit-gradient(
+			linear, 
+			left top, 
+			left bottom, 
+			from(#0771b8), 
+			to(#2183c4)
+		);     
+	background: 
+		-moz-linear-gradient(
+			top, 
+			#0771b8, 
+			#2183c4
+		);     
+	-moz-border-radius: 8px 0px 0px 8px;  
+	-webkit-border-top-left-radius: 8px;     	
+	-webkit-border-bottom-left-radius: 8px; 
+	border-top-left-radius: 8px;  
+	border-bottom-left-radius: 8px;        
+	-moz-box-shadow:1px 1px 5px #000;
+	-webkit-box-shadow:1px 1px 5px #000;
+	box-shadow:1px 1px 5px #000;	
+	}
+.slidingMenu li a {
+	font-size:30px;
+	text-transform:uppercase;
+	text-decoration: none;
+	color: #ddd;
+	outline: none;
+	text-indent:5px;
+	z-index: 10;
+	display: block;
+	float: right;
+	height: 66px;
+	line-height: 66px;
+	position: relative;
+	overflow: hidden;
+	padding-right:10px;
+}
+
+#contents{
+	position:relative;
+	float:right;
+	width:85%;
+	height:1000px;
+	
+	
+}
