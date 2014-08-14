@@ -32,6 +32,9 @@
 	<bean id="anDao" class="model.dao.AnnouncementDAO"/>
 	<bean id="anService" class="model.service.AnnouncementService" />
 	
+	<bean id="acDao" class="model.dao.AccountDAO"/>
+	<bean id="acService" class="model.service.AccountService" />
+	
 	<!-- Json 응답을 위한 설정 -->
 	<!--<bean id="jsonView" class="net.sf.json.spring.web.servlet.view.JsonView" >
 		<property name="contentType" value="text/html;charset=UTF-8" /> 

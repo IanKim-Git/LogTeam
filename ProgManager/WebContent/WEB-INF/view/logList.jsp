@@ -19,10 +19,9 @@
 				success : function(data) {
 					var table = "";
 					$("#listTable tr:gt(0)").remove();
-//					<th>로그번호</th><th>작성자</th><th>작성일</th><th>내용</th><th>공개여부</th><th>승인여부</th><th>삭제</th>
+//					<th>로그번호</th><th>작성자</th><th>작성일</th><th>내용</th><th>공개여부</th><th>승인여부</th>
 					var count = data.list.length;
-					//data.list로 온 데이터 : [{no:값, name:값,...}, {no:값, name:값,...}, {no:값, name:값,...}, ...]
-					$(data.list).each(function(index, item) {//{no:값, name:값,...}
+					$(data.list).each(function(index, item) {
 						table += "<tr><td>" + (count--) + "</td><td>" + item.l_uemail + "</td><td>" +  item.ldata + "</td><td>" +  item.ltext + "</td>";
 						if(item.lpublic == 0){
 							table += "<td>비공개</td>";
