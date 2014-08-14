@@ -20,13 +20,12 @@ public class AnnouncementController {
 	private AnnouncementService anService;
 	
 	//공지사항 목록 출력
-	
 	@RequestMapping("allAns.do")
-	public ModelAndView allLogs(@RequestParam("pnum") String an_pnum ){
+	public ModelAndView allAns(@RequestParam("pnum") String an_pnum ){
 		System.out.println("####################프로젝트 번호 "+an_pnum);
 		List<AnnouncementBean> list =  anService.allAns(Integer.parseInt(an_pnum));
 		
-		//데이터.를 request 저장 & view를 지정 가능한 객체
+		//데이터를 request 저장 & view를 지정 가능한 객체
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("list", list);	
 		mv.setViewName("projectJsonView");	

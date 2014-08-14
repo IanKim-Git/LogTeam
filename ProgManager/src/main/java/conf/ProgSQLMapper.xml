@@ -117,11 +117,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(seq_l.nextval , #{l_pnum}, #{l_uemail}, sysdate, #{ltext}, #{lpublic}, 0)
 	</insert>
 	
-	<insert id="logWriteChoice" parameterType="logBean">
-		insert into log(lnum, l_pnum, l_uemail, ldata, ltext, lpublic, ladmission)
-		values(seq_l.nextval , #{l_pnum}, #{l_uemail}, sysdate, #{ltext}, 0, 0)
-	</insert>
-
 	<!-- ### 공지사항용 SQL문 ### -->
 	<!-- 공지사항 불러오기 -->
 	<select id="allAns" parameterType="int" resultType="anBean" >
@@ -146,6 +141,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 공지사항 삭제 -->
 	<delete id="anDelete" parameterType="int">
 		delete announcement where annum = #{annum}
+	</delete>
+	
+	<!-- ### 회계용 SQL문 ### -->
+	<!-- 회계 목록 -->
+	<select id="allAcs" parameterType="int" resultType="acBean">
+		select ac_pnum, acnum, acplus, acminus, accontents from account where ac_pnum=#{ac_pnum} order by acnum
+	</select>
+	
+	<!-- insert into account values(seq_p.currval, seq_ac.nextval, 200,0,'지원비',null); -->
+	<!-- 회계 등록 -->
+	<insert id="acWrite" parameterType="acBean">
+		insert into account (ac_pnum, acnum, acplus, acminus, accontents)
+		values (#{ac_pnum}, seq_ac.nextval, #{acplus}, #{acminus}, #{accontents})
+	</insert>
+	
+	<!-- 소득만 출력 -->
+	<select id="allAcplus" parameterType="int" resultType="int">
+		select acplus from account where ac_pnum=#{ac_pnum}
+	</select>
+	
+	<!-- 지출만 출력 -->
+	<select id="allAcminus" parameterType="int" resultType="int">
+		select acminus from account where ac_pnum=#{ac_pnum}
+	</select>
+	
+	<!-- 회계 삭제 -->
+	<delete id="acDelete" parameterType="int">
+		delete account where acnum = #{acnum}
 	</delete>
 </mapper>
 

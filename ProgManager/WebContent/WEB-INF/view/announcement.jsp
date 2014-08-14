@@ -23,8 +23,7 @@
 					$("#listTable tr:gt(0)").remove();
 //					<th>번호</th><th>내용</th><th>날짜</th><th>등록자</th><th>중요도</th><th>삭제</th>
 					var count = data.list.length;
-					//data.list로 온 데이터 : [{no:값, name:값,...}, {no:값, name:값,...}, {no:값, name:값,...}, ...]
-					$(data.list).each(function(index, item) {//{no:값, name:값,...}
+					$(data.list).each(function(index, item) {
 						table += "<tr><td>" + (count--) + "</td><td>" + item.ancontent + "</td><td>" +  item.andate + "</td><td>" +  item.an_uemail + "</td>";
 						if(item.animportance == 3){
 							table += "<td>상</td><td>";
@@ -32,8 +31,10 @@
 							table += "<td>중</td><td>";
 						}else if(item.animportance == 1){
 							table += "<td>하</td><td>";
-						}						
-						table += "<input type='button' value='삭제' id='del' name='"+item.annum+"'></td></tr>";
+						}
+						if($("#an_uemail").val() == item.an_uemail){
+							table += "<input type='button' value='삭제' id='del' name='"+item.annum+"'></td></tr>";
+						}
 					});
 					//테이블에 추가
 					$("#listTable tr:eq(0)").after(table);
@@ -63,7 +64,7 @@
 					alert(err + " : 공지사항 정보 삭제 실패");
 				}
 			});
-		});//end of 공지사항 삭제
+		});//end of 공지사항 삭제 
 		
 		//공지사항 등록
 		$("#anWrite").click(function() {
@@ -88,7 +89,6 @@
 				}
 			}); //end of ajax
 		});//end of 공지사항 작성 로직
-		
 		
 		//공지사항 화면 초기화
 		getAns();
