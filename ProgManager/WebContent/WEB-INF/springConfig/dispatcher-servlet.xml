@@ -35,6 +35,8 @@
 	<bean id="acDao" class="model.dao.AccountDAO"/>
 	<bean id="acService" class="model.service.AccountService" />
 	
+	<bean id="lcDao" class="model.dao.LogcommentDAO"/>
+	
 	<!-- Json 응답을 위한 설정 -->
 	<!--<bean id="jsonView" class="net.sf.json.spring.web.servlet.view.JsonView" >
 		<property name="contentType" value="text/html;charset=UTF-8" /> 
