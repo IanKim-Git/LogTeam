@@ -8,7 +8,7 @@
      <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.js' type='text/javascript'></script>
      <script src="js/login.js"></script>
 
-	 <link rel="stylesheet" href="css/style2.css" type="text/css" media="screen">
+	 <link rel="stylesheet" href="css/style3.css" type="text/css" media="screen">
 		
 	 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 	 <script src="js/cufon-yui.js" type="text/javascript"></script>
