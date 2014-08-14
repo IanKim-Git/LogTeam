@@ -7,6 +7,7 @@
 <title>Account</title>
 </head>
 <script src="js/jquery-1.10.2.js"></script>
+<script src="js/formValidation.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		//모든 회계 목록을 불러오는 함수
@@ -59,33 +60,78 @@
 				}
 			});
 		});//end of 회계 삭제 
-		/*
-		//공지사항 등록
-		$("#anWrite").click(function() {
-			$.ajax({
-				url : "writeAn.do",
-				type : "post",
-				dataType : "text", 				
-				data : $("#anWriteForm").serialize(),
-				success : function(data) {
-					if (data == "ok") {
-						alert("공지사항 작성 성공");
-						$("textarea").val("");	
-						getAcs();							
-					} else if(data == "again") {
-						alert("공지사항 중요도를 선택하세요.");
-					} else {
-						alert("공지사항 작성 실패");
+		
+		//소득에 입력하면 지출에 입력 못 하게
+		$("#acplus").keyup(function(){
+			var isValid = isNumValid($("#acplus").val());
+			if(!isValid){
+				$("p").html("<font color='red'>숫자를 입력하세요.</font>");
+				$("#acplus").val("0");
+			}else{
+				$("p").html("");
+			}
+			
+		});
+		
+		//지출에 입력하면 소득에 입력 못 하게
+		$("#acminus").keyup(function(){
+			var isValid = isNumValid($("#acminus").val());
+			if(!isValid){
+				$("p").html("<font color='red'>숫자를 입력하세요.</font>");
+				$("#acminus").val("0");
+			}else{
+				$("p").html("");
+				
+			}
+			
+		});		
+		
+		$("#accontents").click(function(){
+			$("#accontents").text("");
+			$("#accontents").val("");
+		});
+		
+		$("#accontents").blur(function(){
+			if($("#accontents").val() == ""){
+				$("#accontents").val("내용을 입력하세요");
+			}
+			
+		});
+		
+		//회계 등록
+		$("#acWrite").click(function() {
+			if($("#acminus").val() != 0 && $("#acplus").val() !="0"){
+				$("p").html("<font color='red'>수입이나 지출 둘 중 하나만 입력하세요.</font>");
+			}else if($("#acminus").val() =="0"&& $("#acplus").val() =="0"){
+				$("p").html("<font color='red'>수입이나 지출 둘 중 하나를 입력하세요.</font>");
+			}else{
+//				$("p").html("<font color='green'>정상실행</font>");
+				$.ajax({
+					url : "writeAc.do",
+					type : "post",
+					dataType : "text", 				
+					data : $("#acWriteForm").serialize(),
+					success : function(data) {
+						if (data == "ok") {
+							alert("회계 작성 성공");
+							$("textarea").val("내용을 입력하세요");
+							$("input[type=text]").val(0);
+							getAcs();							
+						} else {
+							alert("회계 작성 실패");
+						}
+					},
+					error : function(data) {//200이 안 넘어 왔을 때
+						alert(data + ' : 회계 작성 실행시 에러 발생');
 					}
-				},
-				error : function(data) {//200이 안 넘어 왔을 때
-					alert(data + ' : 공지사항 작성 실행시 에러 발생');
-				}
-			}); //end of ajax
-		});//end of 공지사항 작성 로직
-		 */
+				}); //end of ajax
+			}
+			
+		});//end of 회계 작성 로직
+		 
 		//회계관리 화면 초기화
 		getAcs();
+		$("#accontents").val("내용을 입력하세요");
 	});//end of ready
 
 </script>
@@ -99,18 +145,17 @@
 				<th>번호</th><th>내역</th><th><font color="green"><b>+</b></font></th><th><font color="red"><b>-</b></font></th><th>삭제</th>
 			</tr>
 		</table>
-	</form>
-	사용가능금액 : <input type="text" id="acTotal" readonly="readonly" />
+	</form><br>
+	사용가능금액 : <input type="text" id="acTotal" readonly="readonly" /><br>
 <%-- 	insert into account (ac_pnum, acnum, acplus, acminus, accontents)
 		values (#{ac_pnum}, seq_ac.nextval, #{acplus}, #{acminus}, #{accontents}) --%>
 	<form action="writeAc.do" id="acWriteForm" method="post">
 		<input type="hidden" id="ac_pnum" name="ac_pnum" value="${requestScope.pnum}">
-		<textarea id="accontents" name="accontents" rows="1" cols="40" ></textarea>
-		<input type="text" id="acplus" name="acplus" />
-		<input type="text" id="acminus" name="acminus" />
-<!-- 		<textarea id="acplus" name="acplus" rows="1" cols="20" ></textarea>
-		<textarea id="acminus" name="acminus" rows="1" cols="20" ></textarea> -->
+		내용 <textarea id="accontents" name="accontents" rows="1" cols="40" ></textarea><br>
+		수입 <input type="text" id="acplus" name="acplus" value="0"/>
+		지출 <input type="text" id="acminus" name="acminus" value="0"/>
 		<input type="button" id="acWrite" value="등록">
 	</form>
+	<p></p>
 </body>
 </html>
