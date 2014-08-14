@@ -36,6 +36,7 @@
 	<bean id="acService" class="model.service.AccountService" />
 	
 	<bean id="lcDao" class="model.dao.LogcommentDAO"/>
+	<bean id="lcService" class="model.service.LogcommentService" />
 	
 	<!-- Json 응답을 위한 설정 -->
 	<!--<bean id="jsonView" class="net.sf.json.spring.web.servlet.view.JsonView" >
