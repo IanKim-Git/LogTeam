@@ -20,3 +20,12 @@ function isPasswordValid(pw){
 	}
 	return true;
 }
+
+//숫자 형식 검증 함수
+function isNumValid(num){
+	var numFormat = /^([0-9]+)$/;
+	if(num.search(numFormat) == -1){
+		return false;
+	}
+	return true;
+}

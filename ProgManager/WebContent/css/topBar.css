@@ -1,53 +1,50 @@
-@import url(http://fonts.googleapis.com/css?family=Montserrat|Open+Sans:400,300);
-@import url(http://thecodeplayer.com/uploads/fonts/font-awesome-4.0.1/css/font-awesome.min.css);
+html,body{width:100%;height:100%;padding:0;background:#fff;margin:0;font-family:arial}
 
+#bar { position: relative; width:100%; height:60px; padding:0px ; background:rgb(33,113,187); }
 
-html,body{
-	width:100%;height:100%;padding:0;background:#fff;margin:0;font-family:arial
-	}
-#bar { width:100%; height:90px; padding:0px ; background:rgb(33, 113, 187); }
-
-/*-------LOGIN STARTS HERE -------*/
+#mainView{
+	position:relative;
+	width:40%;
+}
 
 /* Login Container (default to float:right) */
 #loginContainer {
     position:relative;
-    float:left;
     width: 100%;
-    height: 56px;
-    padding-top: 15px;
+    height: 60px;
+    padding-top: 9px;
 }
 
 /* Login Button */
 #loginButton { 
-	display:inline-block;
+    display:inline-block;
     float:right;
-    background:#d2e0ea url(../images/buttonbg.png) repeat-x; 
+    background:#d2e0ea; 
     border:2px solid #899caa;
     border-radius:14px;
     -moz-border-radius:3px;
     position:relative;
     z-index:30;
-    cursor:pointer;    
-    right:250px;
+    cursor:pointer;
+    right:165px;
     width: 108px;
     height: 40px;
     box-sizing: content-box;
-
 }
 
 /* Join Button */
 #JoinButton { 
-    display:inline;
+    display:inline-block;
     float:right;
     background:#d2e0ea; 
      border:2px solid #899caa;
-    border-radius:30px;
+    border-radius:14px;
     position:relative;
     z-index:30;
     cursor:pointer;    
-    width: 115px;
-    height: 47px;
+    right:-70px;
+    width: 108px;
+    height: 40px;
     box-sizing: content-box;    
 }
 
@@ -60,28 +57,26 @@ html,body{
     padding:10px 27px 9px 8px;
     background:url(../images/loginArrow.png) no-repeat 80px 17px;
     display:block
+    
 }
-
 /* Join Button Text */
 #JoinButton span {
     color:#445058; 
-    font-size:21px; 
+    font-size:19px; 
     font-weight:bold; 
     text-shadow:1px 1px #fff; 
-    text-align:center;
-    padding:11px 27px 9px;
+    padding:10px 29px 9px 10px;
     background:url(../images/loginArrow.png) no-repeat 80px 17px;
-    display:block;
+    display:block
 }
 
 #loginButton:hover {
-    background:url(../images/buttonbgHover.png) repeat-x;
-
+    background:#ffffff;
 }
 
 #JoinButton:hover {
-    background:#d2e0ea;
-}
+    background:#ffffff;
+    }
 
 /* Login Box */
 #loginBox {
@@ -101,10 +96,9 @@ html,body{
     z-index:29;
 }
 
-
 /* If the Login Button has been clicked */    
 #loginButton.active {
-    border-radius:30px 30px 0 0;
+    border-radius:14px;
 }
 
 #loginButton.active span {
@@ -113,7 +107,7 @@ html,body{
 
 /* If the Join Button has been clicked */    
 #JoinButton.active {
-    border-radius:30px 30px 0 0;
+    border-radius:14px;
 }
 
 #JoinButton.active span {
@@ -217,10 +211,6 @@ fieldset#body {
     cursor:pointer;
     *padding:7px 2px 8px 2px; /* IE7 Fix */
 }
-
-
-
-
 
 /* Join Form */
 #JoinForm {
@@ -334,88 +324,4 @@ fieldset#body {
     margin:0 12px 0 0;
     cursor:pointer;
     *padding:7px 2px 8px 2px; /* IE7 Fix */
-}
-
-
-
-
-#menubar{
-	position:relative;
-	float:left;
-	width:15%;
-	
-}
-
-
-
-.slidingMenu {
-	position: relative;
-	top:10px;
-	overflow:visible;
-	right:7px;
-	font-family: Arial, Helvetica, sans-serif;
-}
-.slidingMenu li {
-	display:block;
-	float:right;
-	clear:both;
-	position:relative;
-	overflow:hidden;
-}
-.slidingMenu li.move {
-	width: 9px;
-	height: 68px;
-	right:0px;
-	padding-right:10px;
-	margin-top:2px;
-	z-index: 8;
-	position: absolute;    
-	background: #2183c4;     
-	background: 
-		-webkit-gradient(
-			linear, 
-			left top, 
-			left bottom, 
-			from(#0771b8), 
-			to(#2183c4)
-		);     
-	background: 
-		-moz-linear-gradient(
-			top, 
-			#0771b8, 
-			#2183c4
-		);     
-	-moz-border-radius: 8px 0px 0px 8px;  
-	-webkit-border-top-left-radius: 8px;     	
-	-webkit-border-bottom-left-radius: 8px; 
-	border-top-left-radius: 8px;  
-	border-bottom-left-radius: 8px;        
-	-moz-box-shadow:1px 1px 5px #000;
-	-webkit-box-shadow:1px 1px 5px #000;
-	box-shadow:1px 1px 5px #000;	
-	}
-.slidingMenu li a {
-	font-size:30px;
-	text-transform:uppercase;
-	text-decoration: none;
-	color: #ddd;
-	outline: none;
-	text-indent:5px;
-	z-index: 10;
-	display: block;
-	float: right;
-	height: 66px;
-	line-height: 66px;
-	position: relative;
-	overflow: hidden;
-	padding-right:10px;
-}
-
-#contents{
-	position:relative;
-	float:right;
-	width:78%;
-	height:1000px;
-	
-	
 }

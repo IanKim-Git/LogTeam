@@ -80,6 +80,7 @@
         });
     </script>
 </head>
+
 <body>
 	<h6>캘린더</h6>
 	프로젝트 번호 : ${requestScope.pnum}
