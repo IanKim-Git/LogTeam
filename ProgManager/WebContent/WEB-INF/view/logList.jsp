@@ -108,7 +108,7 @@
 	프로젝트 번호 : ${requestScope.pnum}
 	유저 이메일 : ${sessionScope.userData.uemail}<br>
 	
-	<form action="write.do" id="writeForm" method="post">
+<%-- 	<form action="write.do" id="writeForm" method="post">
 		<select id="lpublic" name="lpublic">
 			<option value="-1">선택</option>
 			<option value="0">비공개</option>
@@ -118,16 +118,56 @@
 		<input type="hidden" id="l_uemail" name="l_uemail" value="${sessionScope.userData.uemail}">
 		<textarea id="ltext" name="ltext" rows="5" cols="60" ></textarea>
 		<input type="button" id="write" value="로그등록">		
-	</form>
-	
-	<form action="" id="logListForm">			
-		<table id="listTable" cellspacing="0">
-			<tr bgcolor="#FOFOF7">
-				<th>로그번호</th><th>작성자</th><th>작성일</th><th>내용</th><th>공개여부</th><th>승인여부</th>
-			</tr>
-		</table>
-	</form>
-	
-	
+	</form> --%>
+		<!-- 로그 화면 -->
+	<div id="logsView">
+		<!-- 로그 등록창 -->
+		<div id="writeLog">
+			<form action="write.do" id="writeForm" method="post">
+				<input type="hidden" id="l_pnum" name="l_pnum" value="${requestScope.pnum}">
+				<input type="hidden" id="l_uemail" name="l_uemail" value="${sessionScope.userData.uemail}">
+				<table>
+					<!-- 내용 -->
+					<tr>
+						<th rowspan="5">
+							<textarea id="ltext" name="ltext" rows="5" cols="60" ></textarea>
+						</th>
+					</tr>
+					<!-- 공개여부 -->
+					<tr>
+						<td>
+						<select id="lpublic" name="lpublic">
+							<option value="-1">선택</option>
+							<option value="0">비공개</option>
+							<option value="1">공개</option>
+						</select>
+						</td>
+					</tr>
+					<tr><td></td></tr>
+					<tr><td></td></tr>
+					<!-- 등록버튼 -->
+					<tr>
+						<td>
+							<input type="button" id="write" value="로그등록">
+						</td>
+					</tr>
+				</table>				
+			</form>
+		</div><!-- end of writeLog -->
+		
+		
+		<!-- 로그 목록 -->
+		<div id="logsList">
+			<!-- 로그마다 코멘트 창이 달려야 한다. -->
+			<!-- 코멘트 등록 버튼을 누르면 코멘트 목록과  -->
+			<form action="" id="logListForm">			
+				<table id="listTable" cellspacing="0">
+					<tr bgcolor="#FOFOF7" >
+						<th>로그번호</th><th>작성자</th><th>작성일</th><th>내용</th><th>공개여부</th><th>승인여부</th>
+					</tr>
+				</table>
+			</form>
+		</div><!-- end of logsList -->		
+	</div><!-- end of logsView -->	
 </body>
 </html>
