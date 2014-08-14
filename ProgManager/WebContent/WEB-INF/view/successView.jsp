@@ -11,7 +11,7 @@
      <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
      <link href='stylesheets/jquery.gridly.css' rel='stylesheet' type='text/css'>
      <link href='stylesheets/sample.css' rel='stylesheet' type='text/css'>
-     <link rel="stylesheet" href="css/style3.css" />
+     <link rel="stylesheet" href="css/projectMenu.css" />
      <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.js' type='text/javascript'></script>
      <script src='javascripts/jquery.gridly.js' type='text/javascript'></script>
      <script src='javascripts/brickAddDelete.js' type='text/javascript'></script>
@@ -143,8 +143,7 @@
     
     <div class='content' align="center" style="margin-top: 35px">
     	<h1><b> <font color="4682B4" style="font-style: oblique;">ProgManager!</font></b></h1>
-    	<br>
-    	<hr>
+    	<br><hr><br>
     	<div id="projectList">
     		<section class='example'>
 	    		<div class='gridly' id='gridly'></div>
@@ -159,6 +158,7 @@
           <a class='button' href="javascript:ViewJoinLayer();">프로젝트 참여</a>
         </p>
     </div>
+    <br><br><br><br><br>
         	
    	<div id="createProjectPop" align="center">
 	   	<br><font color="black" size="30" style="4">프로젝트 생성하기</font><br><br>

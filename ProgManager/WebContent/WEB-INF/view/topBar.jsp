@@ -5,7 +5,7 @@
 <head>
      <meta http-equiv="X-UA-Compatible" content="text/html" charset="EUC-KR">
 	 <title>${requestScope.title }</title>
-     <link rel="stylesheet" href="css/style3.css" />
+     <link rel="stylesheet" href="css/topBar.css" />
      <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.js' type='text/javascript'></script>
      <script src="js/login.js"></script>
      <script src="js/formValidation.js"></script>
