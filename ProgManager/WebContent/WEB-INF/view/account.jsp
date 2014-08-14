@@ -8,31 +8,32 @@
 </head>
 <script src="js/jquery-1.10.2.js"></script>
 <script src="js/formValidation.js"></script>
+<script>var jb = jQuery.noConflict();</script>
 <script type="text/javascript">
-	$(document).ready(function(){
+	jb(document).ready(function(){
 		//모든 회계 목록을 불러오는 함수
 		function getAcs() {
-			$.ajax({
+			jb.ajax({
 				url : "allAcs.do", 
 				type : "post",
 				dataType : "json", 					//결과데이터타입
-				data : "pnum="+$("#ac_pnum").val(),
+				data : "pnum="+jb("#ac_pnum").val(),
 				success : function(data) {
 					var table = "";
-					$("#listTable tr:gt(0)").remove();
+					jb("#listTable tr:gt(0)").remove();
 //	<th>번호</th><th>내역</th><th><font color="green"><b>+</b></font></th><th><font color="red"><b>-</b></font></th><th>삭제</th>
 					var sumPlus = 0;
 					var sumMinus = 0;
-					$(data.list).each(function(index, item) {
+					jb(data.list).each(function(index, item) {
 						table += "<tr><td>" + (index + 1) + "</td><td>" + item.accontents + "</td><td>" +  item.acplus + "</td><td>" +  item.acminus + "</td>";
 						table += "<td><input type='button' value='삭제' id='del' name='"+item.acnum+"'></td></tr>";
 						sumPlus += item.acplus;
 						sumMinus += item.acminus;
 					});
 					//테이블에 추가
-					$("#listTable tr:eq(0)").after(table);
+					jb("#listTable tr:eq(0)").after(table);
 					//사용가능금액 계산
-					$("#acTotal").val(sumPlus-sumMinus);
+					jb("#acTotal").val(sumPlus-sumMinus);
 				},
 				error : function(err) {//실패했을때
 					alert(err + " : 해당 프로젝트에는 공지사항이 아직 작성되지 않았습니다");
@@ -41,12 +42,12 @@
 		} //end of getAcs()
 		
 		//삭제 버튼을 눌렀을 때 회계목록 삭제
-		$(document).on("click", "#del", function() {
-			$.ajax({
+		jb(document).on("click", "#del", function() {
+			jb.ajax({
 				url : "deleteAc.do", 
 				type : "post",
 				dataType : "text", 
-				data : "acnum=" + $(this).attr("name"),	
+				data : "acnum=" + jb(this).attr("name"),	
 				success : function(data) {
 					if (data == "ok") {
 						alert("삭제 성공");
@@ -62,60 +63,60 @@
 		});//end of 회계 삭제 
 		
 		//소득에 입력하면 지출에 입력 못 하게
-		$("#acplus").keyup(function(){
-			var isValid = isNumValid($("#acplus").val());
+		jb("#acplus").keyup(function(){
+			var isValid = isNumValid(jb("#acplus").val());
 			if(!isValid){
-				$("p").html("<font color='red'>숫자를 입력하세요.</font>");
-				$("#acplus").val("0");
+				jb("p").html("<font color='red'>숫자를 입력하세요.</font>");
+				jb("#acplus").val("0");
 			}else{
-				$("p").html("");
+				jb("p").html("");
 			}
 			
 		});
 		
 		//지출에 입력하면 소득에 입력 못 하게
-		$("#acminus").keyup(function(){
-			var isValid = isNumValid($("#acminus").val());
+		jb("#acminus").keyup(function(){
+			var isValid = isNumValid(jb("#acminus").val());
 			if(!isValid){
-				$("p").html("<font color='red'>숫자를 입력하세요.</font>");
-				$("#acminus").val("0");
+				jb("p").html("<font color='red'>숫자를 입력하세요.</font>");
+				jb("#acminus").val("0");
 			}else{
-				$("p").html("");
+				jb("p").html("");
 				
 			}
 			
 		});		
 		
-		$("#accontents").click(function(){
-			$("#accontents").text("");
-			$("#accontents").val("");
+		jb("#accontents").click(function(){
+			jb("#accontents").text("");
+			jb("#accontents").val("");
 		});
 		
-		$("#accontents").blur(function(){
-			if($("#accontents").val() == ""){
-				$("#accontents").val("내용을 입력하세요");
+		jb("#accontents").blur(function(){
+			if(jb("#accontents").val() == ""){
+				jb("#accontents").val("내용을 입력하세요");
 			}
 			
 		});
 		
 		//회계 등록
-		$("#acWrite").click(function() {
-			if($("#acminus").val() != 0 && $("#acplus").val() !="0"){
-				$("p").html("<font color='red'>수입이나 지출 둘 중 하나만 입력하세요.</font>");
-			}else if($("#acminus").val() =="0"&& $("#acplus").val() =="0"){
-				$("p").html("<font color='red'>수입이나 지출 둘 중 하나를 입력하세요.</font>");
+		jb("#acWrite").click(function() {
+			if(jb("#acminus").val() != 0 && jb("#acplus").val() !="0"){
+				jb("p").html("<font color='red'>수입이나 지출 둘 중 하나만 입력하세요.</font>");
+			}else if(jb("#acminus").val() =="0"&& jb("#acplus").val() =="0"){
+				jb("p").html("<font color='red'>수입이나 지출 둘 중 하나를 입력하세요.</font>");
 			}else{
-//				$("p").html("<font color='green'>정상실행</font>");
-				$.ajax({
+//				jb("p").html("<font color='green'>정상실행</font>");
+				jb.ajax({
 					url : "writeAc.do",
 					type : "post",
 					dataType : "text", 				
-					data : $("#acWriteForm").serialize(),
+					data : jb("#acWriteForm").serialize(),
 					success : function(data) {
 						if (data == "ok") {
 							alert("회계 작성 성공");
-							$("textarea").val("내용을 입력하세요");
-							$("input[type=text]").val(0);
+							jb("textarea").val("내용을 입력하세요");
+							jb("input[type=text]").val(0);
 							getAcs();							
 						} else {
 							alert("회계 작성 실패");
@@ -131,7 +132,7 @@
 		 
 		//회계관리 화면 초기화
 		getAcs();
-		$("#accontents").val("내용을 입력하세요");
+		jb("#accontents").val("내용을 입력하세요");
 	});//end of ready
 
 </script>
