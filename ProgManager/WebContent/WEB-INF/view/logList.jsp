@@ -72,27 +72,31 @@
 		
 		//로그 등록
 		jb("#write").click(function() {
-			jb.ajax({
-				url : "write.do",
-				type : "post",
-				dataType : "text", 				
-				data : jb("#writeForm").serialize(),
-				success : function(data) {
-					if (data == "ok") {
-						alert("로그 작성 성공");
-						jb("textarea").val("");	
-						getLogs();							
-					} else if(data == "again") {
-						alert("로그 공개여부를 선택하세요.");
-					} else {
-						alert("로그 작성 실패");
+			if(jb("#ltext").val() == ""){
+				alert("내용을 입력하세요.");
+			}else{
+				jb.ajax({
+					url : "write.do",
+					type : "post",
+					dataType : "text", 				
+					data : jb("#writeForm").serialize(),
+					success : function(data) {
+						if (data == "ok") {
+							alert("로그 작성 성공");
+							jb("textarea").val("");	
+							getLogs();							
+						} else if(data == "again") {
+							alert("로그 공개여부를 선택하세요.");
+						} else {
+							alert("로그 작성 실패");
+						}
+					},
+					error : function(data) {//200이 안 넘어 왔을 때
+						alert(data + ' : 로그 작성 실행시 에러 발생');
 					}
-				},
-				error : function(data) {//200이 안 넘어 왔을 때
-					alert(data + ' : 로그 작성 실행시 에러 발생');
-				}
-			}); //end of ajax
-		})//end of 로그 작성 로직
+				}); //end of ajax
+			}
+		});//end of 로그 작성 로직
 		
 		
 		//로그화면 초기화
