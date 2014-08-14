@@ -4,12 +4,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-     <meta http-equiv="X-UA-Compatible" content="text/html" charset="EUC-KR">
+	 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 	 <title>${requestScope.title }</title>
      <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
      <link href='stylesheets/jquery.gridly.css' rel='stylesheet' type='text/css'>
      <link href='stylesheets/sample.css' rel='stylesheet' type='text/css'>
-     <link rel="stylesheet" href="css/style.css" />
+     <link rel="stylesheet" href="css/style3.css" />
      <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.js' type='text/javascript'></script>
      <script src='javascripts/jquery.gridly.js' type='text/javascript'></script>
      <script src='javascripts/brickAddDelete.js' type='text/javascript'></script>
@@ -279,39 +279,32 @@
 
 		//레코드 가져오기는 함수 호출
 		getData();
+
    });//end of ready()
 </script>
 
 
 <body>
     <div id="bar">
-        <div id="container">
-            <!-- Login Starts Here -->
-            <div id="loginContainer">
-                <a href="#" id="loginButton"><span>Logout</span><em></em></a>
-                <div style="clear:both"></div>
-                <div id="loginBox">                
-                    <form action="idPwCheck.do" method="post" id="loginForm">
-                        <fieldset id="body">
-                            <fieldset>
-                                <label for="email">Email Address</label>
-                                <input type="text" name="email" id="email" />
-                            </fieldset>
-                            <fieldset>
-                                <label for="password">Password</label>
-                                <input type="password" name="pw" id="pw" />
-                            </fieldset>
-                            <input type="submit" id="login" value="로그인" />
-                        </fieldset>
-                    </form>
-                </div>
-            </div>
-            <!-- Login Ends Here -->
-        </div>
-         <div id="container">
-            <!-- Join Starts Here -->
-            <div id="JoinContainer">
-                <a href="#" id="JoinButton"><span>Infom</span><em></em></a>
+        <!-- Login Starts Here -->
+    	<div id="loginContainer">
+	        <a href="#" id="loginButton"><span>Logout</span><em></em></a>
+	        <div id="loginBox">                
+	            <form action="idPwCheck.do" method="post" id="loginForm">
+	                    <fieldset id="body">
+		                    <fieldset>
+		                        <label for="email">Email Address</label>
+		                        <input type="text" name="email" id="email" />
+		                    </fieldset>
+		                    <fieldset>
+		                         <label for="password">Password</label>
+		                         <input type="password" name="pw" id="pw" />
+		                    </fieldset>
+		                    <input type="submit" id="login" value="로그인" />
+	                    </fieldset>
+	             </form>
+	         </div>
+                <a href="#" id="JoinButton"><span>Inform</span><em></em></a>
                 <div style="clear:both"></div>
        			<div id="JoinBox">
        				<form action="insert.do" method="post" id="JoinForm">
@@ -343,9 +336,8 @@
                         </fieldset>
                     </form>
        			</div>
-            </div>
+      </div>
             <!-- Join Ends Here -->
-        </div>
     </div>
     
     <div class='content' align="center" style="margin-top: 35px">

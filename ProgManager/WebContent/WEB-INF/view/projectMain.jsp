@@ -1,20 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Project Main</title>
-     <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.js' type='text/javascript'></script>
-     <script src="js/login.js"></script>
-
-	 <link rel="stylesheet" href="css/style2.css" type="text/css" media="screen">
-		
-	 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-	 <script src="js/cufon-yui.js" type="text/javascript"></script>
-	 <script src="js/BabelSans_500.font.js" type="text/javascript"></script>
-	 <script src="js/jquery.easing.1.3.js" type="text/javascript"></script> 
-	 <script type="text/javascript">
+	<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+	<title>Project Main</title>
+	
+    <link rel="stylesheet" href="css/style3.css" type="text/css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.js' type='text/javascript'></script>
+    <script src="js/login.js"></script>
+	<script src="js/formValidation.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>
+	<script src="js/cufon-yui.js" type="text/javascript"></script>
+	<script src="js/BabelSans_500.font.js" type="text/javascript"></script>
+	<script src="js/jquery.easing.1.3.js" type="text/javascript"></script> 
+	
+	<script type="text/javascript">
 			$(function() {
 				Cufon.replace('a, span').CSS.ready(function() {
 					var $menu 		= $("#slidingMenu");
@@ -214,34 +216,26 @@
 
 
 <body>
-    <div id="bar">
-        <div id="container">
-            <!-- Login Starts Here -->
-            <div id="loginContainer">
-                <a href="#" id="loginButton"><span>Logout</span><em></em></a>
-                <div style="clear:both"></div>
-                <div id="loginBox">                
-                    <form action="idPwCheck.do" method="post" id="loginForm">
-                        <fieldset id="body">
-                            <fieldset>
-                                <label for="email">Email Address</label>
-                                <input type="text" name="email" id="email" />
-                            </fieldset>
-                            <fieldset>
-                                <label for="password">Password</label>
-                                <input type="password" name="pw" id="pw" />
-                            </fieldset>
-                            <input type="submit" id="login" value="로그인" />
-                        </fieldset>
-                    </form>
-                </div>
-            </div>
-            <!-- Login Ends Here -->
-        </div>
-         <div id="container">
-            <!-- Join Starts Here -->
-            <div id="JoinContainer">
-                <a href="#" id="JoinButton"><span>Infom</span><em></em></a>
+   <div id="bar">
+        <!-- Login Starts Here -->
+    	<div id="loginContainer">
+	        <a href="#" id="loginButton"><span>Logout</span><em></em></a>
+	        <div id="loginBox">                
+	            <form action="idPwCheck.do" method="post" id="loginForm">
+	                    <fieldset id="body">
+		                    <fieldset>
+		                        <label for="email">Email Address</label>
+		                        <input type="text" name="email" id="email" />
+		                    </fieldset>
+		                    <fieldset>
+		                         <label for="password">Password</label>
+		                         <input type="password" name="pw" id="pw" />
+		                    </fieldset>
+		                    <input type="submit" id="login" value="로그인" />
+	                    </fieldset>
+	             </form>
+	         </div>
+                <a href="#" id="JoinButton"><span>Inform</span><em></em></a>
                 <div style="clear:both"></div>
        			<div id="JoinBox">
        				<form action="insert.do" method="post" id="JoinForm">
@@ -273,10 +267,10 @@
                         </fieldset>
                     </form>
        			</div>
-            </div>
+      </div>
             <!-- Join Ends Here -->
-        </div>
     </div>
+    
 
     
     <div id="menubar">
