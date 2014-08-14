@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="prog">
+
+   <resultMap type="puBean" id="rmPuBean">
+      <result column="UEMAIL" property="uemail" />
+      <result column="UNAME" property="uname" />
+      <result column="UPW" property="upw" />
+      <result column="UPHONE" property="uphone" />
+      <result column="UPROCNT" property="uprocnt" />
+   </resultMap>
+   
+   <!-- 로그인 -->
+   <select id="IdPwCheck" parameterType="puBean" resultMap="rmPuBean">
+      select uemail, uname, upw, uphone, uprocnt from proguser where uemail=#{uemail} and upw=#{upw}
+   </select>
+   
+   <!-- 회원가입 : 전화번호가 있는 경우 -->
+   <insert id="signIn" parameterType="puBean">
+      insert into proguser(uemail, uname, upw, uphone) values(#{uemail} , #{uname} , #{upw}, #{uphone})
+   </insert>
+   
+   <!-- 이메일 중복 체크 -->   
+   <select id="IdCheck" parameterType="java.lang.String" resultType="String" >
+      select uemail from proguser where uemail=#{uemail}
+   </select>
+   
+   <!-- 회원 정보 변경 -->
+   <update id="update" parameterType="puBean">
+      update proguser set upw=#{upw}, uname=#{uname}, uphone=#{uphone} where uemail=#{uemail}      
+   </update>
+   
+   <!-- 회원 탈퇴 -->
+   <delete id="delete" parameterType="puBean">
+   	  delete from proguser where uemail=#{uemail} and upw=#{upw}
+   </delete>
+   
+   <!-- 회원 정보 확인 -->
+   <select id="userInfo" parameterType="java.lang.String" resultMap="rmPuBean">
+      select uemail, uname, upw, uphone, uprocnt from proguser where uemail=#{uemail}
+   </select>
+   
+   <!-- 모든 회원 정보 확인 -->
+   <select id="allUsers" resultMap="rmPuBean">
+      select uemail, uname, upw, uphone, uprocnt from proguser
+   </select>
+
+
+	<!-- ### 프로젝트용 쿼리문 ### -->
+	<!-- 새로운 프로젝트 추가 쿼리문  -->
+	<insert id="newProject" parameterType="projectBean">
+		insert into Project values(seq_p.nextval, #{pname}, #{ppw}, #{pmento}, #{pstart}, #{pend}, #{pleader}, 0)
+	</insert>
+	
+	<!-- 유저 프로젝트 참여 테이블 -->
+	<insert id="newParticipation" parameterType="UPBean">
+		insert into UserProject values(#{up_uemail},#{up_pnum},0)
+	</insert>
+	
+	<!-- 로그인한 유저가 참여한 프로젝트 리스트 가져오기 -->
+	<select id="SelectAllProject" parameterType="String" resultType="projectBean">
+		select pnum, pname, pmento, pstart, pend, pleader from project, UserProject where UP_uemail=#{uemail} and UP_Pnum=Pnum  
+	</select>
+	
+	<!-- 프로젝트 정보로 해당 프로젝트 번호 검색하기 -->
+	<select id="getProjectNumber" resultType="int">
+		select pnum from project where pname=#{pname} and ppw=#{ppw} and pstart=#{pstart} and pend=#{pend} and pleader=#{pleader}
+	</select>
+	
+	<!-- 프로젝트 번호로 해당 프로젝트 정보 가져오기 -->
+	<select id="getProjectInfo" resultType="projectBean">
+		select pnum, pname, ppw, pmento, pstart, pend, pleader, pterminate from project where pnum=#{pnum}
+	</select>
+	
+	<!-- 프로젝트에 속한 유저 정보 가저오기 -->
+	 <select id="getProjectUserList" parameterType="int" resultType="puBean">
+	 	select uname, uphone, uemail from proguser, userproject where up_pnum=#{pnum} and up_uemail=uemail;
+	 </select>
+	 
+	 <!-- 프로젝트 pnum과 ppw를 통해 해당 프로젝트가 있는 프로젝트인지 확인 -->
+	 <select id="checkProValid" parameterType="projectBean" resultType="projectBean">
+	 	select pnum, pname, ppw, pmento, pstart, pend, pleader, pterminate from project where pnum=#{pnum} and ppw=#{ppw}
+	 </select>
+
+	
+	
+	<!--  ### 로그용 SQL문 ###  -->
+	<!-- 해당 프로젝트의 모든 로그 출력 -->
+	<select id="allLogs" parameterType="int" resultType="logBean" >
+		select lnum, l_pnum, l_uemail, ldata, ltext, lpublic, ladmission from log where l_pnum=#{l_pnum} order by ldata desc
+	</select>
+	
+	<!-- 해당 로그 삭제 -->
+	<delete id="logDelete" parameterType="int">
+		delete log where lnum = #{lnum}
+	</delete>
+	
+	<!-- 로그 작성 : only text -->
+	<!-- insert into log values(seq_l.nextval,21,'t@t.t',sysdate,'test text',null,null,0,0); -->
+	<!-- select lnum, l_pnum, l_uemail, ldata, ltext, lpublic, ladmission from log; -->
+	<!-- 
+	"LNUM" NUMBER(4,0) NOT NULL ENABLE, 
+	"L_PNUM" NUMBER(4,0) NOT NULL ENABLE, 
+	"L_UEMAIL" VARCHAR2(30) NOT NULL ENABLE, 
+	"LDATA" DATE NOT NULL ENABLE, 
+	"LTEXT" VARCHAR2(1000), 
+	"LPHOTO" BLOB, 
+	"LFILE" BLOB, 
+	"LPUBLIC" NUMBER(1,0) NOT NULL ENABLE, 
+	"LADMISSION" NUMBER(1,0) NOT NULL ENABLE, 
+	 -->
+	<insert id="logWrite" parameterType="logBean">
+		insert into log(lnum, l_pnum, l_uemail, ldata, ltext, lpublic, ladmission)
+		values(seq_l.nextval , #{l_pnum}, #{l_uemail}, sysdate, #{ltext}, #{lpublic}, 0)
+	</insert>
+	
+	<insert id="logWriteChoice" parameterType="logBean">
+		insert into log(lnum, l_pnum, l_uemail, ldata, ltext, lpublic, ladmission)
+		values(seq_l.nextval , #{l_pnum}, #{l_uemail}, sysdate, #{ltext}, 0, 0)
+	</insert>
+
+	<!-- ### 공지사항용 SQL문 ### -->
+	<!-- 공지사항 불러오기 -->
+	<select id="allAns" parameterType="int" resultType="anBean" >
+		select * from announcement where an_pnum=#{an_pnum} order by andate desc
+	</select>
+	
+	<!-- 공지사항 작성하기 -->
+	<!-- insert into announcement values(seq_an.nextval,seq_p.currval,sysdate,'a@a.a','bbb',1); -->
+	<!-- 
+	private int annum;
+	private int an_pnum;
+	private String andate;
+	private String an_uemail;
+	private String ancontent;
+	private int animportance;
+	 -->
+	<insert id="anWrite" parameterType="anBean">
+		insert into announcement(annum, an_pnum, andate, an_uemail, ancontent, animportance)
+		values(seq_an.nextval , #{an_pnum}, sysdate, #{an_uemail}, #{ancontent}, #{animportance})
+	</insert>
+	
+	<!-- 공지사항 삭제 -->
+	<delete id="anDelete" parameterType="int">
+		delete announcement where annum = #{annum}
+	</delete>
+</mapper>
+
+
+
+
+
+
