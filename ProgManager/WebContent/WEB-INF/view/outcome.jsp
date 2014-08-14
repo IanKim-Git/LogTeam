@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<link href="css/default.css" rel="stylesheet" type="text/css" />
 <title>Outcome</title>
 </head>
 <body>
