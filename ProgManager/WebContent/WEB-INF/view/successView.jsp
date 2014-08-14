@@ -119,6 +119,7 @@
 		                	  			"<form action='enterProjectMain.do' id='enterProject"+project.pnum+"' method='post'>"+
 	                	  				"<input type='hidden' id='pnum' name='pnum' value='"+project.pnum+"'/>"+
 	                	  				"<input type='hidden' id='pname' name='pname' value='"+project.pname+"'/></form>"+
+	                	  				
 	                	  		"</div>";
 	           
 		                  
