@@ -8,8 +8,8 @@
 <title>Project Information</title>
 <link href="css/default.css" rel="stylesheet" type="text/css" />
 <script src="js/jquery.js" type="text/javascript"></script>
-<script src="js/init.js" type="text/javascript"></script>
-<script src="js/jquery-1.10.2.js"></script>
+<!-- <script src="js/init.js" type="text/javascript"></script> -->
+<!-- <script src="js/jquery-1.10.2.js"></script> -->
 </head>
 
 <script>var jb = jQuery.noConflict();</script>
@@ -23,9 +23,11 @@
     	<b> <font color="4682B4" style="font-style: oblique;">프로젝트 이름 </font><br><br>
     	<font color="4682B4" style="font-style: oblique;">프로젝트 방 번호 : </font><br><br>
     	<font color="4682B4" style="font-style: oblique;">기간 : </font><br><br>
-    	<font color="4682B4" style="font-style: oblique;">진행도 :</font></b>
-    	
-    	<div class="wrap">
+    	<font color="4682B4" style="font-style: oblique;">진행도 :</font></b><br><br>
+		
+		<b><font color="4682B4" style="font-style: oblique;">팀원 정보 : &nbsp;</font></b>
+		
+		<!-- <div class="wrap">
 			<div class="bar">
 				<div class="percent">
 					<span style="width: 100%;"></span>
@@ -36,10 +38,8 @@
 			</div>
 			<div class="text">
 				<input type="text" class="input" value="0" />
-			</div>			
-		</div>
-		
-		<b><font color="4682B4" style="font-style: oblique;">팀원 정보 : &nbsp;</font></b>
+			</div>	
+		</div> -->
 		
 		<form action="" id="logListForm">			
 		<table align="left" border="2" id="listTable" cellspacing="3">
@@ -48,7 +48,7 @@
 			</tr>
 		</table>
 	</form>
-    </div>	
+    </div>
     
 </body>
 </html>
