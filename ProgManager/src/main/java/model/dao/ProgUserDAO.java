@@ -3,6 +3,7 @@ package model.dao;
 import java.util.List;
 
 import model.domain.ProgUserBean;
+import model.domain.ProgUserPhotoBean;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -66,6 +67,22 @@ public class ProgUserDAO {
 		}
 		return result;
 	}
+	
+	// 유저 프로필 사진 추가
+	public int userPhoto(ProgUserPhotoBean pup) {
+		SqlSession session = null;
+		boolean flag = false;
+		int result = 0;
+		try {
+			session = DBUtil.getSqlSession();
+			result = session.update("prog.updateUphoto", pup);
+			flag = result > 0 ? true : false;
+			} finally {
+			DBUtil.closeSqlSession(flag, session);
+		}
+		return result;
+	}
+	
 
 	// 회원 탈퇴
 	public int userDelete(ProgUserBean pu) {

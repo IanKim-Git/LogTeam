@@ -5,6 +5,7 @@ import java.io.File;
 import javax.annotation.Resource;
 
 import model.domain.ProgUserBean;
+import model.domain.ProgUserPhotoBean;
 import model.service.ProgUserService;
 
 import org.springframework.http.HttpHeaders;
@@ -114,17 +115,18 @@ public class ProgUserController {
 	// 프로필 사진 등록
 		@RequestMapping(value = "uPhotoUpload.do", method = RequestMethod.POST)
 		@ResponseBody
-		public String updateUserPhoto(@RequestParam("file-0")  MultipartFile file) {
+		public String updateUserPhoto(@RequestParam("file-0")  MultipartFile file, @RequestParam("name") String uemail) {
 			String resultMsg = "no";
 			//int result = puService.userUpdateInfo(new ProgUserBean(uemail, uname, upw, uphone));
-			String fileName = new java.text.SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
-			fileName +=  file.getOriginalFilename();
-			
-			long size = file.getSize();
+			String fileName = uemail;
+			fileName += new java.text.SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
+			fileName += file.getOriginalFilename();
 			try{
 				//폴더에 파일 저장
-				file.transferTo(new File("D:/2014KODB/file/uphoto/" + fileName));
-				resultMsg = "ok";
+				file.transferTo(new File("C:/ProgFile/uphoto/" + fileName));
+				int result = puService.userPhoto(new ProgUserPhotoBean(uemail, "C:/ProgFile/uphoto/"+fileName));
+				if(result>0)
+					resultMsg = "ok";
 			}catch(Exception e){
 				e.printStackTrace();
 			}

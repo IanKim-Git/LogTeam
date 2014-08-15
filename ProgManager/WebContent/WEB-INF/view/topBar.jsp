@@ -155,9 +155,10 @@
 			
 			var data = new FormData();
 	        $.each($('#uphoto')[0].files, function(i, file) {
-	            data.append('file-' + i, file);
+	            data.append('name', $("#email2").val());
+	        	data.append('file-' + i, file);
 	        });
-	        data.
+	        
 	        
 			$.ajax({
 				url : "uPhotoUpload.do",

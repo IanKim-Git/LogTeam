@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import model.dao.ProgUserDAO;
 import model.dao.ProjectDAO;
 import model.domain.ProgUserBean;
+import model.domain.ProgUserPhotoBean;
 
 public class ProgUserService {
 	@Resource(name = "puDao")
@@ -42,8 +43,14 @@ public class ProgUserService {
 		return puDao.userInfo(uemail);
 	}
 	
+	//유저 프로필 사진 삽입
+	public int userPhoto(ProgUserPhotoBean progUserPhotoBean) {
+		return puDao.userPhoto(progUserPhotoBean);
+	}
+	
 	//해당 프로젝트에 속한 회원 리스트 반환
 	public List projectUserList(int pnum){
 		return puDao.allProjectUsers(pnum);
 	}
+
 }

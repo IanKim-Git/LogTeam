@@ -5,7 +5,7 @@ public class ProgUserBean {
 	private String uname;
 	private String upw;
 	private String uphone;
-//	private ? uPhoto;
+	private String uPhoto;
 	private String uprocnt;
 	
 	public ProgUserBean() {}

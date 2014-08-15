@@ -12,6 +12,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
    <!-- 클래스들의 전체경로에 이름(별칭) 만들기 -->
    <typeAliases>
      <typeAlias type="model.domain.ProgUserBean" alias="puBean"/>
+     <typeAlias type="model.domain.ProgUserPhotoBean" alias="pupBean"/>
      <typeAlias type="model.domain.ProjectBean" alias="projectBean"/>
      <typeAlias type="model.domain.UserProjectBean" alias="UPBean"/>
      <typeAlias type="model.domain.LogBean" alias="logBean"/>
