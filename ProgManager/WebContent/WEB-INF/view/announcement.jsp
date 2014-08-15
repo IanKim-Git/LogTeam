@@ -35,10 +35,10 @@
 						}else if(item.animportance == 2){
 							table += "<td>중</td><td>";
 						}else if(item.animportance == 1){
-							table += "<td>하</td><td>";
+							table += "<td>하</td>";
 						}
 						if($("#an_uemail").val() == item.an_uemail){
-							table += "<input type='button' value='삭제' id='del' name='"+item.annum+"'></td></tr>";
+							table += "<td><input type='button' value='삭제' id='del' name='"+item.annum+"'></td></tr>";
 						}
 					});
 					//테이블에 추가

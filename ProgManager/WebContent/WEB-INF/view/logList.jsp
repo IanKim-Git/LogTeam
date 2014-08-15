@@ -23,25 +23,76 @@
 				dataType : "json", 					//결과데이터타입
 				data : "pnum="+jb("#l_pnum").val(),
 				success : function(data) {
+					var div = "";
+					var input = "";
 					var table = "";
-
-					jb("#listTable tr:gt(0)").remove();
-//					<th>로그번호</th><th>작성자</th><th>작성일</th><th>내용</th><th>공개여부</th><th>승인여부</th><th>삭제</th>
-
-					var count = data.list.length;
-
-					//data.list로 온 데이터 : [{no:값, name:값,...}, {no:값, name:값,...}, {no:값, name:값,...}, ...]
-					jb(data.list).each(function(index, item) {//{no:값, name:값,...}
-						table += "<tr><td>" + (count--) + "</td><td>" + item.l_uemail + "</td><td>" +  item.ldata + "</td><td>" +  item.ltext + "</td>";
+					jb("#setLogs").children().remove();
+					/*
+					<div class="logContent">
+						<table id="logTable">
+							<tr>
+								<td>작성자</td>
+								<td>내용</td>
+								<td>작성일</td>
+								<td>공개여부</td>
+								<td>승인여부</td>
+							</tr>
+						</table>
+					</div>
+					<div class='lcContent'>
+						<form action="writeLc.do" id="writeLcForm" method="post">
+							<input type="hidden" id="c_lnum" name="c_lnum" value="">
+							<input type="hidden" id="c_uemail" name="c_uemail" value="">
+							<input type="hidden" id="c_l_pnum" name="c_l_pnum" value="">
+							<table>
+								<tbody id="commentBody">
+								</tbody>
+								<tfoot id="writeComment">
+									<tr>
+										<td><textarea id="ctext" name="ctext" rows="2" cols="30"></textarea></td>
+										<td><input type="button" id="writeLc" value="코멘트등록"></td>
+									</tr>
+								</tfoot>
+							</table>
+						</form>
+					</div><!-- end of comment -->
+					
+					div += "<div class='lcContent'><form action='writeLc.do' id='writeLcForm' method='post'></form></div>";
+					input = "<input type='hidden' id='c_lnum' name='c_lnum'><input type='hidden' id='c_uemail' name='c_uemail'><input type='hidden' id='c_l_pnum' name='c_l_pnum'>";
+					jb("#writeLcForm").html(input);
+					jb("#c_lnum").val(item.lnum);
+					jb("#c_uemail").val() = jb("#l_uemail").val();
+					jb("#c_l_pnum").val(item.l_pnum);
+					table = "<table><tbody id='commentBody'></tbody><tfoot id='writeComment'><tr>"+
+							"<td><textarea id='ctext' name='ctext' rows='2' cols='30'></textarea></td>"+
+							"<td><input type='button' id='writeLc' value='코멘트등록'></td></tr></tfoot></table>";
+					jb()
+						
+					
+				
+					*/
+					 jb(data.list).each(function(index, item) {//{no:값, name:값,...}
+						div += "<div class='logContent' id='"+ item.lnum +"'><table id='logTable'><tr><td>"+ item.l_uemail +"</td><td>"+ item.ltext +"</td>";
+						
+						div += "<td>"+ item.ldata + "</td>";
 						if(item.lpublic == 0){
-							table += "<td>비공개</td>";
+							div += "<td>비공개</td>";
 						}else if(item.lpublic == 1){
-							table += "<td>공개</td>";
-						}						
-						table += "<td>" + item.ladmission + "</td><tr>";
+							div += "<td>공개</td>";
+						}
+						div += "<td>"+ item.ladmission +"</td></tr></table></div>";
+						div += "<div class='lcContent'><form action='writeLc.do' id='writeLcForm' method='post'></form></div>";
+						//div += "<td><input type='button' value='코멘트 등록' id='addLc' name='"+ item.lnum +"'></td></tr></table></div>";
+						/*
+						<form id='lcWriteForm' method='post' action=''>
+							<input type='hidden' id='c_lnum' name='c_lnum' value=''>
+							<input type='hidden' id='c_l_pnum' name='c_l_pnum' value=''>
+							<input type='button' value='코멘트 등록' id='addLc'>
+						</form>
+						*/
+//						getLcs(item.lnum, item.l_pnum);
 					});
-					//테이블에 추가
-					jb("#listTable tr:eq(0)").after(table);
+					jb("#setLogs").html(div); 
 				},
 				error : function(err) {//실패했을때
 					alert(err + " : 해당 프로젝트에는 로그가 아직 작성되지 않았습니다");
@@ -49,7 +100,46 @@
 			});//end of ajax
 		} //end of getLogs()
 		
-		//삭제 버튼을 눌렀을 때 로그 삭제
+		//코멘트 목록 초기화(일단 코멘트만 나오게)
+		function getLcs(c_lnum, c_l_pnum){
+			jb.ajax({
+				url : "allLcs.do", 
+				type : "post",
+				dataType : "json", 		
+				data : "lnum="+c_lnum+"&pnum="+c_l_pnum,
+				success : function(data) {
+					var comments = "";
+					/*
+					<tbody id="commentBody">
+						<tr>
+							<td>-→</td>
+							<td>작성자</td>
+							<td>내용</td>
+							<td>작성일</td>
+							<td>코멘트삭제</td>
+						</tr>
+						<tr>
+							<td>-→</td>
+							<td>작성자</td>
+							<td>내용</td>
+							<td>작성일</td>
+							<td>코멘트삭제</td>
+						</tr>
+					</tbody>
+					*/
+					 jb(data.list).each(function(index, item) {//{no:값, name:값,...}
+						
+					});
+					return comments;
+				},
+				error : function(err) {//실패했을때
+					alert(err + " : 해당 프로젝트에는 코멘트가 아직 작성되지 않았습니다");
+				}
+			});//end of ajax
+		}//end of getLcs()
+		
+		/* 
+		//코멘트 등록 버튼을 눌렀을 때 코멘트 등록
 		jb(document).on("click", "#del", function() {
 			jb.ajax({
 				url : "deleteLog.do", 
@@ -69,7 +159,7 @@
 				}
 			});
 		});//end of 로그 삭제
-		
+		 */
 		//로그 등록
 		jb("#write").click(function() {
 			if(jb("#ltext").val() == ""){
@@ -108,66 +198,115 @@
 	프로젝트 번호 : ${requestScope.pnum}
 	유저 이메일 : ${sessionScope.userData.uemail}<br>
 	
-<%-- 	<form action="write.do" id="writeForm" method="post">
-		<select id="lpublic" name="lpublic">
-			<option value="-1">선택</option>
-			<option value="0">비공개</option>
-			<option value="1">공개</option>
-		</select><br>
-		<input type="hidden" id="l_pnum" name="l_pnum" value="${requestScope.pnum}">
-		<input type="hidden" id="l_uemail" name="l_uemail" value="${sessionScope.userData.uemail}">
-		<textarea id="ltext" name="ltext" rows="5" cols="60" ></textarea>
-		<input type="button" id="write" value="로그등록">		
-	</form> --%>
-		<!-- 로그 화면 -->
-	<div id="logsView">
-		<!-- 로그 등록창 -->
-		<div id="writeLog">
-			<form action="write.do" id="writeForm" method="post">
-				<input type="hidden" id="l_pnum" name="l_pnum" value="${requestScope.pnum}">
-				<input type="hidden" id="l_uemail" name="l_uemail" value="${sessionScope.userData.uemail}">
-				<table>
-					<!-- 내용 -->
-					<tr>
-						<th rowspan="5">
-							<textarea id="ltext" name="ltext" rows="5" cols="60" ></textarea>
-						</th>
-					</tr>
-					<!-- 공개여부 -->
-					<tr>
-						<td>
-						<select id="lpublic" name="lpublic">
-							<option value="-1">선택</option>
-							<option value="0">비공개</option>
-							<option value="1">공개</option>
-						</select>
-						</td>
-					</tr>
-					<tr><td></td></tr>
-					<tr><td></td></tr>
-					<!-- 등록버튼 -->
-					<tr>
-						<td>
-							<input type="button" id="write" value="로그등록">
-						</td>
-					</tr>
-				</table>				
-			</form>
-		</div><!-- end of writeLog -->
-		
-		
-		<!-- 로그 목록 -->
-		<div id="logsList">
-			<!-- 로그마다 코멘트 창이 달려야 한다. -->
-			<!-- 코멘트 등록 버튼을 누르면 코멘트 목록과  -->
-			<form action="" id="logListForm">			
-				<table id="listTable" cellspacing="0">
-					<tr bgcolor="#FOFOF7" >
-						<th>로그번호</th><th>작성자</th><th>작성일</th><th>내용</th><th>공개여부</th><th>승인여부</th>
-					</tr>
-				</table>
-			</form>
-		</div><!-- end of logsList -->		
+	<!-- 로그 화면 -->
+	<div id="logsView" align="left">
+		<fieldset>
+			<!-- 로그 등록창 -->
+			<div id="writeLog">
+				<form action="write.do" id="writeForm" method="post">
+					<input type="hidden" id="l_pnum" name="l_pnum" value="${requestScope.pnum}">
+					<input type="hidden" id="l_uemail" name="l_uemail" value="${sessionScope.userData.uemail}">
+					<table>
+						<!-- 내용 -->
+						<tr>
+							<th rowspan="5">
+								<textarea id="ltext" name="ltext" rows="5" cols="60" ></textarea>
+							</th>
+						</tr>
+						<!-- 공개여부 -->
+						<tr>
+							<td>
+							<select id="lpublic" name="lpublic">
+								<option value="-1">선택</option>
+								<option value="0">비공개</option>
+								<option value="1">공개</option>
+							</select>
+							</td>
+						</tr>
+						<tr><td></td></tr>
+						<tr><td></td></tr>
+						<!-- 등록버튼 -->
+						<tr>
+							<td>
+								<input type="button" id="write" value="로그등록">
+							</td>
+						</tr>
+					</table>				
+				</form>
+			</div><!-- end of writeLog -->
+			
+			
+			<!-- 로그 목록 -->
+			<div id="logsList">
+				<!-- jQuery 함수 사용을 위해서 선언 -->
+				<div id="setLogs">
+					
+					<!-- 로그마다 코멘트 창이 달려야 한다. -->
+					<!-- 코멘트 등록 버튼을 누르면 코멘트 목록이 비동기로 바뀌어야 한다. -->
+					<!-- 코멘트는 작성자만 삭제할 수 있다. -->
+					<!-- <table id="listTable" cellspacing="0">
+						<tr bgcolor="#FOFOF7" >
+							<th>로그번호</th><th>작성자</th><th>작성일</th><th>내용</th><th>공개여부</th><th>승인여부</th><th>코멘트등록</th>
+						</tr>
+					</table> -->
+					<div class="logContent">
+						<table id="logTable">
+							<tr>
+								<td>작성자</td>
+								<td>내용</td>
+								<td>작성일</td>
+								<td>공개여부</td>
+								<td>승인여부</td>
+							</tr>
+						</table>
+					</div>
+					<!-- jb("")
+						 jb(".logContent").after(".lcContent");
+						 jb("#c_lnum").val(c_lnum);
+						 jb("#c_uemail").val(c_uemail);
+						 jb("#c_l_pnum").val(c_l_pnum);
+						 jb("#commentBody").html();
+					
+					 -->
+					<div class='lcContent'>
+						<form action="writeLc.do" id="writeLcForm" method="post">
+							<input type="hidden" id="c_lnum" name="c_lnum" value="">
+							<input type="hidden" id="c_uemail" name="c_uemail" value="">
+							<input type="hidden" id="c_l_pnum" name="c_l_pnum" value="">
+							<table>
+								<tbody id="commentBody">
+									<tr>
+										<td>-→</td>
+										<td>작성자</td>
+										<td>내용</td>
+										<td>작성일</td>
+										<td>코멘트삭제</td>
+									</tr>
+									<tr>
+										<td>-→</td>
+										<td>작성자</td>
+										<td>내용</td>
+										<td>작성일</td>
+										<td>코멘트삭제</td>
+									</tr>
+								</tbody>
+								<tfoot id="writeComment">
+									<tr>
+										<td><textarea id="ctext" name="ctext" rows="2" cols="30"></textarea></td>
+										<td><input type="button" id="writeLc" value="코멘트등록"></td>
+									</tr>
+								</tfoot>
+							</table>
+						</form>
+					</div><!-- end of comment -->
+					
+				</div><!-- end if setLogs -->
+				
+			</div><!-- end of logsList -->	
+			
+			
+			
+		</fieldset>	
 	</div><!-- end of logsView -->	
 </body>
 </html>
