@@ -81,10 +81,6 @@
         });
     </script>
     
-    <script type="text/javascript">
-    function register
-    
-    </script>
    
    <!--  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
