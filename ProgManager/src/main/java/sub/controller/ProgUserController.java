@@ -1,5 +1,7 @@
 package sub.controller;
 
+import java.io.File;
+
 import javax.annotation.Resource;
 
 import model.domain.ProgUserBean;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class ProgUserController {
@@ -106,6 +110,26 @@ public class ProgUserController {
 		}
 		return resultMsg;
 	}
+	
+	// 프로필 사진 등록
+		@RequestMapping(value = "uPhotoUpload.do", method = RequestMethod.POST)
+		@ResponseBody
+		public String updateUserPhoto(@RequestParam("file-0")  MultipartFile file) {
+			String resultMsg = "no";
+			//int result = puService.userUpdateInfo(new ProgUserBean(uemail, uname, upw, uphone));
+			String fileName = new java.text.SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
+			fileName +=  file.getOriginalFilename();
+			
+			long size = file.getSize();
+			try{
+				//폴더에 파일 저장
+				file.transferTo(new File("D:/2014KODB/file/uphoto/" + fileName));
+				resultMsg = "ok";
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			return resultMsg;
+		}
 
 	// 회원 탈퇴
 	@RequestMapping(value = "delete.do", method = RequestMethod.POST)

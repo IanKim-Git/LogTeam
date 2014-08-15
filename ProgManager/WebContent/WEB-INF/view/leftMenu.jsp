@@ -112,6 +112,13 @@
 					<a href="#">List Page</a>
 			</form></li>
 			
+			<!-- 프로젝트 기본정보 -->
+			<li><form action="idPwCheck.do" id="idPwCheck" onclick="onidPwCheck()" method="post">
+					<input type="hidden" name="email" value="${sessionScope.userData.uemail}">
+					<input type="hidden" name="pw" value="${sessionScope.userData.upw }">
+					<a href="#">Simple view</a>
+			</form></li>
+			
 			<!-- 프로젝트 정보 -->
 			<li><form action="projectInfo.do" id="projectInfo" onclick="onprojectInfo()" method="post">
 					<input type="hidden" name="enterProInfoPnum" value="${requestScope.pnum}">

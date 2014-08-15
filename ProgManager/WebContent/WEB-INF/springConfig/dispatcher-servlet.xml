@@ -44,6 +44,10 @@
 		<property name="contentType" value="text/html;charset=UTF-8" />
 	</bean>
 
+	<!-- 파일업로드 기능을 위한 설정 CommonsMultipartResolver 선언할때 id는 반드시 multipartResolver 이어야 한다. -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+
+		
 	<!-- ViewResolver를 찾을때 bean의 id로 제일먼저 찾을수 있도록 우선순위를 0으로 줌
 			생략시 spring controller에서 jsonView에 매핑된 view 실행 불가 -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">

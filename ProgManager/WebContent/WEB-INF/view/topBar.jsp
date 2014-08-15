@@ -79,6 +79,7 @@
 			nflag = false;
 			
 		});//end of reset button
+
 		
 		function deleteJoinForm() {
 			$("#idValidation").html("");
@@ -148,6 +149,36 @@
 				}
 			}); //end of ajax
 		});//end of Join button
+		
+		//프로필 사진 올리기 아작스
+		$("#uphotoUP").click(function(){
+			
+			var data = new FormData();
+	        $.each($('#uphoto')[0].files, function(i, file) {
+	            data.append('file-' + i, file);
+	        });
+	        data.
+	        
+			$.ajax({
+				url : "uPhotoUpload.do",
+				type : "post",
+				dataType : "text", 
+				data : data,
+				processData: false,
+	            contentType: false,
+				success : function(data) {
+					if (data == "ok") {
+						alert("사진 업로드 성공!");
+					} else {
+						alert("사진 업로드 실패");
+					}
+				},
+				error : function(data) {
+					alert(data + ' : 프로필 사진 등록 로직 실행시 에러 발생');
+				}
+			}); //end of ajax
+		});//end of Join button
+		
    });//end of ready()
 </script>
 
@@ -198,9 +229,16 @@
                                 <label for="phone">Phone Number(ex.000-0000-0000)</label>
                                 <input type="text" name="phone" id="phone" value="${requestScope.phone}">
                             </fieldset>
+                            <fieldset>
+                                <label for="photo">Profile Photo</label>
+                                <form action="uPhotoUpload.do" method="post" id="uPhotoUpload" enctype="multipart/form-data">
+									<input type="file" name="uphoto" id="uphoto"/>
+								</form>
+                            </fieldset>
                             <input type="button" id="Join" value="확인" />
                             <input type="reset" id="resetSpan" value="취소" />
                             <input type="button" id="leave" value="탈퇴" />
+                            <input type="button" id="uphotoUP" value="사진"/>
                         </fieldset>
                     </form>
        			</div>
