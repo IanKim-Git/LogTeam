@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -210,16 +212,18 @@
 		comms = getLcs(lnumArray[0], jb("#l_pnum").val()); */
 		
 		//alert(lnumArray);
-		alert(jb(".c_lnum").val());
+//		alert(jb(".c_lnum").val());
 		//alert(length);
 	});//end of ready
 </script>
 <body>
-	<h6>로그게시판</h6>
+	
+	<h6>로그게시판2</h6>
 	프로젝트 번호 : ${requestScope.pnum}
 	유저 이메일 : ${sessionScope.userData.uemail}<br>
 	<%-- 코멘트 : ${requestScope.commentsList[0]}<br>
 	로그 : ${requestScope.logsList[0] }<br> --%>
+	
 	<!-- 로그 화면 -->
 	<div id="logsView" align="left">
 		<fieldset>
@@ -256,8 +260,17 @@
 					</table>				
 				</form>
 			</div><!-- end of writeLog -->
-			
-			
+			<%-- 코멘트 : ${requestScope.commentsList[0]}<br>
+				로그 : ${requestScope.logsList[0] }<br> --%>
+			<!-- 
+				for loop
+				로그 글
+					for loop
+					댓글
+					end loop
+					댓글 입력
+				end loop
+				 -->
 			<!-- 로그 목록 -->
 			<div id="logsList">
 				<!-- jQuery 함수 사용을 위해서 선언 -->
@@ -271,51 +284,56 @@
 							<th>로그번호</th><th>작성자</th><th>작성일</th><th>내용</th><th>공개여부</th><th>승인여부</th><th>코멘트등록</th>
 						</tr>
 					</table> -->
-					<div class="logContent">
-						<table id="logTable">
-							<tr>
-								<td>작성자</td>
-								<td>내용</td>
-								<td>작성일</td>
-								<td>공개여부</td>
-								<td>승인여부</td>
-							</tr>
-						</table>
-					</div>
-
-					<div class='lcContent'>
-						<form action="writeLc.do" id="writeLcForm" method="post">
-							<input type="hidden" id="c_lnum" name="c_lnum" value="">
-							<input type="hidden" id="c_uemail" name="c_uemail" value="">
-							<input type="hidden" id="c_l_pnum" name="c_l_pnum" value="">
-							<table>
-								<tbody id="commentBody">
-									<tr>
-										<td>-→</td>
-										<td>작성자</td>
-										<td>내용</td>
-										<td>작성일</td>
-										<td>코멘트삭제</td>
-									</tr>
-									<tr>
-										<td>-→</td>
-										<td>작성자</td>
-										<td>내용</td>
-										<td>작성일</td>
-										<td>코멘트삭제</td>
-									</tr>
-								</tbody>
-								<tfoot id="writeComment">
-									<tr>
-										<td><textarea id="ctext" name="ctext" rows="2" cols="30"></textarea></td>
-										<td><input type="button" id="writeLc" value="코멘트등록"></td>
-									</tr>
-								</tfoot>
+					<c:forEach items="${requestScope.logsList}" var="logs">
+						<div class="logContent">
+							<table id="logTable">
+								<tr>
+									<%-- <td>작성자</td>
+									<td>내용</td>
+									<td>작성일</td>
+									<td>공개여부</td>
+									<td>승인여부</td> --%>
+									<td>${logs. }</td>
+									<td>내용</td>
+									<td>작성일</td>
+									<td>공개여부</td>
+									<td>승인여부</td>
+								</tr>
 							</table>
-						</form>
-					</div><!-- end of comment -->
+						</div>
 					
-				</div><!-- end if setLogs -->
+						<div class="lcContent">
+							<table>
+									<tbody id="commentBody">
+										<tr>
+											<td>-→</td>
+											<td>작성자</td>
+											<td>내용</td>
+											<td>작성일</td>
+											<td>코멘트삭제</td>
+										</tr>
+									</tbody>
+								</table>					
+						</div><!-- end of lcContent -->
+	
+						<div class="lcWrite">
+							<form action="writeLc.do" id="writeLcForm" method="post">
+								<input type="hidden" id="c_lnum" name="c_lnum" value="">
+								<input type="hidden" id="c_uemail" name="c_uemail" value="">
+								<input type="hidden" id="c_l_pnum" name="c_l_pnum" value="">
+								
+								<table>
+									<tfoot id="writeComment">
+										<tr>
+											<td><textarea id="ctext" name="ctext" rows="2" cols="30"></textarea></td>
+											<td><input type="button" id="writeLc" value="코멘트등록"></td>
+										</tr>
+									</tfoot>
+								</table>
+							</form>
+						</div><!-- end of lcWrite -->
+					</c:forEach>
+				</div><!-- end of setLogs -->
 				
 			</div><!-- end of logsList -->	
 			

@@ -22,7 +22,7 @@ public class LogcommentBean {
 		this.c_l_pnum = c_l_pnum;
 	}
 	
-	public LogcommentBean(int c_lnum, String c_uemail, String ctext, int c_l_pnum) {
+	public LogcommentBean(int c_lnum, String c_uemail, int c_l_pnum, String ctext) {
 		this.c_lnum = c_lnum;
 		this.c_uemail = c_uemail;
 		this.ctext = ctext;
@@ -58,7 +58,7 @@ public class LogcommentBean {
 	public void setCtext(String ctext) {
 		this.ctext = ctext;
 	}
-	public int getC_l_num() {
+	public int getC_l_pnum() {
 		return c_l_pnum;
 	}
 	public void setC_l_pnum(int c_l_pnum) {

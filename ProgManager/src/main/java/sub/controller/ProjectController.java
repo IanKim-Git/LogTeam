@@ -5,6 +5,8 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import model.domain.ProjectBean;
+import model.service.LogService;
+import model.service.LogcommentService;
 import model.service.ProgUserService;
 import model.service.ProjectService;
 
@@ -23,6 +25,12 @@ public class ProjectController {
 	
 	@Resource(name="puService")
 	private ProgUserService puService;
+	
+	@Resource(name="lcService")
+	private LogcommentService lcService;
+	
+	@Resource(name="logService")
+	private LogService logService;
 
 	@RequestMapping(value="newProject.do", method=RequestMethod.POST)
 	@ResponseBody
@@ -114,7 +122,9 @@ public class ProjectController {
 	@RequestMapping("logList.do")
 	public String enterLogList(@RequestParam("enterLogPnum") String pnum, Model model){
 		model.addAttribute("pnum", pnum);
-		return "logList";
+		model.addAttribute("commentsList", lcService.allPlcs(Integer.parseInt(pnum)));
+		model.addAttribute("logsList", logService.allLogs(Integer.parseInt(pnum)));
+		return "logList2";
 	}
 	
 	//팀원성과도로 이동

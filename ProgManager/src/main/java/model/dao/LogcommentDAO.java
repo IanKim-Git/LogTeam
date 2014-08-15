@@ -38,6 +38,20 @@ public class LogcommentDAO {
 		return list;
 	}
 	
+	//해당 프로젝트의 로그의 코멘트 전부 불러오기
+	public List<LogcommentBean> allPlcs(int c_l_pnum){
+		SqlSession session = null;
+		List<LogcommentBean> list = null;
+		try {
+			session = DBUtil.getSqlSession();
+			list = session.selectList("prog.allPlcs", c_l_pnum);
+			
+		} finally {
+			DBUtil.closeSqlSession(session);
+		}
+		return list;
+	}
+	
 	//자신의 코멘트 삭제(코멘트 번호)
 	public int lcDelete(int cnum){
 		SqlSession session = null;
@@ -58,21 +72,19 @@ public class LogcommentDAO {
 		LogcommentDAO lcd = new LogcommentDAO();
 //		insert into logcomment (c_lnum, cnum, cdate, c_uemail, ctext, c_l_pnum)
 //		values(#{c_lnum}, seq_c.nextval, sysdate, #{c_uemail}, #{ctext}, #{c_l_pnum})
-//		lcd.lcWrite(new LogcommentBean(2, "c@c.c", "첫 덧글이다", 2));
-//		lcd.lcWrite(new LogcommentBean(2, "c@c.c", "두 번째 덧글이다", 2));
-//		lcd.lcWrite(new LogcommentBean(2, "c@c.c", "세 번째 덧글이다", 2));
-//		lcd.lcWrite(new LogcommentBean(9, "c@c.c", "coco", 2));
-//		lcd.lcWrite(new LogcommentBean(9, "c@c.c", "coco2", 2));
-//		lcd.lcWrite(new LogcommentBean(9, "c@c.c", "coco3", 2));
-//		lcd.lcWrite(new LogcommentBean(9, "c@c.c", "coco4", 2));
+//		lcd.lcWrite(new LogcommentBean(2, "c@c.c", 2, "첫 덧글이다"));
+//		lcd.lcWrite(new LogcommentBean(2, "c@c.c", 2, "두 번째 덧글이다"));
+//		lcd.lcWrite(new LogcommentBean(2, "c@c.c", 2, "세 번째 덧글이다"));
+//		lcd.lcWrite(new LogcommentBean(3, "c@c.c", 2, "coco"));
+//		lcd.lcWrite(new LogcommentBean(3, "c@c.c", 2, "coco2"));
+//		lcd.lcWrite(new LogcommentBean(4, "c@c.c", 2, "coco3"));
+//		lcd.lcWrite(new LogcommentBean(4, "c@c.c", 2, "coco4"));
 //		select * from logcomment where c_lnum=#{c_lnum} and c_l_pnum=#{c_l_pnum} order by cdate
-		for(LogcommentBean lcb : lcd.allLcs(new LogcommentBean(9, 2))){
+		for(LogcommentBean lcb : lcd.allPlcs(2)){
 			System.out.println(lcb);
 		}
 //		lcd.lcDelete(25);
 //		lcd.lcDelete(26);
-		for(LogcommentBean lcb : lcd.allLcs(new LogcommentBean(9, 2))){
-			System.out.println(lcb);
-		}
+		
 	}*/
 }

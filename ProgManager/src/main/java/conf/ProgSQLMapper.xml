@@ -178,6 +178,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from logcomment where c_lnum=#{c_lnum} and c_l_pnum=#{c_l_pnum} order by cdate
 	</select>
 	
+	<!-- 프로젝트의 모든 코멘트 목록 출력 -->
+	<select id="allPlcs" parameterType="lcBean" resultType="lcBean" >
+		select * from logcomment where c_l_pnum=#{c_l_pnum} order by cdate
+	</select>
+	
 	<!-- 프로젝트의 해당 로그에 코멘트 작성 -->
 	<insert id="lcWrite" parameterType="lcBean">
 		insert into logcomment (c_lnum, cnum, cdate, c_uemail, ctext, c_l_pnum)

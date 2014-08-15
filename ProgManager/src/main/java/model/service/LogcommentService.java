@@ -19,6 +19,10 @@ public class LogcommentService {
 		return lcDao.allLcs(lcb);
 	}
 	
+	public List<LogcommentBean> allPlcs(int c_l_pnum){
+		return lcDao.allPlcs(c_l_pnum);
+	}
+	
 	public int lcDelete(int cnum){
 		return lcDao.lcDelete(cnum);
 	}
