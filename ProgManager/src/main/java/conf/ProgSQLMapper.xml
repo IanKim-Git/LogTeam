@@ -175,6 +175,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="acDelete" parameterType="int">
 		delete account where acnum = #{acnum}
 	</delete>
+	
+	
+	<!-- ### 코멘트용 SQL문 ### -->
+	<!-- 프로젝트의 해당 로그의 코멘트 목록 출력 -->
+	<select id="allLcs" parameterType="lcBean" resultType="lcBean" >
+		select * from logcomment where c_lnum=#{c_lnum} and c_l_pnum=#{c_l_pnum} order by cdate
+	</select>
+	
+	<!-- 프로젝트의 모든 코멘트 목록 출력 -->
+	<select id="allPlcs" parameterType="lcBean" resultType="lcBean" >
+		select * from logcomment where c_l_pnum=#{c_l_pnum} order by cdate
+	</select>
+	
+	<!-- 프로젝트의 해당 로그에 코멘트 작성 -->
+	<insert id="lcWrite" parameterType="lcBean">
+		insert into logcomment (c_lnum, cnum, cdate, c_uemail, ctext, c_l_pnum)
+		values(#{c_lnum}, seq_c.nextval, sysdate, #{c_uemail}, #{ctext}, #{c_l_pnum})
+	</insert>
+	
+	<!-- 코멘트 삭제 -->
+	<delete id="lcDelete" parameterType="int">
+		delete logcomment where cnum=#{cnum}
+	</delete>
 </mapper>
 
 

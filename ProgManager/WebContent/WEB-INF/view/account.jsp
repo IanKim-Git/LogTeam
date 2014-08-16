@@ -108,6 +108,8 @@
 				jb("p").html("<font color='red'>수입이나 지출 둘 중 하나만 입력하세요.</font>");
 			}else if(jb("#acminus").val() =="0"&& jb("#acplus").val() =="0"){
 				jb("p").html("<font color='red'>수입이나 지출 둘 중 하나를 입력하세요.</font>");
+			}else if(jb("#accontents").val() == "내용을 입력하세요"){
+				alert("내용을 입력하세요.");
 			}else{
 //				jb("p").html("<font color='green'>정상실행</font>");
 				jb.ajax({
@@ -129,7 +131,7 @@
 						alert(data + ' : 회계 작성 실행시 에러 발생');
 					}
 				}); //end of ajax
-			}
+			}//end of else
 			
 		});//end of 회계 작성 로직
 		 

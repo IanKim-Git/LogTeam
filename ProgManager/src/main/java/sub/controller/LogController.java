@@ -5,7 +5,9 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import model.domain.LogBean;
+import model.domain.LogcommentBean;
 import model.service.LogService;
+import model.service.LogcommentService;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,15 +21,20 @@ public class LogController {
 	@Resource(name="logService")
 	private LogService logService;
 	
+	@Resource(name="lcService")
+	private LogcommentService lcService;
+	
 	//해당 프로젝트의 모든 로그들을 반환하는 메소드
 	@RequestMapping("allLogs.do")
 	public ModelAndView allLogs(@RequestParam("pnum") String l_pnum ){
 //		System.out.println("####################프로젝트 번호"+l_pnum);
 		List<LogBean> list =  logService.allLogs(Integer.parseInt(l_pnum));
+		List<LogcommentBean> clist = lcService.allPlcs(Integer.parseInt(l_pnum));
 		
 		//데이터.를 request 저장 & view를 지정 가능한 객체
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("list", list);	//request.setAttribute("list", list);
+		mv.addObject("clist", clist);
 		mv.setViewName("projectJsonView");	//id=jsonView 객체를 찾아서 JsonView실행
 		return mv;
 	}
@@ -59,6 +66,5 @@ public class LogController {
 			resultMsg = "ok";//정상 저장시 응답되는 데이터
 		}
 		return resultMsg;  
-	}
-	
+	}	
 }

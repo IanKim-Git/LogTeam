@@ -31,14 +31,14 @@
 					jb(data.list).each(function(index, item) {//{no:값, name:값,...}
 						table += "<tr><td>" + (count--) + "</td><td>" + item.ancontent + "</td><td>" +  item.andate + "</td><td>" +  item.an_uemail + "</td>";
 						if(item.animportance == 3){
-							table += "<td>상</td><td>";
+							table += "<td>상</td>";
 						}else if(item.animportance == 2){
-							table += "<td>중</td><td>";
+							table += "<td>중</td>";
 						}else if(item.animportance == 1){
-							table += "<td>하</td><td>";
+							table += "<td>하</td>";
 						}
 						if($("#an_uemail").val() == item.an_uemail){
-							table += "<input type='button' value='삭제' id='del' name='"+item.annum+"'></td></tr>";
+							table += "<td><input type='button' value='삭제' id='del' name='"+item.annum+"'></td></tr>";
 						}
 					});
 					//테이블에 추가
@@ -73,26 +73,30 @@
 		
 		//공지사항 등록
 		jb("#anWrite").click(function() {
-			jb.ajax({
-				url : "writeAn.do",
-				type : "post",
-				dataType : "text", 				
-				data : jb("#anWriteForm").serialize(),
-				success : function(data) {
-					if (data == "ok") {
-						alert("공지사항 작성 성공");
-						jb("textarea").val("");	
-						getAns();							
-					} else if(data == "again") {
-						alert("공지사항 중요도를 선택하세요.");
-					} else {
-						alert("공지사항 작성 실패");
+			if(jb("#ancontent").val() == ""){
+				alert("내용을 입력하세요.");
+			}else{
+				jb.ajax({
+					url : "writeAn.do",
+					type : "post",
+					dataType : "text", 				
+					data : jb("#anWriteForm").serialize(),
+					success : function(data) {
+						if (data == "ok") {
+							alert("공지사항 작성 성공");
+							jb("textarea").val("");	
+							getAns();							
+						} else if(data == "again") {
+							alert("공지사항 중요도를 선택하세요.");
+						} else {
+							alert("공지사항 작성 실패");
+						}
+					},
+					error : function(data) {//200이 안 넘어 왔을 때
+						alert(data + ' : 공지사항 작성 실행시 에러 발생');
 					}
-				},
-				error : function(data) {//200이 안 넘어 왔을 때
-					alert(data + ' : 공지사항 작성 실행시 에러 발생');
-				}
-			}); //end of ajax
+				}); //end of ajax
+			}
 		});//end of 공지사항 작성 로직
 		
 		//공지사항 화면 초기화
