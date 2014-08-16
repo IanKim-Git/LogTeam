@@ -70,7 +70,6 @@
 					});
 					jb("#setLogs").html(div);
 					jb(".uemail").val(jb("#l_uemail").val());
-					lnumArray = jb(".lnumforc").toArray();
 				},
 				error : function(err) {//실패했을때
 					alert(err + " : 해당 프로젝트에는 로그가 아직 작성되지 않았습니다");
@@ -159,7 +158,7 @@
 		 });//end of 코멘트 등록
 		 		
 		//로그화면 초기화
-//		getLogs();
+		getLogs();
 		
 	});//end of ready
 </script>
@@ -210,9 +209,9 @@
 				<!-- jQuery 함수 사용을 위해서 선언 -->
 				<div id="setLogs">
 					
-					<%-- 로그마다 코멘트 창이 달려야 한다. --%>
-					<%-- 코멘트 등록 버튼을 누르면 코멘트 목록이 비동기로 바뀌어야 한다. --%>
-					<%-- 코멘트는 작성자만 삭제할 수 있다. --%>
+					<%-- 로그마다 코멘트 창이 달려야 한다.
+					코멘트 등록 버튼을 누르면 코멘트 목록이 비동기로 바뀌어야 한다.
+					코멘트는 작성자만 삭제할 수 있다. --%>
 					<c:forEach items="${requestScope.logsList}" var="logs">
 						<!-- 로그내용 -->
 						<div class="logContent">
