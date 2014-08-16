@@ -114,6 +114,7 @@ public class ProgUserController {
 		return resultMsg;
 	}
 	
+
 	// 프로필 사진 등록
 	@RequestMapping(value = "uPhotoUpload.do", method = RequestMethod.POST)
 	@ResponseBody
