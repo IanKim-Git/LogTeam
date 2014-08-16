@@ -158,7 +158,7 @@
 		 });//end of 코멘트 등록
 		 		
 		//로그화면 초기화
-		getLogs();
+//		getLogs();
 		
 	});//end of ready
 </script>
