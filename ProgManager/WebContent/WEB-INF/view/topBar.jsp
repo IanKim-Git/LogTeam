@@ -188,6 +188,10 @@
      <div id="bar">
         <!-- Login Starts Here -->
     	<div id="loginContainer">
+    		<%-- <img id="barUserPhoto" src="./ProgFile/uphoto/${requestScope.photo}" width="100" height="100" border="3" style="margin: 61px 5px 5px 25px;"> --%>
+    		<img id="barUserPhoto" src="${requestScope.photo}" width="100" height="100" border="3" style="margin: 61px 5px 5px 25px;">
+    		<input type="text" value="${requestScope.photo}">
+    		
 	        <a href="#" id="loginButton"><span>Logout</span><em></em></a>
 	        <div id="loginBox">                
 	            <form action="idPwCheck.do" method="post" id="loginForm">

@@ -32,9 +32,11 @@ public class ProgUserController {
 		model.addAttribute("pw", upw);
 
 		ProgUserBean pu = puService.userCheck(uemail, upw);
+		
 		if (pu != null) {
 			model.addAttribute("name", pu.getUname());
 			model.addAttribute("phone", pu.getUphone());
+			model.addAttribute("photo", pu.getuPhoto());
 			model.addAttribute("title", "메인 화면");
 			return "successView";
 		}
@@ -113,25 +115,26 @@ public class ProgUserController {
 	}
 	
 	// 프로필 사진 등록
-		@RequestMapping(value = "uPhotoUpload.do", method = RequestMethod.POST)
-		@ResponseBody
-		public String updateUserPhoto(@RequestParam("file-0")  MultipartFile file, @RequestParam("name") String uemail) {
-			String resultMsg = "no";
-			//int result = puService.userUpdateInfo(new ProgUserBean(uemail, uname, upw, uphone));
-			String fileName = uemail;
-			fileName += new java.text.SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
-			fileName += file.getOriginalFilename();
-			try{
-				//폴더에 파일 저장
-				file.transferTo(new File("C:/ProgFile/uphoto/" + fileName));
-				int result = puService.userPhoto(new ProgUserPhotoBean(uemail, "C:/ProgFile/uphoto/"+fileName));
-				if(result>0)
-					resultMsg = "ok";
-			}catch(Exception e){
-				e.printStackTrace();
-			}
-			return resultMsg;
+	@RequestMapping(value = "uPhotoUpload.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String updateUserPhoto(@RequestParam("file-0")  MultipartFile file, @RequestParam("name") String uemail) {
+		String resultMsg = "no";
+		String fileName =  uemail;
+			   fileName += new java.text.SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
+			   fileName += file.getOriginalFilename();
+		String filePath = "C:/Users/Ian/git/LogTeam/ProgManager/WebContent/ProgFile/uphoto/";
+		String filePath2 = "D:/2014KODB/slogProject/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ProgManager/ProgFile/uphoto/";
+		try{
+			//폴더에 파일 저장
+			file.transferTo(new File(filePath2+fileName));
+			int result = puService.userPhoto(new ProgUserPhotoBean(uemail, "./ProgFile/uphoto/"+fileName));
+			if(result>0)
+				resultMsg = "ok";
+		}catch(Exception e){
+			e.printStackTrace();
 		}
+		return resultMsg;
+	}
 
 	// 회원 탈퇴
 	@RequestMapping(value = "delete.do", method = RequestMethod.POST)

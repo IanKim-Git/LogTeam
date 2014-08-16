@@ -27,12 +27,14 @@
 	String pw = (String)request.getAttribute("pw");
 	String name = (String)request.getAttribute("name");
 	String phone = (String)request.getAttribute("phone");
+	String photo = (String)request.getAttribute("photo");
 	
 	HashMap userData = new HashMap();
 	userData.put("uemail", email);
 	userData.put("upw", pw);
 	userData.put("uname", name);
 	userData.put("uphone", phone);
+	userData.put("uphoto", photo);
 	session.setAttribute("userData", userData);
 %>
 

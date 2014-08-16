@@ -15,7 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    
    <!-- 로그인 -->
    <select id="IdPwCheck" parameterType="puBean" resultMap="rmPuBean">
-      select uemail, uname, upw, uphone, uprocnt from proguser where uemail=#{uemail} and upw=#{upw}
+      select uemail, uname, upw, uphone, uphoto, uprocnt from proguser where uemail=#{uemail} and upw=#{upw}
    </select>
    
    <!-- 회원가입 : 전화번호가 있는 경우 -->
