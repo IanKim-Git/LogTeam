@@ -124,7 +124,7 @@ public class ProjectController {
 		model.addAttribute("pnum", pnum);
 		model.addAttribute("commentsList", lcService.allPlcs(Integer.parseInt(pnum)));
 		model.addAttribute("logsList", logService.allLogs(Integer.parseInt(pnum)));
-		return "logList2";
+		return "logList";
 	}
 	
 	//팀원성과도로 이동

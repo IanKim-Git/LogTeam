@@ -31,9 +31,9 @@
 					jb(data.list).each(function(index, item) {//{no:값, name:값,...}
 						table += "<tr><td>" + (count--) + "</td><td>" + item.ancontent + "</td><td>" +  item.andate + "</td><td>" +  item.an_uemail + "</td>";
 						if(item.animportance == 3){
-							table += "<td>상</td><td>";
+							table += "<td>상</td>";
 						}else if(item.animportance == 2){
-							table += "<td>중</td><td>";
+							table += "<td>중</td>";
 						}else if(item.animportance == 1){
 							table += "<td>하</td>";
 						}
