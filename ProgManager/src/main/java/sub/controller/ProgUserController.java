@@ -131,7 +131,7 @@ public class ProgUserController {
 		//황수남 파일 패스
 		String filePath3 = "";
 		//박다은 파일 패스
-		String filePath4 = "";
+		String filePath4 = "C:\2014KODB/KODBFinalProject/GitTest/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ProgManager/ProgFile/uphoto/";
 		try{
 			//폴더에 파일 저장
 			file.transferTo(new File(filePath1+fileName));
