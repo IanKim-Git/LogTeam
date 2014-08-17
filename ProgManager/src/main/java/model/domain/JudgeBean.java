@@ -3,15 +3,15 @@ package model.domain;
 public class JudgeBean {
 	private String j_uemail;
 	private int j_lnum;
-	private int jscore;
 	private int j_l_pnum;
+	private int jscore;
 	
 	public JudgeBean() {}
-	public JudgeBean(String j_uemail, int j_lnum, int jscore, int j_l_pnum) {
+	public JudgeBean(String j_uemail, int j_lnum, int j_l_pnum, int jscore) {
 		this.j_uemail = j_uemail;
 		this.j_lnum = j_lnum;
-		this.jscore = jscore;
 		this.j_l_pnum = j_l_pnum;
+		this.jscore = jscore;
 	}
 	
 	public JudgeBean(int j_lnum, String j_uemail) {

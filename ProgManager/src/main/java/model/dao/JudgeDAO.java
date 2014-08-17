@@ -50,6 +50,7 @@ public class JudgeDAO {
 		}
 		return list;
 	}
+	
 	//해당 프로젝트에서 로그에 대한 모든 평가 목록들
 	public List<JudgeBean> judgeList(int j_l_pnum){
 		SqlSession session = null;

@@ -203,8 +203,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- ### 평가용 SQL문 ### -->
 	<!-- 평가 등록 -->
 	<insert id="evaluation" parameterType="judgeBean">
-		insert into judge (j_uemail, j_lnum, jscore, j_l_pnum)
-		values (#{j_uemail}, #{j_lnum}, #{jscore}, #{j_l_pnum})
+		insert into judge (j_uemail, j_lnum, j_l_pnum, jscore)
+		values (#{j_uemail}, #{j_lnum}, #{j_l_pnum}, #{jscore})
 	</insert>
 	
 	<!-- 평가인 id 중복 확인 -->
