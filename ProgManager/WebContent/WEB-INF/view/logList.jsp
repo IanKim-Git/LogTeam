@@ -25,11 +25,13 @@
 				url : "allLogs.do", 
 				type : "post",
 				dataType : "json", 					//결과데이터타입
-				data : "pnum="+jb("#l_pnum").val(),
+				data : "pnum="+jb("#l_pnum").val() +"&uemail="+jb("#l_uemail").val(),
 				success : function(data) {
 					var div = "";
 					jb("#setLogs").children().remove();
 //					alert(data.clist.length);
+//					alert(data.jlist[0]);
+					var flag = false;
 					jb(data.list).each(function(index, item) {//{no:값, name:값,...}
 						//로그 div
 					 	div += "<div class='logContent' id='"+ item.lnum +"'><table id='logTable'><tr><td>＃  </td><td>"+ item.l_uemail +"</td><td>"+ item.ltext +"</td></tr>";
@@ -39,7 +41,22 @@
 						}else if(item.lpublic == 1){
 							div += "<td>공개</td>";
 						}
-						div += "<td>"+ item.ladmission +"</td><td>"+ item.ldata + "</td></tr></table></div>";
+						div += "<td>"+ item.ladmission +"</td><td><span>"+ item.ldata + "<span> <span>";
+						jb(data.jlist).each(function(index, jitem){
+							if(jitem.j_uemail == item.l_uemail && jitem.j_lnum == item.lnum){
+								flag = true;								
+							}else{
+								flag = false;
+							}
+						});
+						if(flag){
+							div += "이미 평가하셨습니다.";
+						}else{
+							div += "<input type='button' id='like' value='좋아요'>"+
+									"<input type='button' id='soso' value='그저그래요'>"+
+									"<input type='button' id='hate' value='싫어요'>";
+						}
+						div += "</span></td></tr></table></div>";
 						//div += "<td><input type='button' value='코멘트 등록' id='addLc' name='"+ item.lnum +"'></td></tr></table></div>";
 						
 						//해당 로그의 코멘트 목록 div
@@ -158,7 +175,7 @@
 		 });//end of 코멘트 등록
 		 		
 		//로그화면 초기화
-//		getLogs();
+		getLogs();
 		
 	});//end of ready
 </script>
@@ -203,6 +220,7 @@
 				</form>
 			</div><!-- end of writeLog -->
 			
+			<c:set scope="page" value="yo" var="key"/>
 			
 			<!-- 로그 목록 -->
 			<div id="logsList">
@@ -212,7 +230,7 @@
 					<%-- 로그마다 코멘트 창이 달려야 한다.
 					코멘트 등록 버튼을 누르면 코멘트 목록이 비동기로 바뀌어야 한다.
 					코멘트는 작성자만 삭제할 수 있다. --%>
-					<c:forEach items="${requestScope.logsList}" var="logs">
+					<c:forEach items="${requestScope.logsList}" var="logs" >
 						<!-- 로그내용 -->
 						<div class="logContent">
 							<table id="logTable">
@@ -225,7 +243,25 @@
 									<c:if test="${logs.lpublic == 0}"><td>비공개</td></c:if>
 									<c:if test="${logs.lpublic == 1}"><td>공개</td></c:if>
 									<td>${logs.ladmission}</td>
-									<td>${logs.ldata}</td>
+									<td>
+										<span>${logs.ldata}</span>
+										<span>
+											<%-- <c:forEach items="${sessionScope.judgesList}" var="judges" varStatus="status">
+												<c:choose>
+													<c:when test="${pageScope.key == n}">
+														이미 평가하셨습니다.
+														<c:set scope="page" value="y" var="key"/>
+													</c:when>
+													<c:otherwise>
+														<input type="button" id="like" value="좋아요">
+														<input type="button" id="soso" value="그저그래요">
+														<input type="button" id="hate" value="싫어요">
+														<c:set scope="page" value="n" var="key"/>
+													</c:otherwise>
+												</c:choose>													
+											</c:forEach> --%>	
+										</span>
+									</td>
 								</tr>
 							</table>
 						</div><!-- end of logContent -->
@@ -269,12 +305,12 @@
 							</form>
 						</div><!-- end of lcWrite -->
 					
-					</c:forEach><!-- end of log loop -->
-					
+					</c:forEach><!-- end of judge loop -->
 				</div><!-- end of setLogs -->
 				
 			</div><!-- end of logsList -->		
 		</fieldset>	
 	</div><!-- end of logsView -->	
+	<c:out value="${pageScope.key }"/>
 </body>
 </html>

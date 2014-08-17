@@ -18,6 +18,10 @@ public class JudgeBean {
 		this.j_lnum = j_lnum;
 		this.j_uemail = j_uemail;
 	}
+	public JudgeBean(String j_uemail, int j_l_pnum) {
+		this.j_uemail = j_uemail;
+		this.j_l_pnum = j_l_pnum;
+	}
 	public String getJ_uemail() {
 		return j_uemail;
 	}

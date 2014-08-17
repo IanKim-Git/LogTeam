@@ -39,6 +39,7 @@
 	<bean id="lcService" class="model.service.LogcommentService" />
 	
 	<bean id="judgeDao" class="model.dao.JudgeDAO"/>
+	<bean id="judgeService" class="model.service.JudgeService" />
 	
 	<!-- Json 응답을 위한 설정 -->
 	<!--<bean id="jsonView" class="net.sf.json.spring.web.servlet.view.JsonView" >
