@@ -38,6 +38,8 @@
 	<bean id="lcDao" class="model.dao.LogcommentDAO"/>
 	<bean id="lcService" class="model.service.LogcommentService" />
 	
+	<bean id="judgeDao" class="model.dao.JudgeDAO"/>
+	
 	<!-- Json 응답을 위한 설정 -->
 	<!--<bean id="jsonView" class="net.sf.json.spring.web.servlet.view.JsonView" >
 		<property name="contentType" value="text/html;charset=UTF-8" /> 

@@ -198,6 +198,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="lcDelete" parameterType="int">
 		delete logcomment where cnum=#{cnum}
 	</delete>
+	
+	
+	<!-- ### 평가용 SQL문 ### -->
+	<!-- 평가 등록 -->
+	<insert id="evaluation" parameterType="judgeBean">
+		insert into judge (j_uemail, j_lnum, jscore, j_l_pnum)
+		values (#{j_uemail}, #{j_lnum}, #{jscore}, #{j_l_pnum})
+	</insert>
+	
+	<!-- 평가인 id 중복 확인 -->
+	<select id="dupCheck" parameterType="judgeBean" resultType="String">
+		select j_uemail from judge where j_lnum=#{j_lnum} and j_uemail=#{j_uemail}
+	</select>
+	
+	<!-- 해당 프로젝트의 유저의 평가점수 전부 반환 -->
+	<select id="getScores" parameterType="String" resultType="int">
+		select jscore from judge, log where j_lnum=lnum and l_uemail=#{l_uemail}
+	</select>
+		
 </mapper>
 
 
