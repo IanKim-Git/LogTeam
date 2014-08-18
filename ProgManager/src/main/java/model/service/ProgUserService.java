@@ -52,5 +52,10 @@ public class ProgUserService {
 	public List projectUserList(int pnum){
 		return puDao.allProjectUsers(pnum);
 	}
+	
+	//해당 프로젝트에 속한 회원의 사진과 이메일 반환
+	public List<ProgUserPhotoBean> getUphotoUemail(int up_pnum){
+		return puDao.getUphotoUemail(up_pnum);
+	}
 
 }

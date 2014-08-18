@@ -6,7 +6,7 @@ public class LogBean {
 	private String l_uemail;	//not null
 	private String ldata;		//not null
 	private String ltext;
-	//private ? lphoto;
+	private String lphoto;
 	//private ? lfile;
 	private int lpublic;		//not null
 	private int ladmission;	//not null
@@ -29,7 +29,26 @@ public class LogBean {
 		this.lpublic = lpublic;
 		this.ladmission = ladmission;
 	}
-	
+	public LogBean(int lnum, int l_pnum, String l_uemail, String ldata, String ltext, int lpublic, int ladmission, String lphoto) {
+		this.lnum = lnum;
+		this.l_pnum = l_pnum;
+		this.l_uemail = l_uemail;
+		this.ldata = ldata;
+		this.ltext = ltext;
+		this.lpublic = lpublic;
+		this.ladmission = ladmission;
+		this.lphoto = lphoto;
+	}
+	public LogBean(int lnum, int l_pnum, String l_uemail, String ldata, String ltext, String lphoto, int lpublic, int ladmission) {
+		this.lnum = lnum;
+		this.l_pnum = l_pnum;
+		this.l_uemail = l_uemail;
+		this.ldata = ldata;
+		this.ltext = ltext;
+		this.lphoto = lphoto;
+		this.lpublic = lpublic;
+		this.ladmission = ladmission;
+	}
 	public LogBean(int l_pnum, String l_uemail, String ltext) {
 		this.l_pnum = l_pnum;
 		this.l_uemail = l_uemail;
@@ -41,6 +60,18 @@ public class LogBean {
 		this.ltext = ltext;
 		this.lpublic = lpublic;
 	}
+	public LogBean(int l_pnum, String l_uemail, String ltext, int lpublic, String lphoto) {
+		this.l_pnum = l_pnum;
+		this.l_uemail = l_uemail;
+		this.ltext = ltext;
+		this.lpublic = lpublic;
+		this.lphoto = lphoto;
+	}
+	public LogBean(int lnum, String lphoto) {
+		this.lnum = lnum;
+		this.lphoto = lphoto;
+	}
+	
 	public int getLnum() {
 		return lnum;
 	}
@@ -83,6 +114,12 @@ public class LogBean {
 	public void setLadmission(int ladmission) {
 		this.ladmission = ladmission;
 	}
+	public String getLphoto() {
+		return lphoto;
+	}
+	public void setLphoto(String lphoto) {
+		this.lphoto = lphoto;
+	}
 	
 	@Override
 	public String toString() {
@@ -96,6 +133,8 @@ public class LogBean {
 		builder.append(ldata);
 		builder.append(", ltext=");
 		builder.append(ltext);
+		builder.append(", lphoto=");
+		builder.append(lphoto);
 		builder.append(", lpublic=");
 		builder.append(lpublic);
 		builder.append(", ladmission=");
@@ -103,7 +142,4 @@ public class LogBean {
 		builder.append("]");
 		return builder.toString();
 	}
-	
-	
-	
 }

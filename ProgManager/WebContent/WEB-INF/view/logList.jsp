@@ -32,11 +32,22 @@
 					var flag = 0;
 					var msg = "";
 					jb(data.list).each(function(index, item) {//{no:값, name:값,...}
-						
 						div += "<div class='eachLog' id='"+ item.lnum +"'>";
 						//로그 div
-					 	div += "<div class='logContent' id='logContent"+ item.lnum +"'><table id='logTable'><tr><td>＃  </td><td>"+ item.l_uemail +"</td><td>"+ item.ltext +"</td></tr>";
-						div += "<tr>";
+					 	div += "<div class='logContent' id='logContent"+ item.lnum +"'><table class='logTable'><tr>";
+					 	jb(data.ulist).each(function(index, uitem){
+					 		if(item.l_uemail == uitem.uemail){
+					 			div += "<td><img id='userProfilePhoto' src='" + uitem.uphoto + "' width='50' height='50' border='3' style='margin: -5px 5px 5px 5px;'></td></td>";
+					 		}
+					 	});
+					 	
+					 	
+					 	div += "<td>"+ item.l_uemail +"</td><td></td></tr>";
+					 	
+					 	div += "<tr><td></td><td>"+ item.ltext +"<br></td><td></td></tr>";
+						div += "<tr><td></td>";
+						div += "<td><img id='logPhoto' src='"+ item.lphoto +"' width='80%' height='80%' border='0' style='margin: -5px 5px 5px 5px;'><br>";
+						div += "<td></td></tr><tr>";
 						if(item.lpublic == 0){
 							div += "<td>비공개</td>";
 						}else if(item.lpublic == 1){
@@ -109,11 +120,17 @@
 					
 					//공개 비공개 설정
 					jb(data.list).each(function(indext, item){
-						if(item.lpublic == 0 && item.l_uemail != jb("#l_uemail").val()){
-							jb("#"+item.lnum).css({"display":"none"});
-						}else if(item.lpublic == 0 && item.l_uemail == jb("#l_uemail").val()){
+						
+						if(item.lpublic == 1){
 							jb("#"+item.lnum).css({"display":"block"});
+						}else if(item.lpublic == 0){
+							if(item.l_uemail != jb("#l_uemail").val()){
+								jb("#"+item.lnum).css({"display":"none"});
+							}else if(item.l_uemail == jb("#l_uemail").val()){
+								jb("#"+item.lnum).css({"display":"block"});
+							}
 						}
+						
 					});
 				},
 				error : function(err) {//실패했을때
@@ -123,8 +140,16 @@
 			});//end of ajax
 		} //end of getLogs()
 		
-		//로그 등록
+		//로그 등록 : with photo
 		jb("#write").click(function() {
+			var data = new FormData();
+			data.append('l_pnum', jb("#l_pnum").val());
+			data.append('l_uemail', jb("#l_uemail").val());
+			data.append('ltext', jb("#ltext").val());
+			data.append('lpublic', jb("#lpublic").val());
+			jb.each($("#lphoto")[0].files, function(i, file) {
+			    	data.append('file-' + i, file);
+			});
 			if(jb("#ltext").val() == ""){
 				alert("내용을 입력하세요.");
 			}else{
@@ -132,7 +157,9 @@
 					url : "write.do",
 					type : "post",
 					dataType : "text", 				
-					data : jb("#writeForm").serialize(),
+					data : data,
+					processData: false,
+		            contentType: false,
 					success : function(data) {
 						if (data == "ok") {
 							alert("로그 작성 성공");
@@ -147,7 +174,7 @@
 					error : function(data) {//200이 안 넘어 왔을 때
 						alert(data + ' : 로그 작성 실행시 에러 발생');
 					}
-				}); //end of ajax
+				}); //end of ajax 
 			}
 		});//end of 로그 작성 로직
 		
@@ -234,10 +261,10 @@
 		<fieldset>
 			<!-- 로그 등록창 -->
 			<div id="writeLog">
-				<form action="write.do" id="writeForm" method="post">
+				<form action="write.do" id="writeForm" method="post" enctype="multipart/form-data">
 					<input type="hidden" id="l_pnum" name="l_pnum" value="${requestScope.pnum}">
 					<input type="hidden" id="l_uemail" name="l_uemail" value="${sessionScope.userData.uemail}">
-					<table>
+					<table >
 						<!-- 내용 -->
 						<tr>
 							<th rowspan="5">
@@ -253,9 +280,17 @@
 								<option value="1">공개</option>
 							</select>
 							</td>
+							<td>
+								<label for="photo">Log Photo</label><br>
+								<!-- <form action="lPhotoUpload.do" method="post" id="lphotoUpload" enctype="multipart/form-data"> -->
+								<input type="file" name="lphoto" id="lphoto"/>
+								<!-- </form> -->
+							</td>
 						</tr>
 						<tr><td></td></tr>
-						<tr><td></td></tr>
+						<tr>
+							<td></td>
+						</tr>
 						<!-- 등록버튼 -->
 						<tr>
 							<td>
@@ -278,11 +313,25 @@
 						<div class="eachLog" id="${logs.lnum}">
 							<!-- 로그내용 -->
 							<div class="logContent">
-								<table id="logTable">
+								<table class="logTable">
 									<tr>
-										<td>＃  </td>
+										<td>
+											<img id="userProfilePhoto" src="${sessionScope.userData.uphoto}" width="50" height="50" border="3" style="margin: -5px 5px 5px 5px;">
+										</td>
 										<td>${logs.l_uemail}</td>
-										<td>${logs.ltext}</td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td>${logs.ltext}<br></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td>
+											<img id="logPhoto" src="${logs.lphoto}" width="80%" height="80%" border="0" style="margin: -5px 5px 5px 5px;"><br>
+										</td>
+										<td></td>
 									</tr>
 									<tr>
 										<c:if test="${logs.lpublic == 0}"><td>비공개</td></c:if>

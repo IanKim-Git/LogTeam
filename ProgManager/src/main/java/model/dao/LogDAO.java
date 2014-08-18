@@ -52,8 +52,22 @@ public class LogDAO {
 		}
 		return result;
 	}
-	 
-	 
+	
+	//로그 작성 : with photo
+	public int logWritePhoto(LogBean lb) {
+		SqlSession session = null;
+		boolean flag = false;
+		int result = 0;
+		System.out.println("################################# 이미지 : "+lb.getLphoto());
+		try {
+			session = DBUtil.getSqlSession();
+			result = session.insert("prog.logWritePhoto", lb);
+			flag = result > 0 ? true : false;
+		} finally {
+			DBUtil.closeSqlSession(flag, session);
+		}
+		return result;
+	}
 	
 	//단위 테스트
 	/*public static void main(String[] args){

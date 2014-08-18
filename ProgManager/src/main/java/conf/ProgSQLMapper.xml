@@ -52,7 +52,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    <select id="allUsers" resultMap="rmPuBean">
       select uemail, uname, upw, uphone, uprocnt from proguser
    </select>
-
+   
+   <!-- 해당 프로젝트에 있는 모든 회원의 프로필 사진과 이메일 확인 -->
+	<select id="getUphotoUemail" resultType="pupBean">
+		select uemail, uphoto from proguser, userproject where up_pnum=#{up_pnum} and uemail=up_uemail
+	</select>
 
 	<!-- ### 프로젝트용 쿼리문 ### -->
 	<!-- 새로운 프로젝트 추가 쿼리문  -->
@@ -95,7 +99,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!--  ### 로그용 SQL문 ###  -->
 	<!-- 해당 프로젝트의 모든 로그 출력 -->
 	<select id="allLogs" parameterType="int" resultType="logBean" >
-		select lnum, l_pnum, l_uemail, ldata, ltext, lpublic, ladmission from log where l_pnum=#{l_pnum} order by ldata desc
+		select lnum, l_pnum, l_uemail, ldata, ltext, lphoto, lpublic, ladmission from log where l_pnum=#{l_pnum} order by ldata desc
 	</select>
 	
 	<!-- 해당 로그 삭제 -->
@@ -121,6 +125,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into log(lnum, l_pnum, l_uemail, ldata, ltext, lpublic, ladmission)
 		values(seq_l.nextval , #{l_pnum}, #{l_uemail}, sysdate, #{ltext}, #{lpublic}, 0)
 	</insert>
+	
+	<!-- 로그 작성 : with photo -->
+	<insert id="logWritePhoto" parameterType="logBean">
+		insert into log(lnum, l_pnum, l_uemail, ldata, ltext, lpublic, lphoto, ladmission)
+		values(seq_l.nextval , #{l_pnum}, #{l_uemail}, sysdate, #{ltext}, #{lpublic}, #{lphoto}, 0)
+	</insert>
+	
 	
 	<!-- ### 공지사항용 SQL문 ### -->
 	<!-- 공지사항 불러오기 -->

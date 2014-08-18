@@ -139,6 +139,19 @@ public class ProgUserDAO {
 		return list;
 	}
 	
+	//해당 프로젝트에 있는 모든 회원의 프로필 사진과 이메일 확인
+	public List<ProgUserPhotoBean> getUphotoUemail(int up_pnum){
+		SqlSession session = null;
+		List<ProgUserPhotoBean> list = null;
+		try {
+			session = DBUtil.getSqlSession();
+			list = session.selectList("prog.getUphotoUemail", up_pnum);
+		} finally {
+			DBUtil.closeSqlSession(session);
+		}
+		return list;
+	}
+	
 	
 	//###단위 테스트###
 /*	public static void main(String[] args) {
