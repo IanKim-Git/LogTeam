@@ -126,15 +126,16 @@ public class ProgUserController {
 		
 		//김용두 파일 패스
 		String filePath1 = "D:/2014KODB/slogProject/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ProgManager/ProgFile/uphoto/";
+		String filePath12 = "C:/Users/Ian/git/LogTeam/ProgManager/WebContent/ProgFile/uphoto";
 		//박상태 파일 패스
 		String filePath2 = "";
 		//황수남 파일 패스
 		String filePath3 = "";
 		//박다은 파일 패스
-		String filePath4 = "C:\2014KODB/KODBFinalProject/GitTest/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ProgManager/ProgFile/uphoto/";
+		String filePath4 = "C:/2014KODB/KODBFinalProject/GitTest/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ProgManager/ProgFile/uphoto/";
 		try{
 			//폴더에 파일 저장
-			file.transferTo(new File(filePath1+fileName));
+			file.transferTo(new File(filePath4+fileName));
 			int result = puService.userPhoto(new ProgUserPhotoBean(uemail, "./ProgFile/uphoto/"+fileName));
 			if(result>0)
 				resultMsg = "ok";
