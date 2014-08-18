@@ -22,7 +22,7 @@
 	
 </head>
 
-<%
+<%-- <%
 	String email = (String)request.getAttribute("email");
 	String pw = (String)request.getAttribute("pw");
 	String name = (String)request.getAttribute("name");
@@ -36,7 +36,8 @@
 	userData.put("uphone", phone);
 	userData.put("uphoto", photo);
 	session.setAttribute("userData", userData);
-%>
+	유저 이메일 : ${sessionScope.userData.uemail}<br>
+%> --%>
 
 
 <script type="text/javascript">
@@ -101,7 +102,7 @@
 				type : "post",
 				dataType : "json", 					//결과데이터타입
 				success : function(data) {
-					document.getElementById("gridly").innerHTML="<div class='brick small' ><br><br><font color='black'><b>I'm Mento.</b></font></div>";					
+					document.getElementById("gridly").innerHTML="<div class='brick small' ><br><br><font color='black'><b>I'm Mentor.</b></font></div>";					
 
 					$(data.list).each(function(index, project) {
 						//alert(JSON.stringify(project));
@@ -171,7 +172,7 @@
 			Mento ID :<input type="text" name="pmento" /><br>
 			Start Date :<input type="text" name="pstart" /><br>
 			End Date :<input type="text" name="pend" /><br>
-			Leader :<input type="text" name="pleader" id="pleader" value="${requestScope.email}"/><br>
+			Leader :<input type="text" name="pleader" id="pleader" value="${sessionScope.userData.uemail}"/><br>
 		<br>
 		<br>
 		<input class='basicBtn' type="button" value="생성하기" id="btn">
@@ -187,7 +188,7 @@
 	   	<form name="joinProject.do" id="joinproform" method="post">
 			Project Number :     <input type="text"  name="pnum" id="pnum" /><br>
 			Project PassWord : <input type="password" name="ppw" /><br>
-			<input type="hidden" name="uemail" value="${requestScope.email}">
+			<input type="hidden" name="uemail" value="${sessionScope.userData.uemail}">
 		<br>
 		<br>
 		<input class='basicJoinBtn' type="button" value="참여하기" id="Joinbtn">

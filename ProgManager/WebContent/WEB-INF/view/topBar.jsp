@@ -4,7 +4,7 @@
 <html>
 <head>
      <meta http-equiv="X-UA-Compatible" content="text/html" charset="EUC-KR">
-	 <title>${requestScope.title }</title>
+	 <title>PLog Project : Project Select</title>
      <link rel="stylesheet" href="css/topBar.css" />
      <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.js' type='text/javascript'></script>
      <script src="js/login.js"></script>
@@ -178,7 +178,29 @@
 					alert(data + ' : 프로필 사진 등록 로직 실행시 에러 발생');
 				}
 			}); //end of ajax
+		});//end of profile button
+		
+		$("#loginButton").click(function(){
+			
+			alert("Thank You, Surf by again.");
+		    //location.href = '/WEB-INF/view/logout.jsp';
+			location.href = "<%=request.getContextPath()%>/logout.jsp";
+		    //location.href = './index.html';
+		    //location.href = '/logout.do';
+			//window.location.replace("./index.html");
+			//response.sendRedirect("logout.jsp");
+			/* $.ajax({
+				url : "sessLogout.do", 					//서버에 요청할 정보
+				type : "post",							//method방식
+				dataType : "text", 					//응답되는 데이터 타입
+				//data : "email=" + $("#email2").val(),	//서버에 전송할 데이터 no=입력된 데이터
+				//success : function(data) {},
+				error : function(err) { //응답 실패했을때 자동 실행되는 사용자 정의 함수(서버 자체의 검증 로직 자체가 부득이하게 안 된 경우에 실행)
+					alert(err + " : 로그아웃 실패! 다시 시도해보세요..");
+				}				
+			});//end of ajax	 */
 		});//end of Join button
+		
 		
    });//end of ready()
 </script>
@@ -189,63 +211,49 @@
         <!-- Login Starts Here -->
     	<div id="loginContainer">
     		<%-- <img id="barUserPhoto" src="./ProgFile/uphoto/${requestScope.photo}" width="100" height="100" border="3" style="margin: 61px 5px 5px 25px;"> --%>
-    		<img id="barUserPhoto" src="${sessionScope.userData.uphoto}" width="50" height="50" border="3" style="margin: -5px 5px 5px 5px;">
+    		<img id="barUserPhoto" src=${sessionScope.userData.uphoto} width="50" height="50" border="3" style="margin: -5px 5px 5px 5px;">
     		
 	        <a href="#" id="loginButton"><span>Logout</span><em></em></a>
-	        <div id="loginBox">                
-	            <form action="idPwCheck.do" method="post" id="loginForm">
-	                    <fieldset id="body">
-		                    <fieldset>
-		                        <label for="email">Email Address</label>
-		                        <input type="text" name="email" id="email" />
-		                    </fieldset>
-		                    <fieldset>
-		                         <label for="password">Password</label>
-		                         <input type="password" name="pw" id="pw" />
-		                    </fieldset>
-		                    <input type="submit" id="login" value="로그인" />
-	                    </fieldset>
-	             </form>
-	         </div>
-                <a href="#" id="JoinButton"><span>Inform</span><em></em></a>
-                <div style="clear:both"></div>
-       			<div id="JoinBox">
-       				<form action="insert.do" method="post" id="JoinForm">
-                        <fieldset id="body">
-                        	<fieldset>
-                                <label for="email2">ID(e-mail)</label>
-                               <input type="text" value="${requestScope.email}" disabled="disabled"/>
-                               <input type="hidden" name="email2" id="email2" value="${requestScope.email}"/>
-                            </fieldset>
-                            <fieldset>
-                                <label for="name">name</label>
-                                <input type="text" name="name" id="name" value="${requestScope.name}"/><br><span id="nameValidation"></span>
-                            </fieldset>
-                            <fieldset>
-                                <label for="password2">Password</label>
-                                <input type="password" name="pw2" id="pw2"/><br><span id="pwValidation"></span>
-                            </fieldset>
-                            <fieldset>
-                                <label for="pwAgain">Reenter Password</label>
-                                <input type="password" name="pwAgain" id="pwAgain"/><br><span id="pw2Validation"></span>
-                            </fieldset>
-                            <fieldset>
-                                <label for="phone">Phone Number(ex.000-0000-0000)</label>
-                                <input type="text" name="phone" id="phone" value="${requestScope.phone}">
-                            </fieldset>
-                            <fieldset>
-                                <label for="photo">Profile Photo</label>
-                                <form action="uPhotoUpload.do" method="post" id="uPhotoUpload" enctype="multipart/form-data">
-									<input type="file" name="uphoto" id="uphoto"/>
-								</form>
-                            </fieldset>
-                            <input type="button" id="Join" value="확인" />
-                            <input type="reset" id="resetSpan" value="취소" />
-                            <input type="button" id="leave" value="탈퇴" />
-                            <input type="button" id="uphotoUP" value="사진"/>
+	        
+            <a href="#" id="JoinButton"><span>Inform</span><em></em></a>
+            <div style="clear:both"></div>
+   			<div id="JoinBox">
+   				<form action="insert.do" method="post" id="JoinForm">
+                    <fieldset id="body">
+                    	<fieldset>
+                            <label for="email2">ID(e-mail)</label>
+                           <input type="text" value="${sessionScope.userData.uemail}" disabled="disabled"/>
+                           <input type="hidden" name="email2" id="email2" value="${sessionScope.userData.uemail}"/>
                         </fieldset>
-                    </form>
-       			</div>
+                        <fieldset>
+                            <label for="name">name</label>
+                            <input type="text" name="name" id="name" value="$${sessionScope.userData.uname}"/><br><span id="nameValidation"></span>
+                        </fieldset>
+                        <fieldset>
+                            <label for="password2">Password</label>
+                            <input type="password" name="pw2" id="pw2"/><br><span id="pwValidation"></span>
+                        </fieldset>
+                        <fieldset>
+                            <label for="pwAgain">Reenter Password</label>
+                            <input type="password" name="pwAgain" id="pwAgain"/><br><span id="pw2Validation"></span>
+                        </fieldset>
+                        <fieldset>
+                            <label for="phone">Phone Number(ex.000-0000-0000)</label>
+                            <input type="text" name="phone" id="phone" value="${sessionScope.userData.uphone}">
+                        </fieldset>
+                        <fieldset>
+                            <label for="photo">Profile Photo</label>
+                            <form action="uPhotoUpload.do" method="post" id="uPhotoUpload" enctype="multipart/form-data">
+					<input type="file" name="uphoto" id="uphoto"/>
+				</form>
+                        </fieldset>
+                        <input type="button" id="Join" value="확인" />
+                        <input type="reset" id="resetSpan" value="취소" />
+                        <input type="button" id="leave" value="탈퇴" />
+                        <input type="button" id="uphotoUP" value="사진"/>
+                    </fieldset>
+                </form>
+   			</div>
       </div>
             <!-- Join Ends Here -->
     </div>

@@ -1,6 +1,7 @@
 package sub.controller;
 
 import java.io.File;
+import java.util.HashMap;
 
 import javax.annotation.Resource;
 
@@ -17,10 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
+@SessionAttributes("userData")
 public class ProgUserController {
 	@Resource(name = "puService")
 	private ProgUserService puService;
@@ -28,19 +31,27 @@ public class ProgUserController {
 	// 로그인 할 때 아이디(이메일)와 비밀번호 확인
 	@RequestMapping(value = "idPwCheck.do", method = RequestMethod.POST)
 	public String idPwCheck(@RequestParam("email") String uemail, @RequestParam("pw") String upw, Model model) {
-		model.addAttribute("email", uemail);
-		model.addAttribute("pw", upw);
-
+		
+		HashMap userData = null;
 		ProgUserBean pu = puService.userCheck(uemail, upw);
 		
 		if (pu != null) {
-			model.addAttribute("name", pu.getUname());
-			model.addAttribute("phone", pu.getUphone());
-			model.addAttribute("photo", pu.getuPhoto());
-			model.addAttribute("title", "메인 화면");
+			userData = new HashMap();
+			userData.put("uemail", pu.getUemail());
+			userData.put("upw", pu.getUpw());
+			userData.put("uname", pu.getUname());
+			userData.put("uphone", pu.getUphone());
+			userData.put("uphoto", pu.getuPhoto());
+			model.addAttribute("userData", userData);
 			return "successView";
 		}
 		return "failView";
+	}
+	
+	// 로그 아웃
+	@RequestMapping(value = "sessLogout.do", method = RequestMethod.POST)
+	public String sessLogout(Model model) {
+			return "logout";
 	}
 	
 
@@ -126,7 +137,6 @@ public class ProgUserController {
 		
 		//김용두 파일 패스
 		String filePath1 = "D:/2014KODB/slogProject/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ProgManager/ProgFile/uphoto/";
-		String filePath12 = "C:/Users/Ian/git/LogTeam/ProgManager/WebContent/ProgFile/uphoto";
 		//박상태 파일 패스
 		String filePath2 = "";
 		//황수남 파일 패스
@@ -135,7 +145,7 @@ public class ProgUserController {
 		String filePath4 = "C:/2014KODB/KODBFinalProject/GitTest/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ProgManager/ProgFile/uphoto/";
 		try{
 			//폴더에 파일 저장
-			file.transferTo(new File(filePath4+fileName));
+			file.transferTo(new File(filePath1+fileName));
 			int result = puService.userPhoto(new ProgUserPhotoBean(uemail, "./ProgFile/uphoto/"+fileName));
 			if(result>0)
 				resultMsg = "ok";
@@ -175,5 +185,5 @@ public class ProgUserController {
 		model.addAttribute("title", "메인 화면");
 		return "successView";
 	}
-
+	
 }
