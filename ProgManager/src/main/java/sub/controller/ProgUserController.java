@@ -126,6 +126,7 @@ public class ProgUserController {
 		
 		//김용두 파일 패스
 		String filePath1 = "D:/2014KODB/slogProject/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ProgManager/ProgFile/uphoto/";
+		String filePath12 = "C:/Users/Ian/git/LogTeam/ProgManager/WebContent/ProgFile/uphoto";
 		//박상태 파일 패스
 		String filePath2 = "";
 		//황수남 파일 패스
