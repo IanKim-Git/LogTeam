@@ -7,7 +7,7 @@ public class LogBean {
 	private String ldata;		//not null
 	private String ltext;
 	private String lphoto;
-	//private ? lfile;
+	private String lfile;
 	private int lpublic;		//not null
 	private int ladmission;	//not null
 	
@@ -67,6 +67,16 @@ public class LogBean {
 		this.lpublic = lpublic;
 		this.lphoto = lphoto;
 	}
+	public LogBean(int l_pnum, String l_uemail, String ltext, int lpublic, String lphoto, String lfile) {
+		this.l_pnum = l_pnum;
+		this.l_uemail = l_uemail;
+		this.ltext = ltext;
+		this.lpublic = lpublic;
+		this.lphoto = lphoto;
+		this.lfile = lfile;
+	}
+	
+	
 	public LogBean(int lnum, String lphoto) {
 		this.lnum = lnum;
 		this.lphoto = lphoto;

@@ -66,7 +66,8 @@ public class LogController {
 		}
 		return result; //요청한 jsp 또는 html의 xhr에게 직접 응답
 	}
-/*	//로그 작성
+ 
+	//로그 작성
 	@RequestMapping(value="write.do", method=RequestMethod.POST)
 	@ResponseBody
 	public String insert(@RequestParam("l_pnum") String l_pnum, @RequestParam("l_uemail") String l_uemail,
@@ -83,9 +84,10 @@ public class LogController {
 			resultMsg = "ok";//정상 저장시 응답되는 데이터
 		}
 		return resultMsg;  
-	}	*/	
+	}	
+	
 	//로그 작성
-	@RequestMapping(value="write.do", method=RequestMethod.POST)
+	@RequestMapping(value="writePhoto.do", method=RequestMethod.POST)
 	@ResponseBody
 	public String insert(@RequestParam("file-0")  MultipartFile file, @RequestParam("l_pnum") String l_pnum,
 			@RequestParam("l_uemail") String l_uemail, @RequestParam("ltext") String ltext, @RequestParam("lpublic") String lpublic) {

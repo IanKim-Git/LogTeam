@@ -143,18 +143,39 @@
 		//로그 등록 : with photo
 		jb("#write").click(function() {
 			var data = new FormData();
+			var url = "write.do";
+			var fileFlag = 0;
+			
 			data.append('l_pnum', jb("#l_pnum").val());
 			data.append('l_uemail', jb("#l_uemail").val());
 			data.append('ltext', jb("#ltext").val());
 			data.append('lpublic', jb("#lpublic").val());
-			jb.each($("#lphoto")[0].files, function(i, file) {
+			
+			if(jb("#lphoto")[0].files.length != 0){
+				jb.each(jb("#lphoto")[0].files, function(i, file) {
 			    	data.append('file-' + i, file);
-			});
+				});
+				url = "writePhoto.do";
+				fileFalg += 1;
+			}
+			
+			if(jb("#lfile")[0].files.length != 0){
+				jb.each(jb("#lfile")[0].files, function(i, file) {
+		    	data.append('lfile-' + i, file);
+				}); 
+				url = "writeFile.do";
+				fileFlag += 1;
+			}
+			
+			if(fileFlag == 2){
+				url = "writePhotoFile.do";
+			}
+			
 			if(jb("#ltext").val() == ""){
 				alert("내용을 입력하세요.");
 			}else{
 				jb.ajax({
-					url : "write.do",
+					url : url,
 					type : "post",
 					dataType : "text", 				
 					data : data,
@@ -264,14 +285,8 @@
 				<form action="write.do" id="writeForm" method="post" enctype="multipart/form-data">
 					<input type="hidden" id="l_pnum" name="l_pnum" value="${requestScope.pnum}">
 					<input type="hidden" id="l_uemail" name="l_uemail" value="${sessionScope.userData.uemail}">
-					<table >
+					  <table >
 						<!-- 내용 -->
-						<tr>
-							<th rowspan="5">
-								<textarea id="ltext" name="ltext" rows="5" cols="60" ></textarea>
-							</th>
-						</tr>
-						<!-- 공개여부 -->
 						<tr>
 							<td>
 							<select id="lpublic" name="lpublic">
@@ -280,20 +295,23 @@
 								<option value="1">공개</option>
 							</select>
 							</td>
+						</tr>
+						<!-- 공개여부 -->
+						<tr>
 							<td>
-								<label for="photo">Log Photo</label><br>
-								<!-- <form action="lPhotoUpload.do" method="post" id="lphotoUpload" enctype="multipart/form-data"> -->
-								<input type="file" name="lphoto" id="lphoto"/>
-								<!-- </form> -->
+								<textarea id="ltext" name="ltext" rows="5" cols="60" ></textarea>
+							</td>
+							<td>
+								<div><label for="photo">Log Photo</label><br>
+								<input type="file" name="lphoto" id="lphoto" /></div>
+								<div><label for="file">Log File</label><br>
+								<input type="file" name="lfile" id="lfile"/></div>
 							</td>
 						</tr>
-						<tr><td></td></tr>
-						<tr>
-							<td></td>
-						</tr>
+						
 						<!-- 등록버튼 -->
 						<tr>
-							<td>
+							<td align="center">
 								<input type="button" id="write" value="로그등록">
 							</td>
 						</tr>
@@ -306,9 +324,9 @@
 				<!-- jQuery 함수 사용을 위해서 선언 -->
 				<div id="setLogs">
 					
-					<%-- 로그마다 코멘트 창이 달려야 한다.
+				<!--	로그마다 코멘트 창이 달려야 한다.
 					코멘트 등록 버튼을 누르면 코멘트 목록이 비동기로 바뀌어야 한다.
-					코멘트는 작성자만 삭제할 수 있다. --%>
+					코멘트는 작성자만 삭제할 수 있다. -->
 					<c:forEach items="${requestScope.logsList}" var="logs" >
 						<div class="eachLog" id="${logs.lnum}">
 							<!-- 로그내용 -->
@@ -385,12 +403,10 @@
 									</table>
 								</form>
 							</div><!-- end of lcWrite -->
-					
 						</div><!-- end of eachLog -->
-					
 					</c:forEach><!-- end of log loop -->
-				</div><!-- end of setLogs -->
 				
+				</div><!-- end of setLogs -->
 			</div><!-- end of logsList -->		
 		</fieldset>	
 	</div><!-- end of logsView -->	
