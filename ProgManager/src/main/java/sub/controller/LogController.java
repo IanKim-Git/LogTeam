@@ -24,7 +24,7 @@ public class LogController {
 	@Resource(name="lcService")
 	private LogcommentService lcService;
 	
-	//해당 프로젝트의 모든 로그들을 반환하는 메소드
+	//해당 프로젝트의 모든 로그들과 코멘트를 반환하는 메소드
 	@RequestMapping("allLogs.do")
 	public ModelAndView allLogs(@RequestParam("pnum") String l_pnum ){
 //		System.out.println("####################프로젝트 번호"+l_pnum);
