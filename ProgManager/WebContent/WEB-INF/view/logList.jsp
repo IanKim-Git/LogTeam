@@ -25,11 +25,12 @@
 				url : "allLogs.do", 
 				type : "post",
 				dataType : "json", 					//결과데이터타입
-				data : "pnum="+jb("#l_pnum").val(),
+				data : "pnum="+jb("#l_pnum").val() +"&uemail="+jb("#l_uemail").val(),
 				success : function(data) {
 					var div = "";
 					jb("#setLogs").children().remove();
-//					alert(data.clist.length);
+					var flag = 0;
+					var msg = "";
 					jb(data.list).each(function(index, item) {//{no:값, name:값,...}
 						//로그 div
 					 	div += "<div class='logContent' id='"+ item.lnum +"'><table id='logTable'><tr><td>＃  </td><td>"+ item.l_uemail +"</td><td>"+ item.ltext +"</td></tr>";
@@ -39,7 +40,38 @@
 						}else if(item.lpublic == 1){
 							div += "<td>공개</td>";
 						}
-						div += "<td>"+ item.ladmission +"</td><td>"+ item.ldata + "</td></tr></table></div>";
+						div += "<td>"+ item.ladmission +"</td><td><span>"+ item.ldata + "</span> <span>";
+						
+						//평가 여부 및 평가 버튼 출력
+						jb(data.jlist).each(function(index, jitem){
+							if(jitem.j_uemail == jb("#l_uemail").val() && jitem.j_lnum == item.lnum){
+								flag += 1;
+								msg = "이미 평가하셨습니다 : ";
+								if(jitem.jscore == 2){
+									msg += "좋아요";
+								}else if(jitem.jscore == 1){
+									msg += "그저그래요";
+								}else if(jitem.jscore == -1){
+									msg += "싫어요";
+								}
+							}
+						});
+						
+						if(flag > 0){
+							div += msg;
+						}else{
+							div += "<form action='evaluation.do' class='evaluationForm' id='evaluationForm"+ item.lnum +"' method='post'>";
+							div += "<input type='hidden' class='uemail' id='j_uemail"+ item.lnum +"' name='j_uemail'>";
+							div += "<input type='hidden' class='j_lnum' id='j_lnum"+ item.lnum +"' name='j_lnum' value='"+ item.lnum +"'>";
+							div += "<input type='hidden' id='j_l_pnum"+ item.lnum +"' name='j_l_pnum' value="+jb("#l_pnum").val()+">";
+							div += "<input type='button' class='judge' id='like' value='좋아요' name='2'>"+
+									"<input type='button' class='judge' id='soso' value='그저그래요' name='1'>"+
+									"<input type='button' class='judge' id='hate' value='싫어요' name='-1'>";
+							div += "</form>";
+						}
+						flag = 0; //flag 초기화
+						msg = ""; //msg 초기화
+						div += "</span></td></tr></table></div>";
 						//div += "<td><input type='button' value='코멘트 등록' id='addLc' name='"+ item.lnum +"'></td></tr></table></div>";
 						
 						//해당 로그의 코멘트 목록 div
@@ -107,7 +139,6 @@
 		
 		//코멘트 삭제 버튼을 눌렀을 때 코멘트 삭제
 		jb(document).on("click", "#del", function() {
-//			alert(jb(this).attr("name") + "삭제 성공");
 			jb.ajax({
 				url : "deleteLc.do", 
 				type : "post",
@@ -131,9 +162,6 @@
 		jb(document).on("click", "#writeLc", function() {
 			vLnum = "#"+jb(this).parent().parent().parent().parent().parent().attr("id"); //코멘트 등록하는 form의 id 추출
 			vCtext = "#"+jb(this).parent().parent().parent().attr("id"); // 코멘트 입력창이 있는 table의 id 추출
-//			alert(jb(vLnum).serialize() + " 등록 성공");
-//			alert(vCtext);
-//			alert(jb(vCtext + " textarea").attr("id"));
 			if(jb(vCtext + " textarea").val() == ""){
 				alert("내용을 입력하세요");
 			}else{
@@ -156,9 +184,30 @@
 				}); 
 			}
 		 });//end of 코멘트 등록
+		 
+		//평가 점수 전달
+		jb(document).on("click", ".judge", function() {
+			jb.ajax({
+				url : "evaluation.do", 
+				type : "post",
+				dataType : "text", 
+				data : jb("#"+jb(this).parent().attr("id")).serialize() + "&jscore=" + jb(this).attr("name"),
+				success : function(data) {
+					if (data == "ok") {
+						alert("평가 성공");
+						getLogs();
+					} else {
+						alert("평가 실패");
+					}
+				},
+				error : function(err) {//실패했을때
+					alert(err + " : 평가 실패");
+				}
+			});  
+		});//end of 평가
 		 		
 		//로그화면 초기화
-//		getLogs();
+		getLogs();
 		
 	});//end of ready
 </script>
@@ -203,6 +252,7 @@
 				</form>
 			</div><!-- end of writeLog -->
 			
+			<c:set scope="page" value="yo" var="key"/>
 			
 			<!-- 로그 목록 -->
 			<div id="logsList">
@@ -212,7 +262,7 @@
 					<%-- 로그마다 코멘트 창이 달려야 한다.
 					코멘트 등록 버튼을 누르면 코멘트 목록이 비동기로 바뀌어야 한다.
 					코멘트는 작성자만 삭제할 수 있다. --%>
-					<c:forEach items="${requestScope.logsList}" var="logs">
+					<c:forEach items="${requestScope.logsList}" var="logs" >
 						<!-- 로그내용 -->
 						<div class="logContent">
 							<table id="logTable">
@@ -225,7 +275,12 @@
 									<c:if test="${logs.lpublic == 0}"><td>비공개</td></c:if>
 									<c:if test="${logs.lpublic == 1}"><td>공개</td></c:if>
 									<td>${logs.ladmission}</td>
-									<td>${logs.ldata}</td>
+									<td>
+										<span>${logs.ldata}</span>
+										<span>
+											<!-- 평가 부분 -->
+										</span>
+									</td>
 								</tr>
 							</table>
 						</div><!-- end of logContent -->
@@ -249,7 +304,7 @@
 										</table>					
 								</div><!-- end of lcContent -->
 							</c:if>
-						</c:forEach>
+						</c:forEach><!-- end of comment loop -->
 						
 						<!-- 코멘트 입력창 -->
 						<div class="lcWrite">
@@ -270,11 +325,11 @@
 						</div><!-- end of lcWrite -->
 					
 					</c:forEach><!-- end of log loop -->
-					
 				</div><!-- end of setLogs -->
 				
 			</div><!-- end of logsList -->		
 		</fieldset>	
 	</div><!-- end of logsView -->	
+	<c:out value="${pageScope.key }"/>
 </body>
 </html>

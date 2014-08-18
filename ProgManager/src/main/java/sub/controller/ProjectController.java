@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import model.domain.ProjectBean;
+import model.service.JudgeService;
 import model.service.LogService;
 import model.service.LogcommentService;
 import model.service.ProgUserService;
@@ -31,6 +32,9 @@ public class ProjectController {
 	
 	@Resource(name="logService")
 	private LogService logService;
+	
+	@Resource(name="judgeService")
+	private JudgeService judgeService;
 
 	@RequestMapping(value="newProject.do", method=RequestMethod.POST)
 	@ResponseBody
@@ -124,6 +128,7 @@ public class ProjectController {
 		model.addAttribute("pnum", pnum);
 		model.addAttribute("commentsList", lcService.allPlcs(Integer.parseInt(pnum)));
 		model.addAttribute("logsList", logService.allLogs(Integer.parseInt(pnum)));
+		model.addAttribute("judgesList", judgeService.judgeList(Integer.parseInt(pnum)));
 		return "logList";
 	}
 	
