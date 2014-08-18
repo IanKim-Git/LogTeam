@@ -32,8 +32,10 @@
 					var flag = 0;
 					var msg = "";
 					jb(data.list).each(function(index, item) {//{no:값, name:값,...}
+						
+						div += "<div class='eachLog' id='"+ item.lnum +"'>";
 						//로그 div
-					 	div += "<div class='logContent' id='"+ item.lnum +"'><table id='logTable'><tr><td>＃  </td><td>"+ item.l_uemail +"</td><td>"+ item.ltext +"</td></tr>";
+					 	div += "<div class='logContent' id='logContent"+ item.lnum +"'><table id='logTable'><tr><td>＃  </td><td>"+ item.l_uemail +"</td><td>"+ item.ltext +"</td></tr>";
 						div += "<tr>";
 						if(item.lpublic == 0){
 							div += "<td>비공개</td>";
@@ -99,13 +101,25 @@
 						div += "<td><input type='button' id='writeLc' value='코멘트등록'></td></tr></tfoot></table>";
 						
 						div += "</form></div>";
+						
+						div += "</div>";
 					});
 					jb("#setLogs").html(div);
 					jb(".uemail").val(jb("#l_uemail").val());
+					
+					//공개 비공개 설정
+					jb(data.list).each(function(indext, item){
+						if(item.lpublic == 0 && item.l_uemail != jb("#l_uemail").val()){
+							jb("#"+item.lnum).css({"display":"none"});
+						}else if(item.lpublic == 0 && item.l_uemail == jb("#l_uemail").val()){
+							jb("#"+item.lnum).css({"display":"block"});
+						}
+					});
 				},
 				error : function(err) {//실패했을때
 					alert(err + " : 해당 프로젝트에는 로그가 아직 작성되지 않았습니다");
 				}
+				
 			});//end of ajax
 		} //end of getLogs()
 		
@@ -252,8 +266,6 @@
 				</form>
 			</div><!-- end of writeLog -->
 			
-			<c:set scope="page" value="yo" var="key"/>
-			
 			<!-- 로그 목록 -->
 			<div id="logsList">
 				<!-- jQuery 함수 사용을 위해서 선언 -->
@@ -263,66 +275,69 @@
 					코멘트 등록 버튼을 누르면 코멘트 목록이 비동기로 바뀌어야 한다.
 					코멘트는 작성자만 삭제할 수 있다. --%>
 					<c:forEach items="${requestScope.logsList}" var="logs" >
-						<!-- 로그내용 -->
-						<div class="logContent">
-							<table id="logTable">
-								<tr>
-									<td>＃  </td>
-									<td>${logs.l_uemail}</td>
-									<td>${logs.ltext}</td>
-								</tr>
-								<tr>
-									<c:if test="${logs.lpublic == 0}"><td>비공개</td></c:if>
-									<c:if test="${logs.lpublic == 1}"><td>공개</td></c:if>
-									<td>${logs.ladmission}</td>
-									<td>
-										<span>${logs.ldata}</span>
-										<span>
-											<!-- 평가 부분 -->
-										</span>
-									</td>
-								</tr>
-							</table>
-						</div><!-- end of logContent -->
-						
-						<!-- 코멘트 목록 -->
-						<c:forEach items="${requestScope.commentsList}" var="comment">
-							<c:if test="${comment.c_lnum == logs.lnum }">
-								<div class="lcContent">
-									<table>
-											<tbody id="commentBody">
-												<tr>
-													<td>-→</td>
-													<td>${comment.c_uemail }</td>
-													<td>${comment.ctext}</td>
-													<td>${comment.cdate}</td>
-													<c:if test="${comment.c_uemail == sessionScope.userData.uemail}">
-														<td><input type="button" value="삭제" id="del" name="${comment.cnum}"></td>
-													</c:if>
-												</tr>
-											</tbody>
-										</table>					
-								</div><!-- end of lcContent -->
-							</c:if>
-						</c:forEach><!-- end of comment loop -->
-						
-						<!-- 코멘트 입력창 -->
-						<div class="lcWrite">
-							<form action="writeLc.do" class="writeLcForm" id="writeLcForm${logs.lnum}" method="post">
-								<input type="hidden" id="c_lnum${logs.lnum}" name="c_lnum" value="${logs.lnum}">
-								<input type="hidden" id="c_uemail${logs.lnum}" name="c_uemail" value="${sessionScope.userData.uemail}">
-								<input type="hidden" id="c_l_pnum${logs.lnum}" name="c_l_pnum" value="${logs.l_pnum}">
-								
-								<table>
-									<tfoot id="writeComment${logs.lnum}">
-										<tr>
-											<td><textarea id="ctext${logs.lnum}" name="ctext" rows="2" cols="30"></textarea></td>
-											<td><input type="button" id="writeLc" value="코멘트등록"></td>
-										</tr>
-									</tfoot>
+						<div class="eachLog" id="${logs.lnum}">
+							<!-- 로그내용 -->
+							<div class="logContent">
+								<table id="logTable">
+									<tr>
+										<td>＃  </td>
+										<td>${logs.l_uemail}</td>
+										<td>${logs.ltext}</td>
+									</tr>
+									<tr>
+										<c:if test="${logs.lpublic == 0}"><td>비공개</td></c:if>
+										<c:if test="${logs.lpublic == 1}"><td>공개</td></c:if>
+										<td>${logs.ladmission}</td>
+										<td>
+											<span>${logs.ldata}</span>
+											<span>
+												<!-- 평가 부분 -->
+											</span>
+										</td>
+									</tr>
 								</table>
-							</form>
-						</div><!-- end of lcWrite -->
+							</div><!-- end of logContent -->
+							
+							<!-- 코멘트 목록 -->
+							<c:forEach items="${requestScope.commentsList}" var="comment">
+								<c:if test="${comment.c_lnum == logs.lnum }">
+									<div class="lcContent">
+										<table>
+												<tbody id="commentBody">
+													<tr>
+														<td>-→</td>
+														<td>${comment.c_uemail }</td>
+														<td>${comment.ctext}</td>
+														<td>${comment.cdate}</td>
+														<c:if test="${comment.c_uemail == sessionScope.userData.uemail}">
+															<td><input type="button" value="삭제" id="del" name="${comment.cnum}"></td>
+														</c:if>
+													</tr>
+												</tbody>
+											</table>					
+									</div><!-- end of lcContent -->
+								</c:if>
+							</c:forEach><!-- end of comment loop -->
+							
+							<!-- 코멘트 입력창 -->
+							<div class="lcWrite">
+								<form action="writeLc.do" class="writeLcForm" id="writeLcForm${logs.lnum}" method="post">
+									<input type="hidden" id="c_lnum${logs.lnum}" name="c_lnum" value="${logs.lnum}">
+									<input type="hidden" id="c_uemail${logs.lnum}" name="c_uemail" value="${sessionScope.userData.uemail}">
+									<input type="hidden" id="c_l_pnum${logs.lnum}" name="c_l_pnum" value="${logs.l_pnum}">
+									
+									<table>
+										<tfoot id="writeComment${logs.lnum}">
+											<tr>
+												<td><textarea id="ctext${logs.lnum}" name="ctext" rows="2" cols="30"></textarea></td>
+												<td><input type="button" id="writeLc" value="코멘트등록"></td>
+											</tr>
+										</tfoot>
+									</table>
+								</form>
+							</div><!-- end of lcWrite -->
+					
+						</div><!-- end of eachLog -->
 					
 					</c:forEach><!-- end of log loop -->
 				</div><!-- end of setLogs -->
@@ -330,6 +345,5 @@
 			</div><!-- end of logsList -->		
 		</fieldset>	
 	</div><!-- end of logsView -->	
-	<c:out value="${pageScope.key }"/>
 </body>
 </html>
