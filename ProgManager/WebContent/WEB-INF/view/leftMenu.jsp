@@ -4,12 +4,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Project Main</title>
-	
+	<script src="js/jquery-1.4.3.min.js"></script>
 	<link rel="stylesheet" href="css/leftMenu.css" type="text/css" media="screen">
-	
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-	
 	<script src="js/cufon-yui.js" type="text/javascript"></script>
 	<script src="js/BabelSans_500.font.js" type="text/javascript"></script>
 	<script src="js/jquery.easing.1.3.js" type="text/javascript"></script> 

@@ -17,6 +17,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
      <typeAlias type="model.domain.LogBean" alias="logBean"/>
      <typeAlias type="model.domain.AnnouncementBean" alias="anBean"/>
      <typeAlias type="model.domain.AccountBean" alias="acBean"/>
+     <typeAlias type="model.domain.scheduleBean" alias="scheBean"/>
    </typeAliases>
    
 	<environments default="development">

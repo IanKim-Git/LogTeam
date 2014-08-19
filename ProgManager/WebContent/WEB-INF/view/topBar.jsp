@@ -6,13 +6,11 @@
      <meta http-equiv="X-UA-Compatible" content="text/html; charset=EUC-KR">
 	 <title>${requestScope.title }</title>
      <link rel="stylesheet" href="css/topBar.css" />
-     <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.js' type='text/javascript'></script>
-     <script src="js/login.js"></script>
+   	 <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/login.js"></script>
      <script src="js/formValidation.js"></script>
-<!-- 	 <script src="js/jquery-1.10.2.js"></script> -->
 
 </head>
-
 
 <script type="text/javascript">
 
@@ -156,7 +154,7 @@
      <div id="bar">
         <!-- Login Starts Here -->
     	<div id="loginContainer">
-	        <a href="#" id="loginButton"><span>Logout</span><em></em></a>
+	        <a href="#" id="loginButton"><span style="font-size: 16px">Logout</span><em></em></a>
 	        <div id="loginBox">                
 	            <form action="idPwCheck.do" method="post" id="loginForm">
 	                    <fieldset id="body">
@@ -172,7 +170,7 @@
 	                    </fieldset>
 	             </form>
 	         </div>
-                <a href="#" id="JoinButton"><span>Inform</span><em></em></a>
+                <a href="#" id="JoinButton"><span style="font-size: 17px">Inform</span><em></em></a>
                 <div style="clear:both"></div>
        			<div id="JoinBox">
        				<form action="insert.do" method="post" id="JoinForm">
