@@ -99,6 +99,7 @@ public class ProjectController {
 		return mv;
 	}
 	
+	
 	//프로젝트 정보로 이동
 	@RequestMapping("projectInfo.do")
 	public String enterProjectInfo(@RequestParam("enterProInfoPnum") String pnum, Model model){
