@@ -47,13 +47,13 @@
     </div>
     
     <div class="item">
-    	<img src="footer_menu/launcher-pro.png" width="60" onclick="onidPwCheck()"/>
-    	<img src="footer_menu/Information-icon.png" width="60" onclick="onprojectInfo()"/>
-    	<img src="footer_menu/man-announce-01.png" width="60" onclick="onannouncement()"/>
-    	<img src="footer_menu/Calendar-icon.png" width="60" onclick="calender()"/>
-    	<img src="footer_menu/2do.png" width="60" onclick="onlogList()"/>
-       	<img src="footer_menu/graph_icon.png" width="60" onclick="onoutcome()"/>
-      	<img src="footer_menu/account_icon2.png" width="60" onclick="onaccount()"/>     	 	
+    	<img src="footer_menu/iconmonstr-home-6-icon-64.png" width="60" onclick="onidPwCheck()"/>
+    	<img src="footer_menu/iconmonstr-info-2-icon-64.png" width="60" onclick="onprojectInfo()"/>
+    	<img src="footer_menu/iconmonstr-megaphone-3-icon-64.png" width="60" onclick="onannouncement()"/>
+    	<img src="footer_menu/iconmonstr-calendar-4-icon-64.png" width="60" onclick="calender()"/>
+    	<img src="footer_menu/iconmonstr-note-19-icon-64.png" width="60" onclick="onlogList()"/>
+       	<img src="footer_menu/iconmonstr-line-chart-3-icon-64.png" width="60" onclick="onoutcome()"/>
+      	<img src="footer_menu/iconmonstr-coin-2-icon-64.png" width="60" onclick="onaccount()"/>     	 	
 
  	    <form action="idPwCheck.do" id="idPwCheck" onclick="onidPwCheck()" method="post">
  			<input type="hidden" name="email" value="${sessionScope.userData.uemail}">

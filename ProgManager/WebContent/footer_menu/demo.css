@@ -4,13 +4,16 @@ body {
   text-align: center;
   color: #715241;
   background: #ffffff;
+  
   background: -moz-radial-gradient(center, ellipse cover,  #fbf5f3 49%, #d6c8bd 100%);
   background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(49%,#fbf5f3), color-stop(100%,#d6c8bd));
-  background: -webkit-radial-gradient(center, ellipse cover,  #fbf5f3 49%,#d6c8bd 100%);
+ 
+  background: -webkit-radial-gradient(center, ellipse cover,  #ffffff 49%,#E5E5E5 100%);
+ 
   background: -o-radial-gradient(center, ellipse cover,  #fbf5f3 49%,#d6c8bd 100%);
   background: -ms-radial-gradient(center, ellipse cover,  #fbf5f3 49%,#d6c8bd 100%);
   background: radial-gradient(center, ellipse cover,  #fbf5f3 49%,#d6c8bd 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fbf5f3', endColorstr='#d6c8bd',GradientType=1 );
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#E5E5E5',GradientType=1 );
   background-repeat: no-repeat;
   background-attachment: fixed;
 }

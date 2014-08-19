@@ -4,7 +4,6 @@
 <html>
 <head>
 	<jsp:include page="topBar.jsp" flush="false" />
-	<jsp:include page="leftMenu.jsp" flush="false" />
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Account</title>
 	<link href="css/kendo.common.min.css" rel="stylesheet" />
@@ -250,4 +249,5 @@
 	</div>
 
 </body>
+<jsp:include page="bottomMenu.jsp" flush="true"/>
 </html>

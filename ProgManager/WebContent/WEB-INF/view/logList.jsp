@@ -6,7 +6,6 @@
 <html>
 <head>
 	<jsp:include page="topBar.jsp" flush="false" />
-	<jsp:include page="leftMenu.jsp" flush="false" />
 	
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Log List</title>
@@ -332,4 +331,5 @@
 	</div><!-- end of logsView -->	
 	<c:out value="${pageScope.key }"/>
 </body>
+<jsp:include page="bottomMenu.jsp" flush="true"/>
 </html>

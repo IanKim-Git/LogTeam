@@ -79,7 +79,7 @@ public class ProjectController {
 		model.addAttribute("pnum", pnum);
 		model.addAttribute("pname", pname);
 		
-		return "projectMain";
+		return "projectInfo";
 	}
 
 	/* 스프링 웹 설정 파일 참조 : springAjaxMyBatis-servlet.xml  

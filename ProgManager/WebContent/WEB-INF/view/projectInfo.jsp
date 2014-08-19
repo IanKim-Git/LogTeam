@@ -3,7 +3,6 @@
 <html>
 <head>
 	<jsp:include page="topBar.jsp" flush="false" />
-	<jsp:include page="leftMenu.jsp" flush="false" />
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Project Information</title>
 </head>
@@ -12,8 +11,9 @@
 <script>var jb = jQuery.noConflict();</script>
 
 <body>
-	<h6>프로젝트 화면</h6>
+	<h6>프로젝트 정보 화면</h6>
 	프로젝트 번호 : ${requestScope.pnum}
 	유저 이메일 : ${sessionScope.userData.uemail}<br>
 </body>
+<jsp:include page="bottomMenu.jsp" flush="true"/>
 </html>
