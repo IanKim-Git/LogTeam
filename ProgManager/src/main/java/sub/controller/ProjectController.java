@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import model.domain.ProgUserBean;
 import model.domain.ProjectBean;
 import model.service.LogService;
 import model.service.LogcommentService;
@@ -99,8 +100,10 @@ public class ProjectController {
 	@RequestMapping("projectInfo.do")
 	public String enterProjectInfo(@RequestParam("enterProInfoPnum") String pnum, Model model){
 		model.addAttribute("pnum", pnum);
-		//model.addAttribute("pinfo", projectService.getProjectInfo(pnum));
-		//model.addAttribute("puser", puService.projectUserList(pnum));
+		model.addAttribute("pinfo", projectService.getProjectInfo(Integer.valueOf(pnum)));
+		model.addAttribute("prodate",projectService.getProjectDate(Integer.valueOf(pnum)));
+		model.addAttribute("puser", puService.projectUserList(Integer.valueOf(pnum)));
+		model.addAttribute("pleader",projectService.getProjectLeader(Integer.parseInt(pnum)));
 		return "projectInfo";
 	}
 	

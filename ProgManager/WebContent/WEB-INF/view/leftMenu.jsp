@@ -8,13 +8,13 @@
 	
 	<link rel="stylesheet" href="css/leftMenu.css" type="text/css" media="screen">
 	
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-	
 	<script src="js/cufon-yui.js" type="text/javascript"></script>
 	<script src="js/BabelSans_500.font.js" type="text/javascript"></script>
-	<script src="js/jquery.easing.1.3.js" type="text/javascript"></script> 
-
-	 <script type="text/javascript">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	
+	<script src="js/jquery.easing.1.3.js" type="text/javascript"></script>
+	
+	<script type="text/javascript">
 			$(function() {
 				Cufon.replace('a, span').CSS.ready(function() {
 					var $menu 		= $("#slidingMenu");
@@ -114,7 +114,7 @@
 			
 			<!-- 프로젝트 정보 -->
 			<li><form action="projectInfo.do" id="projectInfo" onclick="onprojectInfo()" method="post">
-					<input type="hidden" name="enterProInfoPnum" value="${requestScope.pnum}">
+					<input type="hidden" name="enterProInfoPnum" value="${requestScope.pnum}">				
 					<a href="#">INFO</a>
 			</form></li>
 			

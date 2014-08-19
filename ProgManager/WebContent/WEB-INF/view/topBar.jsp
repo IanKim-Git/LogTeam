@@ -146,7 +146,11 @@
 				error : function(data) {
 					alert(data + ' : 회원 탈퇴 로직 실행시 에러 발생');
 				}
-			}); //end of ajax
+			}); //leave of ajax
+		});//leave of Join button
+		
+		$("#loginButton").click(function(){
+			alert(11111);
 		});//end of Join button
    });//end of ready()
 </script>
@@ -157,21 +161,7 @@
         <!-- Login Starts Here -->
     	<div id="loginContainer">
 	        <a href="#" id="loginButton"><span>Logout</span><em></em></a>
-	        <div id="loginBox">                
-	            <form action="idPwCheck.do" method="post" id="loginForm">
-	                    <fieldset id="body">
-		                    <fieldset>
-		                        <label for="email">Email Address</label>
-		                        <input type="text" name="email" id="email" />
-		                    </fieldset>
-		                    <fieldset>
-		                         <label for="password">Password</label>
-		                         <input type="password" name="pw" id="pw" />
-		                    </fieldset>
-		                    <input type="submit" id="login" value="로그인" />
-	                    </fieldset>
-	             </form>
-	         </div>
+	        
                 <a href="#" id="JoinButton"><span>Inform</span><em></em></a>
                 <div style="clear:both"></div>
        			<div id="JoinBox">

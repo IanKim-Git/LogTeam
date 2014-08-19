@@ -5,7 +5,9 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import model.dao.ProjectDAO;
+import model.domain.ProgUserBean;
 import model.domain.ProjectBean;
+import model.domain.UserProjectBean;
 
 public class ProjectService {
 	
@@ -50,7 +52,23 @@ public class ProjectService {
 		System.out.println("////////////////////////////////getproject info service//////////////////////////////");
 		return projectDao.getProject(pnum);
 	}
-
+	
+	public String getProjectDate(int pnum){
+		System.out.println("////////////////////////////////getproject info service//////////////////////////////");
+		return projectDao.getProjectDate(pnum);
+	}
+	//프로젝트 정보 변경
+	public int projectUpdateInfo(ProjectBean pb) {
+		return projectDao.projectUpdateInfo(pb);
+	}
+	//프로젝트 삭제
+	public int projectDelete(int pnum) {
+		return projectDao.projectDelete(pnum);
+	}
+	//프로젝트 리더 가져오기
+	public String getProjectLeader(int pnum) {
+		return projectDao.getProjectLeader(pnum);
+	}
 }
 
 

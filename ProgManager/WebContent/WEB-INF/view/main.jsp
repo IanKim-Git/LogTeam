@@ -249,8 +249,7 @@
 	<form action="sendEmail.do" id="userEmail" method="post">
 		<input type="submit" value="개인정보 변경하기"/>
 		<input type="hidden" name="email" id="email" value="${requestScope.email}"/>
-	</form>
-		
+	</form>		
 	
 </body>
 </html>

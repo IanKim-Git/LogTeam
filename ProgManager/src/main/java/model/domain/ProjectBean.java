@@ -19,6 +19,15 @@ public class ProjectBean {
 		this.pnum = pnum;
 		this.ppw = ppw;
 	}
+	
+	public ProjectBean(String pname, String ppw, String pstart, String pend, int pnum) {
+		super();
+		this.pname = pname;
+		this.ppw = ppw;
+		this.pstart = pstart;
+		this.pend = pend;
+		this.pnum = pnum;
+	}
 
 	public ProjectBean(int pnum, String pname, String ppw, String pstart,
 			String pleader, int pterminate) {
