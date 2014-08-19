@@ -16,6 +16,11 @@ public class LogService {
 		return logDao.allLogs(l_pnum);
 	}
 	
+	//해당 프로젝트의 공개된 로그와 자신의 비공개 로그 출력 allSelectedLogs
+	public List<LogBean> allSelectedLogs(LogBean lb) {
+		return logDao.allSelectedLogs(lb);
+	}
+	
 	//로그 삭제
 	public int logDelete(int lnum){
 		return logDao.logDelete(lnum);

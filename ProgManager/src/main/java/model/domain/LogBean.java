@@ -104,6 +104,10 @@ public class LogBean {
 		this.lphoto = lphoto;
 	}
 	
+	public LogBean(String l_uemail, int l_pnum) {
+		this.l_uemail = l_uemail;
+		this.l_pnum = l_pnum;
+	}
 	public int getLnum() {
 		return lnum;
 	}

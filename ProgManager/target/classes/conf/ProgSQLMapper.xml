@@ -120,6 +120,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from log where l_pnum=#{l_pnum} order by ldata desc
 	</select>
 	
+	<!-- 해당 프로젝트의 공개된 로그와 자신의 비공개 로그 출력 -->
+	<select id="allSelectedLogs" parameterType="logBean" resultType="logBean">
+		select * from log where l_pnum=#{l_pnum} and (lpublic=1 or (lpublic=0 and l_uemail=#{l_uemail} ))
+	</select>
+	
 	<!-- 해당 로그 삭제 -->
 	<delete id="logDelete" parameterType="int">
 		delete log where lnum = #{lnum}

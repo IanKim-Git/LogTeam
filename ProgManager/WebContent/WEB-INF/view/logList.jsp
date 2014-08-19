@@ -31,52 +31,7 @@
 					var flag = 0;
 					var msg = "";
 					jb(data.list).each(function(index, item) {//{no:값, name:값,...}
-					/*
-					<div class="logContent">
-								<table class="logTable">
-									<tr>
-										<td>
-											<img id="userProfilePhoto" src="${sessionScope.userData.uphoto}" width="50" height="50" border="3" style="margin: -5px 5px 5px 5px;">
-										</td>
-										<td>${logs.l_uemail}</td>
-										<td></td>
-									</tr>
-									<tr>
-										<td></td>
-										<td>${logs.ltext}<br></td>
-										<td></td>
-									</tr>
-									<tr>
-										<td></td>
-										<td>
-											<img id="logPhoto" src="${logs.lphoto}" width="80%" height="80%" border="0" style="margin: -5px 5px 5px 5px;"><br>
-										</td>
-										<td></td>
-									</tr>
-									<tr>
-										<td></td>
-										<td><input type="button" value="파일다운" onclick="location.href='http://www.naver.com'">파일이름</td>
-										<td></td>
-									</tr>
-									<tr>
-										<c:if test="${logs.lpublic == 0}"><td>비공개</td></c:if>
-										<c:if test="${logs.lpublic == 1}"><td>공개</td></c:if>
-										<td>${logs.ladmission}</td>
-										<td>
-											<span>${logs.ldata}</span>
-											<span>
-												<input type='button' class='judge' id='like' value='좋아요' name='2'>
-												<input type='button' class='judge' id='soso' value='그저그래요' name='1'>
-												<input type='button' class='judge' id='hate' value='싫어요' name='-1'>
-											</span>
-										</td>
-									</tr>
-								</table>
-							</div><!-- end of logContent -->
-					
-					*/
-					
-						div += "<div class='eachLog' id='"+ item.lnum +"'>";
+						div += "<fieldset><div class='eachLog' id='"+ item.lnum +"'>";
 						//로그 div
 					 	div += "<div class='logContent' id='logContent"+ item.lnum +"'><table class='logTable'><tr>";
 					 	jb(data.ulist).each(function(index, uitem){
@@ -89,16 +44,13 @@
 					 	div += "<tr><td></td><td>"+ item.ltext +"<br></td><td></td></tr>";
 						
 					 	div += "<tr><td></td><td>";
-//					 	alert(item.lphoto == null);
 						if(item.lphoto != ""){
 							div += "<img id='logPhoto' src='"+ item.lphoto +"' width='80%' height='80%' border='0' style='margin: -5px 5px 5px 5px;'><br>";
 						}
 						div += "</td><td></td></tr>";
 						
 						div +="<tr><td></td><td>";
-//						alert(item.lfilename);
 						if(item.lfile != ""){
-//							div += "<input type=\"button\" value=\"파일다운\" onclick=\"location.href='down.do?lfile='"+ item.lfile +"\">"+ item.lfilename;
 							div += "<a href=\"down.do?lfile="+ item.lfile +"\" >" + item.lfilename + "</a>";
 						}
 						div += "</td><td></td></tr><tr>";
@@ -168,8 +120,9 @@
 						
 						div += "</form></div>";
 						
-						div += "</div>";
+						div += "</div></fieldset><br>";
 					});
+					
 					jb("#setLogs").html(div);
 					jb(".uemail").val(jb("#l_uemail").val());
 					
@@ -205,19 +158,14 @@
 			data.append('l_uemail', jb("#l_uemail").val());
 			data.append('ltext', jb("#ltext").val());
 			data.append('lpublic', jb("#lpublic").val());
-			alert(url);
 			
-//			alert(jb("#lphoto")[0].files.length);
-//			alert(jb("#lphoto")[0].files.length > 0);
 			if(jb("#lphoto")[0].files.length > 0){
-//				alert(url);
 				jb.each(jb("#lphoto")[0].files, function(i, file) {
 			    	data.append('file-' + i, file);
 				});
 				url = "writePhoto.do";
 				fileFlag += 1;
 			}
-			alert(url);
 			
 			if(jb("#lfile")[0].files.length > 0){
 				jb.each(jb("#lfile")[0].files, function(i, file) {
@@ -226,12 +174,10 @@
 				url = "writeFile.do";
 				fileFlag += 1;
 			}
-			alert(url);
 			
 			if(fileFlag == 2){
 				url = "writePhotoFile.do";
 			}
-			alert(url);
 			
 			if(jb("#ltext").val() == ""){
 				alert("내용을 입력하세요.");
@@ -336,11 +282,12 @@
 	});//end of ready
 </script>
 <body>
-	<h6>로그게시판</h6>
+<%-- 	<h6>로그게시판</h6>
 	프로젝트 번호 : ${requestScope.pnum}
-	유저 이메일 : ${sessionScope.userData.uemail}<br>
+	유저 이메일 : ${sessionScope.userData.uemail}<br> --%>
+	<br><br>
 	<!-- 로그 화면 -->
-	<div id="logsView" align="left">
+	<div id="logsView" align="left" style="margin-left: 15%;margin-right: 15%;">
 		<fieldset>
 			<!-- 로그 등록창 -->
 			<div id="writeLog">
@@ -376,15 +323,12 @@
 					</table>				
 				</form>
 			</div><!-- end of writeLog -->
-			
+			</fieldset>
 			<!-- 로그 목록 -->
 			<div id="logsList">
 				<!-- jQuery 함수 사용을 위해서 선언 -->
 				<div id="setLogs">
 					
-				<!--	로그마다 코멘트 창이 달려야 한다.
-					코멘트 등록 버튼을 누르면 코멘트 목록이 비동기로 바뀌어야 한다.
-					코멘트는 작성자만 삭제할 수 있다. -->
 					<c:forEach items="${requestScope.logsList}" var="logs" >
 						<div class="eachLog" id="${logs.lnum}">
 							<!-- 로그내용 -->
@@ -475,6 +419,7 @@
 			</div><!-- end of logsList -->		
 		</fieldset>	
 	</div><!-- end of logsView -->	
+	<br><br><br><br><br><br><br><br>
 </body>
 <jsp:include page="bottomMenu.jsp" flush="true"/>
 </html>

@@ -57,10 +57,10 @@ public class LogController {
 	
 	//해당 프로젝트의 모든 로그들과 코멘트를 반환하는 메소드
 	@RequestMapping("allLogs.do")
-	public ModelAndView allLogs(@RequestParam("pnum") String l_pnum){
+	public ModelAndView allLogs(@RequestParam("pnum") String l_pnum, @RequestParam("uemail") String l_uemail){
 //		System.out.println("####################프로젝트 번호"+l_pnum);
 		int pnum = Integer.parseInt(l_pnum);
-		List<LogBean> list =  logService.allLogs(pnum);
+		List<LogBean> list =  logService.allSelectedLogs(new LogBean(l_uemail, pnum));
 		List<LogcommentBean> clist = lcService.allPlcs(pnum);
 		List<JudgeBean> jlist = judgeService.judgeList(pnum);
 		List<ProgUserPhotoBean> ulist = puService.getUphotoUemail(pnum);
@@ -121,7 +121,7 @@ public class LogController {
 	 	}
 		try{
 			//폴더에 사진 저장
-			file.transferTo(new File(filePath1+photoName));
+			file.transferTo(new File(filePath4+photoName));
 			String lphoto = "./ProgFile/lphoto/"+photoName;
 			System.out.println("################################## controller 이미지 : " + lphoto);
 			int result = logService.logWritePhoto(new LogBean(Integer.parseInt(l_pnum), l_uemail, ltext, Integer.parseInt(lpublic), lphoto));
@@ -152,7 +152,7 @@ public class LogController {
 	 	}
 		try{
 			//폴더에 파일 저장
-			lfile.transferTo(new File(lfilePath1+lfileName));
+			lfile.transferTo(new File(lfilePath4+lfileName));
 			System.out.println("################################## controller 파일 : " + lfileName);
 			int result = logService.logWriteFile(new LogBean(Integer.parseInt(l_pnum), l_uemail, ltext, lfileName, originalName, Integer.parseInt(lpublic)));
 			if(result>0){
@@ -188,12 +188,12 @@ public class LogController {
 	 	}
 		try{
 			//폴더에 사진 저장
-			file.transferTo(new File(filePath1+photoName));
+			file.transferTo(new File(filePath4+photoName));
 			String lphoto = "./ProgFile/lphoto/"+photoName;
 			System.out.println("################################## controller 이미지 : " + lphoto);
 			
 			//폴더에 파일 저장
-			lfile.transferTo(new File(lfilePath1+lfileName));
+			lfile.transferTo(new File(lfilePath4+lfileName));
 			System.out.println("################################## controller 파일 : " + lfileName);
 			
 			int result = logService.logWritePhotoFile(new LogBean(Integer.parseInt(l_pnum), l_uemail, ltext, Integer.parseInt(lpublic), lphoto, lfileName, originalName));
@@ -209,7 +209,7 @@ public class LogController {
 	@RequestMapping("/down.do")
 	public ModelAndView down(String lfile){
 		System.out.println("########################################### 다운 받을 파일 이름 : "+lfile);
-		File file = new File(lfilePath1+lfile);
+		File file = new File(lfilePath4+lfile);
 		/*
 		 * downLoadView는 뷰의 이름 : DownLoadCustomView.class를 생성한 id이다.
 		 * 
