@@ -2,21 +2,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<jsp:include page="topBar.jsp" flush="false" />
-	<jsp:include page="leftMenu.jsp" flush="false" />
+	<jsp:include page="topBar.jsp" flush="true" />
 	<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 	<title>Calendar</title>
-	<script src="js/jquery-1.10.2.js"></script>
-	<script type="text/javascript">	jQuery.noConflict(); </script>
-		
-	<link rel="stylesheet" href="calendar_file/css/core.css" type="text/css" />
-	<link rel="stylesheet" href="calendar_file/css/cupertino/jquery-ui.cupertino.css" type="text/css" />
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>	        
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/jquery-ui.min.js"></script>
-	  <script src="js/jquery-1.4.3.min.js" type="text/javascript"></script>
-	
-    <script src="calendar_file/js/jMonthCalendar.js" type="text/javascript"></script>    
+	<link href="kendo_file/examples-offline.css" rel="stylesheet">
+    <link href="kendo_file/kendo.common.min.css" rel="stylesheet">
+    <link href="kendo_file/kendo.rtl.min.css" rel="stylesheet">
+    <link href="kendo_file/kendo.default.min.css" rel="stylesheet">
+    <link href="kendo_file/kendo.dataviz.min.css" rel="stylesheet">
+    <link href="kendo_file/kendo.dataviz.default.min.css" rel="stylesheet">
+    <script src="kendo_file/jquery.min.js"></script>
 
+<<<<<<< HEAD
 	<style type="text/css" media="screen">
 		#jMonthCalendar .Meeting { background-color: #DDFFFF;}
 		#jMonthCalendar .Birthday { background-color: #DD00FF;}
@@ -137,42 +134,95 @@
   </script> -->
   
     
+=======
+    <script src="kendo_file/angular.min.js"></script>
+    <script src="kendo_file/kendo.all.min.js"></script>
+    <script src="kendo_file/console.js"></script>
+>>>>>>> branch 'pst_calendar' of https://github.com/IanKim-Git/LogTeam.git
 </head>
+<script type="text/javascript">
+	$(document).ready(function(){
+		function getData() {
+			$.ajax({
+				url : "getSchedule.do",
+				data : "pnum=" + requestScope.pnum,
+				type : "post",
+				dataType : "json", 					//결과데이터타입
+				success : function(data) {
+					
+					alert(data);
+					
+					
+/* 					document.getElementById("gridly").innerHTML="<div class='brick small' ><br><br><font color='black'><b>I'm Mento.</b></font></div>";					
+
+					$(data.list).each(function(index, project) {
+						//alert(JSON.stringify(project));
+						fullProjectInfo = JSON.stringify(project);//value="+JSON.stringify(project)+"
+						simpleProjectInfo = project.pnum + project.pname;
+						//alert(simpleProjectInfo);
+						
+						
+		                document.getElementById("gridly").innerHTML+=
+		                	  "<div class='brick small' id="+project.pnum+"><br><br><font color='black' >"+
+		                	  		"<div id='content_s"+project.pnum+"' style='display:table-cell; vertical-align:middle; font-size: 1.3em;'>"+project.pname+"</div><br>"+
+		                	  		"<div id='content_l"+project.pnum+"' style='display:none; font-size: 1.2em;'>"+
+		                	  			"프로젝트 번호 : "+project.pnum+"<br>"+	"프로젝트 이름 : "+project.pname+"<br>"+
+		                	  			"멘토 : "+project.pmento+"<br>"+  		"기간 : <br>"+project.pstart+"~"+project.pend+"<br>"+
+		                	  			"팀장 : "+project.pleader+"<br>"+  		"</div><br></font>"+
+		                	  		"<a class='enter' href='#' id="+project.pnum+">[입장하기]</a>"+
+		                	  			"<form action='enterProjectMain.do' id='enterProject"+project.pnum+"' method='post'>"+
+	                	  				"<input type='hidden' id='pnum' name='pnum' value='"+project.pnum+"'/>"+
+	                	  				"<input type='hidden' id='pname' name='pname' value='"+project.pname+"'/></form>"+
+	                	  				
+	                	  		"</div>";
+	           
+		                  
+		                $('.gridly').gridly(); */
+		               });
+					//테이블에 추가
+				},
+				error : function(err) {//실패했을때
+					alert(err + " : 모든 프로젝트 정보 불러오기 실패");
+				}
+			}); //end of ajax
+		}//end of getData()
+		getData();
+		
+	});
+</script>
 
 <body>
 	<h6>캘린더</h6>
-<%-- 	프로젝트 번호 : ${requestScope.pnum}
-	유저 이메일 : ${sessionScope.userData.uemail}<br> --%>
-	
-	<center style="width: 77%; position: relative; display: inline-block;">
-		<div id="jMonthCalendar"></div>
 
-		<button id="Button">temp</button>
+    <div id="scheduler"></div>
+<script>
+$(function() {
+    $("#scheduler").kendoScheduler({
+        date: new Date("2014/8/17"),
+    });
+    var scheduler = $("#scheduler").data("kendoScheduler");
+    var dataSource = new kendo.data.SchedulerDataSource({
+    	data:[
+    	      {
+    	    	  id:1,
+    	    	  start: new Date("2014/8/18 8:00 AM"),
+    	    	  end: new Date("2014/8/18 9:00 AM"),
+    	    	  title: "Interview"
+    	      },
+    	      {
+    	    	  id:2,
+    	    	  start: new Date("2014/8/19 5:00 AM"),
+    	    	  end: new Date("2014/8/19 8:00 AM"),
+    	    	  title: "InterView2"
+    	      }
+    	 ]
+    });
+	scheduler.setDataSource(dataSource);
+});
+</script>
 
-		
-		<button id="scheduleBtn">일정 등록</button>
-		<button id="meetingRegister">모임 등록</button>
-		<button id="todoRegister">할일 등록</button>
-		<button id="ChangeMonth">Change Month to August 2009</button>
-	</center>
-	<!-- 
-<div id="registerSche" title="일정등록" style="">
-  <form>
-    <fieldset>
-      <label for="content">일정내용</label>
-      <input type="text" name="content" id="content" class="text ui-widget-content ui-corner-all">
-      <label for="sdate">시작일</label>
-      <input type="text" name="sdate" id="sdate" class="text ui-widget-content ui-corner-all">
-      <label for="edate">종료일</label>
-      <input type="text" name="edate" id="edate" class="text ui-widget-content ui-corner-all">
- 
-      Allow form submission with keyboard without duplicating the dialog button
-      <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
-    </fieldset>
-  </form>
-</div> -->
- 
 
-	
+ 	<jsp:include page="bottomMenu.jsp" flush="true"/>
+
 </body>
 </html>

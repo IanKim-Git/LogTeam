@@ -122,7 +122,12 @@ public class ProgUserDAO {
 		}
 		return list;
 	}
+	public static void main(String[] args) {
+		ProgUserDAO p = new ProgUserDAO();
 	
+		System.out.println("### 로그인 테스트 ###");
+		System.out.println(p.userIdPwCheck("a@a.a", "1234"));
+	}
 	
 	//###단위 테스트###
 /*	public static void main(String[] args) {

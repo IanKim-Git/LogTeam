@@ -26,6 +26,9 @@
 	<bean id="projectDao" class="model.dao.ProjectDAO" />
 	<bean id="projectService" class="model.service.ProjectService" />
 	
+	<bean id="scheduleDao" class="model.dao.ScheduleDAO"/>
+	<bean id="scheduleService" class="model.service.ScheduleService" />
+	
 	<bean id="logDao" class="model.dao.LogDAO" />
 	<bean id="logService" class="model.service.LogService" />
 	
@@ -43,6 +46,10 @@
 	<bean id="projectJsonView" class="net.sf.json.spring.web.servlet.view.JsonView" >
 		<property name="contentType" value="text/html;charset=UTF-8" />
 	</bean>
+	
+	<bean id="scheduleJsonView" class="net.sf.json.spring.web.servlet.view.JsonView">
+		<property name="contentType" value="text/html;charset=UTF-8"/>
+	</bean> 
 
 	<!-- ViewResolver를 찾을때 bean의 id로 제일먼저 찾을수 있도록 우선순위를 0으로 줌
 			생략시 spring controller에서 jsonView에 매핑된 view 실행 불가 -->
