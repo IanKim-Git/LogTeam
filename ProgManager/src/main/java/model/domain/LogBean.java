@@ -8,6 +8,7 @@ public class LogBean {
 	private String ltext;
 	private String lphoto;
 	private String lfile;
+	private String lfilename;
 	private int lpublic;		//not null
 	private int ladmission;	//not null
 	
@@ -67,15 +68,36 @@ public class LogBean {
 		this.lpublic = lpublic;
 		this.lphoto = lphoto;
 	}
-	public LogBean(int l_pnum, String l_uemail, String ltext, int lpublic, String lphoto, String lfile) {
+	public LogBean(int l_pnum, String l_uemail, String ltext, String lfile, String lfilename, int lpublic) {
+		this.l_pnum = l_pnum;
+		this.l_uemail = l_uemail;
+		this.ltext = ltext;
+		this.lfile = lfile;
+		this.lfilename = lfilename;
+		this.lpublic = lpublic;
+	}
+	public LogBean(int l_pnum, String l_uemail, String ltext, int lpublic, String lphoto, String lfile, String lfilename) {
 		this.l_pnum = l_pnum;
 		this.l_uemail = l_uemail;
 		this.ltext = ltext;
 		this.lpublic = lpublic;
 		this.lphoto = lphoto;
 		this.lfile = lfile;
+		this.lfilename = lfilename;
 	}
-	
+	public LogBean(int lnum, int l_pnum, String l_uemail, String ldata, String ltext, String lphoto, 
+			String lfile, String lfilename, int lpublic, int ladmission) {
+		this.lnum = lnum;
+		this.l_pnum = l_pnum;
+		this.l_uemail = l_uemail;
+		this.ldata = ldata;
+		this.ltext = ltext;
+		this.lphoto = lphoto;
+		this.lfile = lfile;
+		this.lfilename = lfilename;
+		this.lpublic = lpublic;
+		this.ladmission = ladmission;
+	}
 	
 	public LogBean(int lnum, String lphoto) {
 		this.lnum = lnum;
@@ -130,6 +152,18 @@ public class LogBean {
 	public void setLphoto(String lphoto) {
 		this.lphoto = lphoto;
 	}
+	public String getLfile() {
+		return lfile;
+	}
+	public void setLfile(String lfile) {
+		this.lfile = lfile;
+	}
+	public String getLfilename() {
+		return lfilename;
+	}
+	public void setLfilename(String lfilename) {
+		this.lfilename = lfilename;
+	}
 	
 	@Override
 	public String toString() {
@@ -145,6 +179,8 @@ public class LogBean {
 		builder.append(ltext);
 		builder.append(", lphoto=");
 		builder.append(lphoto);
+		builder.append(", lfile=");
+		builder.append(lfile);
 		builder.append(", lpublic=");
 		builder.append(lpublic);
 		builder.append(", ladmission=");
@@ -152,4 +188,6 @@ public class LogBean {
 		builder.append("]");
 		return builder.toString();
 	}
+
+	
 }

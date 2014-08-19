@@ -99,7 +99,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!--  ### 로그용 SQL문 ###  -->
 	<!-- 해당 프로젝트의 모든 로그 출력 -->
 	<select id="allLogs" parameterType="int" resultType="logBean" >
-		select lnum, l_pnum, l_uemail, ldata, ltext, lphoto, lpublic, ladmission from log where l_pnum=#{l_pnum} order by ldata desc
+		select * from log where l_pnum=#{l_pnum} order by ldata desc
 	</select>
 	
 	<!-- 해당 로그 삭제 -->
@@ -130,6 +130,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="logWritePhoto" parameterType="logBean">
 		insert into log(lnum, l_pnum, l_uemail, ldata, ltext, lpublic, lphoto, ladmission)
 		values(seq_l.nextval , #{l_pnum}, #{l_uemail}, sysdate, #{ltext}, #{lpublic}, #{lphoto}, 0)
+	</insert>
+	
+	<!-- 로그 작성 : with file -->
+	<insert id="logWriteFile" parameterType="logBean">
+		insert into log(lnum, l_pnum, l_uemail, ldata, ltext, lfile, lfilename, lpublic, ladmission)
+		values(seq_l.nextval , #{l_pnum}, #{l_uemail}, sysdate, #{ltext}, #{lfile}, #{lfilename}, #{lpublic}, 0)
+	</insert>
+	
+	<!-- 로그 작성 : with photo file -->
+	<insert id="logWritePhotoFile" parameterType="logBean">
+		insert into log(lnum, l_pnum, l_uemail, ldata, ltext, lpublic, lphoto, lfile, lfilename, ladmission)
+		values(seq_l.nextval , #{l_pnum}, #{l_uemail}, sysdate, #{ltext}, #{lpublic}, #{lphoto}, #{lfile}, #{lfilename}, 0)
 	</insert>
 	
 	

@@ -36,6 +36,25 @@ public class LogController {
 	@Resource(name = "puService")
 	private ProgUserService puService;
 	
+	//김용두 사진 패스
+	private String filePath1 = "D:/2014KODB/slogProject/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ProgManager/ProgFile/uphoto/";
+	//박상태 사진 패스
+	private String filePath2 = "C:/Users/Ian/git/LogTeam/ProgManager/WebContent/ProgFile/uphoto";
+	//황수남 사진 패스
+	private String filePath3 = "";
+	//박다은 사진 패스
+	private String filePath4 =  "C:/2014KODB/KODBFinalProject/GitTest/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ProgManager/ProgFile/lphoto/";
+
+	//김용두 파일 패스
+	private String lfilePath1 = "D:/2014KODB/slogProject/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ProgManager/ProgFile/uphoto/";
+	//박상태 파일 패스
+	private String lfilePath2 = "C:/Users/Ian/git/LogTeam/ProgManager/WebContent/ProgFile/uphoto";
+	//황수남 파일 패스
+	private String lfilePath3 = "";
+	//박다은 파일 패스
+	private String lfilePath4 =  "C:/2014KODB/KODBFinalProject/GitTest/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ProgManager/ProgFile/lfile/";
+
+	
 	//해당 프로젝트의 모든 로그들과 코멘트를 반환하는 메소드
 	@RequestMapping("allLogs.do")
 	public ModelAndView allLogs(@RequestParam("pnum") String l_pnum){
@@ -67,7 +86,7 @@ public class LogController {
 		return result; //요청한 jsp 또는 html의 xhr에게 직접 응답
 	}
  
-	//로그 작성
+	//로그 작성 : only text
 	@RequestMapping(value="write.do", method=RequestMethod.POST)
 	@ResponseBody
 	public String insert(@RequestParam("l_pnum") String l_pnum, @RequestParam("l_uemail") String l_uemail,
@@ -93,27 +112,17 @@ public class LogController {
 			@RequestParam("l_uemail") String l_uemail, @RequestParam("ltext") String ltext, @RequestParam("lpublic") String lpublic) {
 //		System.out.println("###################받아온 데이터"+lb);
 		String resultMsg = "no";//저장 실패시 응답되는 데이터
-		String fileName =  l_uemail;
-		fileName += new java.text.SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
-		fileName += file.getOriginalFilename();
-		
-		//김용두 파일 패스
-		String filePath1 = "D:/2014KODB/slogProject/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ProgManager/ProgFile/uphoto/";
-		String filePath12 = "C:/Users/Ian/git/LogTeam/ProgManager/WebContent/ProgFile/uphoto";
-		//박상태 파일 패스
-		String filePath2 = "";
-		//황수남 파일 패스
-		String filePath3 = "";
-		//박다은 파일 패스
-		String filePath4 =  "C:/2014KODB/KODBFinalProject/GitTest/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ProgManager/ProgFile/lphoto/";
+		String photoName =  l_uemail;
+		photoName += new java.text.SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
+		photoName += file.getOriginalFilename();
 		
 		if(Integer.parseInt(lpublic) == -1){
 	 		return "again";
 	 	}
 		try{
-			//폴더에 파일 저장
-			file.transferTo(new File(filePath4+fileName));
-			String lphoto = "./ProgFile/lphoto/"+fileName;
+			//폴더에 사진 저장
+			file.transferTo(new File(filePath4+photoName));
+			String lphoto = "./ProgFile/lphoto/"+photoName;
 			System.out.println("################################## controller 이미지 : " + lphoto);
 			int result = logService.logWritePhoto(new LogBean(Integer.parseInt(l_pnum), l_uemail, ltext, Integer.parseInt(lpublic), lphoto));
 			if(result>0){
@@ -125,5 +134,91 @@ public class LogController {
 		return resultMsg;  
 	}
 	
+	//로그 작성 : with file
+	@RequestMapping(value="writeFile.do", method=RequestMethod.POST)
+	@ResponseBody
+	public String insert(@RequestParam("l_pnum") String l_pnum, @RequestParam("l_uemail") String l_uemail, 
+			@RequestParam("ltext") String ltext, @RequestParam("lpublic") String lpublic, @RequestParam("lfile-0")  MultipartFile lfile) {
+//		System.out.println("###################받아온 데이터"+lb);
+		String resultMsg = "no";//저장 실패시 응답되는 데이터
+		String lfileName =  l_uemail;
+		lfileName += new java.text.SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
+		lfileName += lfile.getOriginalFilename();
+		String originalName = lfile.getOriginalFilename();
+		System.out.println("##################################### 파일이름 : " + originalName);
+		
+		if(Integer.parseInt(lpublic) == -1){
+	 		return "again";
+	 	}
+		try{
+			//폴더에 파일 저장
+			lfile.transferTo(new File(lfilePath4+lfileName));
+			System.out.println("################################## controller 파일 : " + lfileName);
+			int result = logService.logWriteFile(new LogBean(Integer.parseInt(l_pnum), l_uemail, ltext, lfileName, originalName, Integer.parseInt(lpublic)));
+			if(result>0){
+				resultMsg = "ok";
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return resultMsg;  
+	}
+	
+	//로그 작성 : with photo file
+	@RequestMapping(value="writePhotoFile.do", method=RequestMethod.POST)
+	@ResponseBody
+	public String insert(@RequestParam("file-0")  MultipartFile file, @RequestParam("l_pnum") String l_pnum,
+			@RequestParam("l_uemail") String l_uemail, @RequestParam("ltext") String ltext, @RequestParam("lpublic") String lpublic, @RequestParam("lfile-0")  MultipartFile lfile) {
+//		System.out.println("###################받아온 데이터"+lb);
+		String resultMsg = "no";//저장 실패시 응답되는 데이터
+		
+		//사진
+		String photoName =  l_uemail;
+		photoName += new java.text.SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
+		photoName += file.getOriginalFilename();
+		
+		//파일
+		String lfileName =  l_uemail;
+		lfileName += new java.text.SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
+		lfileName += lfile.getOriginalFilename();
+		String originalName = lfile.getOriginalFilename();
+		
+		if(Integer.parseInt(lpublic) == -1){
+	 		return "again";
+	 	}
+		try{
+			//폴더에 사진 저장
+			file.transferTo(new File(filePath4+photoName));
+			String lphoto = "./ProgFile/lphoto/"+photoName;
+			System.out.println("################################## controller 이미지 : " + lphoto);
+			
+			//폴더에 파일 저장
+			lfile.transferTo(new File(lfilePath4+lfileName));
+			System.out.println("################################## controller 파일 : " + lfileName);
+			
+			int result = logService.logWritePhotoFile(new LogBean(Integer.parseInt(l_pnum), l_uemail, ltext, Integer.parseInt(lpublic), lphoto, lfileName, originalName));
+			if(result>0){
+				resultMsg = "ok";
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return resultMsg;  
+	}
+	
+	@RequestMapping("/down.do")
+	public ModelAndView down(String lfile){
+		System.out.println("########################################### 다운 받을 파일 이름 : "+lfile);
+		File file = new File(lfilePath4+lfile);
+		/*
+		 * downLoadView는 뷰의 이름 : DownLoadCustomView.class를 생성한 id이다.
+		 * 
+		 * BeanNameViewResolver(빈의 이름으로 뷰를찾는다)를
+		 * 등록하면 먼저 빈의 이름으로 찾을수 있도록 하고
+		 * 만약, bean의 id중에 찾는 이름이 없으면 
+		 * InternalResourceViewResolver 에서 등록된 뷰가 실행된다.
+		 * */
+		return new ModelAndView("downLoadView", "downFile", file);
+	}
 	
 }

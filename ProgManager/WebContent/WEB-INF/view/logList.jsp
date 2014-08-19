@@ -32,6 +32,51 @@
 					var flag = 0;
 					var msg = "";
 					jb(data.list).each(function(index, item) {//{no:값, name:값,...}
+					/*
+					<div class="logContent">
+								<table class="logTable">
+									<tr>
+										<td>
+											<img id="userProfilePhoto" src="${sessionScope.userData.uphoto}" width="50" height="50" border="3" style="margin: -5px 5px 5px 5px;">
+										</td>
+										<td>${logs.l_uemail}</td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td>${logs.ltext}<br></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td>
+											<img id="logPhoto" src="${logs.lphoto}" width="80%" height="80%" border="0" style="margin: -5px 5px 5px 5px;"><br>
+										</td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td><input type="button" value="파일다운" onclick="location.href='http://www.naver.com'">파일이름</td>
+										<td></td>
+									</tr>
+									<tr>
+										<c:if test="${logs.lpublic == 0}"><td>비공개</td></c:if>
+										<c:if test="${logs.lpublic == 1}"><td>공개</td></c:if>
+										<td>${logs.ladmission}</td>
+										<td>
+											<span>${logs.ldata}</span>
+											<span>
+												<input type='button' class='judge' id='like' value='좋아요' name='2'>
+												<input type='button' class='judge' id='soso' value='그저그래요' name='1'>
+												<input type='button' class='judge' id='hate' value='싫어요' name='-1'>
+											</span>
+										</td>
+									</tr>
+								</table>
+							</div><!-- end of logContent -->
+					
+					*/
+					
 						div += "<div class='eachLog' id='"+ item.lnum +"'>";
 						//로그 div
 					 	div += "<div class='logContent' id='logContent"+ item.lnum +"'><table class='logTable'><tr>";
@@ -40,14 +85,25 @@
 					 			div += "<td><img id='userProfilePhoto' src='" + uitem.uphoto + "' width='50' height='50' border='3' style='margin: -5px 5px 5px 5px;'></td></td>";
 					 		}
 					 	});
-					 	
-					 	
 					 	div += "<td>"+ item.l_uemail +"</td><td></td></tr>";
-					 	
+
 					 	div += "<tr><td></td><td>"+ item.ltext +"<br></td><td></td></tr>";
-						div += "<tr><td></td>";
-						div += "<td><img id='logPhoto' src='"+ item.lphoto +"' width='80%' height='80%' border='0' style='margin: -5px 5px 5px 5px;'><br>";
-						div += "<td></td></tr><tr>";
+						
+					 	div += "<tr><td></td><td>";
+//					 	alert(item.lphoto == null);
+						if(item.lphoto != ""){
+							div += "<img id='logPhoto' src='"+ item.lphoto +"' width='80%' height='80%' border='0' style='margin: -5px 5px 5px 5px;'><br>";
+						}
+						div += "</td><td></td></tr>";
+						
+						div +="<tr><td></td><td>";
+//						alert(item.lfilename);
+						if(item.lfile != ""){
+//							div += "<input type=\"button\" value=\"파일다운\" onclick=\"location.href='down.do?lfile='"+ item.lfile +"\">"+ item.lfilename;
+							div += "<a href=\"down.do?lfile="+ item.lfile +"\" >" + item.lfilename + "</a>";
+						}
+						div += "</td><td></td></tr><tr>";
+						
 						if(item.lpublic == 0){
 							div += "<td>비공개</td>";
 						}else if(item.lpublic == 1){
@@ -293,7 +349,6 @@
 					<input type="hidden" id="l_pnum" name="l_pnum" value="${requestScope.pnum}">
 					<input type="hidden" id="l_uemail" name="l_uemail" value="${sessionScope.userData.uemail}">
 					  <table >
-						<!-- 내용 -->
 						<tr>
 							<td>
 							<select id="lpublic" name="lpublic">
@@ -303,7 +358,6 @@
 							</select>
 							</td>
 						</tr>
-						<!-- 공개여부 -->
 						<tr>
 							<td>
 								<textarea id="ltext" name="ltext" rows="5" cols="60" ></textarea>
@@ -315,8 +369,6 @@
 								<input type="file" name="lfile" id="lfile"/></div>
 							</td>
 						</tr>
-						
-						<!-- 등록버튼 -->
 						<tr>
 							<td align="center">
 								<input type="button" id="write" value="로그등록">
@@ -359,13 +411,20 @@
 										<td></td>
 									</tr>
 									<tr>
+										<td></td>
+										<td><input type="button" value="파일다운" onclick="location.href='http://www.naver.com'">파일이름</td>
+										<td></td>
+									</tr>
+									<tr>
 										<c:if test="${logs.lpublic == 0}"><td>비공개</td></c:if>
 										<c:if test="${logs.lpublic == 1}"><td>공개</td></c:if>
 										<td>${logs.ladmission}</td>
 										<td>
 											<span>${logs.ldata}</span>
 											<span>
-												<!-- 평가 부분 -->
+												<input type='button' class='judge' id='like' value='좋아요' name='2'>
+												<input type='button' class='judge' id='soso' value='그저그래요' name='1'>
+												<input type='button' class='judge' id='hate' value='싫어요' name='-1'>
 											</span>
 										</td>
 									</tr>

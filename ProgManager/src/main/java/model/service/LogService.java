@@ -31,4 +31,17 @@ public class LogService {
 		System.out.println("######################## service 이미지 : " + lb.getLphoto());
 		return logDao.logWritePhoto(lb);
 	}
+	
+	//로그 작성 : with file
+	public int logWriteFile(LogBean lb) {
+		System.out.println("######################## service 파일 : " + lb.getLfile());
+		return logDao.logWriteFile(lb);
+	}
+	
+	//로그 작성 : with file
+	public int logWritePhotoFile(LogBean lb) {
+		System.out.println("######################## service 이미지 : " + lb.getLphoto());
+		System.out.println("######################## service 파일 : " + lb.getLfile());
+		return logDao.logWritePhotoFile(lb);
+	}
 }

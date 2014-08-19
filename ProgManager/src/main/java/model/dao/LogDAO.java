@@ -69,6 +69,40 @@ public class LogDAO {
 		return result;
 	}
 	
+	//로그 작성 : with file
+	public int logWriteFile(LogBean lb) {
+		SqlSession session = null;
+		boolean flag = false;
+		int result = 0;
+		System.out.println("################################# 파일 : "+lb.getLfile());
+		try {
+			session = DBUtil.getSqlSession();
+			result = session.insert("prog.logWriteFile", lb);
+			flag = result > 0 ? true : false;
+		} finally {
+			DBUtil.closeSqlSession(flag, session);
+		}
+		return result;
+	}
+	
+	//로그 작성 : with photo file
+	public int logWritePhotoFile(LogBean lb) {
+		SqlSession session = null;
+		boolean flag = false;
+		int result = 0;
+		System.out.println("################################# 이미지 : "+lb.getLphoto());
+		System.out.println("################################# 파일 : "+lb.getLfile());
+		try {
+			session = DBUtil.getSqlSession();
+			result = session.insert("prog.logWritePhotoFile", lb);
+			flag = result > 0 ? true : false;
+		} finally {
+			DBUtil.closeSqlSession(flag, session);
+		}
+		return result;
+	}
+		
+	
 	//단위 테스트
 	/*public static void main(String[] args){
 		LogDAO ld = new LogDAO();
