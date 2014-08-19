@@ -86,7 +86,7 @@ public class LogController {
 		return resultMsg;  
 	}	
 	
-	//로그 작성
+	//로그 작성 : with photo
 	@RequestMapping(value="writePhoto.do", method=RequestMethod.POST)
 	@ResponseBody
 	public String insert(@RequestParam("file-0")  MultipartFile file, @RequestParam("l_pnum") String l_pnum,

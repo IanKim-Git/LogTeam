@@ -150,26 +150,33 @@
 			data.append('l_uemail', jb("#l_uemail").val());
 			data.append('ltext', jb("#ltext").val());
 			data.append('lpublic', jb("#lpublic").val());
+			alert(url);
 			
-			if(jb("#lphoto")[0].files.length != 0){
+//			alert(jb("#lphoto")[0].files.length);
+//			alert(jb("#lphoto")[0].files.length > 0);
+			if(jb("#lphoto")[0].files.length > 0){
+//				alert(url);
 				jb.each(jb("#lphoto")[0].files, function(i, file) {
 			    	data.append('file-' + i, file);
 				});
 				url = "writePhoto.do";
-				fileFalg += 1;
+				fileFlag += 1;
 			}
+			alert(url);
 			
-			if(jb("#lfile")[0].files.length != 0){
+			if(jb("#lfile")[0].files.length > 0){
 				jb.each(jb("#lfile")[0].files, function(i, file) {
 		    	data.append('lfile-' + i, file);
 				}); 
 				url = "writeFile.do";
 				fileFlag += 1;
 			}
+			alert(url);
 			
 			if(fileFlag == 2){
 				url = "writePhotoFile.do";
 			}
+			alert(url);
 			
 			if(jb("#ltext").val() == ""){
 				alert("내용을 입력하세요.");
