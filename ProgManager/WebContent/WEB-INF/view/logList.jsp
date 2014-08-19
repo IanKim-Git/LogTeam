@@ -31,9 +31,78 @@
 					var flag = 0;
 					var msg = "";
 					jb(data.list).each(function(index, item) {//{no:값, name:값,...}
+					/*
+					<div class="logContent">
+								<table class="logTable">
+									<tr>
+										<td>
+											<img id="userProfilePhoto" src="${sessionScope.userData.uphoto}" width="50" height="50" border="3" style="margin: -5px 5px 5px 5px;">
+										</td>
+										<td>${logs.l_uemail}</td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td>${logs.ltext}<br></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td>
+											<img id="logPhoto" src="${logs.lphoto}" width="80%" height="80%" border="0" style="margin: -5px 5px 5px 5px;"><br>
+										</td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td><input type="button" value="파일다운" onclick="location.href='http://www.naver.com'">파일이름</td>
+										<td></td>
+									</tr>
+									<tr>
+										<c:if test="${logs.lpublic == 0}"><td>비공개</td></c:if>
+										<c:if test="${logs.lpublic == 1}"><td>공개</td></c:if>
+										<td>${logs.ladmission}</td>
+										<td>
+											<span>${logs.ldata}</span>
+											<span>
+												<input type='button' class='judge' id='like' value='좋아요' name='2'>
+												<input type='button' class='judge' id='soso' value='그저그래요' name='1'>
+												<input type='button' class='judge' id='hate' value='싫어요' name='-1'>
+											</span>
+										</td>
+									</tr>
+								</table>
+							</div><!-- end of logContent -->
+					
+					*/
+					
+						div += "<div class='eachLog' id='"+ item.lnum +"'>";
 						//로그 div
-					 	div += "<div class='logContent' id='"+ item.lnum +"'><table id='logTable'><tr><td>＃  </td><td>"+ item.l_uemail +"</td><td>"+ item.ltext +"</td></tr>";
-						div += "<tr>";
+					 	div += "<div class='logContent' id='logContent"+ item.lnum +"'><table class='logTable'><tr>";
+					 	jb(data.ulist).each(function(index, uitem){
+					 		if(item.l_uemail == uitem.uemail){
+					 			div += "<td><img id='userProfilePhoto' src='" + uitem.uphoto + "' width='50' height='50' border='3' style='margin: -5px 5px 5px 5px;'></td></td>";
+					 		}
+					 	});
+					 	div += "<td>"+ item.l_uemail +"</td><td></td></tr>";
+
+					 	div += "<tr><td></td><td>"+ item.ltext +"<br></td><td></td></tr>";
+						
+					 	div += "<tr><td></td><td>";
+//					 	alert(item.lphoto == null);
+						if(item.lphoto != ""){
+							div += "<img id='logPhoto' src='"+ item.lphoto +"' width='80%' height='80%' border='0' style='margin: -5px 5px 5px 5px;'><br>";
+						}
+						div += "</td><td></td></tr>";
+						
+						div +="<tr><td></td><td>";
+//						alert(item.lfilename);
+						if(item.lfile != ""){
+//							div += "<input type=\"button\" value=\"파일다운\" onclick=\"location.href='down.do?lfile='"+ item.lfile +"\">"+ item.lfilename;
+							div += "<a href=\"down.do?lfile="+ item.lfile +"\" >" + item.lfilename + "</a>";
+						}
+						div += "</td><td></td></tr><tr>";
+						
 						if(item.lpublic == 0){
 							div += "<td>비공개</td>";
 						}else if(item.lpublic == 1){
@@ -98,26 +167,82 @@
 						div += "<td><input type='button' id='writeLc' value='코멘트등록'></td></tr></tfoot></table>";
 						
 						div += "</form></div>";
+						
+						div += "</div>";
 					});
 					jb("#setLogs").html(div);
 					jb(".uemail").val(jb("#l_uemail").val());
+					
+					//공개 비공개 설정
+					jb(data.list).each(function(indext, item){
+						
+						if(item.lpublic == 1){
+							jb("#"+item.lnum).css({"display":"block"});
+						}else if(item.lpublic == 0){
+							if(item.l_uemail != jb("#l_uemail").val()){
+								jb("#"+item.lnum).css({"display":"none"});
+							}else if(item.l_uemail == jb("#l_uemail").val()){
+								jb("#"+item.lnum).css({"display":"block"});
+							}
+						}
+						
+					});
 				},
 				error : function(err) {//실패했을때
 					alert(err + " : 해당 프로젝트에는 로그가 아직 작성되지 않았습니다");
 				}
+				
 			});//end of ajax
 		} //end of getLogs()
 		
-		//로그 등록
+		//로그 등록 : with photo
 		jb("#write").click(function() {
+			var data = new FormData();
+			var url = "write.do";
+			var fileFlag = 0;
+			
+			data.append('l_pnum', jb("#l_pnum").val());
+			data.append('l_uemail', jb("#l_uemail").val());
+			data.append('ltext', jb("#ltext").val());
+			data.append('lpublic', jb("#lpublic").val());
+			alert(url);
+			
+//			alert(jb("#lphoto")[0].files.length);
+//			alert(jb("#lphoto")[0].files.length > 0);
+			if(jb("#lphoto")[0].files.length > 0){
+//				alert(url);
+				jb.each(jb("#lphoto")[0].files, function(i, file) {
+			    	data.append('file-' + i, file);
+				});
+				url = "writePhoto.do";
+				fileFlag += 1;
+			}
+			alert(url);
+			
+			if(jb("#lfile")[0].files.length > 0){
+				jb.each(jb("#lfile")[0].files, function(i, file) {
+		    	data.append('lfile-' + i, file);
+				}); 
+				url = "writeFile.do";
+				fileFlag += 1;
+			}
+			alert(url);
+			
+			if(fileFlag == 2){
+				url = "writePhotoFile.do";
+			}
+			alert(url);
+			
 			if(jb("#ltext").val() == ""){
 				alert("내용을 입력하세요.");
 			}else{
 				jb.ajax({
-					url : "write.do",
+					url : url,
 					type : "post",
 					dataType : "text", 				
-					data : jb("#writeForm").serialize(),
+					data : data,
+					processData: false,
+		            contentType: false,
 					success : function(data) {
 						if (data == "ok") {
 							alert("로그 작성 성공");
@@ -132,7 +257,7 @@
 					error : function(data) {//200이 안 넘어 왔을 때
 						alert(data + ' : 로그 작성 실행시 에러 발생');
 					}
-				}); //end of ajax
+				}); //end of ajax 
 			}
 		});//end of 로그 작성 로직
 		
@@ -219,17 +344,10 @@
 		<fieldset>
 			<!-- 로그 등록창 -->
 			<div id="writeLog">
-				<form action="write.do" id="writeForm" method="post">
+				<form action="write.do" id="writeForm" method="post" enctype="multipart/form-data">
 					<input type="hidden" id="l_pnum" name="l_pnum" value="${requestScope.pnum}">
 					<input type="hidden" id="l_uemail" name="l_uemail" value="${sessionScope.userData.uemail}">
-					<table>
-						<!-- 내용 -->
-						<tr>
-							<th rowspan="5">
-								<textarea id="ltext" name="ltext" rows="5" cols="60" ></textarea>
-							</th>
-						</tr>
-						<!-- 공개여부 -->
+					  <table >
 						<tr>
 							<td>
 							<select id="lpublic" name="lpublic">
@@ -239,11 +357,19 @@
 							</select>
 							</td>
 						</tr>
-						<tr><td></td></tr>
-						<tr><td></td></tr>
-						<!-- 등록버튼 -->
 						<tr>
 							<td>
+								<textarea id="ltext" name="ltext" rows="5" cols="60" ></textarea>
+							</td>
+							<td>
+								<div><label for="photo">Log Photo</label><br>
+								<input type="file" name="lphoto" id="lphoto" /></div>
+								<div><label for="file">Log File</label><br>
+								<input type="file" name="lfile" id="lfile"/></div>
+							</td>
+						</tr>
+						<tr>
+							<td align="center">
 								<input type="button" id="write" value="로그등록">
 							</td>
 						</tr>
@@ -251,85 +377,104 @@
 				</form>
 			</div><!-- end of writeLog -->
 			
-			<c:set scope="page" value="yo" var="key"/>
-			
 			<!-- 로그 목록 -->
 			<div id="logsList">
 				<!-- jQuery 함수 사용을 위해서 선언 -->
 				<div id="setLogs">
 					
-					<%-- 로그마다 코멘트 창이 달려야 한다.
+				<!--	로그마다 코멘트 창이 달려야 한다.
 					코멘트 등록 버튼을 누르면 코멘트 목록이 비동기로 바뀌어야 한다.
-					코멘트는 작성자만 삭제할 수 있다. --%>
+					코멘트는 작성자만 삭제할 수 있다. -->
 					<c:forEach items="${requestScope.logsList}" var="logs" >
-						<!-- 로그내용 -->
-						<div class="logContent">
-							<table id="logTable">
-								<tr>
-									<td>＃  </td>
-									<td>${logs.l_uemail}</td>
-									<td>${logs.ltext}</td>
-								</tr>
-								<tr>
-									<c:if test="${logs.lpublic == 0}"><td>비공개</td></c:if>
-									<c:if test="${logs.lpublic == 1}"><td>공개</td></c:if>
-									<td>${logs.ladmission}</td>
-									<td>
-										<span>${logs.ldata}</span>
-										<span>
-											<!-- 평가 부분 -->
-										</span>
-									</td>
-								</tr>
-							</table>
-						</div><!-- end of logContent -->
-						
-						<!-- 코멘트 목록 -->
-						<c:forEach items="${requestScope.commentsList}" var="comment">
-							<c:if test="${comment.c_lnum == logs.lnum }">
-								<div class="lcContent">
-									<table>
-											<tbody id="commentBody">
-												<tr>
-													<td>-→</td>
-													<td>${comment.c_uemail }</td>
-													<td>${comment.ctext}</td>
-													<td>${comment.cdate}</td>
-													<c:if test="${comment.c_uemail == sessionScope.userData.uemail}">
-														<td><input type="button" value="삭제" id="del" name="${comment.cnum}"></td>
-													</c:if>
-												</tr>
-											</tbody>
-										</table>					
-								</div><!-- end of lcContent -->
-							</c:if>
-						</c:forEach><!-- end of comment loop -->
-						
-						<!-- 코멘트 입력창 -->
-						<div class="lcWrite">
-							<form action="writeLc.do" class="writeLcForm" id="writeLcForm${logs.lnum}" method="post">
-								<input type="hidden" id="c_lnum${logs.lnum}" name="c_lnum" value="${logs.lnum}">
-								<input type="hidden" id="c_uemail${logs.lnum}" name="c_uemail" value="${sessionScope.userData.uemail}">
-								<input type="hidden" id="c_l_pnum${logs.lnum}" name="c_l_pnum" value="${logs.l_pnum}">
-								
-								<table>
-									<tfoot id="writeComment${logs.lnum}">
-										<tr>
-											<td><textarea id="ctext${logs.lnum}" name="ctext" rows="2" cols="30"></textarea></td>
-											<td><input type="button" id="writeLc" value="코멘트등록"></td>
-										</tr>
-									</tfoot>
+						<div class="eachLog" id="${logs.lnum}">
+							<!-- 로그내용 -->
+							<div class="logContent">
+								<table class="logTable">
+									<tr>
+										<td>
+											<img id="userProfilePhoto" src="${sessionScope.userData.uphoto}" width="50" height="50" border="3" style="margin: -5px 5px 5px 5px;">
+										</td>
+										<td>${logs.l_uemail}</td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td>${logs.ltext}<br></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td>
+											<img id="logPhoto" src="${logs.lphoto}" width="80%" height="80%" border="0" style="margin: -5px 5px 5px 5px;"><br>
+										</td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td><input type="button" value="파일다운" onclick="location.href='http://www.naver.com'">파일이름</td>
+										<td></td>
+									</tr>
+									<tr>
+										<c:if test="${logs.lpublic == 0}"><td>비공개</td></c:if>
+										<c:if test="${logs.lpublic == 1}"><td>공개</td></c:if>
+										<td>${logs.ladmission}</td>
+										<td>
+											<span>${logs.ldata}</span>
+											<span>
+												<input type='button' class='judge' id='like' value='좋아요' name='2'>
+												<input type='button' class='judge' id='soso' value='그저그래요' name='1'>
+												<input type='button' class='judge' id='hate' value='싫어요' name='-1'>
+											</span>
+										</td>
+									</tr>
 								</table>
-							</form>
-						</div><!-- end of lcWrite -->
-					
+							</div><!-- end of logContent -->
+							
+							<!-- 코멘트 목록 -->
+							<c:forEach items="${requestScope.commentsList}" var="comment">
+								<c:if test="${comment.c_lnum == logs.lnum }">
+									<div class="lcContent">
+										<table>
+												<tbody id="commentBody">
+													<tr>
+														<td>-→</td>
+														<td>${comment.c_uemail }</td>
+														<td>${comment.ctext}</td>
+														<td>${comment.cdate}</td>
+														<c:if test="${comment.c_uemail == sessionScope.userData.uemail}">
+															<td><input type="button" value="삭제" id="del" name="${comment.cnum}"></td>
+														</c:if>
+													</tr>
+												</tbody>
+											</table>					
+									</div><!-- end of lcContent -->
+								</c:if>
+							</c:forEach><!-- end of comment loop -->
+							
+							<!-- 코멘트 입력창 -->
+							<div class="lcWrite">
+								<form action="writeLc.do" class="writeLcForm" id="writeLcForm${logs.lnum}" method="post">
+									<input type="hidden" id="c_lnum${logs.lnum}" name="c_lnum" value="${logs.lnum}">
+									<input type="hidden" id="c_uemail${logs.lnum}" name="c_uemail" value="${sessionScope.userData.uemail}">
+									<input type="hidden" id="c_l_pnum${logs.lnum}" name="c_l_pnum" value="${logs.l_pnum}">
+									
+									<table>
+										<tfoot id="writeComment${logs.lnum}">
+											<tr>
+												<td><textarea id="ctext${logs.lnum}" name="ctext" rows="2" cols="30"></textarea></td>
+												<td><input type="button" id="writeLc" value="코멘트등록"></td>
+											</tr>
+										</tfoot>
+									</table>
+								</form>
+							</div><!-- end of lcWrite -->
+						</div><!-- end of eachLog -->
 					</c:forEach><!-- end of log loop -->
-				</div><!-- end of setLogs -->
 				
+				</div><!-- end of setLogs -->
 			</div><!-- end of logsList -->		
 		</fieldset>	
 	</div><!-- end of logsView -->	
-	<c:out value="${pageScope.key }"/>
 </body>
 <jsp:include page="bottomMenu.jsp" flush="true"/>
 </html>
