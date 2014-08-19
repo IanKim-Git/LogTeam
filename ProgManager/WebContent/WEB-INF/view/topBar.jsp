@@ -218,7 +218,7 @@
 
     		<img id="barUserPhoto" src="${sessionScope.userData.uphoto}" width="50" height="50" border="3" style="margin: -5px 5px 5px 5px;">
     		<%-- <input value="${sessionScope.userData.uphoto}"> --%>
-	        <a href="#" id="loginButton"><span>Logout</span><em></em></a>
+	        <a href="#" id="loginButton"><span>Sign out</span><em></em></a>
 	        
             <a href="#" id="JoinButton"><span>Inform</span><em></em></a>
             <div style="clear:both"></div>

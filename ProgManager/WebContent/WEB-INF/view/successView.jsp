@@ -143,7 +143,7 @@
 </script>
 
 <body>
-    
+    <br><br>
     <div class='content' align="center" style="margin-top: 35px">
     	<h1><img src="./images/ProgManager.png"></h1>
     	<hr><br>

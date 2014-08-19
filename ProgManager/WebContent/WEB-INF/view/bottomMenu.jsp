@@ -60,7 +60,7 @@
 			<input type="hidden" name="pw" value="${sessionScope.userData.upw }">
 		</form>
 		<form action="projectInfo.do" id="projectInfo" onclick="onprojectInfo()" method="post">
-			<input type="hidden" name="enterProInfoPnum" value="${requestScope.pnum}">
+			<input type="hidden" name="pnum" value="${requestScope.pnum}">
 		</form>
 		<form action="announcement.do" id="announcement" onclick="onannouncement()" method="post">
 			<input type="hidden" name="enterAnnPnum" value="${requestScope.pnum}">

@@ -4,7 +4,6 @@
 <html>
 <head>
 	<jsp:include page="topBar.jsp" flush="false" />
-	<jsp:include page="leftMenu.jsp" flush="false" />
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Calender</title>
 </head>
@@ -17,4 +16,6 @@
 	프로젝트 번호 : ${requestScope.pnum}
 	유저 이메일 : ${sessionScope.userData.uemail}<br>
 </body>
+<br><br><br>
+<jsp:include page="bottomMenu.jsp" flush="true"/>
 </html>

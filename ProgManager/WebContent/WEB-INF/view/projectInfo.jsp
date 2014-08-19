@@ -86,17 +86,18 @@
 </head>
 
 <body>
-
+	<br><br>
 	<%-- <h6>프로젝트 화면</h6>
 	프로젝트 번호 : ${requestScope.pnum}
 	유저 이메일 : ${sessionScope.userData.uemail}<br> --%>
 	<div id="infomain" align="center">
 	<div class='contents' style="margin-top: 40px">
 	<form action="" id="info" method="post">
-    	<b> <font color="#9B2626" style="font-style: oblique;" size="5">프로젝트 이름 : <b id="proname">${requestScope.pinfo.pname}</b></font><br><br>
-    	<font color="#9B2626" style="font-style: oblique;" size="5">프로젝트 방 번호 : &nbsp;&nbsp;${requestScope.pinfo.pnum}</font><br><br>
-    	<font color="#9B2626" style="font-style: oblique;" size="5">기간 : <b id="term">${requestScope.pinfo.pstart} ~ ${requestScope.pinfo.pend}</b></font><br><br>
-    	<font color="#9B2626" style="font-style: oblique;" size="5">프로젝트 일정 상황:</font>&nbsp;&nbsp;
+    	<b> 
+    	<font color="#5A5A5A" style="font-style: initial;" size="5">프로젝트 이름 : <b id="proname">${requestScope.pinfo.pname}</b></font><br><br>
+    	<font color="#5A5A5A" style="font-style: initial;" size="5">프로젝트 방 번호 : &nbsp;&nbsp;${requestScope.pinfo.pnum}</font><br><br>
+    	<font color="#5A5A5A" style="font-style: initial;" size="5">기간 : <b id="term">${requestScope.pinfo.pstart} ~ ${requestScope.pinfo.pend}</b></font><br><br>
+    	<font color="#5A5A5A" style="font-style: initial;" size="5">프로젝트 일정 상황:</font>&nbsp;&nbsp;
     </form>
    		<div>${requestScope.prodate}%
     	<progress value="${requestScope.prodate}" max="100"/>
@@ -105,7 +106,7 @@
 	</div>
     	
     	<br>
-		<font color="#9B2626" style="font-style: oblique;" size="5">팀원 정보 : &nbsp;</font></b>
+		<font color="#5A5A5A" style="font-style: oblique;" size="5">팀원 정보 : &nbsp;</font></b>
 		<br>
 
 <table border="0" cellpadding="2" cellspacing="1" width="25%" bordercolordark="white" bordercolorlight="black">
@@ -168,6 +169,7 @@
 		 </div>
 		</div>
 </body>
+<br><br><br>
 <jsp:include page="bottomMenu.jsp" flush="true"/>
 </html>
 
