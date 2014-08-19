@@ -38,10 +38,10 @@
     
   <div id="dock-wrapper">
     <div class="dock">
-      <div class="dock-front">
+      <div class="dock-front" align="center">
     	    <img src="footer_menu/arrow-up.png" alt="Arrow Up" id="arrow-up" />
       </div>
-      <div class="dock-top">
+      <div class="dock-top" align="center">
     	    <img src="footer_menu/arrow-down.png" alt="Arrow Down" id="arrow-down" />
       </div>
     </div>

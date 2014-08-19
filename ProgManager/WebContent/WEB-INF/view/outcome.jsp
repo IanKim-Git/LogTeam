@@ -12,7 +12,7 @@
 <script>var jb = jQuery.noConflict();</script>
 
 <body>
-	<h6>팀원성과도</h6>
+	<h1><b>팀원성과도 : 개발예정</b></h1>
 	프로젝트 번호 : ${requestScope.pnum}
 	유저 이메일 : ${sessionScope.userData.uemail}<br>
 </body>

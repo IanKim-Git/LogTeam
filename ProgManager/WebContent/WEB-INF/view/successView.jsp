@@ -48,7 +48,7 @@
 		$("#btn").click(function() {
     	 	var brick;
    			var pname = $("#pname").val();
-   		 	alert(pname);
+   		 	//alert(pname);
 			$.ajax({
 				url : "newProject.do",
 				type : "post",
@@ -145,8 +145,8 @@
 <body>
     
     <div class='content' align="center" style="margin-top: 35px">
-    	<h1><b> <font color="4682B4" style="font-style: oblique;">ProgManager!</font></b></h1>
-    	<br><hr><br>
+    	<h1><img src="./images/ProgManager.png"></h1>
+    	<hr><br>
     	<div id="projectList">
     		<section class='example'>
 	    		<div class='gridly' id='gridly'></div>

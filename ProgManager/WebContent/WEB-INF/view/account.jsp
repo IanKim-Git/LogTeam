@@ -195,7 +195,7 @@
 	            },
 	            axisDefaults: {
 	                majorGridLines: {
-	                    visible: false
+	                    visible: true
 	                }
 	            }
 	        });
