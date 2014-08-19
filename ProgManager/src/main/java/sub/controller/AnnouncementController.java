@@ -58,7 +58,5 @@ public class AnnouncementController {
 			result = "ok";
 		}
 		return result; //요청한 jsp 또는 html의 xhr에게 직접 응답
-	}
-	
-	 
+	}	 
 }

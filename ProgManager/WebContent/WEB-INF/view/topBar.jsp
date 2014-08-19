@@ -147,7 +147,11 @@
 				error : function(data) {
 					alert(data + ' : 회원 탈퇴 로직 실행시 에러 발생');
 				}
-			}); //end of ajax
+			}); //leave of ajax
+		});//leave of Join button
+		
+		$("#loginButton").click(function(){
+			alert(11111);
 		});//end of Join button
 		
 		//프로필 사진 올리기 아작스

@@ -119,7 +119,7 @@
 		                	  			"∏‡≈‰ : "+project.pmento+"<br>"+  		"±‚∞£ : <br>"+project.pstart+"~"+project.pend+"<br>"+
 		                	  			"∆¿¿Â : "+project.pleader+"<br>"+  		"</div><br></font>"+
 		                	  		"<a class='enter' href='#' id="+project.pnum+">[¿‘¿Â«œ±‚]</a>"+
-		                	  			"<form action='enterProjectMain.do' id='enterProject"+project.pnum+"' method='post'>"+
+		                	  			"<form action='projectInfo.do' id='enterProject"+project.pnum+"' method='post'>"+
 	                	  				"<input type='hidden' id='pnum' name='pnum' value='"+project.pnum+"'/>"+
 	                	  				"<input type='hidden' id='pname' name='pname' value='"+project.pname+"'/></form>"+
 	                	  				

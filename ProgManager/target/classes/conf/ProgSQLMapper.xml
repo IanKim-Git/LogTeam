@@ -84,9 +84,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select pnum, pname, ppw, pmento, pstart, pend, pleader, pterminate from project where pnum=#{pnum}
 	</select>
 	
+	<!-- 프로젝트 번호로 남은 날짜 계산 -->
+	<select id="getProjectDate" resultType="String">
+		select trunc((sysdate-pstart)/(pend-pstart)*100) from project where pnum=#{pnum}
+	</select>
+	
 	<!-- 프로젝트에 속한 유저 정보 가저오기 -->
 	 <select id="getProjectUserList" parameterType="int" resultType="puBean">
-	 	select uname, uphone, uemail from proguser, userproject where up_pnum=#{pnum} and up_uemail=uemail;
+	 	select uname, uphone, uemail from proguser, userproject where up_pnum=#{pnum} and up_uemail=uemail
 	 </select>
 	 
 	 <!-- 프로젝트 pnum과 ppw를 통해 해당 프로젝트가 있는 프로젝트인지 확인 -->
@@ -94,7 +99,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 	select pnum, pname, ppw, pmento, pstart, pend, pleader, pterminate from project where pnum=#{pnum} and ppw=#{ppw}
 	 </select>
 
-	
+	 <!-- 프로젝트 정보 변경 -->
+     <update id="projectUpdate" parameterType="puBean">
+        update project set pname=#{pname}, ppw=#{ppw}, pstart=#{pstart}, pend=#{pend} where pnum=#{pnum}      
+     </update>
+   
+   	 <!-- 프로젝트 삭제 -->
+     <delete id="deleteProject" parameterType="int">
+   	    delete from project where pnum=#{pnum}
+     </delete>
+     
+     <!-- 프로젝트 리더 가져오기 -->
+	 <select id="getProjectLeader" parameterType="int" resultType="String">
+	 	select pleader from project where pnum=#{pnum}
+	 </select>
 	
 	<!--  ### 로그용 SQL문 ###  -->
 	<!-- 해당 프로젝트의 모든 로그 출력 -->

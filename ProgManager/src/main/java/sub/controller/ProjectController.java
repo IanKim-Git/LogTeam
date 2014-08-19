@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import model.domain.ProgUserBean;
 import model.domain.ProjectBean;
 import model.service.JudgeService;
 import model.service.LogService;
@@ -70,7 +71,7 @@ public class ProjectController {
 			return "no";
 	}
 	
-	@RequestMapping(value="enterProjectMain.do", method=RequestMethod.POST)
+	/*@RequestMapping(value="enterProjectMain.do", method=RequestMethod.POST)
 	public String newProject(@RequestParam("pnum") String pnum, @RequestParam("pname") String pname, Model model){
 
 		System.out.println("///////////////////////sdfsdfsdf/////////////////////");
@@ -80,7 +81,7 @@ public class ProjectController {
 		model.addAttribute("pname", pname);
 		
 		return "projectInfo";
-	}
+	}*/
 
 	/* 스프링 웹 설정 파일 참조 : springAjaxMyBatis-servlet.xml  
 	<bean id="jsonView" class="net.sf.json.spring.web.servlet.view.JsonView" >
@@ -101,10 +102,12 @@ public class ProjectController {
 	
 	//프로젝트 정보로 이동
 	@RequestMapping("projectInfo.do")
-	public String enterProjectInfo(@RequestParam("enterProInfoPnum") String pnum, Model model){
+	public String enterProjectInfo(@RequestParam("pnum") String pnum, @RequestParam("pname") String pname, Model model){
 		model.addAttribute("pnum", pnum);
-		//model.addAttribute("pinfo", projectService.getProjectInfo(pnum));
-		//model.addAttribute("puser", puService.projectUserList(pnum));
+		model.addAttribute("pinfo", projectService.getProjectInfo(Integer.valueOf(pnum)));
+		model.addAttribute("prodate",projectService.getProjectDate(Integer.valueOf(pnum)));
+		model.addAttribute("puser", puService.projectUserList(Integer.valueOf(pnum)));
+		model.addAttribute("pleader",projectService.getProjectLeader(Integer.parseInt(pnum)));
 		return "projectInfo";
 	}
 	
