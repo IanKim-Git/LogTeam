@@ -48,7 +48,6 @@
 		$("#btn").click(function() {
     	 	var brick;
    			var pname = $("#pname").val();
-   		 	//alert(pname);
 			$.ajax({
 				url : "newProject.do",
 				type : "post",
@@ -68,6 +67,13 @@
 				}
 			}); //end of ajax
 		});//end of 가입로직
+		
+		$("#btn2").click(function() {
+   			$(".overlay").hide();
+		});
+		$("#Joinbtn2").click(function() {
+   			$(".overlay").hide();
+		});
 		
 		//프로젝트 참여하기 버튼 로직
 		$("#Joinbtn").click(function() {
@@ -132,7 +138,7 @@
 				}
 			}); //end of ajax
 		}//end of getData()
-
+		
 		//데이터 가져오는 함수 호출
 		getData();
 
@@ -141,36 +147,40 @@
    
 <body>
 	<br><br>
+    
     <div class='content' align="center" style="margin-top: 35px">
     	<h1><img src="./images/ProgManager.png"></h1>
     	<hr><br>
 
-    	<div id="projectList">
+    	<div id="projectList" style="right: 500px;">
     		<section class='example'>
 	    		<div class='gridly' id='gridly'></div>
-	    		</section>
+	    	</section>
   	  	</div>
+  	  	<hr>
   	  	
-  	  	<br><hr>
         <p class='actions' style="float: left;">
-          <a class='button' href="javascript:ViewCreateLayer();" >프로젝트 생성</a>
+          <a class='button' href="javascript:ViewCreateLayer();javascript:viewLayer();" style="font-size: 40px">NEW</a>
         </p>
         <p class='actions' style="float: right;">
-          <a class='button' href="javascript:ViewJoinLayer();">프로젝트 참여</a>
+          <a class='button' href="javascript:ViewJoinLayer();javascript:viewLayer();" style="font-size: 40px">JOIN</a>
         </p>
     </div>
     <br><br><br><br><br>
     
    	<div id="createProjectPop" align="center">
-	   	<br><font color="black" size="30" style="4" >프로젝트 생성</font><br><br>
+	   	<br><font color="#ACA7A7" size="27" style="4" >New Project!</font>
+	   	<br><br>
 
 	   	<form name="newProject.do" id="newproform" method="post">
-			Name :<input type="text"  name="pname" id="pname" /><br>
-			PassWord :<input type="password" name="ppw" /><br>
-			Mento ID :<input type="text" name="pmento" /><br>
-			Start Date :<input type="text" name="pstart" /><br>
-			End Date :<input type="text" name="pend" /><br>
-			Leader :<input type="text" name="pleader" id="pleader" value="${sessionScope.userData.uemail}"/><br>
+	   	<table style="margin: 0 0 0 120px">
+			<tr><td>Name :</td><td><input type="text"  name="pname" id="pname" /></td></tr>
+			<tr><td>PassWord :</td><td><input type="password" name="ppw" /></td></tr>
+			<tr><td>Mento ID :</td><td><input type="text" name="pmento" /></td></tr>
+			<tr><td>Start Date :</td><td><input type="text" name="pstart" /></td></tr>
+			<tr><td>End Date :</td><td><input type="text" name="pend" /></td></tr>
+			<tr><td>Leader :</td><td><input type="text" name="pleader" id="pleader" value="${sessionScope.userData.uemail}"/></td></tr>
+		</table>
 		<br>
 		<br>
 		<input class='basicBtn' type="button" value="생성" id="btn">
@@ -180,20 +190,23 @@
    	</div>
    	
    	<div id="joinProjectPop" align="center">
-	   	<br><font color="black" size="30" style="4">프로젝트 참여</font>
+	   	<br><font color="#ACA7A7" size="27" style="4" >Join Project!</font>
 	   	<br><br>
 
 	   	<form name="joinProject.do" id="joinproform" method="post">
-			Project Number :     <input type="text"  name="pnum" id="pnum" /><br>
-			Project PassWord : <input type="password" name="ppw" /><br>
-			<input type="hidden" name="uemail" value="${sessionScope.userData.uemail}">
-		<br>
-		<br>
+		<table style="margin: 15px 0 0 95px">
+			<tr><td>Project Number :   </td><td><input type="text"  name="pnum" id="pnum" /></td></tr>
+			<tr><td>Project PassWord : </td><td><input type="password" name="ppw" /></td></tr>
+			<tr><td></td><td><input type="hidden" name="uemail" value="${sessionScope.userData.uemail}"></td></tr>
+		</table>
+		<br><br><br><br><br>
 		<input class='basicJoinBtn' type="button" value="참여하기" id="Joinbtn">
 		<input class='cancel basicJoinBtn' type="button" value="취소" id="Joinbtn2">
 		</form>
 	   	<br><br>
    	</div>
+   	
+   	<div class="overlay" id="overlay"></div>
 
 	<script> 
       function ViewCreateLayer(){
@@ -204,7 +217,16 @@
       }
       function ViewJoinLayer(){
           document.getElementById("joinProjectPop").style.display='block';
-       }
+      }
+      function joinProject(){
+    	  document.getElementById("joinProjectPop").style.display='none';
+      }
+      function viewLayer(){
+    	  document.getElementById("overlay").style.display="inline";
+      }
+      function hideLayer(){
+    	  document.getElementById("overlay").style.display="none";
+      }
 	</script> 	
 	<br>
 	

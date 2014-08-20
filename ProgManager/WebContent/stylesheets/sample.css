@@ -74,7 +74,7 @@ pre {
   padding: 20px;
   width: 200px;
   color: white;
-  background: #888888;
+  background: #B7B7B7;
   margin: 20px 0;
   text-align: center;
   text-decoration: none;
@@ -113,43 +113,44 @@ pre .string.value {
       height: 300px; }
     .example .brick.dragging {
       opacity: 0.8; }
+      
     .example .brick:nth-child(20n + 1) {
-      background: #1abc9c; }
+      background: rgb(161,180,238); }
     .example .brick:nth-child(20n + 2) {
-      background: #16a085; }
+      background: rgb(162,225,217); }
     .example .brick:nth-child(20n + 3) {
-      background: #2ecc71; }
+      background: rgb(179,214,190); }
     .example .brick:nth-child(20n + 4) {
-      background: #27ae60; }
+      background: rgb(225,231,205); }
     .example .brick:nth-child(20n + 5) {
-      background: #3498db; }
+      background: rgb(241,218,246); }
     .example .brick:nth-child(20n + 6) {
-      background: #2980b9; }
+      background: rgb(251,247,156); }
     .example .brick:nth-child(20n + 7) {
-      background: #9b59b6; }
+      background: rgb(247,238,243); }
     .example .brick:nth-child(20n + 8) {
-      background: #8e44ad; }
+      background: rgb(184,160,150); }
     .example .brick:nth-child(20n + 9) {
-      background: #34495e; }
+      background: rgb(160,205,198); }
     .example .brick:nth-child(20n + 10) {
-      background: #2c3e50; }
+      background: rgb(192,187,183); }
     .example .brick:nth-child(20n + 11) {
-      background: #f1c40f; }
+      background: rgb(157,198,166); }
     .example .brick:nth-child(20n + 12) {
-      background: #f39c12; }
+      background: rgb(242,218,180); }
     .example .brick:nth-child(20n + 13) {
-      background: #e67e22; }
+      background: rgb(159,203,242); }
     .example .brick:nth-child(20n + 14) {
-      background: #d35400; }
+      background: rgb(245,174,208); }
     .example .brick:nth-child(20n + 15) {
-      background: #e74c3c; }
+      background: rgb(216,222,218); }
     .example .brick:nth-child(20n + 16) {
-      background: #c0392b; }
+      background: rgb(244,185,171); }
     .example .brick:nth-child(20n + 17) {
-      background: #ecf0f1; }
+      background: rgb(201,207,223); }
     .example .brick:nth-child(20n + 18) {
-      background: #bdc3c7; }
+      background: rgb(172,218,172); }
     .example .brick:nth-child(20n + 19) {
-      background: #95a5a6; }
+      background: rgb(211,201,165); }
     .example .brick:nth-child(20n + 20) {
-      background: #7f8c8d; }
+      background: rgb(216,188,239); }
