@@ -21,6 +21,7 @@
 <script type="text/javascript">
 	jb(document).ready(function(){
 		var acChartArray = null;
+		var indexArray = null;
 		
 		//모든 회계 목록을 불러오는 함수
 		function getAcs() {
@@ -64,11 +65,17 @@
 				success : function(data) {
 					//var acChartArray =new Array();
 					acChartArray = new Array();
+					indexArray = new Array();
+					
 					jb(data.list).each(function(index, item) {
-						if(item.acplus != 0)
+						if(item.acplus != 0){
 							acChartArray.push(item.acplus);
-						if(item.acminus != 0)
+							indexArray.push(item.acnum);
+						}
+						if(item.acminus != 0){
 							acChartArray.push(0-item.acminus);
+							indexArray.push(item.acnum);
+						}
 					});
 					jb("#chartData").val(acChartArray);
 					
@@ -212,9 +219,9 @@
 
 <body>
 <br><br>
-<img src="./images/accounts.png" align="left" style="margin: 3% 0 0 2%; ">
+<img src="./images/accounts.png" align="left" style="margin: 2% 0 0 1%; ">
 
-	<div id="example" align="center">
+	<div id="example" align="center" style="width: 80%;margin-left: 10%;">
     	<div class="demo-section k-content">
         	<div id="chart"></div>
     	</div>
@@ -225,7 +232,9 @@
 	유저 이메일 : ${sessionScope.userData.uemail}<br> --%>
 	
 	<div style="margin: 0 auto; width: 1300px">
-		<div style="float: left;">
+	
+	<table align="center" border="0px #ffffff">
+	<tr><td>
 	<form action="" id="acListForm">			
 		<table id="listTable" cellspacing="3" cellpadding="0" align="center">
 			<tr bgcolor="#FOFOF7">
@@ -233,21 +242,22 @@
 			</tr>
 		</table>
 	</form><br>
-		</div>
-		<div style="float: right;">
-		<br><br><br>
-	사용가능금액 : <input type="text" id="acTotal" readonly="readonly" /><br>
-	<%--insert into account (ac_pnum, acnum, acplus, acminus, accontents)
-		values (#{ac_pnum}, seq_ac.nextval, #{acplus}, #{acminus}, #{accontents}) --%>
-	<form action="writeAc.do" id="acWriteForm" method="post">
-		<input type="hidden" id="ac_pnum" name="ac_pnum" value="${requestScope.pnum}" align="middle">
-		내용 <textarea id="accontents" name="accontents" rows="1" cols="40" ></textarea><br>
-		수입 <input type="text" id="acplus" name="acplus" value="0"/>
-		지출 <input type="text" id="acminus" name="acminus" value="0"/>
-		<input type="button" id="acWrite" value="등록">
-	</form>
-	<p></p>
-	</div>
+	</td>
+	<td style="padding-left: 50px;">
+	<table>
+	<tr><td><b>Balance : </b></td><td><input type="text" id="acTotal" readonly="readonly" /><br><br></td></tr>
+		<form action="writeAc.do" id="acWriteForm" method="post">
+			<input type="hidden" id="ac_pnum" name="ac_pnum" value="${requestScope.pnum}" align="middle">
+			<tr><td>Income(<font color="green"><b>+</b></font>) :</td><td><input type="text" id="acplus" name="acplus" value="0"/></td></tr>
+			<tr><td>Outlay(<font color="red"><b>-</b></font>) :</td><td><input type="text" id="acminus" name="acminus" value="0"/></td></tr>
+			<tr><td>History :</td><td><textarea id="accontents" name="accontents" rows="4" cols="30" ></textarea></td></tr>
+			
+			<tr><td></td><td><input type="button" id="acWrite" value="등록"></td></tr>
+		</form>
+	</table>
+	</td>
+	</table>
+	
 	</div>
 	
 	<br><br><br><br><br><br><br><br><br>
