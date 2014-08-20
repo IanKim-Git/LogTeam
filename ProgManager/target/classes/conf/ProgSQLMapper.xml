@@ -122,11 +122,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from log where l_pnum=#{l_pnum} order by ldata desc
 	</select>
 	
-	<!-- 프로젝트 번호와 그날 날짜로 모임정보 가져오기 -->
-	<select id="getProjectInfo" resultType="projectBean">
-		select sdate, stitle, stext from schedule where pnum=#{s_pnum} and sdate=#{sysdate}
-	</select>
-	
 	<!-- 해당 로그 삭제 -->
 	<delete id="logDelete" parameterType="int">
 		delete log where lnum = #{lnum}
