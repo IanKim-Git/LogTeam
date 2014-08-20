@@ -102,7 +102,7 @@ public class ProjectController {
 	
 	//프로젝트 정보로 이동
 	@RequestMapping("projectInfo.do")
-	public String enterProjectInfo(@RequestParam("pnum") String pnum, @RequestParam("pname") String pname, Model model){
+	public String enterProjectInfo(@RequestParam("pnum") String pnum, Model model){
 		model.addAttribute("pnum", pnum);
 		model.addAttribute("pinfo", projectService.getProjectInfo(Integer.valueOf(pnum)));
 		model.addAttribute("prodate",projectService.getProjectDate(Integer.valueOf(pnum)));

@@ -162,7 +162,7 @@
         </p>
     </div>
     <br><br><br><br><br>
-        	
+    
    	<div id="createProjectPop" align="center">
 	   	<br><font color="black" size="30" style="4">프로젝트 생성하기</font><br><br>
 
@@ -199,13 +199,13 @@
    	
     <script> 
       function ViewCreateLayer(){
-        document.getElementById("createProjectPop").style.display='inline'
+        document.getElementById("createProjectPop").style.display='block'
      }
       function registerProject(){
     	  document.getElementById("createProjectPop").style.display='none'
       }
       function ViewJoinLayer(){
-          document.getElementById("joinProjectPop").style.display='inline'
+          document.getElementById("joinProjectPop").style.display='block'
        }
 	</script> 	
 	<br>

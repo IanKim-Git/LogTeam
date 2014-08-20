@@ -216,7 +216,7 @@
     	<div id="loginContainer">
     		<%-- <img id="barUserPhoto" src="./ProgFile/uphoto/${requestScope.photo}" width="100" height="100" border="3" style="margin: 61px 5px 5px 25px;"> --%>
 
-    		<img id="barUserPhoto" src="${sessionScope.userData.uphoto}" width="50" height="50" border="3" style="margin: -5px 5px 5px 5px;">
+    		<img id="barUserPhoto" src="${sessionScope.userData.uphoto}" width="50" height="50" border="2" style="margin: -6px 5px 3px 5px;">
     		<%-- <input value="${sessionScope.userData.uphoto}"> --%>
 	        <a href="#" id="loginButton"><span>Sign out</span><em></em></a>
 	        
