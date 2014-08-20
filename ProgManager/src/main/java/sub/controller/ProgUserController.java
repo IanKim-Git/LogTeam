@@ -21,11 +21,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
+import util.MethodUtil;
+
 @Controller
 @SessionAttributes("userData")
 public class ProgUserController {
 	@Resource(name = "puService")
 	private ProgUserService puService;
+	
+	//김용두 파일 패스
+//	private String filePath = "D:/2014KODB/slogProject/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ProgManager/ProgFile/uphoto/";
+	//박상태 파일 패스
+//	private String filePath = "";
+	//황수남 파일 패스
+//	private String filePath = "";
+	//박다은 파일 패스
+	private String filePath = "C:/2014KODB/KODBFinalProject/GitTest/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ProgManager/ProgFile/uphoto/";
 
 	// 로그인 할 때 아이디(이메일)와 비밀번호 확인
 	@RequestMapping(value = "idPwCheck.do", method = RequestMethod.POST)
@@ -123,29 +134,19 @@ public class ProgUserController {
 		}
 		return resultMsg;
 	}
-	
 
 	// 프로필 사진 등록
 	@RequestMapping(value = "uPhotoUpload.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String updateUserPhoto(@RequestParam("file-0")  MultipartFile file, @RequestParam("name") String uemail) {
 		String resultMsg = "no";
-		String fileName =  uemail;
-			   fileName += new java.text.SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
-			   fileName += file.getOriginalFilename();
+		String fileName =  MethodUtil.fileNameCreate(file.getOriginalFilename(), uemail);
 		
-		//김용두 파일 패스
-		String filePath1 = "D:/2014KODB/slogProject/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ProgManager/ProgFile/uphoto/";
-		//박상태 파일 패스
-		String filePath2 = "";
-		//황수남 파일 패스
-		String filePath3 = "";
-		//박다은 파일 패스
-		String filePath4 = "C:/2014KODB/KODBFinalProject/GitTest/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ProgManager/ProgFile/uphoto/";
 		try{
 			//폴더에 파일 저장
-			file.transferTo(new File(filePath1+fileName));
-			int result = puService.userPhoto(new ProgUserPhotoBean(uemail, "./ProgFile/uphoto/"+fileName));
+			file.transferTo(new File(filePath+fileName));
+			fileName = MethodUtil.filePath("./ProgFile/uphoto/", fileName);
+			int result = puService.userPhoto(new ProgUserPhotoBean(uemail, fileName));
 			if(result>0)
 				resultMsg = "ok";
 		}catch(Exception e){
@@ -184,5 +185,4 @@ public class ProgUserController {
 		model.addAttribute("title", "메인 화면");
 		return "successView";
 	}
-	
 }

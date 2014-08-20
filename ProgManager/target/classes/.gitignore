@@ -1,2 +1,9 @@
+<<<<<<< HEAD
 /conf/
 /sub/
+=======
+/sub/
+/conf/
+/model/
+/util/
+>>>>>>> refs/remotes/origin/pde_logDetail

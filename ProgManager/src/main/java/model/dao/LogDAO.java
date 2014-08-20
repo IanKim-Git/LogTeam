@@ -23,6 +23,20 @@ public class LogDAO {
 		return list;
 	}
 	
+	//해당 프로젝트의 공개된 로그와 자신의 비공개 로그 출력 allSelectedLogs
+	public List<LogBean> allSelectedLogs(LogBean lb) {
+		SqlSession session = null;
+		List<LogBean> list = null;
+		try {
+			session = DBUtil.getSqlSession();
+			list = session.selectList("prog.allSelectedLogs", lb);
+			
+		} finally {
+			DBUtil.closeSqlSession(session);
+		}
+		return list;
+	}
+	
 	//해당 로그 삭제
 	public int logDelete(int lnum) {
 		SqlSession session = null;
