@@ -16,63 +16,100 @@
     <script src="kendo_file/angular.min.js"></script>
     <script src="kendo_file/kendo.all.min.js"></script>
     <script src="kendo_file/console.js"></script>
-</head>
-<script type="text/javascript">
-	$(document).ready(function(){
-		function getData() {
-			$.ajax({
-				url : "getSchedule.do",
-				data : "pnum=" + requestScope.pnum,
-				type : "post",
-				dataType : "json", 					//결과데이터타입
-				success : function(data) {
-					
-					alert(data);
-					
-					
-/* 					document.getElementById("gridly").innerHTML="<div class='brick small' ><br><br><font color='black'><b>I'm Mento.</b></font></div>";					
 
-					$(data.list).each(function(index, project) {
-						//alert(JSON.stringify(project));
-						fullProjectInfo = JSON.stringify(project);//value="+JSON.stringify(project)+"
-						simpleProjectInfo = project.pnum + project.pname;
-						//alert(simpleProjectInfo);
-						
-						
-		                document.getElementById("gridly").innerHTML+=
-		                	  "<div class='brick small' id="+project.pnum+"><br><br><font color='black' >"+
-		                	  		"<div id='content_s"+project.pnum+"' style='display:table-cell; vertical-align:middle; font-size: 1.3em;'>"+project.pname+"</div><br>"+
-		                	  		"<div id='content_l"+project.pnum+"' style='display:none; font-size: 1.2em;'>"+
-		                	  			"프로젝트 번호 : "+project.pnum+"<br>"+	"프로젝트 이름 : "+project.pname+"<br>"+
-		                	  			"멘토 : "+project.pmento+"<br>"+  		"기간 : <br>"+project.pstart+"~"+project.pend+"<br>"+
-		                	  			"팀장 : "+project.pleader+"<br>"+  		"</div><br></font>"+
-		                	  		"<a class='enter' href='#' id="+project.pnum+">[입장하기]</a>"+
-		                	  			"<form action='enterProjectMain.do' id='enterProject"+project.pnum+"' method='post'>"+
-	                	  				"<input type='hidden' id='pnum' name='pnum' value='"+project.pnum+"'/>"+
-	                	  				"<input type='hidden' id='pname' name='pname' value='"+project.pname+"'/></form>"+
-	                	  				
-	                	  		"</div>";
-	           
-		                  
-		                $('.gridly').gridly(); */
-		               });
-					//테이블에 추가
+    <script type="text/javascript">
+	$(document).ready(function(){
+		function sendSchedule(x){
+			alert(x.title);
+			$.ajax({
+				url : "sendSchedule.do",
+				data : "pnum="+$("#pnum").val()+"&sdate="+x.start+"&edate="+x.end+"&stext="+x.description+"&stitle="+x.title,
+				type:"post",
+				dataType:"text",
+				success:function(data){
+					if(data=="ok"){
+						alert("등록 성공!!");
+					} else{
+						alert("실패임ㅡ,.ㅡ");
+					}
 				},
-				error : function(err) {//실패했을때
-					alert(err + " : 모든 프로젝트 정보 불러오기 실패");
-				}
-			}); //end of ajax
-		}//end of getData()
-		getData();
+				error:function(data){
+					alert("등록 로직 실패");
+				} 
+			});
+		}
+	/* 	data:[
+    	      {
+    	    	  id:1,
+    	    	  start: new Date("2014/8/18 8:00 AM"),
+    	    	  end: new Date("2014/8/18 9:00 AM"),
+    	    	  title: "Interview"
+    	      },
+    	      {
+    	    	  id:2,
+    	    	  start: new Date("2014/8/19 5:00 AM"),
+    	    	  end: new Date("2014/8/19 8:00 AM"),
+    	    	  title: "InterView2"
+    	      }
+    	 ] */
+		var scheduleJsonList=null;
+		$.ajax({
+			url : "getSchedule.do",
+			data : "pnum="+$('#pnum').val(),
+			type : "post",
+			dataType : "json", 					//결과데이터타입
+			success : function(data) {
+				//alert(data.list.length);    // data 갯수 
+					    $("#scheduler").kendoScheduler({
+					        date: new Date("2014/8/17"),
+					        views: ["month", "day" ],
+					        save: function(e) {
+					            sendSchedule(e.event);
+					            alert("나왔넹");
+					        }
+					    });
+					    var scheduler = $("#scheduler").data("kendoScheduler");
+					    $(data.list).each(function(index,schedule){
+					    	scheduler.dataSource.add({
+					    		start:new Date(schedule.sdate),
+					    		end: new Date(schedule.edate),
+					    		title:schedule.stitle,
+					    		description:schedule.stext
+					    	});
+					    });
+					    
+				
+				//fullProjectInfo = JSON.stringify(data);//value="+JSON.stringify(project)+"
+				//simpleProjectInfo = project.pnum + project.pname;
+				
+				//alert(fullProjectInfo);
+			//	alert(data);
+				//alert($('#pnum').val());
+				//scheduleJsonList= data;
+				
+			//	var obj_length=Object.keys(data).length;
+/* 
+				$(data.list).each(function(index, schedule) {
+					alert(schedule.stext);
+				}); */
+			},
+			error : function(err) {//실패했을때
+				alert(err + " : 모든 프로젝트 정보 불러오기 실패");
+			}
+		}); //end of ajax
+		
 		
 	});
 </script>
+    
+    
+</head>
 
 <body>
 	<h6>캘린더</h6>
 
     <div id="scheduler"></div>
-<script>
+<!-- <script>
 $(function() {
     $("#scheduler").kendoScheduler({
         date: new Date("2014/8/17"),
@@ -96,10 +133,11 @@ $(function() {
     });
 	scheduler.setDataSource(dataSource);
 });
-</script>
+</script> -->
 
 
  	<jsp:include page="bottomMenu.jsp" flush="true"/>
+ 	<input type="hidden" id="pnum" value="${requestScope.pnum}" />
 
 </body>
 </html>

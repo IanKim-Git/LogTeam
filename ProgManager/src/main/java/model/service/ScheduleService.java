@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import model.dao.ScheduleDAO;
+import model.domain.ScheduleBean;
 
 public class ScheduleService {
 	
@@ -15,6 +16,14 @@ public class ScheduleService {
 	public List getProjectList(String pnum) {
 		System.out.println("////////////////////////////////getproject list service//////////////////////////////");
 		return scheduleDao.getSchedule(pnum);
+	}
+
+	public int sendSchedule(ScheduleBean scheBean) {
+		// TODO Auto-generated method stub
+		System.out.println("//////////////sendSchedule service/////////////");
+		
+		return scheduleDao.sendSchedule(scheBean);
+		
 	}
 
 }
