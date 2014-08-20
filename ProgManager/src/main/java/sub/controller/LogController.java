@@ -37,22 +37,22 @@ public class LogController {
 	private ProgUserService puService;
 	
 	//김용두 사진 패스
-	private String filePath1 = "D:/2014KODB/slogProject/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ProgManager/ProgFile/lphoto/";
+//	private String pfilePath = "D:/2014KODB/slogProject/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ProgManager/ProgFile/lphoto/";
 	//박상태 사진 패스
-	private String filePath2 = "C:/Users/Ian/git/LogTeam/ProgManager/WebContent/ProgFile/uphoto";
+//	private String pfilePath = "C:/Users/Ian/git/LogTeam/ProgManager/WebContent/ProgFile/uphoto";
 	//황수남 사진 패스
-	private String filePath3 = "";
+//	private String pfilePath = "";
 	//박다은 사진 패스
-	private String filePath4 =  "C:/2014KODB/KODBFinalProject/GitTest/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ProgManager/ProgFile/lphoto/";
+	private String pfilePath =  "C:/2014KODB/KODBFinalProject/GitTest/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ProgManager/ProgFile/lphoto/";
 
 	//김용두 파일 패스
-	private String lfilePath1 = "D:/2014KODB/slogProject/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ProgManager/ProgFile/lfile/";
+//	private String lfilePath = "D:/2014KODB/slogProject/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ProgManager/ProgFile/lfile/";
 	//박상태 파일 패스
-	private String lfilePath2 = "C:/Users/Ian/git/LogTeam/ProgManager/WebContent/ProgFile/uphoto";
+//	private String lfilePath = "C:/Users/Ian/git/LogTeam/ProgManager/WebContent/ProgFile/uphoto";
 	//황수남 파일 패스
-	private String lfilePath3 = "";
+//	private String lfilePath = "";
 	//박다은 파일 패스
-	private String lfilePath4 =  "C:/2014KODB/KODBFinalProject/GitTest/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ProgManager/ProgFile/lfile/";
+	private String lfilePath =  "C:/2014KODB/KODBFinalProject/GitTest/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ProgManager/ProgFile/lfile/";
 
 	
 	//해당 프로젝트의 모든 로그들과 코멘트를 반환하는 메소드
@@ -121,7 +121,7 @@ public class LogController {
 	 	}
 		try{
 			//폴더에 사진 저장
-			file.transferTo(new File(filePath4+photoName));
+			file.transferTo(new File(pfilePath+photoName));
 			String lphoto = "./ProgFile/lphoto/"+photoName;
 			System.out.println("################################## controller 이미지 : " + lphoto);
 			int result = logService.logWritePhoto(new LogBean(Integer.parseInt(l_pnum), l_uemail, ltext, Integer.parseInt(lpublic), lphoto));
@@ -152,7 +152,7 @@ public class LogController {
 	 	}
 		try{
 			//폴더에 파일 저장
-			lfile.transferTo(new File(lfilePath4+lfileName));
+			lfile.transferTo(new File(lfilePath+lfileName));
 			System.out.println("################################## controller 파일 : " + lfileName);
 			int result = logService.logWriteFile(new LogBean(Integer.parseInt(l_pnum), l_uemail, ltext, lfileName, originalName, Integer.parseInt(lpublic)));
 			if(result>0){
@@ -188,12 +188,12 @@ public class LogController {
 	 	}
 		try{
 			//폴더에 사진 저장
-			file.transferTo(new File(filePath4+photoName));
+			file.transferTo(new File(pfilePath+photoName));
 			String lphoto = "./ProgFile/lphoto/"+photoName;
 			System.out.println("################################## controller 이미지 : " + lphoto);
 			
 			//폴더에 파일 저장
-			lfile.transferTo(new File(lfilePath4+lfileName));
+			lfile.transferTo(new File(lfilePath+lfileName));
 			System.out.println("################################## controller 파일 : " + lfileName);
 			
 			int result = logService.logWritePhotoFile(new LogBean(Integer.parseInt(l_pnum), l_uemail, ltext, Integer.parseInt(lpublic), lphoto, lfileName, originalName));
@@ -209,7 +209,7 @@ public class LogController {
 	@RequestMapping("/down.do")
 	public ModelAndView down(String lfile){
 		System.out.println("########################################### 다운 받을 파일 이름 : "+lfile);
-		File file = new File(lfilePath4+lfile);
+		File file = new File(lfilePath+lfile);
 		/*
 		 * downLoadView는 뷰의 이름 : DownLoadCustomView.class를 생성한 id이다.
 		 * 

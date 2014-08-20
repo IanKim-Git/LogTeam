@@ -99,10 +99,17 @@
 						div += "<table><tbody id='commentBody'>";
 						jb(data.clist).each(function(index, citem) {//{no:값, name:값,...}
 							if(citem.c_lnum == item.lnum){
-								div += "<tr><td>→</td>";
+								div += "<tr><td> &nbsp; <td>";
+								div +="<td>";
+								jb(data.ulist).each(function(index, uitem){
+							 	if(citem.c_uemail == uitem.uemail){
+							 			div += "<img id='userCommentProfilePhoto' src='" + uitem.uphoto + "' width='30' height='30' border='3' style='margin: -5px 5px 5px 5px;'>";
+							 		}
+							 	});
+								div+="</td>";
 								div += "<td>"+citem.c_uemail+"</td>";
-								div += "<td>"+citem.ctext+"</td>";
-								div += "<td>"+ citem.cdate +"</td>";
+								div += "<td align='left' width='650'>"+citem.ctext+"</td>";
+								div += "<td align='right'>"+ citem.cdate +"</td>";
 								if(citem.c_uemail == jb("#l_uemail").val()){
 									div += "<td><input type='button' value='삭제' id='del' name='"+citem.cnum+"'></td></tr>";
 								}
@@ -115,8 +122,8 @@
 						div += "<input type='hidden' class='c_lnum' id='c_lnum"+ item.lnum +"' name='c_lnum' value='"+ item.lnum +"'>";
 						div += "<input type='hidden' class='uemail' id='c_uemail"+ item.lnum +"' name='c_uemail'>";
 						div += "<input type='hidden' id='c_l_pnum"+ item.lnum +"' name='c_l_pnum' value="+jb("#l_pnum").val()+">";
-						div += "<table><tfoot id='writeComment"+ item.lnum +"'><tr><td><textarea id='ctext"+ item.lnum +"' name='ctext' rows='2' cols='30'></textarea></td>";
-						div += "<td><input type='button' id='writeLc' value='코멘트등록'></td></tr></tfoot></table>";
+						div += "<table><tfoot id='writeComment"+ item.lnum +"'><tr><td><textarea id='ctext"+ item.lnum +"' name='ctext' rows='2' cols='135'></textarea></td>";
+						div += "<td><input type='button' id='writeLc' value='등록'></td></tr></tfoot></table>";
 						
 						div += "</form></div>";
 						
@@ -277,7 +284,7 @@
 		});//end of 평가
 		 		
 		//로그화면 초기화
-//		getLogs();
+		getLogs();
 		
 	});//end of ready
 </script>
@@ -382,28 +389,28 @@
 								<hr>
 								<!-- 코멘트 목록 -->
 								
-										<div class="lcContent">
-											<table >
-												<tbody id="commentBody">
-													<c:forEach items="${requestScope.commentsList}" var="comment">
-														<c:if test="${comment.c_lnum == logs.lnum }">
-															<tr>
-																<td> &nbsp; <td>
-																<td>
-																	<img id="userProfilePhoto" src="${sessionScope.userData.uphoto}" width="30" height="30" border="3" style="margin: -5px 5px 5px 5px;">
-																</td>
-																<td>${comment.c_uemail }</td>
-																<td align="left" width="650">${comment.ctext}</td>
-																<td align="right">${comment.cdate}</td>
-																<c:if test="${comment.c_uemail == sessionScope.userData.uemail}">
-																	<td><input type="button" value="삭제" id="del" name="${comment.cnum}"></td>
-																</c:if>
-															</tr>
+								<div class="lcContent">
+									<table >
+										<tbody id="commentBody">
+											<c:forEach items="${requestScope.commentsList}" var="comment">
+												<c:if test="${comment.c_lnum == logs.lnum }">
+													<tr>
+														<td> &nbsp; <td>
+														<td>
+															<img id="userProfilePhoto" src="${sessionScope.userData.uphoto}" width="30" height="30" border="3" style="margin: -5px 5px 5px 5px;">
+														</td>
+														<td>${comment.c_uemail }</td>
+														<td align="left" width="650">${comment.ctext}</td>
+														<td align="right">${comment.cdate}</td>
+														<c:if test="${comment.c_uemail == sessionScope.userData.uemail}">
+															<td><input type="button" value="삭제" id="del" name="${comment.cnum}"></td>
 														</c:if>
-													</c:forEach><!-- end of comment loop -->
-												</tbody>
-											</table>					
-										</div><!-- end of lcContent -->
+													</tr>
+												</c:if>
+											</c:forEach><!-- end of comment loop -->
+										</tbody>
+									</table>					
+								</div><!-- end of lcContent -->
 									
 								
 								<!-- 코멘트 입력창 -->
