@@ -211,14 +211,14 @@
 </script>
 
 <body>
-	
+<br><br><br>	
 	<div id="example" align="center">
     	<div class="demo-section k-content">
         	<div id="chart"></div>
     	</div>
 	</div>
 
-	<h6>회계관리</h6>
+	<hr>
 	<%-- 프로젝트 번호 : ${requestScope.pnum}
 	유저 이메일 : ${sessionScope.userData.uemail}<br> --%>
 	
@@ -247,6 +247,8 @@
 	<p></p>
 	</div>
 	</div>
+	
+	<br><br><br><br><br><br><br><br><br>
 
 </body>
 <jsp:include page="bottomMenu.jsp" flush="true"/>

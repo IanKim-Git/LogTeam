@@ -122,10 +122,7 @@
 		                	  			"<form action='projectInfo.do' id='enterProject"+project.pnum+"' method='post'>"+
 	                	  				"<input type='hidden' id='pnum' name='pnum' value='"+project.pnum+"'/>"+
 	                	  				"<input type='hidden' id='pname' name='pname' value='"+project.pname+"'/></form>"+
-	                	  				
-	                	  		"</div>";
-	           
-		                  
+	                	  		"</div>";	           
 		                $('.gridly').gridly();
 		               });
 					//테이블에 추가
@@ -141,19 +138,20 @@
 
    });//end of ready()
 </script>
-
+   
 <body>
-    
+	<br><br>
     <div class='content' align="center" style="margin-top: 35px">
     	<h1><img src="./images/ProgManager.png"></h1>
     	<hr><br>
+
     	<div id="projectList">
     		<section class='example'>
 	    		<div class='gridly' id='gridly'></div>
 	    		</section>
   	  	</div>
-  	  	<br>
-    	<hr>
+  	  	
+  	  	<br><hr>
         <p class='actions' style="float: left;">
           <a class='button' href="javascript:ViewCreateLayer();" >프로젝트 생성</a>
         </p>
@@ -162,9 +160,9 @@
         </p>
     </div>
     <br><br><br><br><br>
-        	
+    
    	<div id="createProjectPop" align="center">
-	   	<br><font color="black" size="30" style="4">프로젝트 생성하기</font><br><br>
+	   	<br><font color="black" size="30" style="4" >프로젝트 생성</font><br><br>
 
 	   	<form name="newProject.do" id="newproform" method="post">
 			Name :<input type="text"  name="pname" id="pname" /><br>
@@ -175,14 +173,14 @@
 			Leader :<input type="text" name="pleader" id="pleader" value="${sessionScope.userData.uemail}"/><br>
 		<br>
 		<br>
-		<input class='basicBtn' type="button" value="생성하기" id="btn">
+		<input class='basicBtn' type="button" value="생성" id="btn">
 		<input class='cancel basicBtn' type="button" value="취소" id="btn2">
 		</form>
-	   	<br><br>
+	   	<br><br> 
    	</div>
    	
    	<div id="joinProjectPop" align="center">
-	   	<br><font color="black" size="30" style="4">프로젝트 참여하기</font>
+	   	<br><font color="black" size="30" style="4">프로젝트 참여</font>
 	   	<br><br>
 
 	   	<form name="joinProject.do" id="joinproform" method="post">
@@ -196,19 +194,25 @@
 		</form>
 	   	<br><br>
    	</div>
-   	
-    <script> 
+
+	<script> 
       function ViewCreateLayer(){
-        document.getElementById("createProjectPop").style.display='inline'
+        document.getElementById("createProjectPop").style.display='block';
      }
       function registerProject(){
-    	  document.getElementById("createProjectPop").style.display='none'
+    	  document.getElementById("createProjectPop").style.display='none';
       }
       function ViewJoinLayer(){
-          document.getElementById("joinProjectPop").style.display='inline'
+          document.getElementById("joinProjectPop").style.display='block';
        }
 	</script> 	
 	<br>
 	
 </body>
 </html>
+
+
+
+
+
+
