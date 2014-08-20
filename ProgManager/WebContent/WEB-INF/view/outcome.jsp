@@ -11,10 +11,26 @@
 <script src="js/jquery-1.10.2.js"></script>
 <script>var jb = jQuery.noConflict();</script>
 
+<script type="text/javascript">
+	$(document).ready(function(){
+		
+});//end of ready
+</script>
+
 <body>
-	<h1><b>팀원성과도 : 개발예정</b></h1>
+	<h1>팀원성과도 : 개발예정</h1>
 	프로젝트 번호 : ${requestScope.pnum}
 	유저 이메일 : ${sessionScope.userData.uemail}<br>
+	
+	<!-- <div class='contents' style="margin-top: 5px">
+	<br><hr>
+	<form action="attendaceInfo.do" id="attInfo" method="post">
+    	<b> <font color="#9B2626" style="font-style: oblique;" size="5">프로젝트 이름 : <b id="proname"></b></font><br><br>
+    	<font color="#9B2626" style="font-style: oblique;" size="5">프로젝트 방 번호 : &nbsp;&nbsp;</font><br><br>
+    	<font color="#9B2626" style="font-style: oblique;" size="5">기간 : <b id="term"></b></font><br><br>
+    	<font color="#9B2626" style="font-style: oblique;" size="5">프로젝트 일정 상황:</font>&nbsp;&nbsp;
+    </form>
+    </div> -->
 </body>
 
 <jsp:include page="bottomMenu.jsp" flush="true"/>

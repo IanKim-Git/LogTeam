@@ -10,7 +10,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       <result column="UNAME" property="uname" />
       <result column="UPW" property="upw" />
       <result column="UPHONE" property="uphone" />
+      <result column="UPHOTO" property="uPhoto" />
       <result column="UPROCNT" property="uprocnt" />
+      <result column="SDATE" property="Sdate" />
    </resultMap>
    
    <!-- 로그인 -->
@@ -91,7 +93,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 프로젝트에 속한 유저 정보 가저오기 -->
 	 <select id="getProjectUserList" parameterType="int" resultType="puBean">
-	 	select uname, uphone, uemail from proguser, userproject where up_pnum=#{pnum} and up_uemail=uemail
+	 	select uname, uphone, uemail, upw, uphoto from proguser, userproject where up_pnum=#{pnum} and up_uemail=uemail
 	 </select>
 	 
 	 <!-- 프로젝트 pnum과 ppw를 통해 해당 프로젝트가 있는 프로젝트인지 확인 -->
@@ -118,6 +120,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 해당 프로젝트의 모든 로그 출력 -->
 	<select id="allLogs" parameterType="int" resultType="logBean" >
 		select * from log where l_pnum=#{l_pnum} order by ldata desc
+	</select>
+	
+	<!-- 프로젝트 번호와 그날 날짜로 모임정보 가져오기 -->
+	<select id="getProjectInfo" resultType="projectBean">
+		select sdate, stitle, stext from schedule where pnum=#{pnum} and sdate=#{sysdate}
 	</select>
 	
 	<!-- 해당 로그 삭제 -->
