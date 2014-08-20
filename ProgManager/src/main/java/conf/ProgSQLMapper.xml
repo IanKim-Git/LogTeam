@@ -274,6 +274,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getScores" parameterType="String" resultType="int">
 		select jscore from judge, log where j_lnum=lnum and l_uemail=#{l_uemail}
 	</select>
+	
+	<!-- 캘린더 sql부분 -->
+	<select id="getSchedule" parameterType="String" resultType="scheBean">
+      select s_pnum, snum, sdate, edate, stext, stitle from schedule where s_pnum=#{pnum}
+   	</select>
+   
+    <insert id="insertSchedule" parameterType="scheBean">
+       insert into schedule values(#{pnum}, seq_s.nextval, #{sdate}, #{edate}, #{stext}, #{stitle}) 
+    </insert>
 		
 </mapper>
 

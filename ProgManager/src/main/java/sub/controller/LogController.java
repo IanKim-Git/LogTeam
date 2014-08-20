@@ -39,22 +39,22 @@ public class LogController {
 	private ProgUserService puService;
 	
 	//김용두 사진 패스
-//	private String pfilePath = "D:/2014KODB/slogProject/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ProgManager/ProgFile/lphoto/";
+	private String pfilePath = "D:/2014KODB/slogProject/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ProgManager/ProgFile/lphoto/";
 	//박상태 사진 패스
 //	private String pfilePath = "C:/Users/Ian/git/LogTeam/ProgManager/WebContent/ProgFile/uphoto";
 	//황수남 사진 패스
 //	private String pfilePath = "";
 	//박다은 사진 패스
-	private String pfilePath =  "C:/2014KODB/KODBFinalProject/GitTest/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ProgManager/ProgFile/lphoto/";
+//	private String pfilePath =  "C:/2014KODB/KODBFinalProject/GitTest/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ProgManager/ProgFile/lphoto/";
 
 	//김용두 파일 패스
-//	private String lfilePath = "D:/2014KODB/slogProject/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ProgManager/ProgFile/lfile/";
+	private String lfilePath = "D:/2014KODB/slogProject/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ProgManager/ProgFile/lfile/";
 	//박상태 파일 패스
 //	private String lfilePath = "C:/Users/Ian/git/LogTeam/ProgManager/WebContent/ProgFile/uphoto";
 	//황수남 파일 패스
 //	private String lfilePath = "";
 	//박다은 파일 패스
-	private String lfilePath =  "C:/2014KODB/KODBFinalProject/GitTest/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ProgManager/ProgFile/lfile/";
+//	private String lfilePath =  "C:/2014KODB/KODBFinalProject/GitTest/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ProgManager/ProgFile/lfile/";
 
 	
 	//해당 프로젝트의 모든 로그들과 코멘트를 반환하는 메소드

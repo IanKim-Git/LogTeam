@@ -41,6 +41,9 @@
 	<bean id="judgeDao" class="model.dao.JudgeDAO"/>
 	<bean id="judgeService" class="model.service.JudgeService" />
 	
+	<bean id="scheduleDao" class="model.dao.ScheduleDAO"/>
+   	<bean id="scheduleService" class="model.service.ScheduleService" />
+	
 	<!-- Json 응답을 위한 설정 -->
 	<!--<bean id="jsonView" class="net.sf.json.spring.web.servlet.view.JsonView" >
 		<property name="contentType" value="text/html;charset=UTF-8" /> 
@@ -49,6 +52,10 @@
 	<bean id="projectJsonView" class="net.sf.json.spring.web.servlet.view.JsonView" >
 		<property name="contentType" value="text/html;charset=UTF-8" />
 	</bean>
+	
+	<bean id="scheduleJsonView" class="net.sf.json.spring.web.servlet.view.JsonView">
+      <property name="contentType" value="text/html;charset=UTF-8"/>
+   	</bean>
 
 	<!-- 파일업로드 기능을 위한 설정 CommonsMultipartResolver 선언할때 id는 반드시 multipartResolver 이어야 한다. -->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" >
