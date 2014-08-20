@@ -58,6 +58,17 @@ pre {
 	text-decoration: none;
 }
 
+.basicJoinBtn{
+	display : inline;
+	padding: 5px;
+	color: white;
+	background: gray;
+	margin: 6px;
+	text-align:center;
+	border-radius:10px;
+	text-decoration: none;
+}
+
 .button {
   display: block;
   padding: 20px;
