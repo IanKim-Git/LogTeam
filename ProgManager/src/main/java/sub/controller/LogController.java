@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import util.MethodUtil;
+
 @Controller
 public class LogController {
 	@Resource(name="logService")
@@ -112,13 +114,8 @@ public class LogController {
 			@RequestParam("l_uemail") String l_uemail, @RequestParam("ltext") String ltext, @RequestParam("lpublic") String lpublic) {
 //		System.out.println("###################받아온 데이터"+lb);
 		String resultMsg = "no";//저장 실패시 응답되는 데이터
-		
 		String originalPname = file.getOriginalFilename();
-		String exc = originalPname.substring(originalPname.lastIndexOf(".")+1, originalPname.length());
-		
-		String photoName =  l_uemail;
-		photoName += new java.text.SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
-		photoName += exc;		
+		String photoName =  MethodUtil.fileNameCreate(originalPname, l_uemail);
 
 		if(Integer.parseInt(lpublic) == -1){
 	 		return "again";
@@ -126,9 +123,8 @@ public class LogController {
 		try{
 			//폴더에 사진 저장
 			file.transferTo(new File(pfilePath+photoName));
-			String lphoto = "./ProgFile/lphoto/"+photoName;
-			System.out.println("################################## controller 이미지 : " + lphoto);
-			int result = logService.logWritePhoto(new LogBean(Integer.parseInt(l_pnum), l_uemail, ltext, Integer.parseInt(lpublic), lphoto, originalPname));
+			photoName = MethodUtil.filePath("./ProgFile/lphoto/", photoName);
+			int result = logService.logWritePhoto(new LogBean(Integer.parseInt(l_pnum), l_uemail, ltext, Integer.parseInt(lpublic), photoName, originalPname));
 			if(result>0){
 				resultMsg = "ok";
 			}
@@ -145,15 +141,8 @@ public class LogController {
 			@RequestParam("ltext") String ltext, @RequestParam("lpublic") String lpublic, @RequestParam("lfile-0")  MultipartFile lfile) {
 //		System.out.println("###################받아온 데이터"+lb);
 		String resultMsg = "no";//저장 실패시 응답되는 데이터
-		
 		String originalFname = lfile.getOriginalFilename();
-		String exc = originalFname.substring(originalFname.lastIndexOf(".")+1, originalFname.length());
-		
-		String lfileName =  l_uemail;
-		lfileName += new java.text.SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
-		lfileName += exc;
-		
-		System.out.println("##################################### 파일 확장자: " + exc);
+		String lfileName =  MethodUtil.fileNameCreate(lfile.getOriginalFilename(), l_uemail);
 		
 		if(Integer.parseInt(lpublic) == -1){
 	 		return "again";
@@ -161,7 +150,6 @@ public class LogController {
 		try{
 			//폴더에 파일 저장
 			lfile.transferTo(new File(lfilePath+lfileName));
-			System.out.println("################################## controller 파일 : " + lfileName);
 			int result = logService.logWriteFile(new LogBean(Integer.parseInt(l_pnum), l_uemail, ltext, lfileName, originalFname, Integer.parseInt(lpublic)));
 			if(result>0){
 				resultMsg = "ok";
@@ -182,19 +170,11 @@ public class LogController {
 		
 		//사진
 		String originalPname = file.getOriginalFilename();
-		String exc = originalPname.substring(originalPname.lastIndexOf(".")+1, originalPname.length());
-		
-		String photoName =  l_uemail;
-		photoName += new java.text.SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
-		photoName += exc;
+		String photoName =  MethodUtil.fileNameCreate(originalPname, l_uemail);
 		
 		//파일
 		String originalFname = lfile.getOriginalFilename();
-		exc = originalFname.substring(originalFname.lastIndexOf(".")+1, originalFname.length());
-		
-		String lfileName =  l_uemail;
-		lfileName += new java.text.SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
-		lfileName += exc;
+		String lfileName =  MethodUtil.fileNameCreate(lfile.getOriginalFilename(), l_uemail);
 		
 		if(Integer.parseInt(lpublic) == -1){
 	 		return "again";
@@ -202,14 +182,11 @@ public class LogController {
 		try{
 			//폴더에 사진 저장
 			file.transferTo(new File(pfilePath+photoName));
-			String lphoto = "./ProgFile/lphoto/"+photoName;
-			System.out.println("################################## controller 이미지 : " + lphoto);
-			
+			photoName = MethodUtil.filePath("./ProgFile/lphoto/", photoName);
 			//폴더에 파일 저장
 			lfile.transferTo(new File(lfilePath+lfileName));
-			System.out.println("################################## controller 파일 : " + lfileName);
 			
-			int result = logService.logWritePhotoFile(new LogBean(Integer.parseInt(l_pnum), l_uemail, ltext, Integer.parseInt(lpublic), lphoto, originalPname, lfileName, originalFname));
+			int result = logService.logWritePhotoFile(new LogBean(Integer.parseInt(l_pnum), l_uemail, ltext, Integer.parseInt(lpublic), photoName , originalPname, lfileName, originalFname));
 			if(result>0){
 				resultMsg = "ok";
 			}
@@ -219,19 +196,11 @@ public class LogController {
 		return resultMsg;  
 	}
 	
+	//파일 다운
 	@RequestMapping("/down.do")
 	public ModelAndView down(String lfile){
-		System.out.println("########################################### 다운 받을 파일 이름 : "+lfile);
+//		System.out.println("########################################### 다운 받을 파일 이름 : "+lfile);
 		File file = new File(lfilePath+lfile);
-		/*
-		 * downLoadView는 뷰의 이름 : DownLoadCustomView.class를 생성한 id이다.
-		 * 
-		 * BeanNameViewResolver(빈의 이름으로 뷰를찾는다)를
-		 * 등록하면 먼저 빈의 이름으로 찾을수 있도록 하고
-		 * 만약, bean의 id중에 찾는 이름이 없으면 
-		 * InternalResourceViewResolver 에서 등록된 뷰가 실행된다.
-		 * */
 		return new ModelAndView("downLoadView", "downFile", file);
 	}
-	
 }
