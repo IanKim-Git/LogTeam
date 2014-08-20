@@ -102,7 +102,10 @@
 		getAns();
 	});//end of ready
 </script>
+
 <body>
+<br><br>
+<img src="./images/announcement.png" align="left" style="margin: 3% 0 0 2%; ">
 
 	<h6>공지사항</h6>
 	프로젝트 번호 : ${requestScope.pnum}

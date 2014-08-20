@@ -100,9 +100,11 @@
 	});
 </script>
 </head>
+
 <body>
-	<h6>Ä¶¸°´õ</h6>
-	<br><br><br>
+<br><br>
+<img src="./images/calendar.png" align="left" style="margin: 5% 0 0 2%; ">
+	
 <div align="center">
     <div id="scheduler" style=" width:90%"></div>
 </div>

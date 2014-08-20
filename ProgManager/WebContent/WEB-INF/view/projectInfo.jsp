@@ -136,6 +136,7 @@
 
 <body>
 	<br><br>
+	<img src="./images/projectinfo.png" align="left" style="margin: 3% 0 0 0%; "><br>
 	<%-- <h6>프로젝트 화면</h6>
 	프로젝트 번호 : ${requestScope.pnum}
 	유저 이메일 : ${sessionScope.userData.uemail}<br> --%>

@@ -302,12 +302,13 @@
    });//end of ready
 </script>
 <body>
+<img src="./images/logboard.png" align="left" style="margin: 6% 0 0 1%; "><br>
 <%--    <h6>로그게시판</h6>
    프로젝트 번호 : ${requestScope.pnum}
    유저 이메일 : ${sessionScope.userData.uemail}<br> --%>
    <br><br><br><br>
    <!-- 로그 화면 -->
-   <div id="logsView" align="left" style="margin-left: 15%;margin-right: 15%;">
+   <div id="logsView" align="left" style="margin-left: 16%;margin-right: 15%;">
       
          <!-- 로그 등록창 -->
          <div id="writeLog">

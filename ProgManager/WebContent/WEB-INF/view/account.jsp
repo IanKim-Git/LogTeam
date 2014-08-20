@@ -211,7 +211,9 @@
 </script>
 
 <body>
-<br><br><br>	
+<br><br>
+<img src="./images/accounts.png" align="left" style="margin: 3% 0 0 2%; ">
+
 	<div id="example" align="center">
     	<div class="demo-section k-content">
         	<div id="chart"></div>

@@ -18,6 +18,7 @@
 </script>
 
 <body>
+<img src="./images/team.png" align="left" style="margin: 3% 0 0 2%; ">
 	<h1>팀원성과도 : 개발예정</h1>
 	프로젝트 번호 : ${requestScope.pnum}
 	유저 이메일 : ${sessionScope.userData.uemail}<br>
