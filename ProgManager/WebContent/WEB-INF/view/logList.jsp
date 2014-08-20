@@ -45,9 +45,9 @@
 						
 					 	div += "<tr><td></td><td>";
 						if(item.lphoto != ""){
-							div += "<img id='logPhoto' src='"+ item.lphoto +"' width='70%' height='70%' border='0' style='margin: -5px 5px 5px 5px;'><br>";
+							div += "<img id='logPhoto' src='"+ item.lphoto +"' title='"+ item.lphotoname +"' width='70%' height='70%' border='0' style='margin: -5px 5px 5px 5px;'><br>";
 						}
-						div += "</td><td></td></tr>";
+						div += "</td></tr>";
 						
 						div +="<tr><td></td><td>";
 						if(item.lfile != ""){
@@ -60,13 +60,13 @@
 						}else if(item.lpublic == 1){
 							div += "<td>공개</td>";
 						}
-						div += "<td>"+ item.ladmission +"</td><td><span>"+ item.ldata + "</span> <span>";
+						div += "<td>"+ item.ldata + "</td><td><span>";
 						
 						//평가 여부 및 평가 버튼 출력
 						jb(data.jlist).each(function(index, jitem){
 							if(jitem.j_uemail == jb("#l_uemail").val() && jitem.j_lnum == item.lnum){
 								flag += 1;
-								msg = "이미 평가하셨습니다 : ";
+								msg = "평가 완료 : ";
 								if(jitem.jscore == 2){
 									msg += "좋아요";
 								}else if(jitem.jscore == 1){
@@ -362,7 +362,7 @@
 										<tr>
 											<td></td>
 											<td>
-												<img id="logPhoto" src="${logs.lphoto}" width="70%" height="70%" border="0" style="margin: -5px 5px 5px 5px;"><br>
+												<img id="logPhoto" src="${logs.lphoto}" title="${logs.lphotoname}" width="70%" height="70%" border="0" style="margin: -5px 5px 5px 5px;"><br>
 											</td>
 											<td></td>
 										</tr>
@@ -374,9 +374,8 @@
 										<tr>
 											<c:if test="${logs.lpublic == 0}"><td>비공개</td></c:if>
 											<c:if test="${logs.lpublic == 1}"><td>공개</td></c:if>
-											<td>${logs.ladmission}</td>
+											<td>${logs.ldata}</td>
 											<td>
-												<span>${logs.ldata}</span>
 												<span>
 													<input type='button' class='judge' id='like' value='좋아요' name='2'>
 													<input type='button' class='judge' id='soso' value='그저그래요' name='1'>

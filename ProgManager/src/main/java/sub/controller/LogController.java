@@ -112,10 +112,14 @@ public class LogController {
 			@RequestParam("l_uemail") String l_uemail, @RequestParam("ltext") String ltext, @RequestParam("lpublic") String lpublic) {
 //		System.out.println("###################받아온 데이터"+lb);
 		String resultMsg = "no";//저장 실패시 응답되는 데이터
+		
+		String originalPname = file.getOriginalFilename();
+		String exc = originalPname.substring(originalPname.lastIndexOf(".")+1, originalPname.length());
+		
 		String photoName =  l_uemail;
 		photoName += new java.text.SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
-		photoName += file.getOriginalFilename();
-		
+		photoName += exc;		
+
 		if(Integer.parseInt(lpublic) == -1){
 	 		return "again";
 	 	}
@@ -124,7 +128,7 @@ public class LogController {
 			file.transferTo(new File(pfilePath+photoName));
 			String lphoto = "./ProgFile/lphoto/"+photoName;
 			System.out.println("################################## controller 이미지 : " + lphoto);
-			int result = logService.logWritePhoto(new LogBean(Integer.parseInt(l_pnum), l_uemail, ltext, Integer.parseInt(lpublic), lphoto));
+			int result = logService.logWritePhoto(new LogBean(Integer.parseInt(l_pnum), l_uemail, ltext, Integer.parseInt(lpublic), lphoto, originalPname));
 			if(result>0){
 				resultMsg = "ok";
 			}
@@ -141,11 +145,15 @@ public class LogController {
 			@RequestParam("ltext") String ltext, @RequestParam("lpublic") String lpublic, @RequestParam("lfile-0")  MultipartFile lfile) {
 //		System.out.println("###################받아온 데이터"+lb);
 		String resultMsg = "no";//저장 실패시 응답되는 데이터
+		
+		String originalFname = lfile.getOriginalFilename();
+		String exc = originalFname.substring(originalFname.lastIndexOf(".")+1, originalFname.length());
+		
 		String lfileName =  l_uemail;
 		lfileName += new java.text.SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
-		lfileName += lfile.getOriginalFilename();
-		String originalName = lfile.getOriginalFilename();
-		System.out.println("##################################### 파일이름 : " + originalName);
+		lfileName += exc;
+		
+		System.out.println("##################################### 파일 확장자: " + exc);
 		
 		if(Integer.parseInt(lpublic) == -1){
 	 		return "again";
@@ -154,7 +162,7 @@ public class LogController {
 			//폴더에 파일 저장
 			lfile.transferTo(new File(lfilePath+lfileName));
 			System.out.println("################################## controller 파일 : " + lfileName);
-			int result = logService.logWriteFile(new LogBean(Integer.parseInt(l_pnum), l_uemail, ltext, lfileName, originalName, Integer.parseInt(lpublic)));
+			int result = logService.logWriteFile(new LogBean(Integer.parseInt(l_pnum), l_uemail, ltext, lfileName, originalFname, Integer.parseInt(lpublic)));
 			if(result>0){
 				resultMsg = "ok";
 			}
@@ -173,15 +181,20 @@ public class LogController {
 		String resultMsg = "no";//저장 실패시 응답되는 데이터
 		
 		//사진
+		String originalPname = file.getOriginalFilename();
+		String exc = originalPname.substring(originalPname.lastIndexOf(".")+1, originalPname.length());
+		
 		String photoName =  l_uemail;
 		photoName += new java.text.SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
-		photoName += file.getOriginalFilename();
+		photoName += exc;
 		
 		//파일
+		String originalFname = lfile.getOriginalFilename();
+		exc = originalFname.substring(originalFname.lastIndexOf(".")+1, originalFname.length());
+		
 		String lfileName =  l_uemail;
 		lfileName += new java.text.SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
-		lfileName += lfile.getOriginalFilename();
-		String originalName = lfile.getOriginalFilename();
+		lfileName += exc;
 		
 		if(Integer.parseInt(lpublic) == -1){
 	 		return "again";
@@ -196,7 +209,7 @@ public class LogController {
 			lfile.transferTo(new File(lfilePath+lfileName));
 			System.out.println("################################## controller 파일 : " + lfileName);
 			
-			int result = logService.logWritePhotoFile(new LogBean(Integer.parseInt(l_pnum), l_uemail, ltext, Integer.parseInt(lpublic), lphoto, lfileName, originalName));
+			int result = logService.logWritePhotoFile(new LogBean(Integer.parseInt(l_pnum), l_uemail, ltext, Integer.parseInt(lpublic), lphoto, originalPname, lfileName, originalFname));
 			if(result>0){
 				resultMsg = "ok";
 			}

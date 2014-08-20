@@ -151,20 +151,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 로그 작성 : with photo -->
 	<insert id="logWritePhoto" parameterType="logBean">
-		insert into log(lnum, l_pnum, l_uemail, ldata, ltext, lpublic, lphoto, ladmission)
-		values(seq_l.nextval , #{l_pnum}, #{l_uemail}, sysdate, #{ltext}, #{lpublic}, #{lphoto}, 0)
+		insert into log(lnum, l_pnum, l_uemail, ldata, ltext, lpublic, lphoto, lphotoname, ladmission)
+		values(seq_l.nextval , #{l_pnum}, #{l_uemail}, sysdate, #{ltext}, #{lpublic}, #{lphoto}, #{lphotoname}, 0)
 	</insert>
 	
 	<!-- 로그 작성 : with file -->
 	<insert id="logWriteFile" parameterType="logBean">
 		insert into log(lnum, l_pnum, l_uemail, ldata, ltext, lfile, lfilename, lpublic, ladmission)
-		values(seq_l.nextval , #{l_pnum}, #{l_uemail}, sysdate, #{ltext}, #{lfile}, #{lfilename}, #{lpublic}, 0)
+		values(seq_l.nextval , #{l_pnum}, #{l_uemail}, sysdate, #{ltext}, #{lfile}, #{lfilename}, #{lpublic} 0)
 	</insert>
 	
 	<!-- 로그 작성 : with photo file -->
 	<insert id="logWritePhotoFile" parameterType="logBean">
-		insert into log(lnum, l_pnum, l_uemail, ldata, ltext, lpublic, lphoto, lfile, lfilename, ladmission)
-		values(seq_l.nextval , #{l_pnum}, #{l_uemail}, sysdate, #{ltext}, #{lpublic}, #{lphoto}, #{lfile}, #{lfilename}, 0)
+		insert into log(lnum, l_pnum, l_uemail, ldata, ltext, lpublic, lphoto, lphotoname, lfile, lfilename, ladmission)
+		values(seq_l.nextval , #{l_pnum}, #{l_uemail}, sysdate, #{ltext}, #{lpublic}, #{lphoto}, #{lphotoname}, #{lfile}, #{lfilename}, 0)
 	</insert>
 	
 	
