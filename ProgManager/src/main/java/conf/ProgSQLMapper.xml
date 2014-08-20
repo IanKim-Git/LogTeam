@@ -121,6 +121,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="allLogs" parameterType="int" resultType="logBean" >
 		select * from log where l_pnum=#{l_pnum} order by ldata desc
 	</select>
+
+	<!-- 해당 프로젝트의 공개된 로그와 자신의 비공개 로그 출력 -->
+	<select id="allSelectedLogs" parameterType="logBean" resultType="logBean">
+		select * from log where l_pnum=#{l_pnum} and (lpublic=1 or (lpublic=0 and l_uemail=#{l_uemail} )) order by ldata desc
+	</select>
 	
 	<!-- 해당 로그 삭제 -->
 	<delete id="logDelete" parameterType="int">
@@ -148,8 +153,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 로그 작성 : with photo -->
 	<insert id="logWritePhoto" parameterType="logBean">
-		insert into log(lnum, l_pnum, l_uemail, ldata, ltext, lpublic, lphoto, ladmission)
-		values(seq_l.nextval , #{l_pnum}, #{l_uemail}, sysdate, #{ltext}, #{lpublic}, #{lphoto}, 0)
+		insert into log(lnum, l_pnum, l_uemail, ldata, ltext, lpublic, lphoto, lphotoname, ladmission)
+		values(seq_l.nextval , #{l_pnum}, #{l_uemail}, sysdate, #{ltext}, #{lpublic}, #{lphoto}, #{lphotoname}, 0)
 	</insert>
 	
 	<!-- 로그 작성 : with file -->
@@ -160,8 +165,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 로그 작성 : with photo file -->
 	<insert id="logWritePhotoFile" parameterType="logBean">
-		insert into log(lnum, l_pnum, l_uemail, ldata, ltext, lpublic, lphoto, lfile, lfilename, ladmission)
-		values(seq_l.nextval , #{l_pnum}, #{l_uemail}, sysdate, #{ltext}, #{lpublic}, #{lphoto}, #{lfile}, #{lfilename}, 0)
+		insert into log(lnum, l_pnum, l_uemail, ldata, ltext, lpublic, lphoto, lphotoname, lfile, lfilename, ladmission)
+		values(seq_l.nextval , #{l_pnum}, #{l_uemail}, sysdate, #{ltext}, #{lpublic}, #{lphoto}, #{lphotoname}, #{lfile}, #{lfilename}, 0)
 	</insert>
 	
 	
@@ -269,6 +274,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getScores" parameterType="String" resultType="int">
 		select jscore from judge, log where j_lnum=lnum and l_uemail=#{l_uemail}
 	</select>
+	
+	<!-- 캘린더 sql부분 -->
+	<select id="getSchedule" parameterType="String" resultType="scheBean">
+      select s_pnum, snum, sdate, edate, stext, stitle from schedule where s_pnum=#{pnum}
+   	</select>
+   
+    <insert id="insertSchedule" parameterType="scheBean">
+       insert into schedule values(#{pnum}, seq_s.nextval, #{sdate}, #{edate}, #{stext}, #{stitle}) 
+    </insert>
 		
 </mapper>
 
