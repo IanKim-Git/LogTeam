@@ -63,22 +63,22 @@
 				dataType : "json",
 				data : "pnum="+jb("#ac_pnum").val(),
 				success : function(data) {
-					//var acChartArray =new Array();
 					acChartArray = new Array();
 					indexArray = new Array();
+					var index = 1;
 					
 					jb(data.list).each(function(index, item) {
 						if(item.acplus != 0){
 							acChartArray.push(item.acplus);
-							indexArray.push(item.acnum);
+							indexArray.push(index+1);
 						}
 						if(item.acminus != 0){
 							acChartArray.push(0-item.acminus);
-							indexArray.push(item.acnum);
+							indexArray.push(index+1);
 						}
 					});
-					jb("#chartData").val(acChartArray);
-					
+					//jb("#chartData").val(acChartArray);
+					alert(indexArray);
 					$(document).ready(createChart);
 			        $(document).bind("kendo:skinChange", createChart);
 				},
@@ -198,7 +198,7 @@
 	                }
 	            }],
 	            categoryAxis: {
-	                categories: []
+	                categories: indexArray,
 	            },
 	            axisDefaults: {
 	                majorGridLines: {
