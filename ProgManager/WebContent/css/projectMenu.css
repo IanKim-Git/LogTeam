@@ -20,6 +20,15 @@ html,body{width:100%;height:100%;padding:0;
     z-index:1000;
 }
 
+.enter{
+	color : #000000;
+	border:0px solid #899caa; 
+	border-radius:5px;
+	background-color: #ffffff;
+	text-decoration: blink;
+
+}
+
 /* 프로젝트 생성 버튼 및 box 설정  */
 
 #createProject { 

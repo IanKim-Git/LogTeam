@@ -124,7 +124,7 @@
 		                	  			"프로젝트 번호 : "+project.pnum+"<br>"+	"프로젝트 이름 : "+project.pname+"<br>"+
 		                	  			"멘토 : "+project.pmento+"<br>"+  		"기간 : <br>"+project.pstart+"~"+project.pend+"<br>"+
 		                	  			"팀장 : "+project.pleader+"<br>"+  		"</div><br></font>"+
-		                	  		"<a class='enter' href='#' id="+project.pnum+">[입장하기]</a>"+
+		                	  		"<a class='enter' href='#' id="+project.pnum+">&nbsp;GO&nbsp;</a>"+
 		                	  			"<form action='projectInfo.do' id='enterProject"+project.pnum+"' method='post'>"+
 	                	  				"<input type='hidden' id='pnum' name='pnum' value='"+project.pnum+"'/>"+
 	                	  				"<input type='hidden' id='pname' name='pname' value='"+project.pname+"'/></form>"+
