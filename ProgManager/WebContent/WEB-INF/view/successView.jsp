@@ -151,6 +151,7 @@
   	  	</div>
   	  	<br>
     	<hr>
+    	
         <p class='actions' style="float: left;">
           <a class='button' href="javascript:ViewCreateLayer();" >프로젝트 생성</a>
         </p>
