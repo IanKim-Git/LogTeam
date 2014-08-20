@@ -176,7 +176,7 @@
 		<input class='basicBtn' type="button" value="생성" id="btn">
 		<input class='cancel basicBtn' type="button" value="취소" id="btn2">
 		</form>
-	   	<br><br>
+	   	<br><br> 
    	</div>
    	
    	<div id="joinProjectPop" align="center">
