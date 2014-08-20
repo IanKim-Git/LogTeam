@@ -12,6 +12,8 @@
 </head>
 
 <script src="js/jquery-1.10.2.js"></script>
+<script src="js/jquery.form.js"></script>
+<script src="js/jQuery.MultiFile.min.js"></script>
 <script>var jb = jQuery.noConflict();</script>
 
 <script type="text/javascript">
@@ -45,7 +47,7 @@
 						
 					 	div += "<tr><td></td><td>";
 						if(item.lphoto != ""){
-							div += "<img id='logPhoto' src='"+ item.lphoto +"' title='"+ item.lphotoname +"' width='70%' height='70%' border='0' style='margin: -5px 5px 5px 5px;'><br>";
+							div += "<img id='logPhoto' src='"+ item.lphoto +"' title='"+ item.lphotoname +"' width='70%' height='70%' border='0' ><br>";
 						}
 						div += "</td></tr>";
 						
@@ -56,9 +58,9 @@
 						div += "</td><td></td></tr><tr>";
 						
 						if(item.lpublic == 0){
-							div += "<td>비공개</td>";
+							div += "<td>나만보기</td>";
 						}else if(item.lpublic == 1){
-							div += "<td>공개</td>";
+							div += "<td>모두보기</td>";
 						}
 						div += "<td>"+ item.ldata + "</td><td><span>";
 						
@@ -122,7 +124,7 @@
 						div += "<input type='hidden' class='c_lnum' id='c_lnum"+ item.lnum +"' name='c_lnum' value='"+ item.lnum +"'>";
 						div += "<input type='hidden' class='uemail' id='c_uemail"+ item.lnum +"' name='c_uemail'>";
 						div += "<input type='hidden' id='c_l_pnum"+ item.lnum +"' name='c_l_pnum' value="+jb("#l_pnum").val()+">";
-						div += "<table><tfoot id='writeComment"+ item.lnum +"'><tr><td><textarea id='ctext"+ item.lnum +"' name='ctext' rows='2' cols='135'></textarea></td>";
+						div += "<table><tfoot id='writeComment"+ item.lnum +"'><tr><td><textarea id='ctext"+ item.lnum +"' name='ctext' rows='2' cols=120% ></textarea></td>";
 						div += "<td><input type='button' id='writeLc' value='등록'></td></tr></tfoot></table>";
 						
 						div += "</form></div>";
@@ -154,6 +156,17 @@
 				
 			});//end of ajax
 		} //end of getLogs()
+		
+		jb("#lphoto").MultiFile({
+			max: 1, //업로드 최대 파일 갯수 (지정하지 않으면 무한대)
+	        accept: 'jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF|', //허용할 확장자(지정하지 않으면 모든 확장자 허용)
+	        STRING: { //Multi-lingual support : 메시지 수정 가능
+	            duplicate : "$file 은 이미 선택된 파일입니다.", 
+	            denied : "$ext 는(은) 업로드 할수 없는 파일확장자입니다.",
+	            selected:'$file 을 선택했습니다.', 
+	            toomany: "업로드할 수 있는 최대 갯수는 $max개 입니다."
+	        }
+		});
 		
 		//로그 등록 : with photo
 		jb("#write").click(function() {
@@ -284,7 +297,7 @@
 		});//end of 평가
 		 		
 		//로그화면 초기화
-		getLogs();
+//		getLogs();
 		
 	});//end of ready
 </script>
@@ -307,14 +320,14 @@
 								<td>
 									<select id="lpublic" name="lpublic">
 										<option value="-1">선택</option>
-										<option value="0">비공개</option>
-										<option value="1">공개</option>
+										<option value="0">나만보기</option>
+										<option value="1">모두보기</option>
 									</select>
 								</td>
 							</tr>
 							<tr>
 								<td  colspan="2">
-									<textarea id="ltext" name="ltext" rows="5" cols="120" ></textarea>
+									<textarea id="ltext" name="ltext" rows="5" cols=120% ></textarea>
 								</td>
 								<td>
 									<input type="button" id="write" value="로그등록">
@@ -362,18 +375,18 @@
 										<tr>
 											<td></td>
 											<td>
-												<img id="logPhoto" src="${logs.lphoto}" title="${logs.lphotoname}" width="70%" height="70%" border="0" style="margin: -5px 5px 5px 5px;"><br>
+												<img id="logPhoto" src="${logs.lphoto}" title="${logs.lphotoname}" width="70%" border="0" ><br>
 											</td>
 											<td></td>
 										</tr>
 										<tr>
 											<td></td>
-											<td><input type="button" value="파일다운" onclick="location.href='http://www.naver.com'">파일이름</td>
+											<td><input type="button" value="파일다운" onclick="location.href='http://www.naver.com'">파일이</td>
 											<td></td>
 										</tr>
 										<tr>
-											<c:if test="${logs.lpublic == 0}"><td>비공개</td></c:if>
-											<c:if test="${logs.lpublic == 1}"><td>공개</td></c:if>
+											<c:if test="${logs.lpublic == 0}"><td>나만보기</td></c:if>
+											<c:if test="${logs.lpublic == 1}"><td>모두보기</td></c:if>
 											<td>${logs.ldata}</td>
 											<td>
 												<span>

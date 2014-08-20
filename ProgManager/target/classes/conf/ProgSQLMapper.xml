@@ -158,7 +158,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 로그 작성 : with file -->
 	<insert id="logWriteFile" parameterType="logBean">
 		insert into log(lnum, l_pnum, l_uemail, ldata, ltext, lfile, lfilename, lpublic, ladmission)
-		values(seq_l.nextval , #{l_pnum}, #{l_uemail}, sysdate, #{ltext}, #{lfile}, #{lfilename}, #{lpublic} 0)
+		values(seq_l.nextval , #{l_pnum}, #{l_uemail}, sysdate, #{ltext}, #{lfile}, #{lfilename}, #{lpublic}, 0)
 	</insert>
 	
 	<!-- 로그 작성 : with photo file -->
