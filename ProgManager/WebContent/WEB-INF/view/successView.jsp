@@ -45,7 +45,6 @@
 		$("#btn").click(function() {
     	 	var brick;
    			var pname = $("#pname").val();
-   			alert("나온다씨리얼라이즈");
    		 	alert($("#newproform").serialize());
 			$.ajax({
 				url : "newProject.do",

@@ -38,20 +38,20 @@
 				} 
 			});
 		}
-	/* 	data:[
+	 	data:[
     	      {
     	    	  id:1,
     	    	  start: new Date("2014/8/18 8:00 AM"),
     	    	  end: new Date("2014/8/18 9:00 AM"),
-    	    	  title: "Interview"
+    	    	  title: "StartDate"
     	      },
     	      {
     	    	  id:2,
     	    	  start: new Date("2014/8/19 5:00 AM"),
     	    	  end: new Date("2014/8/19 8:00 AM"),
-    	    	  title: "InterView2"
+    	    	  title: "EndDate"
     	      }
-    	 ] */
+    	 ]
 		var scheduleJsonList=null;
 		$.ajax({
 			url : "getSchedule.do",
@@ -79,62 +79,21 @@
 					    });
 					    
 				
-				//fullProjectInfo = JSON.stringify(data);//value="+JSON.stringify(project)+"
-				//simpleProjectInfo = project.pnum + project.pname;
-				
-				//alert(fullProjectInfo);
-			//	alert(data);
-				//alert($('#pnum').val());
-				//scheduleJsonList= data;
-				
-			//	var obj_length=Object.keys(data).length;
-/* 
-				$(data.list).each(function(index, schedule) {
-					alert(schedule.stext);
-				}); */
+
 			},
 			error : function(err) {//실패했을때
 				alert(err + " : 모든 프로젝트 정보 불러오기 실패");
 			}
 		}); //end of ajax
-		
-		
 	});
 </script>
-    
-    
 </head>
-
 <body>
 	<h6>캘린더</h6>
-
-    <div id="scheduler"></div>
-<!-- <script>
-$(function() {
-    $("#scheduler").kendoScheduler({
-        date: new Date("2014/8/17"),
-    });
-    var scheduler = $("#scheduler").data("kendoScheduler");
-    var dataSource = new kendo.data.SchedulerDataSource({
-    	data:[
-    	      {
-    	    	  id:1,
-    	    	  start: new Date("2014/8/18 8:00 AM"),
-    	    	  end: new Date("2014/8/18 9:00 AM"),
-    	    	  title: "Interview"
-    	      },
-    	      {
-    	    	  id:2,
-    	    	  start: new Date("2014/8/19 5:00 AM"),
-    	    	  end: new Date("2014/8/19 8:00 AM"),
-    	    	  title: "InterView2"
-    	      }
-    	 ]
-    });
-	scheduler.setDataSource(dataSource);
-});
-</script> -->
-
+	
+<div align="center">
+    <div id="scheduler" style=" width:90%"></div>
+</div>
 
  	<jsp:include page="bottomMenu.jsp" flush="true"/>
  	<input type="hidden" id="pnum" value="${requestScope.pnum}" />

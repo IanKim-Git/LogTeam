@@ -75,16 +75,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select pnum, pname, ppw, pmento, pstart, pend, pleader, pterminate from project where pnum=#{pnum}
 	</select>
 	
-	<select id="getSchedule" parameterType="String" resultType="scheBean">
-		select s_pnum, snum, sdate, edate, stext, stitle from schedule where s_pnum=#{pnum}
-	</select>
-	
-	
 	<!-- 프로젝트에 속한 유저 정보 가저오기 -->
 	 <select id="getProjectUserList" parameterType="int" resultType="puBean">
 	 	select uname, uphone, uemail from proguser, userproject where up_pnum=#{pnum} and up_uemail=uemail;
 	 </select>
 	 
+	<select id="getSchedule" parameterType="String" resultType="scheBean">
+		select s_pnum, snum, sdate, edate, stext, stitle from schedule where s_pnum=#{pnum}
+	</select>
+	
 	 <insert id="insertSchedule" parameterType="scheBean">
 	 	insert into schedule values(#{pnum}, seq_s.nextval, #{sdate}, #{edate}, #{stext}, #{stitle}) 
 	 </insert>
