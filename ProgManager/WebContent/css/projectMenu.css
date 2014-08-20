@@ -1,10 +1,13 @@
 html,body{width:100%;height:100%;padding:0;
-		background: -webkit-radial-gradient(center, ellipse cover,  #ffffff 49%,#E5E5E5 100%);margin:0;font-family:arial}
+		background: -webkit-radial-gradient(center, ellipse cover,  #ffffff 49%,#E5E5E5 100%);
+		margin:0;font-family:arial
+}
 
 #mainView{
 	position:relative;
 	width:40%;
 }
+
 
 /* 프로젝트 생성 버튼 및 box 설정  */
 
@@ -18,7 +21,6 @@ html,body{width:100%;height:100%;padding:0;
     cursor:pointer;    
     width: 108px;
     height: 52px;
-    
 }
 
 /* create Button Text */
@@ -50,13 +52,14 @@ html,body{width:100%;height:100%;padding:0;
    width:495px; 
    height:370px; 
    background:#ffffff;
-   border:2px dotted #585858;
+   border:5px dashed #9B2626;
    
    z-index:20; 
    display:none; 
-   border:medium; 
-   border-radius:60px;
+   border-radius:20px;
 }
+
+
 
 /* 프로젝트 조인 버튼*/
 #joinProject { 
@@ -68,8 +71,7 @@ html,body{width:100%;height:100%;padding:0;
     z-index:30;
     cursor:pointer;    
     width: 108px;
-    height: 52px;
-    
+    height: 52px;    
 }
 #joinProject span {
     color:#445058; 
@@ -92,17 +94,18 @@ html,body{width:100%;height:100%;padding:0;
     z-index:29;
 }
 
-#joinProjectPop{
+#joinProjectPop{   
    position:absolute; 
-   top: 30%; 
-   left: 30%; 
-   width:550px; 
-   height:400px; 
-   background: rgb(193,233,242);
+   left:30%; 
+   top:30%; 
+   width:495px; 
+   height:370px; 
+   background:#ffffff;
+   border:5px dashed #9B2626;
+   
    z-index:20; 
    display:none; 
-   border:medium; 
-   border-radius:90px;
+   border-radius:20px;
 }
 
 
