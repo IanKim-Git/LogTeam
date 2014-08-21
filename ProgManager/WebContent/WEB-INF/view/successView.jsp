@@ -107,7 +107,7 @@
 				type : "post",
 				dataType : "json", 					//결과데이터타입
 				success : function(data) {
-					document.getElementById("gridly").innerHTML="<div class='brick small' ><br><br><font color='black'><b>I'm Mentor.</b></font></div>";					
+					//document.getElementById("gridly").innerHTML="<div class='brick small' ><br><br><font color='black'><b>I'm Mentor.</b></font></div>";					
 
 					$(data.list).each(function(index, project) {
 						//alert(JSON.stringify(project));
