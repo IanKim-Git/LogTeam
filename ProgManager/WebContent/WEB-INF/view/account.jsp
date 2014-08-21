@@ -38,7 +38,7 @@
 					var sumMinus = 0;
 					jb(data.list).each(function(index, item) {
 						table += "<tr><td>" + (index + 1) + "</td><td style='padding-left: 100px; padding-right: 100px'>" + item.accontents + 
-								 "</td><td  style='padding-left: 50px; padding-right: 50px'>" +  item.acplus + "</td><td  style='padding-left: 50px; padding-right: 50px'>" +  item.acminus + "</td>";
+								 "</td><td  style='padding-left: 50px; padding-right: 50px'>" + item.acplus + "</td><td  style='padding-left: 50px; padding-right: 50px'>" +  item.acminus + "</td>";
 						table += "<td><input type='button' value='»èÁ¦' id='del' name='"+item.acnum+"'></td></tr>";
 						sumPlus += item.acplus;
 						sumMinus += item.acminus;
@@ -78,7 +78,7 @@
 						}
 					});
 					//jb("#chartData").val(acChartArray);
-					alert(indexArray);
+					//alert(indexArray);
 					$(document).ready(createChart);
 			        $(document).bind("kendo:skinChange", createChart);
 				},
