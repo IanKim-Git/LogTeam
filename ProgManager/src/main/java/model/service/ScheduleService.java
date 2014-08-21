@@ -14,16 +14,19 @@ public class ScheduleService {
 	
 	//프로젝트 번호를 이용해서 스케줄 가져오기
 	public List getProjectList(String pnum) {
-		System.out.println("////////////////////////////////getproject list service//////////////////////////////");
 		return scheduleDao.getSchedule(pnum);
 	}
 
 	public int sendSchedule(ScheduleBean scheBean) {
-		// TODO Auto-generated method stub
-		System.out.println("//////////////sendSchedule service/////////////");
-		
 		return scheduleDao.sendSchedule(scheBean);
-		
+	}
+	public int deleteSchedule(int snum) {
+		System.out.println("/////////deleteSchedule service/////");
+		return scheduleDao.deleteSchedule(snum);
+	}
+
+	public int checkUpdate(ScheduleBean scheBean) {
+		return scheduleDao.checkUpdate(scheBean);
 	}
 
 }

@@ -21,6 +21,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
      <typeAlias type="model.domain.LogcommentBean" alias="lcBean"/>
      <typeAlias type="model.domain.JudgeBean" alias="judgeBean"/>
      <typeAlias type="model.domain.ScheduleBean" alias="scheBean"/>
+     <typeAlias type="model.domain.MeetingBean" alias="meetingBean"/>
    </typeAliases>
    
 	<environments default="development">

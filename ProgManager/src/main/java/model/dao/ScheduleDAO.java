@@ -13,6 +13,18 @@ import util.DBUtil;
 
 public class ScheduleDAO {
 	
+	public int deleteSchedule(int snum) {
+		SqlSession session = null;
+		int result=0;
+		try{
+			session = DBUtil.getSqlSession();
+			result=session.delete("prog.deleteSchedule", snum);
+			session.commit();
+		}finally{
+			DBUtil.closeSqlSession(session);
+		}
+		return result;
+	}
 	public static List<ScheduleBean> getSchedule(String pnum){
 		
 		SqlSession session = null;
@@ -20,7 +32,6 @@ public class ScheduleDAO {
 		try{
 			session = DBUtil.getSqlSession();
 			list = session.selectList("prog.getSchedule", pnum);
-			System.out.println(list.toString());
 		}finally{
 			DBUtil.closeSqlSession(session);
 		}
@@ -29,6 +40,48 @@ public class ScheduleDAO {
 
 	public int sendSchedule(ScheduleBean scheBean) {
 		
+		String sdate = scheBean.getSdate();
+		String edate = scheBean.getEdate();
+		String[] sdateList = sdate.split(" ");
+		String[] edateList = edate.split(" ");
+		
+		sdate=sdateList[3].substring(2)+"/"+convertMonth(sdateList[1])+"/"+sdateList[2];
+		edate=edateList[3].substring(2)+"/"+convertMonth(edateList[1])+"/"+edateList[2];
+
+		scheBean.setSdate(sdate);
+		scheBean.setEdate(edate);
+		
+		int result=0;
+		SqlSession session = null;
+		 
+		try{
+			session = DBUtil.getSqlSession();
+			result = session.insert("prog.insertSchedule", scheBean);
+			session.commit();
+		}finally{
+			DBUtil.closeSqlSession(session);
+		}
+		return result;
+	}
+	
+	public int checkUpdate(ScheduleBean scheBean) {
+		scheBean=convertType(scheBean);
+		SqlSession session=null;
+		int result=0;
+		try{
+			session = DBUtil.getSqlSession();
+			result = session.selectOne("prog.checkUpdate", scheBean);
+			if(result!=0){
+				result=session.delete("prog.deleteSchedule", scheBean.getSnum());
+				session.commit();
+			}
+		}finally{
+			DBUtil.closeSqlSession(session);
+		}
+		return result;
+	}
+	
+	public ScheduleBean convertType(ScheduleBean scheBean){
 		String sdate = scheBean.getSdate();
 		String edate = scheBean.getEdate();
 		System.out.println("!!!!!!sdate"+sdate);
@@ -43,19 +96,10 @@ public class ScheduleDAO {
 		scheBean.setSdate(sdate);
 		scheBean.setEdate(edate);
 		
-		System.out.println("이야아아아아아ㅏ아아아아아압!!!!!!!!!!!"+sdate);
-		int result=0;
-		SqlSession session = null;
-		 
-		try{
-			session = DBUtil.getSqlSession();
-			result = session.insert("prog.insertSchedule", scheBean);
-			session.commit();
-		}finally{
-			DBUtil.closeSqlSession(session);
-		}
-		return result;
+		return scheBean;
 	}
+
+	
 	public String convertMonth(String sdateList){
 		switch(sdateList){
 		case "Jan":
@@ -85,4 +129,7 @@ public class ScheduleDAO {
 		}
 		return null;
 	}
+
+
+
 }
