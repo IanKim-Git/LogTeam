@@ -139,6 +139,8 @@ public class ProjectController {
 	@RequestMapping("outcome.do")
 	public String enterOutcome(@RequestParam("enterOutPnum") String pnum, Model model){
 		model.addAttribute("pnum", pnum);
+		//model.addAttribute("meeting",projectService.getProjectMeeting(Integer.valueOf(pnum)));
+		//System.out.println("##################"+projectService.getProjectMeeting(Integer.valueOf(pnum)));
 		return "outcome";
 	}
 	
@@ -148,7 +150,6 @@ public class ProjectController {
 		model.addAttribute("pnum", pnum);
 		return "account";
 	}
-
 }
 
 

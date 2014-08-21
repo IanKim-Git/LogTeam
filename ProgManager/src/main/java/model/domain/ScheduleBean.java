@@ -10,7 +10,15 @@ public class ScheduleBean {
 	public ScheduleBean() {
 		super();
 		// TODO Auto-generated constructor stub
+	}	
+	
+	public ScheduleBean(String sdate, String stext, String stitle) {
+		super();
+		this.sdate = sdate;
+		this.stext = stext;
+		this.stitle = stitle;
 	}
+	
 	public ScheduleBean(int pnum, int snum, String sdate, String edate,
 			String stext, String stitle) {
 		super();
