@@ -93,7 +93,9 @@ pre .string.value {
     opacity: 1;
     cursor: pointer;
     position: relative;
-    border-radius: 50px; }
+    border-radius: 50px; 
+    box-shadow: 10px 10px 5px #CECECE;
+    }
     .example .brick .delete {
       display: block;
       color: white;

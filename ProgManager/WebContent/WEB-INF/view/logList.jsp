@@ -9,6 +9,41 @@
    
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Log List</title>
+<style type="text/css">
+   fieldset {
+      border-radius: 13px;
+      border-color: #C48989;
+      box-shadow: outset 0px 1px 3px #bbb;
+   }
+   textarea {
+      border: 1px solid;
+      width: 96%;
+      border-radius: 3px;
+      color: #3a454d;
+      box-shadow: inset 0px 1px 3px #bbb;
+   }
+   select {
+      border-radius: 3px;
+      color: #3a454d;
+   }
+   #write {
+      width: auto;
+      padding: 5px 8px 6px 8px;
+      margin: 30px 12px 0px 0;
+   }
+   #logFormTable{
+      width: 100%;
+   }
+   .logTable {
+      width: 100%;
+   }
+   .commentTable {
+      width: 100%;
+   }
+   .commentWriteTable {
+      width: 100%;
+   }
+</style>
 </head>
 
 <script src="js/jquery-1.10.2.js"></script>
@@ -47,7 +82,7 @@
                   
                    div += "<tr><td></td><td>";
                   if(item.lphoto != ""){
-                     div += "<img id='logPhoto' src='"+ item.lphoto +"' title='"+ item.lphotoname +"' width='70%' height='70%' border='0' ><br>";
+                     div += "<img id='logPhoto' src='"+ item.lphoto +"' title='"+ item.lphotoname +"' width='70%' border='0' ><br>";
                   }
                   div += "</td></tr>";
                   
@@ -98,7 +133,7 @@
                   
                   //해당 로그의 코멘트 목록 div
                   div += "<div class='lcContent'>";
-                  div += "<table><tbody id='commentBody'>";
+                  div += "<table class='commentTable'><tbody id='commentBody'>";
                   jb(data.clist).each(function(index, citem) {//{no:값, name:값,...}
                      if(citem.c_lnum == item.lnum){
                         div += "<tr><td> &nbsp; <td>";
@@ -124,7 +159,7 @@
                   div += "<input type='hidden' class='c_lnum' id='c_lnum"+ item.lnum +"' name='c_lnum' value='"+ item.lnum +"'>";
                   div += "<input type='hidden' class='uemail' id='c_uemail"+ item.lnum +"' name='c_uemail'>";
                   div += "<input type='hidden' id='c_l_pnum"+ item.lnum +"' name='c_l_pnum' value="+jb("#l_pnum").val()+">";
-                  div += "<table><tfoot id='writeComment"+ item.lnum +"'><tr><td><textarea id='ctext"+ item.lnum +"' name='ctext' rows='2' cols=110% ></textarea></td>";
+                  div += "<table class='commentWriteTable'><tfoot id='writeComment"+ item.lnum +"'><tr><td><textarea id='ctext"+ item.lnum +"' name='ctext' rows='2' cols=110% ></textarea></td>";
                   div += "<td><input type='button' id='writeLc' value='등록'></td></tr></tfoot></table>";
                   
                   div += "</form></div>";
@@ -135,20 +170,6 @@
                jb("#setLogs").html(div);
                jb(".uemail").val(jb("#l_uemail").val());
                
-               /* //공개 비공개 설정
-               jb(data.list).each(function(indext, item){
-                  
-                  if(item.lpublic == 1){
-                     jb("#"+item.lnum).css({"display":"block"});
-                  }else if(item.lpublic == 0){
-                     if(item.l_uemail != jb("#l_uemail").val()){
-                        jb("#"+item.lnum).css({"display":"none"});
-                     }else if(item.l_uemail == jb("#l_uemail").val()){
-                        jb("#"+item.lnum).css({"display":"block"});
-                     }
-                  }
-                  
-               }); */
             },
             error : function(err) {//실패했을때
                alert(err + " : 해당 프로젝트에는 로그가 아직 작성되지 않았습니다");
@@ -302,16 +323,15 @@
    });//end of ready
 </script>
 <body>
-<img src="./images/logboard.png" align="left" style="margin: 6% 0 0 1%; "><br>
 <%--    <h6>로그게시판</h6>
    프로젝트 번호 : ${requestScope.pnum}
    유저 이메일 : ${sessionScope.userData.uemail}<br> --%>
    <br><br><br><br>
    <!-- 로그 화면 -->
-   <div id="logsView" align="left" style="margin-left: 16%;margin-right: 15%;">
+   <div id="logsView" align="left" style="margin-left: 15%;margin-right: 15%;">
       
          <!-- 로그 등록창 -->
-         <div id="writeLog">
+         <div id="writeLog" >
             <fieldset>
                <form action="write.do" id="writeForm" method="post" enctype="multipart/form-data">
                   <input type="hidden" id="l_pnum" name="l_pnum" value="${requestScope.pnum}">
@@ -354,7 +374,7 @@
          <div id="logsList">
             <!-- jQuery 함수 사용을 위해서 선언 -->
             <div id="setLogs">
-            
+            <%-- 
                <c:forEach items="${requestScope.logsList}" var="logs" >
                   <div class="eachLog" id="${logs.lnum}">
                      <fieldset>   
@@ -448,7 +468,7 @@
                   </div><!-- end of eachLog -->
                   <br>
                </c:forEach><!-- end of log loop -->
-            
+             --%>
             </div><!-- end of setLogs -->
          </div><!-- end of logsList -->      
    </div><!-- end of logsView -->   
