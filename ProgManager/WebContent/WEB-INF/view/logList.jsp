@@ -26,18 +26,13 @@
 		border-radius: 3px;
 		color: #3a454d;
 	}
-	
 	#write {
 		width: auto;
 		padding: 5px 8px 6px 8px;
 		margin: 30px 12px 0px 0;
 	}
-	
 	table{
 		width: 100%;
-	}
-	
-	td{
 	}
 </style>
 </head>
@@ -166,20 +161,6 @@
                jb("#setLogs").html(div);
                jb(".uemail").val(jb("#l_uemail").val());
                
-               /* //공개 비공개 설정
-               jb(data.list).each(function(indext, item){
-                  
-                  if(item.lpublic == 1){
-                     jb("#"+item.lnum).css({"display":"block"});
-                  }else if(item.lpublic == 0){
-                     if(item.l_uemail != jb("#l_uemail").val()){
-                        jb("#"+item.lnum).css({"display":"none"});
-                     }else if(item.l_uemail == jb("#l_uemail").val()){
-                        jb("#"+item.lnum).css({"display":"block"});
-                     }
-                  }
-                  
-               }); */
             },
             error : function(err) {//실패했을때
                alert(err + " : 해당 프로젝트에는 로그가 아직 작성되지 않았습니다");
@@ -384,7 +365,7 @@
          <div id="logsList">
             <!-- jQuery 함수 사용을 위해서 선언 -->
             <div id="setLogs">
-            
+            <%-- 
                <c:forEach items="${requestScope.logsList}" var="logs" >
                   <div class="eachLog" id="${logs.lnum}">
                      <fieldset>   
@@ -478,7 +459,7 @@
                   </div><!-- end of eachLog -->
                   <br>
                </c:forEach><!-- end of log loop -->
-            
+             --%>
             </div><!-- end of setLogs -->
          </div><!-- end of logsList -->      
    </div><!-- end of logsView -->   
