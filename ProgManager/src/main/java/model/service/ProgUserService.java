@@ -5,7 +5,6 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import model.dao.ProgUserDAO;
-import model.dao.ProjectDAO;
 import model.domain.ProgUserBean;
 import model.domain.ProgUserPhotoBean;
 
