@@ -56,7 +56,8 @@
 					if (data == "ok") {
 						alert("프로젝트 생성 완료");
 						getData();							//모든레코드 검색하는 함수 호출				
-				    	document.getElementById("createProjectPop").style.display="none";				        
+				    	document.getElementById("createProjectPop").style.display="none";
+				    	$(".overlay").hide();
 					} else {
 						alert("프로젝트 생성 실패");
 					}
@@ -89,6 +90,7 @@
 						alert("프로젝트 참여 성공");
 						getData();							//모든레코드 검색하는 함수 호출				
 				    	document.getElementById("joinProjectPop").style.display="none";
+				    	$(".overlay").hide();
 					} else {
 						alert("프로젝트 참여 실패");
 					}
@@ -125,7 +127,7 @@
 		                	  "<div class='brick small' id="+project.pnum+"><br><br><font color='black' >"+
 		                	  		"<div id='content_s"+project.pnum+"' style='display:table-cell; vertical-align:middle; font-size: 1.3em;'>"+project.pname+"</div><br>"+
 		                	  		"<div id='content_l"+project.pnum+"' style='display:none; font-size: 1.2em;'>"+
-		                	  			"<big><strong>프로젝트 번호 : "+project.pnum+"</strong></big><br>"+	"<big><strong>프로젝트 이름 : "+project.pname+"</strong></big><br>"+
+		                	  			"<big>프로젝트 번호 : "+project.pnum+"</big><br>"+	"<big>프로젝트 이름 : "+project.pname+"</big><br>"+
 		                	  			"멘토 : "+project.pmento+"<br>"+  		"기간 : "+cpstart+"~"+cpend+"<br>"+
 		                	  			"팀장 : "+project.pleader+"<br>"+  		"</div><br></font>"+
 		                	  		"<a class='enter' href='#' id="+project.pnum+">&nbsp;GO&nbsp;</a>"+

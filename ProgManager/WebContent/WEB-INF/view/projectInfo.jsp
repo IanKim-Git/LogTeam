@@ -179,21 +179,21 @@
 
 <body>
 	<br><br>
-	<img src="./images/projectinfo.png" align="left" style="margin: 3% 0 0 0%; "><br>
 	<%-- <h6>프로젝트 화면</h6>
 	프로젝트 번호 : ${requestScope.pnum}
 	유저 이메일 : ${sessionScope.userData.uemail}<br> --%>
 	<div id="projectInformation" align="center">
+	<img src="./images/projectinfo.png" align="left" style="margin: 3% 0 0 2%;float: left;"><br>
 	<div class='contents' style="margin-top: 9px" >
-	<br><hr><br><br><br><br><br>
+	<br><br><br>
 	
 	<form action="" id="info" method="post">
     	<b> 
-    	<br><font color="#5A5A5A" style="font-style: initial;" size="6">프로젝트 이름 : &nbsp;&nbsp;<b id="proname">${requestScope.pinfo.pname}</b></font><br><br>
-    	<br><font color="#5A5A5A" style="font-style: initial;" size="6">프로젝트 방 번호 : &nbsp;&nbsp;${requestScope.pinfo.pnum}</font><br><br>
-    	<br><font color="#5A5A5A" style="font-style: initial;" size="6">기간 : <b id="term"></b></font><br><br>
-    	<br><font color="#5A5A5A" style="font-style: initial;" size="6">프로젝트 일정 상황:</font>&nbsp;&nbsp;
-    </form>
+    	<br><font color="#5A5A5A" style="font-style: initial;" size="5">프로젝트 이름 : &nbsp;&nbsp;<b id="proname">${requestScope.pinfo.pname}</b></font><br>
+    	<br><font color="#5A5A5A" style="font-style: initial;" size="5">프로젝트 방 번호 : &nbsp;&nbsp;${requestScope.pinfo.pnum}</font><br>
+    	<br><font color="#5A5A5A" style="font-style: initial;" size="5">기간 : <b id="term"></b></font><br>
+    	<br><font color="#5A5A5A" style="font-style: initial;" size="5">프로젝트 경과율:</font>&nbsp;&nbsp;
+    
     	<c:if test="${requestScope.prodate <= 0}">
 	   		<div class="progressBar">
 				<b><e style="left:0px"></e></b>
@@ -209,14 +209,14 @@
 				<b><e style="left:${requestScope.prodate*2}px"></e></b>
 			</div>
 		</c:if>
-		<div><font color="#5A5A5A" style="font-style: initial;" size="5"><b id="percentage"></b>%</font>
-    	</div>
+		<font color="#5A5A5A" style="font-style: initial;" size="5"><b id="percentage"></b>%</font>
+    </form>	
 	</div>
     	<br>
 		<font color="#5A5A5A" style="font-style: initial;" size="5">팀원 정보 : &nbsp;</font>
 		<br><br>
 	<div id="userList">
-		<table border="0" cellpadding="0" cellspacing="1" width="40%" bordercolordark="white" bordercolorlight="black">
+		<table border="0" cellpadding="0" cellspacing="1" width="80%" bordercolordark="white" bordercolorlight="black">
 			<tr>
 		        <td bgcolor="#9b2626">
 		            <p align="center"><font color="white"><b><span style="font-size:12pt;">Photo</span></b></font></p>
@@ -255,10 +255,10 @@
 	
 	<div id="projectInfoChange" style="border-left:2px solid; padding:9px;">
 
-		 <br><hr><br><br><br><br><br><br><br><br>
+		 <br><br><br><br><br>
 		 <div align="left" >
-			 <font color="#9B2626" size="10" style="font-style: oblique;">프로젝트 정보 변경</font>
-			 <font color="#9B2626" size="3" style="font-style: oblique;">
+			 <font color="#9B2626" size="6" style="font-style: oblique;">Info Change.</font><br><br>
+			 <font color="#5A5A5A" size="3" style="font-style: oblique;">
 			 <form action="proUpdate.do" id="proupdateform" method="post">
 			 	<table border="0" width="70%" height="7%" cellspacing="5">
 					<tr>
@@ -274,11 +274,11 @@
  						<td><input type="password" name="ppwAgain" id="ppwAgain"/></td>
 					</tr>
 					<tr>
- 						<td>Project Start Date :</td>
+ 						<td>Start Date :</td>
  						<td><input type="text" name="pstart" id="pstart"/></td>
 					</tr>
 					<tr>
- 						<td>Project End Date :</td>
+ 						<td>End Date :</td>
  						<td><input type="text" name="pend" id="pend"/></td>
 					</tr>
 				</table>
@@ -299,7 +299,7 @@
 		 </div>
 	</div>	
 </body>
-<br><br><br>
+<br>
 <jsp:include page="bottomMenu.jsp" flush="true"/>
 </html>
 

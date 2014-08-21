@@ -146,22 +146,22 @@ html,body{width:100%;height:100%;padding:0;
 #projectInformation{
 	position:relative;
 	float:left;
-	width:73%;
+	width:65%;
 	height:100%;
 }
 
 #projectInfoChange{
 	position:relative;
 	float:right;
-	width:25%;
-	height:100%;
+	width:32%;
+	height:85%;
 }
 
 #userList{
 	position:relative;
 	float:right;
 	width:100%;
-	height:60%;	
+	height:30%;	
 }
 
 
