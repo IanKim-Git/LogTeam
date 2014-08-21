@@ -148,6 +148,8 @@
 				}
 			}); //end of ajax
 		});//end of Join button
+		
+		$(".overlay").show();
 	
 	});//end of ready
 </script>
@@ -217,12 +219,16 @@
    		 <h2>PLog Maneger<br>메인 페이지 레이아웃 테스트<br>Main Page Layout Test<br>Test Page<br></h2>
     </div> -->
     
+    <div class="overlay">
+    	<div id="plogmanagerlogo"><img id="plogmanagerlogoImg" src="images/mainLogo.png"></div>
+    </div>
+
 <div class="container">
-	<div id="content-slider">
-    	<div id="slider">
-        	<div id="mask" >
+   <div id="content-slider">
+       <div id="slider">
+           <div id="mask" >
             <ul>
-           	<li id="first" class="firstanimation">
+              <li id="first" class="firstanimation">
             <a href="#">
             <img src="images/0.jpg" width="100%"/>
             </a>
@@ -244,7 +250,13 @@
             <a href="#">
             <img src="images/3.jpg" width="100%"/>
             </a>
-            </li>          
+            </li>    
+            
+            <li id="fifth" class="fifthanimation">
+            <a href="#">
+            <img src="images/4.jpg" width="100%"/>
+            </a>
+            </li>      
             </ul>
             </div>
         </div>
