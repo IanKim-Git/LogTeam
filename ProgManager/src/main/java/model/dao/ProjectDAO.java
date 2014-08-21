@@ -2,8 +2,8 @@ package model.dao;
 
 import java.util.List;
 
-import model.domain.ProgUserBean;
 import model.domain.ProjectBean;
+import model.domain.ScheduleBean;
 import model.domain.UserProjectBean;
 
 import org.apache.ibatis.session.SqlSession;
@@ -90,7 +90,7 @@ public class ProjectDAO {
 		}
 		
 		// 프로젝트 정보 변경
-		public int projectUpdateInfo(ProjectBean pb) {
+		public static int projectUpdateInfo(ProjectBean pb) {
 			SqlSession session = null;
 			boolean flag = false;
 			int result = 0;
@@ -106,7 +106,7 @@ public class ProjectDAO {
 		}
 		
 		// 프로젝트 삭제
-		public int projectDelete(int pnum) {
+		public static int projectDelete(int pnum) {
 			SqlSession session = null;
 			boolean flag = false;
 			int result = 0;
@@ -121,7 +121,8 @@ public class ProjectDAO {
 			return result;
 		}
 		
-		public String getProjectLeader(int pnum) {
+		//프로젝트 리더 가져오기
+		public static String getProjectLeader(int pnum) {
 			SqlSession session = null;
 			String leader = null;
 			try {
@@ -131,6 +132,19 @@ public class ProjectDAO {
 				DBUtil.closeSqlSession(session);
 			}
 			return leader;
+		}
+		
+		//프로젝트 미팅 정보 가져오기
+		public static ScheduleBean getProjectMeeting(int pnum) {
+			SqlSession session = null;
+			ScheduleBean sb = null;
+			try {
+				session = DBUtil.getSqlSession();
+				sb = session.selectOne("prog.getMeetingInfo", pnum);
+			} finally {
+				DBUtil.closeSqlSession(session);
+			}
+			return sb;
 		}
 	
 	//pnum과 ppw받아서 있는 프로젝트인지 확인하기
@@ -162,6 +176,10 @@ public class ProjectDAO {
 		
 		return true;
 	}
+	
+	/*public static void main(String[] args) {
+		System.out.println(getProjectMeeting(2).getSdate());
+	}*/
 	
 //	public static void main(String[] args) {
 //		ProgUserDAO p = new ProgUserDAO();

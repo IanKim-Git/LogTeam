@@ -5,9 +5,8 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import model.dao.ProjectDAO;
-import model.domain.ProgUserBean;
 import model.domain.ProjectBean;
-import model.domain.UserProjectBean;
+import model.domain.ScheduleBean;
 
 public class ProjectService {
 	
@@ -69,6 +68,11 @@ public class ProjectService {
 	public String getProjectLeader(int pnum) {
 		return projectDao.getProjectLeader(pnum);
 	}
+	
+	/*//프로젝트 미팅 정보 가져오기
+	public ScheduleBean getProjectMeeting(int pnum) {
+		return projectDao.getProjectMeeting(pnum);
+	}*/
 }
 
 

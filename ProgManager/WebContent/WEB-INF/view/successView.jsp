@@ -96,6 +96,10 @@
 
 		// 해당 유저의 email로 등록된 모든 프로젝트 검색 후 출력
 		function getData() {
+					
+			var cpstart;
+			var cpend;
+			
 			$.ajax({
 				url : "getProjectList.do",
 				data : "uemail=" + $("#pleader").val(),
@@ -109,14 +113,15 @@
 						fullProjectInfo = JSON.stringify(project);//value="+JSON.stringify(project)+"
 						simpleProjectInfo = project.pnum + project.pname;
 						//alert(simpleProjectInfo);
-						
+						cpstart = project.pstart.substring(0,4) +"-"+ project.pstart.substring(5,7) +"-"+ project.pstart.substring(8,10);
+						cpend = project.pend.substring(0,4) +"-"+ project.pend.substring(5,7) +"-"+ project.pend.substring(8,10);
 						
 		                document.getElementById("gridly").innerHTML+=
 		                	  "<div class='brick small' id="+project.pnum+"><br><br><font color='black' >"+
 		                	  		"<div id='content_s"+project.pnum+"' style='display:table-cell; vertical-align:middle; font-size: 1.3em;'>"+project.pname+"</div><br>"+
 		                	  		"<div id='content_l"+project.pnum+"' style='display:none; font-size: 1.2em;'>"+
-		                	  			"프로젝트 번호 : "+project.pnum+"<br>"+	"프로젝트 이름 : "+project.pname+"<br>"+
-		                	  			"멘토 : "+project.pmento+"<br>"+  		"기간 : <br>"+project.pstart+"~"+project.pend+"<br>"+
+		                	  			"<big><strong>프로젝트 번호 : "+project.pnum+"</strong></big><br>"+	"<big><strong>프로젝트 이름 : "+project.pname+"</strong></big><br>"+
+		                	  			"멘토 : "+project.pmento+"<br>"+  		"기간 : "+cpstart+"~"+cpend+"<br>"+
 		                	  			"팀장 : "+project.pleader+"<br>"+  		"</div><br></font>"+
 		                	  		"<a class='enter' href='#' id="+project.pnum+">[입장하기]</a>"+
 		                	  			"<form action='projectInfo.do' id='enterProject"+project.pnum+"' method='post'>"+
