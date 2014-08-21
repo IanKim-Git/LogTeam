@@ -31,7 +31,16 @@
 		padding: 5px 8px 6px 8px;
 		margin: 30px 12px 0px 0;
 	}
-	table{
+	#logFormTable{
+		width: 100%;
+	}
+	.logTable {
+		width: 100%;
+	}
+	.commentTable {
+		width: 100%;
+	}
+	.commentWriteTable {
 		width: 100%;
 	}
 </style>
@@ -124,7 +133,7 @@
                   
                   //해당 로그의 코멘트 목록 div
                   div += "<div class='lcContent'>";
-                  div += "<table><tbody id='commentBody'>";
+                  div += "<table class='commentTable'><tbody id='commentBody'>";
                   jb(data.clist).each(function(index, citem) {//{no:값, name:값,...}
                      if(citem.c_lnum == item.lnum){
                         div += "<tr><td> &nbsp; <td>";
@@ -150,7 +159,7 @@
                   div += "<input type='hidden' class='c_lnum' id='c_lnum"+ item.lnum +"' name='c_lnum' value='"+ item.lnum +"'>";
                   div += "<input type='hidden' class='uemail' id='c_uemail"+ item.lnum +"' name='c_uemail'>";
                   div += "<input type='hidden' id='c_l_pnum"+ item.lnum +"' name='c_l_pnum' value="+jb("#l_pnum").val()+">";
-                  div += "<table><tfoot id='writeComment"+ item.lnum +"'><tr><td><textarea id='ctext"+ item.lnum +"' name='ctext' rows='2' cols=110% ></textarea></td>";
+                  div += "<table class='commentWriteTable'><tfoot id='writeComment"+ item.lnum +"'><tr><td><textarea id='ctext"+ item.lnum +"' name='ctext' rows='2' cols=110% ></textarea></td>";
                   div += "<td><input type='button' id='writeLc' value='등록'></td></tr></tfoot></table>";
                   
                   div += "</form></div>";
