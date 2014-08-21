@@ -191,8 +191,8 @@
     	<b> 
     	<br><font color="#5A5A5A" style="font-style: initial;" size="5">프로젝트 이름 : &nbsp;&nbsp;<b id="proname">${requestScope.pinfo.pname}</b></font><br>
     	<br><font color="#5A5A5A" style="font-style: initial;" size="5">프로젝트 방 번호 : &nbsp;&nbsp;${requestScope.pinfo.pnum}</font><br>
-    	<br><font color="#5A5A5A" style="font-style: initial;" size="5">기간 : <b id="term"></b></font><br>
-    	<br><font color="#5A5A5A" style="font-style: initial;" size="5">프로젝트 경과율:</font>&nbsp;&nbsp;
+    	<br><font color="#5A5A5A" style="font-style: initial;" size="5">기간 : <b id="term"></b></font>
+    	<br><table><tr><td><font color="#5A5A5A" style="font-style: initial;" size="5">프로젝트 경과율:</font></td><td style="padding-bottom: 18px;">&nbsp;&nbsp;
     
     	<c:if test="${requestScope.prodate <= 0}">
 	   		<div class="progressBar">
@@ -209,12 +209,14 @@
 				<b><e style="left:${requestScope.prodate*2}px"></e></b>
 			</div>
 		</c:if>
+		</td><td>
 		<font color="#5A5A5A" style="font-style: initial;" size="5"><b id="percentage"></b>%</font>
+		</td></table>
     </form>	
 	</div>
     	<br>
-		<font color="#5A5A5A" style="font-style: initial;" size="5">팀원 정보 : &nbsp;</font>
-		<br><br>
+		<!-- <font color="#5A5A5A" style="font-style: initial;" size="5">팀원 정보 : &nbsp;</font> -->
+		<br>
 	<div id="userList">
 		<table border="0" cellpadding="0" cellspacing="1" width="80%" bordercolordark="white" bordercolorlight="black">
 			<tr>
