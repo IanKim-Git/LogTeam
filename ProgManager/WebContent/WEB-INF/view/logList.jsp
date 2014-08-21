@@ -9,6 +9,37 @@
    
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Log List</title>
+<style type="text/css">
+	fieldset {
+		border-radius: 13px;
+		border-color: #C48989;
+		box-shadow: outset 0px 1px 3px #bbb;
+	}
+	textarea {
+		border: 1px solid;
+		width: 96%;
+		border-radius: 3px;
+		color: #3a454d;
+		box-shadow: inset 0px 1px 3px #bbb;
+	}
+	select {
+		border-radius: 3px;
+		color: #3a454d;
+	}
+	
+	#write {
+		width: auto;
+		padding: 5px 8px 6px 8px;
+		margin: 30px 12px 0px 0;
+	}
+	
+	table{
+		width: 100%;
+	}
+	
+	td{
+	}
+</style>
 </head>
 
 <script src="js/jquery-1.10.2.js"></script>
@@ -47,7 +78,7 @@
                   
                    div += "<tr><td></td><td>";
                   if(item.lphoto != ""){
-                     div += "<img id='logPhoto' src='"+ item.lphoto +"' title='"+ item.lphotoname +"' width='70%' height='70%' border='0' ><br>";
+                     div += "<img id='logPhoto' src='"+ item.lphoto +"' title='"+ item.lphotoname +"' width='70%' border='0' ><br>";
                   }
                   div += "</td></tr>";
                   
@@ -310,7 +341,7 @@
    <div id="logsView" align="left" style="margin-left: 15%;margin-right: 15%;">
       
          <!-- 로그 등록창 -->
-         <div id="writeLog">
+         <div id="writeLog" >
             <fieldset>
                <form action="write.do" id="writeForm" method="post" enctype="multipart/form-data">
                   <input type="hidden" id="l_pnum" name="l_pnum" value="${requestScope.pnum}">

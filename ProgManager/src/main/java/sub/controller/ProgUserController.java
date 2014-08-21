@@ -30,13 +30,13 @@ public class ProgUserController {
 	private ProgUserService puService;
 	
 	//김용두 파일 패스
-	private String filePath = "D:/2014KODB/slogProject/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ProgManager/ProgFile/uphoto/";
+//	private String filePath = "D:/2014KODB/slogProject/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ProgManager/ProgFile/uphoto/";
 	//박상태 파일 패스
 //	private String filePath = "";
 	//황수남 파일 패스
 //	private String filePath = "";
 	//박다은 파일 패스
-//	private String filePath = "C:/2014KODB/KODBFinalProject/GitTest/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ProgManager/ProgFile/uphoto/";
+	private String filePath = "C:/2014KODB/KODBFinalProject/GitTest/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ProgManager/ProgFile/uphoto/";
 
 	// 로그인 할 때 아이디(이메일)와 비밀번호 확인
 	@RequestMapping(value = "idPwCheck.do", method = RequestMethod.POST)

@@ -104,29 +104,32 @@
 </script>
 <body>
 
-	<h6>공지사항</h6>
+	<%-- <h6>공지사항</h6>
 	프로젝트 번호 : ${requestScope.pnum}
-	유저 이메일 : ${sessionScope.userData.uemail}<br>
-	<form action="writeAn.do" id="anWriteForm" method="post">
-		<select id="animportance" name="animportance">
-			<option value="-1">선택</option>
-			<option value="3">상</option>
-			<option value="2">중</option>
-			<option value="1">하</option>
-		</select><br>
-		<input type="hidden" id="an_pnum" name="an_pnum" value="${requestScope.pnum}">
-		<input type="hidden" id="an_uemail" name="an_uemail" value="${sessionScope.userData.uemail}">
-		<textarea id="ancontent" name="ancontent" rows="5" cols="60" ></textarea>
-		<input type="button" id="anWrite" value="등록">		
-	</form>
-	
-	<form action="" id="anListForm">			
-		<table id="listTable" cellspacing="0">
-			<tr bgcolor="#FOFOF7">
-				<th>번호</th><th>내용</th><th>날짜</th><th>등록자</th><th>중요도</th><th>삭제</th>
-			</tr>
-		</table>
-	</form>
+	유저 이메일 : ${sessionScope.userData.uemail}<br> --%>
+	<br><br><br><br>
+	<div>
+		<form action="writeAn.do" id="anWriteForm" method="post">
+			<select id="animportance" name="animportance">
+				<option value="-1">선택</option>
+				<option value="3">상</option>
+				<option value="2">중</option>
+				<option value="1">하</option>
+			</select><br>
+			<input type="hidden" id="an_pnum" name="an_pnum" value="${requestScope.pnum}">
+			<input type="hidden" id="an_uemail" name="an_uemail" value="${sessionScope.userData.uemail}">
+			<textarea id="ancontent" name="ancontent" rows="5" cols="60" ></textarea>
+			<input type="button" id="anWrite" value="등록">		
+		</form>
+		
+		<form action="" id="anListForm">			
+			<table id="listTable" cellspacing="0">
+				<tr bgcolor="#FOFOF7">
+					<th>번호</th><th>내용</th><th>날짜</th><th>등록자</th><th>중요도</th><th>삭제</th>
+				</tr>
+			</table>
+		</form>
+	</div>
 </body>
 <jsp:include page="bottomMenu.jsp" flush="true"/>
 </html>
