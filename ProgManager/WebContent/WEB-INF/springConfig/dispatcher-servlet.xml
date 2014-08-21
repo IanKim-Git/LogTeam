@@ -42,7 +42,10 @@
 	<bean id="judgeService" class="model.service.JudgeService" />
 	
 	<bean id="scheduleDao" class="model.dao.ScheduleDAO"/>
-   	<bean id="scheduleService" class="model.service.ScheduleService" />
+   	<bean id="scheduleService" class="model.service.ScheduleService"/>
+   	
+   	<bean id="meetingDao" class="model.dao.MeetingDAO"/>
+   	<bean id="meetingService" class="model.service.MeetingService"/>
 	
 	<!-- Json 응답을 위한 설정 -->
 	<!--<bean id="jsonView" class="net.sf.json.spring.web.servlet.view.JsonView" >

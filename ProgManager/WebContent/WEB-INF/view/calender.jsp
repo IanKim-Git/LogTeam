@@ -20,17 +20,15 @@
     <script type="text/javascript">
 	$(document).ready(function(){
 		function sendSchedule(x){
-			alert(x.title);
 			$.ajax({
 				url : "sendSchedule.do",
-				data : "pnum="+$("#pnum").val()+"&sdate="+x.start+"&edate="+x.end+"&stext="+x.description+"&stitle="+x.title,
+				data : "pnum="+$("#pnum").val()+"&sdate="+x.start+"&edate="+x.end+"&stext="+x.description+"&stitle="+x.title
+						+"&flag="+x.isAllDay,
 				type:"post",
 				dataType:"text",
 				success:function(data){
 					if(data=="ok"){
-						alert("등록 성공!!");
 					} else{
-						alert("실패임ㅡ,.ㅡ");
 					}
 				},
 				error:function(data){
@@ -38,20 +36,45 @@
 				} 
 			});
 		}
-	/* 	data:[
-    	      {
-    	    	  id:1,
-    	    	  start: new Date("2014/8/18 8:00 AM"),
-    	    	  end: new Date("2014/8/18 9:00 AM"),
-    	    	  title: "Interview"
-    	      },
-    	      {
-    	    	  id:2,
-    	    	  start: new Date("2014/8/19 5:00 AM"),
-    	    	  end: new Date("2014/8/19 8:00 AM"),
-    	    	  title: "InterView2"
-    	      }
-    	 ] */
+		function deleteSchedule(x){
+			$.ajax({
+				url:"deleteSchedule.do",
+				data:"snum="+x,
+				type:"post",
+				dataType:"text",
+				success:function(data){
+					if(data=="ok"){
+					}else{
+					}
+				},
+				error:function(data){
+				}
+			});
+		}
+		function updateSchedule(x){
+			$.ajax({
+				url:"updateSchedule.do",
+				data: "snum="+x
+				
+			});
+		}
+		function checkUpdate(x){
+			$.ajax({
+				url:"checkUpdate.do",
+				data:"snum="+x.id+"&stitle="+x.title+"&stext="+x.description+"&sdate="+x.start+"&edate="+x.end,
+				type:"post",
+				dataType:"text",
+				success:function(data){
+					if(data=="ok"){
+						
+					}else{
+					}
+				},
+				error:function(data){
+				}
+			});
+		}
+		
 		var scheduleJsonList=null;
 		$.ajax({
 			url : "getSchedule.do",
@@ -64,34 +87,28 @@
 					        date: new Date("2014/8/17"),
 					        views: ["month", "day" ],
 					        save: function(e) {
+					        	alert(e.event.isAllDay);
 					            sendSchedule(e.event);
-					            alert("나왔넹");
+					            checkUpdate(e.event);
+					        },
+					    	remove: function(e) {
+					    		alert(e.event.id);
+					    		deleteSchedule(e.event.id);
+					        },
+					        resizeEnd: function(e){
+					        	updateSchedule(e);
 					        }
 					    });
 					    var scheduler = $("#scheduler").data("kendoScheduler");
 					    $(data.list).each(function(index,schedule){
 					    	scheduler.dataSource.add({
+					    		id:schedule.snum,
 					    		start:new Date(schedule.sdate),
 					    		end: new Date(schedule.edate),
 					    		title:schedule.stitle,
 					    		description:schedule.stext
 					    	});
 					    });
-					    
-				
-				//fullProjectInfo = JSON.stringify(data);//value="+JSON.stringify(project)+"
-				//simpleProjectInfo = project.pnum + project.pname;
-				
-				//alert(fullProjectInfo);
-			//	alert(data);
-				//alert($('#pnum').val());
-				//scheduleJsonList= data;
-				
-			//	var obj_length=Object.keys(data).length;
-/* 
-				$(data.list).each(function(index, schedule) {
-					alert(schedule.stext);
-				}); */
 			},
 			error : function(err) {//실패했을때
 				alert(err + " : 모든 프로젝트 정보 불러오기 실패");

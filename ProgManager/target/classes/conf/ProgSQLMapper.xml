@@ -176,16 +176,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from announcement where an_pnum=#{an_pnum} order by andate desc
 	</select>
 	
-	<!-- 공지사항 작성하기 -->
-	<!-- insert into announcement values(seq_an.nextval,seq_p.currval,sysdate,'a@a.a','bbb',1); -->
-	<!-- 
-	private int annum;
-	private int an_pnum;
-	private String andate;
-	private String an_uemail;
-	private String ancontent;
-	private int animportance;
-	 -->
 	<insert id="anWrite" parameterType="anBean">
 		insert into announcement(annum, an_pnum, andate, an_uemail, ancontent, animportance)
 		values(seq_an.nextval , #{an_pnum}, sysdate, #{an_uemail}, #{ancontent}, #{animportance})
@@ -283,7 +273,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <insert id="insertSchedule" parameterType="scheBean">
        insert into schedule values(#{pnum}, seq_s.nextval, #{sdate}, #{edate}, #{stext}, #{stitle}) 
     </insert>
-		
+    
+    <delete id="deleteSchedule" parameterType="scheBean">
+    	delete from schedule where snum=#{snum}
+    </delete>
+    
+    <select id="checkUpdate" parameterType="scheBean" resultType="int">
+    	select snum from schedule where snum=#{snum}
+    </select>
+    
+    <!-- meeting sql 부분 -->
+    
+    <insert id="insertMeeting" parameterType="meetingBean">
+    	insert into meeting values(seq_m.nextval, #{mpnum}, #{mdate}, #{mplace}, #{mpoint}, #{mcontent})
+    </insert>
+    
+    
 </mapper>
 
 
