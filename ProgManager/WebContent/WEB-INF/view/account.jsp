@@ -219,7 +219,7 @@
 
 <body>
 <br><br>
-<img src="./images/accounts.png" align="left" style="margin: 2% 0 0 1%; ">
+<img src="./images/accounts.png" align="left" style="margin: 4% 0 0 10%; ">
 
 	<div id="example" align="center" style="width: 80%;margin-left: 10%;">
     	<div class="demo-section k-content">
@@ -245,12 +245,13 @@
 	</td>
 	<td style="padding-left: 50px;">
 	<table>
-	<tr><td><b>Balance : </b></td><td><input type="text" id="acTotal" readonly="readonly" /><br><br></td></tr>
+	<br>
+	<tr><td><b>현재 잔고 : </b></td><td><input type="text" id="acTotal" readonly="readonly" /></td></tr>
 		<form action="writeAc.do" id="acWriteForm" method="post">
 			<input type="hidden" id="ac_pnum" name="ac_pnum" value="${requestScope.pnum}" align="middle">
-			<tr><td>Income(<font color="green"><b>+</b></font>) :</td><td><input type="text" id="acplus" name="acplus" value="0"/></td></tr>
-			<tr><td>Outlay(<font color="red"><b>-</b></font>) :</td><td><input type="text" id="acminus" name="acminus" value="0"/></td></tr>
-			<tr><td>History :</td><td><textarea id="accontents" name="accontents" rows="4" cols="30" ></textarea></td></tr>
+			<tr><td>수입(<font color="green"><b>+</b></font>) :</td><td><input type="text" id="acplus" name="acplus" value="0"/></td></tr>
+			<tr><td>지출(<font color="red"><b>-</b></font>) :</td><td><input type="text" id="acminus" name="acminus" value="0"/></td></tr>
+			<tr><td>내역 :</td><td><textarea id="accontents" name="accontents" rows="4" cols="30" ></textarea></td></tr>
 			
 			<tr><td></td><td><input type="button" id="acWrite" value="등록"></td></tr>
 		</form>

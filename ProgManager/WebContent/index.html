@@ -158,44 +158,44 @@
 
     <div id="bar">
        <div id="loginContainer">
-           <a href="#" id="loginButton"><span>Sign in</span><em></em></a>
+           <a href="#" id="loginButton"><span>&nbsp; 로그인</span><em></em></a>
            <div id="loginBox">                
                <form action="idPwCheck.do" method="post" id="loginForm">
                     <fieldset id="body">
                         <fieldset>
-                             <label for="email">Email Address</label>
+                             <label for="email">아이디</label>
                              <input type="text" name="email" id="email" />
                         </fieldset>
                         <fieldset>
-                             <label for="password">Password</label>
+                             <label for="password">비밀번호</label>
                              <input type="password" name="pw" id="pw" />
                         </fieldset>
                         <input type="submit" id="login" value="로그인" />
                    </fieldset>
               </form>
           </div>
-          <a href="#" id="JoinButton"><span>Sign up</span><em></em></a>
+          <a href="#" id="JoinButton"><span>회원가입</span><em></em></a>
        	  <div id="JoinBox">
        		   <form action="insert.do" method="post" id="JoinForm">
                      <fieldset id="body">
                            <fieldset>
-                                <label for="email2">ID(e-mail)</label>
+                                <label for="email2">아이디(e-mail)</label>
                                 <input type="text" name="email2" id="email2"/><br><span id="idValidation"></span>
                            </fieldset>
                            <fieldset>
-                                <label for="password2">Password</label>
+                                <label for="password2">비밀번호</label>
                                 <input type="password" name="pw2" id="pw2"/><span id="pwValidation"></span>
                            </fieldset>
                            <fieldset>
-                                <label for="pwAgain">Reenter Password</label>
+                                <label for="pwAgain">비밀번호 확인</label>
                                 <input type="password" name="pwAgain" id="pwAgain"/><span id="pw2Validation"></span>
                            </fieldset>
                            <fieldset>
-                                <label for="name">Name</label>
+                                <label for="name">이름</label>
                                 <input type="text" name="name" id="name"/><span id="nameValidation"></span>
                            </fieldset>
                            <fieldset>
-                                <label for="phone">Phone Number(ex.000-0000-0000)</label>
+                                <label for="phone">전화번호(ex.000-0000-0000)</label>
                                 <input type="text" name="phone" id="phone">
                            </fieldset>
                            <input type="button" id="Join" value="가입" />

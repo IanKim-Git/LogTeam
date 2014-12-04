@@ -16,12 +16,19 @@ public class MeetingService {
 	public int sendMeeting(MeetingBean meetingBean) {
 		return meetingDao.sendMeeting(meetingBean);
 	}
-	public int deleteMeeting(int snum) {
-		return meetingDao.deleteMeeting(snum);
+	public int deleteMeeting(int mnum) {
+		return meetingDao.deleteMeeting(mnum);
 	}
 
 	public int checkUpdate(MeetingBean meetingBean) {
 		return meetingDao.checkUpdate(meetingBean);
+	}
+	public List<MeetingBean> getProjectList(String pnum) {
+		// TODO Auto-generated method stub
+		return meetingDao.getMeetingList(pnum);
+	}
+	public int updateMeeting(MeetingBean meetingBean) {
+		return meetingDao.updateMeeting(meetingBean);
 	}
 
 

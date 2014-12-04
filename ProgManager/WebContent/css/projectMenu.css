@@ -74,11 +74,11 @@ html,body{width:100%;height:100%;padding:0;
    text-align: center;
    left: 50%;
    top: 50%;
-   width:500px; 
-   height:370px;
-   margin: -185px 0 0 -250px;
+   width:440px; 
+   height:330px;
+   margin: -175px 0 0 -215px;
  
-   background:#ffffff;
+   background:#F6F6F6;
    border:5px solid #9B2626;
    z-index: 1001;
 }
@@ -127,11 +127,11 @@ html,body{width:100%;height:100%;padding:0;
    text-align: center;
    left: 50%;
    top: 50%;
-   width:500px; 
-   height:370px;
-   margin: -185px 0 0 -250px;
+   width:440px; 
+   height:250px;
+   margin: -125px 0 0 -220px;
  
-   background:#ffffff;
+   background:#F6F6F6;
    border:5px solid #9B2626;
    z-index: 1001;
 }

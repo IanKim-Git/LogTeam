@@ -26,6 +26,9 @@
 	프로젝트 번호 : ${requestScope.pnum}
 	유저 이메일 : ${sessionScope.userData.uemail}<br> --%>
 	<br><br><br><br>
+		<h6>공지사항</h6>
+	프로젝트 번호 : ${requestScope.pnum}
+	유저 이메일 : ${sessionScope.userData.uemail}<br>
 	<div>
 		<form action="writeAn.do" id="anWriteForm" method="post">
 			<select id="animportance" name="animportance">

@@ -218,36 +218,36 @@
     		<img id="barUserPhoto" src="${sessionScope.userData.uphoto}" width="50" height="50" border="2" style="margin: -6px 5px 3px 5px; color: #FFFFFF">
     		<!-- <img src="./images/PM_redGlow.png" height="65" style="margin: -8px 0 0 6px;"> -->
     		<%-- <input value="${sessionScope.userData.uphoto}"> --%>
-	        <a href="#" id="loginButton"><span>Sign out</span><em></em></a>
+	        <a href="#" id="loginButton"><span>로그아웃</span><em></em></a>
 	        
-            <a href="#" id="JoinButton"><span>Inform</span><em></em></a>
+            <a href="#" id="JoinButton"><span>회원정보</span><em></em></a>
             <div style="clear:both"></div>
    			<div id="JoinBox">
    				<form action="insert.do" method="post" id="JoinForm">
                     <fieldset id="body">
                     	<fieldset>
-                            <label for="email2">ID(e-mail)</label>
+                            <label for="email2">아이디</label>
                            <input type="text" value="${sessionScope.userData.uemail}" disabled="disabled"/>
                            <input type="hidden" name="email2" id="email2" value="${sessionScope.userData.uemail}"/>
                         </fieldset>
                         <fieldset>
-                            <label for="name">name</label>
+                            <label for="name">이름</label>
                             <input type="text" name="name" id="name" value="$${sessionScope.userData.uname}"/><br><span id="nameValidation"></span>
                         </fieldset>
                         <fieldset>
-                            <label for="password2">Password</label>
+                            <label for="password2">비밀번호</label>
                             <input type="password" name="pw2" id="pw2"/><br><span id="pwValidation"></span>
                         </fieldset>
                         <fieldset>
-                            <label for="pwAgain">Reenter Password</label>
+                            <label for="pwAgain">비밀번호 확인</label>
                             <input type="password" name="pwAgain" id="pwAgain"/><br><span id="pw2Validation"></span>
                         </fieldset>
                         <fieldset>
-                            <label for="phone">Phone Number(ex.000-0000-0000)</label>
+                            <label for="phone">전화번호</label>
                             <input type="text" name="phone" id="phone" value="${sessionScope.userData.uphone}">
                         </fieldset>
                         <fieldset>
-                            <label for="photo">Profile Photo</label>
+                            <label for="photo">프로필 사진</label>
                             <form action="uPhotoUpload.do" method="post" id="uPhotoUpload" enctype="multipart/form-data">
 					<input type="file" name="uphoto" id="uphoto"/>
 				</form>

@@ -1,5 +1,6 @@
 package sub.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -20,7 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 public class ScheduleController {
 	@Resource(name="scheduleService")
 	private ScheduleService scheduleService;
-	
 	
 	@Resource(name="meetingService")
 	private MeetingService meetingService;
@@ -44,24 +44,35 @@ public class ScheduleController {
 		}
 		return "ok";
 	}
+	@RequestMapping(value="deleteMeeting.do", method=RequestMethod.POST)
+	@ResponseBody
+	public String deleteMeeting(@RequestParam("mnum") int mnum){
+		if(meetingService.deleteMeeting(mnum)==0){
+			return "no";
+		}
+		return "ok";
+	}
+
 	
 	@RequestMapping(value="sendSchedule.do", method=RequestMethod.POST)
 	@ResponseBody
-	public String sendSchedule(@RequestParam("pnum") int pnum, @RequestParam("sdate") String sdate, @RequestParam("edate") String edate, @RequestParam("stext") String stext,
-			@RequestParam("stitle") String stitle, @RequestParam("flag") boolean sflag){
-		if(sflag){  // true => 스케줄 등록
-			ScheduleBean scheBean = new ScheduleBean(pnum,0,sdate,edate,stext,stitle);
-			System.out.println(scheBean.getPnum()+" : "+ scheBean.getStext());
-			System.out.println("sendSchedule.do controller");
-			
+	public String sendSchedule(@RequestParam("pnum") int pnum, @RequestParam("number") int number, @RequestParam("sdate") String sdate, @RequestParam("edate") String edate, @RequestParam("stext") String stext,
+			@RequestParam("stitle") String stitle, @RequestParam("flag") String sflag, @RequestParam("lati") String lati, @RequestParam("longi") String longi){
+		if(sflag.equals("schedule")){  // true => 스케줄 등록
+			ScheduleBean scheBean = new ScheduleBean(pnum,number,sdate,edate,stext,stitle);
+			if(number!=0){
+			scheduleService.checkUpdate(scheBean);
+			}
 			if(scheduleService.sendSchedule(scheBean)==0){
 				return "no";
 			}
 			return "ok";
-			
 		}
 		else{	// 미팅 등록
-			MeetingBean meetingBean = new MeetingBean(0,pnum,sdate,stext, null,stitle);
+			MeetingBean meetingBean = new MeetingBean(number,pnum,sdate,stext, lati,longi,stitle, new Date());
+			if(number!=0){
+				meetingService.checkUpdate(meetingBean);
+			}
 			if(meetingService.sendMeeting(meetingBean)==0){
 				return "no";
 			}
@@ -70,23 +81,38 @@ public class ScheduleController {
 	}
 	
 	@RequestMapping(value="getSchedule.do", method=RequestMethod.POST)
-	public ModelAndView select(String pnum){
-		System.out.println(pnum+"//////");
-		System.out.println("getschedule.do controller");
+	public ModelAndView selectSchedule(String pnum){
 		List<ScheduleBean> list = scheduleService.getProjectList(pnum);
-		System.out.println(list.toString()+"/////");
-		
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("list",list);
 		mv.setViewName("scheduleJsonView");
 		return mv;
 	}
-
+	@RequestMapping(value="getMeeting.do", method=RequestMethod.POST)
+	public ModelAndView selectMeeting(String pnum){
+		List<MeetingBean> list = meetingService.getProjectList(pnum);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("list",list);
+		mv.setViewName("meetingJsonView");
+		return mv;
+	}
+	@RequestMapping(value="updateSchedule.do", method=RequestMethod.POST)
+	@ResponseBody
+	public String updateSchedule(@RequestParam("pnum") int pnum, @RequestParam("number") int number, @RequestParam("sdate") String sdate, @RequestParam("edate") String edate, @RequestParam("stext") String stext,
+			@RequestParam("stitle") String stitle, @RequestParam("flag") String sflag, @RequestParam("lati") String lati, @RequestParam("longi") String longi ){
+		if(sflag.equals("schedule")){
+			ScheduleBean scheBean = new ScheduleBean(pnum, number, sdate, edate, stext, stitle);
+			if(scheduleService.updateSchedule(scheBean)==0){
+				return "no";
+			}
+			return "ok";
+		}else
+		{
+			MeetingBean meetingBean = new MeetingBean(number, pnum, sdate, stext, lati, longi, stitle, new Date());
+			if(meetingService.updateMeeting(meetingBean)==0){
+				return "no";
+			}
+			return "ok";
+		}
+	}
 }
-
-
-
-
-
-
-

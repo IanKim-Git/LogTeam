@@ -1,51 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+	pageEncoding="EUC-KR"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-   <jsp:include page="topBar.jsp" flush="false" />
+<jsp:include page="topBar.jsp" flush="false" />
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Announcement</title>
 <link href="kendo_file/examples-offline.css" rel="stylesheet">
-    <link href="kendo_file/kendo.common.min.css" rel="stylesheet">
-    <link href="kendo_file/kendo.rtl.min.css" rel="stylesheet">
-    <link href="kendo_file/kendo.default.min.css" rel="stylesheet">
-    <link href="kendo_file/kendo.dataviz.min.css" rel="stylesheet">
-    <link href="kendo_file/kendo.dataviz.default.min.css" rel="stylesheet">
-    <script src="kendo_file/jquery.min.js"></script>
+<link href="kendo_file/kendo.common.min.css" rel="stylesheet">
+<link href="kendo_file/kendo.rtl.min.css" rel="stylesheet">
+<link href="kendo_file/kendo.default.min.css" rel="stylesheet">
+<link href="kendo_file/kendo.dataviz.min.css" rel="stylesheet">
+<link href="kendo_file/kendo.dataviz.default.min.css" rel="stylesheet">
+<script src="kendo_file/jquery.min.js"></script>
 
-    <script src="kendo_file/angular.min.js"></script>
-    <script src="kendo_file/kendo.all.min.js"></script>
+<script src="kendo_file/angular.min.js"></script>
+<script src="kendo_file/kendo.all.min.js"></script>
 </head>
 <!-- <script src="js/jquery-1.10.2.js"></script> -->
 <script>var jb = jQuery.noConflict();</script>
 
 <body>
-
-   <%-- <h6>공지사항</h6>
+	<%-- <h6>공지사항</h6>
    프로젝트 번호 : ${requestScope.pnum}
    유저 이메일 : ${sessionScope.userData.uemail}<br> --%>
-   <br><br><br><br>
-   <div style="width: 81%;padding: 4% 0 0 10%;">
-   <div>
-      <form action="writeAn.do" id="anWriteForm" method="post">
-         <select id="animportance" name="animportance">
-            <option value="-1">선택</option>
-            <option value="3">상</option>
-            <option value="2">중</option>
-            <option value="1">하</option>
-         </select><br>
-         <input type="hidden" id="an_pnum" name="an_pnum" value="${requestScope.pnum}">
-         <input type="hidden" id="an_uemail" name="an_uemail" value="${sessionScope.userData.uemail}">
-         <textarea id="ancontent" name="ancontent" rows="5" cols="150%" ></textarea>
-         <input type="button" id="anWrite" value="등록">      
-      </form>
-   </div>
-   <br><hr><br>
-    <div id="example">
-      <div id="grid"></div>
-      </div>
-         <script>
+   
+	<div style="width: 88%; padding: 6% 0 0 6%;">
+	<img src="./images/announcement.png" align="left" style="margin: 6% 0 0 1%; ">
+	<br><br><br><br><br><br>
+
+		<div id="example">
+			<div id="grid"></div>
+		</div>
+		<script>
             jb(document).ready(function(){
               //모든 공지사항을 불러오는 함수
               function getAns() {
@@ -184,7 +171,6 @@
               //공지사항 화면 초기화
               getAns();
               
-              
               /* var dataSource = new kendo.data.DataSource({
                  transport: {
                     read: {
@@ -276,12 +262,32 @@
                 }
                 getKendoAns();
               
-              
               });//end of ready
             </script>
-        </div>
-     
-<!--    <div>  
+
+		<hr>
+		<div align="right">
+			<form action="writeAn.do" id="anWriteForm" method="post">
+				공지 중요도 : <select id="animportance" name="animportance">
+					<option value="-1">선택</option>
+					<option value="3">상</option>
+					<option value="2">중</option>
+					<option value="1">하</option>
+				</select> <input type="hidden" id="an_pnum" name="an_pnum"
+					value="${requestScope.pnum}"> <input type="hidden"
+					id="an_uemail" name="an_uemail"
+					value="${sessionScope.userData.uemail}">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="button"
+					id="anWrite" value=" 등록하기 "><br>
+				<textarea id="ancontent" name="ancontent" rows="5" cols="100%"></textarea>
+			</form>
+		</div>
+	</div>
+	<br><br><br><br>
+
+
+
+	<!--    <div>  
       <form action="" id="anListForm">         
          <table id="listTable" cellspacing="0">
             <tr bgcolor="#FOFOF7">
@@ -290,7 +296,8 @@
          </table>
       </form>
    </div>
- -->   <br><br><br><br>
+ -->
+
 </body>
-<jsp:include page="bottomMenu.jsp" flush="true"/>
+<jsp:include page="bottomMenu.jsp" flush="true" />
 </html>

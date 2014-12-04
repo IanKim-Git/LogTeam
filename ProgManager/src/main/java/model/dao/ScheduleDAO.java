@@ -45,6 +45,8 @@ public class ScheduleDAO {
 		String[] sdateList = sdate.split(" ");
 		String[] edateList = edate.split(" ");
 		
+		System.out.println(sdate);
+		
 		sdate=sdateList[3].substring(2)+"/"+convertMonth(sdateList[1])+"/"+sdateList[2];
 		edate=edateList[3].substring(2)+"/"+convertMonth(edateList[1])+"/"+edateList[2];
 
@@ -63,9 +65,33 @@ public class ScheduleDAO {
 		}
 		return result;
 	}
+	public int updateSchedule(ScheduleBean scheBean) {
+		String sdate = scheBean.getSdate();
+		String edate = scheBean.getEdate();
+		String[] sdateList = sdate.split(" ");
+		String[] edateList = edate.split(" ");
+		
+		sdate=sdateList[3].substring(2)+"/"+convertMonth(sdateList[1])+"/"+sdateList[2];
+		edate=edateList[3].substring(2)+"/"+convertMonth(edateList[1])+"/"+edateList[2];
+
+		scheBean.setSdate(sdate);
+		scheBean.setEdate(edate);
+		
+		int result=0;
+		SqlSession session = null;
+		
+		try{
+			session = DBUtil.getSqlSession();
+			result = session.update("prog.updateSchedule", scheBean);
+			session.commit();
+		}finally{
+			DBUtil.closeSqlSession(session);
+		}
+		return result;
+	}
 	
 	public int checkUpdate(ScheduleBean scheBean) {
-		scheBean=convertType(scheBean);
+		//scheBean=convertType(scheBean);
 		SqlSession session=null;
 		int result=0;
 		try{
@@ -80,16 +106,12 @@ public class ScheduleDAO {
 		}
 		return result;
 	}
-	
 	public ScheduleBean convertType(ScheduleBean scheBean){
 		String sdate = scheBean.getSdate();
 		String edate = scheBean.getEdate();
-		System.out.println("!!!!!!sdate"+sdate);
 		String[] sdateList = sdate.split(" ");
 		String[] edateList = edate.split(" ");
 		
-		System.out.println("!!!!!!!!!!!!!List"+sdateList);
-
 		sdate=sdateList[3].substring(2)+"/"+convertMonth(sdateList[1])+"/"+sdateList[2];
 		edate=edateList[3].substring(2)+"/"+convertMonth(edateList[1])+"/"+edateList[2];
 
@@ -122,14 +144,12 @@ public class ScheduleDAO {
 			return "09";
 		case "Oct":
 			return "10";
-		case "Nob":
+		case "Nov":
 			return "11";
 		case "Dec":
 			return "12";
 		}
 		return null;
 	}
-
-
 
 }

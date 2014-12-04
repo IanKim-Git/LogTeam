@@ -25,9 +25,9 @@
 	function onlogList(){
 		$("#logList").submit();
 	}
-	function onoutcome(){
+	/* function onoutcome(){
 		$("#outcome").submit();
-	}
+	} */
 	function onaccount(){
 		$("#account").submit();
 	}
@@ -52,7 +52,7 @@
     	<img src="footer_menu/iconmonstr-megaphone-3-icon-64.png" width="60" onclick="onannouncement()"/>
     	<img src="footer_menu/iconmonstr-calendar-4-icon-64.png" width="60" onclick="calender()"/>
     	<img src="footer_menu/iconmonstr-note-19-icon-64.png" width="60" onclick="onlogList()"/>
-       	<img src="footer_menu/iconmonstr-line-chart-3-icon-64.png" width="60" onclick="onoutcome()"/>
+       	<!-- <img src="footer_menu/iconmonstr-line-chart-3-icon-64.png" width="60" onclick="onoutcome()"/>  -->
       	<img src="footer_menu/iconmonstr-coin-2-icon-64.png" width="60" onclick="onaccount()"/>     	 	
 
  	    <form action="idPwCheck.do" id="idPwCheck" onclick="onidPwCheck()" method="post">
@@ -71,9 +71,9 @@
     	<form action="logList.do" id="logList" onclick="onlogList()" method="post">
 			<input type="hidden" name="enterLogPnum" value="${requestScope.pnum}">
 		</form>
-    	<form action="outcome.do" id="outcome" onclick="onoutcome()" method="post">
+    	<%-- <form action="outcome.do" id="outcome" onclick="onoutcome()" method="post">
 			<input type="hidden" name="enterOutPnum" value="${requestScope.pnum}">
-		</form>
+		</form> --%>
 		<form action="account.do" id="account" onclick="onaccount()" method="post">
 			<input type="hidden" name="enterAccPnum" value="${requestScope.pnum}">
 		</form>

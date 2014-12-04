@@ -167,48 +167,48 @@
   	  	<hr>
   	  	
         <p class='actions' style="float: left;">
-          <a class='button' href="javascript:ViewCreateLayer();javascript:viewLayer();" style="font-size: 40px">NEW</a>
+          <a class='button' href="javascript:ViewCreateLayer();javascript:viewLayer();" style="font-size: 40px;font-family: fantasy;">새로</a>
         </p>
         <p class='actions' style="float: right;">
-          <a class='button' href="javascript:ViewJoinLayer();javascript:viewLayer();" style="font-size: 40px">JOIN</a>
+          <a class='button' href="javascript:ViewJoinLayer();javascript:viewLayer();" style="font-size: 40px; font-family: fantasy;">같이</a>
         </p>
     </div>
     <br><br><br><br><br>
     
    	<div id="createProjectPop" align="center">
-	   	<br><font color="#ACA7A7" size="27" style="4" >New Project!</font>
+	   	<br><font color="#686060" size="27" style="4; font-family: fantasy; font-weight: bolder;" >새로운 프로젝트</font>
 	   	<br><br>
 
 	   	<form name="newProject.do" id="newproform" method="post">
-	   	<table style="margin: 0 0 0 120px">
-			<tr><td>Name :</td><td><input type="text"  name="pname" id="pname" /></td></tr>
-			<tr><td>PassWord :</td><td><input type="password" name="ppw" /></td></tr>
-			<tr><td>Mento ID :</td><td><input type="text" name="pmento" /></td></tr>
-			<tr><td>Start Date :</td><td><input type="text" name="pstart" /></td></tr>
-			<tr><td>End Date :</td><td><input type="text" name="pend" /></td></tr>
-			<tr><td>Leader :</td><td><input type="text" name="pleader" id="pleader" value="${sessionScope.userData.uemail}"/></td></tr>
+	   	<table style="margin: 0 0 0 120px; color: #686060;">
+			<tr><td>이 름 :</td><td><input type="text"  name="pname" id="pname" /></td></tr>
+			<tr><td>비밀번호 :</td><td><input type="password" name="ppw" /></td></tr>
+			<tr><td>멘토 ID :</td><td><input type="text" name="pmento" /></td></tr>
+			<tr><td>시작일 :</td><td><input type="text" name="pstart" /></td></tr>
+			<tr><td>종료일 :</td><td><input type="text" name="pend" /></td></tr>
+			<tr><td>팀장 :</td><td><input type="text" name="pleader" id="pleader" value="${sessionScope.userData.uemail}"/></td></tr>
 		</table>
 		<br>
-		<br>
-		<input class='basicBtn' type="button" value="생성" id="btn">
-		<input class='cancel basicBtn' type="button" value="취소" id="btn2">
+		<input class='basicBtn' type="button" value="  생성  " id="btn">
+		<input class='cancel basicBtn' type="button" value="  취소  " id="btn2">
 		</form>
 	   	<br><br> 
    	</div>
    	
    	<div id="joinProjectPop" align="center">
-	   	<br><font color="#ACA7A7" size="27" style="4" >Join Project!</font>
+	   	<br><font color="#686060" size="27" style="4; font-family: fantasy;font-weight: bolder;" >프로젝트 참여</font>
 	   	<br><br>
 
 	   	<form name="joinProject.do" id="joinproform" method="post">
-		<table style="margin: 15px 0 0 95px">
-			<tr><td>Project Number :   </td><td><input type="text"  name="pnum" id="pnum" /></td></tr>
-			<tr><td>Project PassWord : </td><td><input type="password" name="ppw" /></td></tr>
+		<table style="margin: 9px 0 0 80px; color: #686060;">
+			<tr><td>프로젝트 번호 :   </td><td><input type="text"  name="pnum" id="pnum" /></td></tr>
+			<tr></tr>
+			<tr><td>프로젝트 비밀번호 : </td><td><input type="password" name="ppw" /></td></tr>
 			<tr><td></td><td><input type="hidden" name="uemail" value="${sessionScope.userData.uemail}"></td></tr>
 		</table>
-		<br><br><br><br><br>
-		<input class='basicJoinBtn' type="button" value="참여하기" id="Joinbtn">
-		<input class='cancel basicJoinBtn' type="button" value="취소" id="Joinbtn2">
+		<br>
+		<input class='basicJoinBtn' type="button" value=" 참여하기 " id="Joinbtn">
+		<input class='cancel basicJoinBtn' type="button" value="  취소  " id="Joinbtn2">
 		</form>
 	   	<br><br>
    	</div>

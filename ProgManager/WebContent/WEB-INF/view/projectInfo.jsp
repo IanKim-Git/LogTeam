@@ -51,7 +51,7 @@
 				if (data == "ok" && $('#puser').val()!=$('#pleader').val()){
 					$('#change').attr('disabled',true);
 					$('#deletePro').attr('disabled',true);
-					$("#caution").html("*PM만이 프로젝트 정보를 변경할 수 있습니다.");
+					$("#caution").html("*팀장만 변경 가능합니다.");
 				}
 			},
 			error : function(data) {
@@ -183,16 +183,28 @@
 	프로젝트 번호 : ${requestScope.pnum}
 	유저 이메일 : ${sessionScope.userData.uemail}<br> --%>
 	<div id="projectInformation" align="center">
-	<img src="./images/projectinfo.png" align="left" style="margin: 3% 0 0 2%;float: left;"><br>
+	<img src="./images/projectinfo.png" align="left" style="margin: 6% 0 0 9%;float: left;"><br>
 	<div class='contents' style="margin-top: 9px" >
-	<br><br><br>
+	<br><br><br><br><br><br>
 	
 	<form action="" id="info" method="post">
     	<b> 
-    	<br><font color="#5A5A5A" style="font-style: initial;" size="5">프로젝트 이름 : &nbsp;&nbsp;<b id="proname">${requestScope.pinfo.pname}</b></font><br>
-    	<br><font color="#5A5A5A" style="font-style: initial;" size="5">프로젝트 방 번호 : &nbsp;&nbsp;${requestScope.pinfo.pnum}</font><br>
-    	<br><font color="#5A5A5A" style="font-style: initial;" size="5">기간 : <b id="term"></b></font>
-    	<br><table><tr><td><font color="#5A5A5A" style="font-style: initial;" size="5">프로젝트 경과율:</font></td><td style="padding-bottom: 18px;">&nbsp;&nbsp;
+    	<table style="color: #5a5a5a; font-style: normal; size: 4">
+    	<tr>
+    	<td> <font color="#5A5A5A" style="font-style: initial;" size="5">프로젝트 이름 : &nbsp;&nbsp;</td>
+    	<td> <b id="proname"><font color="#5A5A5A" style="font-style: initial;" size="5">${requestScope.pinfo.pname}</b></font><br></td>
+    	</tr>
+    	<tr>
+    	<td> <font color="#5A5A5A" style="font-style: initial;" size="5">프로젝트 번호 : &nbsp;&nbsp;</td>
+    	<td><font color="#5A5A5A" style="font-style: initial;" size="5">${requestScope.pinfo.pnum}</font><br></td>
+    	</tr>
+    	<tr>
+    	<td> <font color="#5A5A5A" style="font-style: initial;" size="5">기간 : </td>
+    	<td><b id="term"><font color="#5A5A5A" style="font-style: initial;" size="5"></b></font></td>
+    	</tr>
+    	</table>
+    	
+    	<table><tr><td><font color="#5A5A5A" style="font-style: initial;" size="5">진행기간:</font></td><td style="padding-bottom: 18px;">&nbsp;&nbsp;
     
     	<c:if test="${requestScope.prodate <= 0}">
 	   		<div class="progressBar">
@@ -221,16 +233,16 @@
 		<table border="0" cellpadding="0" cellspacing="1" width="80%" bordercolordark="white" bordercolorlight="black">
 			<tr>
 		        <td bgcolor="#9b2626">
-		            <p align="center"><font color="white"><b><span style="font-size:12pt;">Photo</span></b></font></p>
+		            <p align="center"><font color="white"><b><span style="font-size:12pt;">사진</span></b></font></p>
 		        </td>
 		        <td bgcolor="#9b2626" >
-		            <p align="center"><font color="white"><b><span style="font-size:12pt;">Nickname</span></b></font></p>
+		            <p align="center"><font color="white"><b><span style="font-size:12pt;">이름</span></b></font></p>
 		        </td>
 		        <td bgcolor="#9b2626">
-		            <p align="center"><font color="white"><b><span style="font-size:12pt;">Mobile</span></b></font></p>
+		            <p align="center"><font color="white"><b><span style="font-size:12pt;">전화번호</span></b></font></p>
 		        </td>
 		        <td bgcolor="#9b2626">
-		            <p align="center"><font color="white"><b><span style="font-size:12pt;">E-mail</span></b></font></p>
+		            <p align="center"><font color="white"><b><span style="font-size:12pt;">이메일</span></b></font></p>
 		        </td>
 		    </tr>
 		    
@@ -259,28 +271,28 @@
 
 		 <br><br><br><br><br>
 		 <div align="left" >
-			 <font color="#9B2626" size="6" style="font-style: oblique;">Info Change.</font><br><br>
+			 <font color="#9B2626" size="6" style="font-style: oblique;">프로젝트 정보변경</font><br><br>
 			 <font color="#5A5A5A" size="3" style="font-style: oblique;">
 			 <form action="proUpdate.do" id="proupdateform" method="post">
 			 	<table border="0" width="70%" height="7%" cellspacing="5">
 					<tr>
- 						<td>Project Name :</td>
+ 						<td>프로젝트 이름 :</td>
  						<td><input type="text"  name="pname" id="pname"/></td>
 					</tr>
 					<tr>
- 						<td>Project PassWord :</td>
+ 						<td>비밀번호 :</td>
  						<td><input type="password" name="ppw" id="ppw"/><br></td>
 					</tr>
 					<tr>
- 						<td>Reenter PassWord :</td>
+ 						<td>비밀번호 재입력 :</td>
  						<td><input type="password" name="ppwAgain" id="ppwAgain"/></td>
 					</tr>
 					<tr>
- 						<td>Start Date :</td>
+ 						<td>시작일 :</td>
  						<td><input type="text" name="pstart" id="pstart"/></td>
 					</tr>
 					<tr>
- 						<td>End Date :</td>
+ 						<td>종료일 :</td>
  						<td><input type="text" name="pend" id="pend"/></td>
 					</tr>
 				</table>

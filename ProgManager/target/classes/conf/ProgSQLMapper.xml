@@ -125,6 +125,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 해당 프로젝트의 모든 로그 출력 -->
 	<select id="allLogs" parameterType="int" resultType="logBean" >
 		select * from log where l_pnum=#{l_pnum} order by ldata desc
+		<!-- select lnum, l_pnum, uname as l_uemail, ldata, ltext, lphoto, lphotoname,lfile,lfilename,lpublic,ladmission from log, proguser where l_uemail=uemail and l_pnum=#{l_pnum} order by ldata desc -->
 	</select>
 
 	<!-- 해당 프로젝트의 공개된 로그와 자신의 비공개 로그 출력 -->
@@ -137,20 +138,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete log where lnum = #{lnum}
 	</delete>
 	
-	<!-- 로그 작성 : only text -->
-	<!-- insert into log values(seq_l.nextval,21,'t@t.t',sysdate,'test text',null,null,0,0); -->
-	<!-- select lnum, l_pnum, l_uemail, ldata, ltext, lpublic, ladmission from log; -->
-	<!-- 
-	"LNUM" NUMBER(4,0) NOT NULL ENABLE, 
-	"L_PNUM" NUMBER(4,0) NOT NULL ENABLE, 
-	"L_UEMAIL" VARCHAR2(30) NOT NULL ENABLE, 
-	"LDATA" DATE NOT NULL ENABLE, 
-	"LTEXT" VARCHAR2(1000), 
-	"LPHOTO" BLOB, 
-	"LFILE" BLOB, 
-	"LPUBLIC" NUMBER(1,0) NOT NULL ENABLE, 
-	"LADMISSION" NUMBER(1,0) NOT NULL ENABLE, 
-	 -->
+	<!-- 로그 작성 글만 -->
 	<insert id="logWrite" parameterType="logBean">
 		insert into log(lnum, l_pnum, l_uemail, ldata, ltext, lpublic, ladmission)
 		values(seq_l.nextval , #{l_pnum}, #{l_uemail}, sysdate, #{ltext}, #{lpublic}, 0)
@@ -283,21 +271,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	delete from schedule where snum=#{snum}
     </delete>
     
+    <delete id="deleteMeeting" parameterType="meetingBean">
+    	delete from meeting where mnum=#{mnum}
+    </delete>
+    
     <select id="checkUpdate" parameterType="scheBean" resultType="int">
     	select snum from schedule where snum=#{snum}
     </select>
     
-    <!-- meeting sql 부분 -->
+    <select id="checkUpdate2" parameterType="meetingBean" resultType="int">
+    	select mnum from meeting where mnum=#{mnum}
+    </select>
     
+    
+    <!-- meeting sql 부분 -->
     <insert id="insertMeeting" parameterType="meetingBean">
-    	insert into meeting values(seq_m.nextval, #{mpnum}, #{mdate}, #{mplace}, #{mpoint}, #{mcontent})
+       insert into meeting values(seq_m.nextval, #{mpnum}, to_date(#{mdate}, 'yyyy-mm-dd hh24:mi'), #{mplace}, #{mLati}, #{mLongi}, #{mcontent})
     </insert>
     
+    <select id="getMeeting" parameterType="String" resultType="meetingBean">
+      select mnum, m_pnum, mdate, mplace, mcontent from meeting where m_pnum=#{pnum}
+   	</select>
     
+    <update id="updateSchedule" parameterType="scheBean">
+    	update schedule set sdate=#{sdate}, edate=#{edate}, stext=#{stext}, stitle=#{stitle} where s_pnum=#{pnum} and snum=#{snum}
+    </update>
+    
+    <update id="updateMeeting" parameterType="meetingBean">
+       update meeting set mdate=#{mdate}, mplace=#{mplace}, mlati=#{mlati}, mlongi=#{mlongi}, mcontent=#{mcontent} where m_pnum=#{mpnum} and mnum=#{mnum}
+    </update>     
 </mapper>
-
-
-
-
-
-

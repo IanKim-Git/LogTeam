@@ -326,10 +326,11 @@
 <%--    <h6>로그게시판</h6>
    프로젝트 번호 : ${requestScope.pnum}
    유저 이메일 : ${sessionScope.userData.uemail}<br> --%>
-   <br><br><br><br>
+   <br><br><br>
    <!-- 로그 화면 -->
-   <div id="logsView" align="left" style="margin-left: 15%;margin-right: 15%;">
-      
+   <div id="logsView" align="left" style="margin-left: 10%;margin-right: 10%;">
+   <div><img src="./images/logboard.png" align="left" style="margin: 6% 0 0 1%;" ><br><br></div>
+   
          <!-- 로그 등록창 -->
          <div id="writeLog" >
             <fieldset>
@@ -338,7 +339,7 @@
                   <input type="hidden" id="l_uemail" name="l_uemail" value="${sessionScope.userData.uemail}">
                     <table id="logFormTable">
                      <tr>
-                        <td>
+                        <td>공개범위 
                            <select id="lpublic" name="lpublic">
                               <option value="-1">선택</option>
                               <option value="0">나만보기</option>
@@ -348,19 +349,19 @@
                      </tr>
                      <tr>
                         <td  colspan="2">
-                           <textarea id="ltext" name="ltext" rows="5" cols=110% ></textarea>
+                           <textarea id="ltext" name="ltext" rows="8" cols=110% ></textarea>
                         </td>
                         <td>
-                           <input type="button" id="write" value="로그등록">
+                           <input type="button" id="write" value="로그등록" >
                         </td>
                      </tr>
                      <tr>
                         <td>
-                           <label for="photo">Log Photo</label>
+                           <label for="photo">사진 등록</label>
                            <div><input type="file" name="lphoto" id="lphoto" /></div>
                         </td>
                         <td>
-                           <label for="file">Log File</label>
+                           <label for="file">파일 등록</label>
                            <div><input type="file" name="lfile" id="lfile"/></div>
                         </td>
                      </tr>

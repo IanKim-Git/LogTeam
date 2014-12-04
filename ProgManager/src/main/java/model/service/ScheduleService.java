@@ -21,7 +21,6 @@ public class ScheduleService {
 		return scheduleDao.sendSchedule(scheBean);
 	}
 	public int deleteSchedule(int snum) {
-		System.out.println("/////////deleteSchedule service/////");
 		return scheduleDao.deleteSchedule(snum);
 	}
 
@@ -29,4 +28,8 @@ public class ScheduleService {
 		return scheduleDao.checkUpdate(scheBean);
 	}
 
+	public int updateSchedule(ScheduleBean scheBean) {
+		return scheduleDao.updateSchedule(scheBean);
+
+	}
 }
